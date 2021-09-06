@@ -7,17 +7,17 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2021-09-06T17:04:13+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://blog.fzhiy.net/</loc>
     <lastmod>2021-09-06T17:04:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://blog.fzhiy.net/post/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6amptodo_list/</loc>
+    <loc>https://blog.fzhiy.net/posts/</loc>
+    <lastmod>2021-09-06T17:04:13+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://blog.fzhiy.net/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6amptodo_list/</loc>
     <lastmod>2021-09-06T17:04:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

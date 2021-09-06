@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>fzhiy&#39;s blog</title>
-    <link>https://blog.fzhiy.net/</link>
-    <description>Recent content on fzhiy&#39;s blog</description>
+    <title>Posts on fzhiy&#39;s blog</title>
+    <link>https://blog.fzhiy.net/posts/</link>
+    <description>Recent content in Posts on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <managingEditor>fzhiy270@gmail.com (fzhiy)</managingEditor>
     <webMaster>fzhiy270@gmail.com (fzhiy)</webMaster>
-    <lastBuildDate>Mon, 06 Sep 2021 17:04:13 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About</title>
-      <link>https://blog.fzhiy.net/about/</link>
-      <pubDate>Mon, 06 Sep 2021 17:04:13 +0800</pubDate>
-      <author>fzhiy270@gmail.com (fzhiy)</author>
-      <guid>https://blog.fzhiy.net/about/</guid>
-      <description>自我介绍 余锋，网络空间安全专业硕士在读 坐标：福建福州，曾居住武汉、湘潭 爱好：捣鼓和折腾新技术，包括但不限于机器学习、深度强化学习、推荐系统、</description>
-    </item>
-    
+    <lastBuildDate>Mon, 06 Sep 2021 17:04:13 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>那些年读过的书</title>
       <link>https://blog.fzhiy.net/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6amptodo_list/</link>
