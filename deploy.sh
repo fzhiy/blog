@@ -3,7 +3,7 @@
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
-hugo -t even –buildDraft
+hugo -t LoveIt –buildDraft
 
 # Add changes to git.
 git add .
