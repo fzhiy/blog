@@ -131,7 +131,7 @@ theme = "LoveIt"
       # LoveIt 更改 | 0.2.7 主页显示的网站标题 (支持 HTML 格式)
       title = "fzhiy's blog"
       # 主页显示的网站副标题
-      subtitle = "这是我的全新 Hugo 网站"
+      subtitle = "Stay hungry, Stay foolish."
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
