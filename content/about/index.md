@@ -47,6 +47,10 @@ Email：[fzhiy270@163.com](mailto:fzhiy270@163.com)
 
 - 2020.12.17，阿里云OSS自定义域名+CDN加速
 - 2020.12.19，配置https访问+阿里云CDN Referer防盗链以及OSS Referer防盗链
-- 
-
+- 2021.09.05，
+  - 采用hugo + github action搭建[博客](https://blog.fzhiy.net )并自动化部署。（都是才接触不久的，花了一大天时间。。~~感觉违背将重心放在写作上，舍本逐末瞎折~~）这个博客站点专门用来分享笔记，原网站 https://fzhiy.net/ 计划改动中...
+  - 改用github图床 + jsdelivr CDN加速（还是免费香呀~）
+  - LoveIt主题个性化配置
+  - 打算制作个人主页， 建立一个能够分享学习笔记的站点。
+  - 
 
