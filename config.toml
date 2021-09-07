@@ -173,7 +173,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
     # LoveIt 新增 | 0.2.0 是否使用 fontawesome 扩展语法
     fontawesome = true
     # 是否在文章页面显示原始 Markdown 文档链接
-    linkToMarkdown = false
+    linkToMarkdown = true
     # LoveIt 新增 | 0.2.4 是否在 RSS 中显示全文内容
     rssFullText = false
     # LoveIt 新增 | 0.2.0 目录配置
@@ -181,7 +181,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
     # 是否使用目录
     enable = true
     # LoveIt 新增 | 0.2.9 是否保持使用文章前面的静态目录
-    keepStatic = true
+    keepStatic = false
     # 是否使侧边目录自动折叠展开
     auto = true
 # LoveIt 新增 | 0.2.0 代码配置
@@ -388,7 +388,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
     pre = ""
     # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
     post = ""
-    name = "文章"
+    name = "归档"
     url = "/posts/"
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
