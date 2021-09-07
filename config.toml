@@ -339,7 +339,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
 
   # LoveIt 新增 | 0.2.0 网站分析配置
   [params.analytics]
-    enable = false
+    enable = true
     # Google Analytics
     [params.analytics.google]
       id = ""
@@ -350,6 +350,10 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
       id = ""
       # 自行托管追踪器时的主机路径
       server = ""
+    # Baidu Analytics
+    # 百度统计
+    [params.analytics.baidu]
+      id = "9fbd5f93609f8dc1b2c1163190f37f96"
 
   # LoveIt 新增 | 0.2.7 Cookie 许可配置
   [params.cookieconsent]
