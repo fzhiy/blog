@@ -9,9 +9,12 @@ hasCJKLanguage = true
 title = "fzhiy's blog"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
-theme = "LoveIt"
+#theme = "LoveIt"
+theme = ["hugo-search-fuse-js", "LoveIt"]
 
 [params]
+  # cdn变量，末尾不需要加/
+  cdnPrefix = "https://cdn.jsdelivr.net/gh"
   # LoveIt 主题版本
   version = "0.2.X"
   # 网站描述
@@ -42,7 +45,7 @@ theme = "LoveIt"
 
 # LoveIt 新增 | 0.2.0 搜索配置
 [params.search]
-  enable = true
+  enable = false
   # 搜索引擎的类型 ("lunr", "algolia")
   type = "lunr"
   # 文章内容最长索引长度
@@ -403,13 +406,27 @@ theme = "LoveIt"
     title = ""
     weight = 3
   [[menu.main]]
+    identifier = "links"
+    pre = "<i class='fas fa-fw fa-fan fa-spin'></i>"
+    post = ""
+    name = "友链"
+    url = "/friends/"
+    title = ""
+    weight = 4
+  [[menu.main]]
     identifier = "about"
     pre = ""
     post = ""
     name = "关于"
     url = "/about/"
     title = ""
-    weight = 4
+    weight = 5
+  [[menu.main]]
+    identifier = "search"
+    pre = "<i class='fas fa-fw fa-search'></i>"
+    name = "搜索"
+    weight = 6
+    url = "/search/"
 
 # Hugo 解析文档的配置
 [markup]
