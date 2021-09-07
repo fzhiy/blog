@@ -353,7 +353,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
     # Baidu Analytics
     # 百度统计
     [params.analytics.baidu]
-      id = "9fbd5f93609f8dc1b2c1163190f37f96"
+      id = "e4ff802fe8f2731918ababdb4ccf87bc"
 
   # LoveIt 新增 | 0.2.7 Cookie 许可配置
   [params.cookieconsent]
