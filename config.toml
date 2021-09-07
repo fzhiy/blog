@@ -256,19 +256,19 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
   # Disqus 评论系统设置
   [params.page.comment.disqus]
     # LoveIt 新增 | 0.1.1
-    enable = false
+    enable = true
     # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
     shortname = ""
      # Facebook 评论系统设置
       [params.page.comment.facebook]
-        enable = false
+        enable = true
         width = "100%"
         numPosts = 10
         appId = ""
         languageCode = "zh_CN"
       # LoveIt 新增 | 0.2.0 Telegram Comments 评论系统设置
       [params.page.comment.telegram]
-        enable = false
+        enable = true
         siteID = ""
         limit = 5
         height = ""
@@ -281,7 +281,7 @@ theme = ["hugo-search-fuse-js", "LoveIt"]
         enable = false
       # LoveIt 新增 | 0.2.5 Utterances 评论系统设置
       [params.page.comment.utterances]
-        enable = false
+        enable = true
         # owner/repo
         repo = ""
         issueTerm = "pathname"
