@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>fzhiy270@gmail.com (fzhiy)</managingEditor>
             <webMaster>fzhiy270@gmail.com (fzhiy)</webMaster><lastBuildDate>Tue, 07 Sep 2021 15:11:35 &#43;0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/git/" rel="self" type="application/rss+xml" /><item>
     <title>Git学习笔记与常用命令</title>
-    <link>https://blog.fzhiy.net/2021-09-07-git-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+    <link>https://blog.fzhiy.net/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
     <pubDate>Tue, 07 Sep 2021 15:11:35 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://blog.fzhiy.net/2021-09-07-git-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+    <guid>https://blog.fzhiy.net/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
     <description><![CDATA[Git学习笔记与常用命令 平时用git不太熟练，又花了一点时间来学习。整理一些相关经验和常用命令备忘，应该会更新 几个重要命令及术语 引阮一峰的网]]></description>
 </item></channel>
 </rss>
