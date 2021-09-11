@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git学习笔记与常用命令 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Git常用命令与学习小结（含部分经验建议）" /><meta name="keywords" content="Git" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git学习笔记与常用命令" />
+<meta property="og:description" content="Git常用命令与学习小结（含部分经验建议）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-07T15:11:35+08:00" />
+<meta property="article:modified_time" content="2021-09-07T15:11:35+08:00" />
+
+<meta itemprop="name" content="Git学习笔记与常用命令">
+<meta itemprop="description" content="Git常用命令与学习小结（含部分经验建议）"><meta itemprop="datePublished" content="2021-09-07T15:11:35+08:00" />
+<meta itemprop="dateModified" content="2021-09-07T15:11:35+08:00" />
+<meta itemprop="wordCount" content="3763">
+<meta itemprop="keywords" content="Git," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git学习笔记与常用命令"/>
+<meta name="twitter:description" content="Git常用命令与学习小结（含部分经验建议）"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git学习笔记与常用命令</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-07 </span>
+        <div class="post-category">
+            <a href="/categories/git/"> Git </a>
+            </div>
+          <span class="more-meta"> 约 3763 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#git">Git</a>
+      <ul>
+        <li><a href="#几个重要命令及术语">几个重要命令及术语</a>
+          <ul>
+            <li><a href="#术语">术语</a></li>
+            <li><a href="#其他术语">其他术语</a></li>
+          </ul>
+        </li>
+        <li><a href="#一些经验及git教程小结">一些经验及Git教程小结</a></li>
+        <li><a href="#常用命令">常用命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>平时用git不太熟练，又花了一点时间来学习。整理一些相关经验和常用命令备忘，应该会更新</p>
+</blockquote>
+<h1 id="git">Git</h1>
+<h2 id="几个重要命令及术语">几个重要命令及术语</h2>
+<p>引阮一峰的网络博客</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs/20210907155444.png" alt="几种重要Git命令工作流程"></p>
+<h3 id="术语">术语</h3>
+<p>图中几个术语说明：</p>
+<ol>
+<li><strong>Workspace</strong>：工作区</li>
+<li><strong>Index</strong> (又称Stage)：暂存区</li>
+<li><strong>Repository</strong>：本地仓库（版本库）</li>
+<li><strong>Remote</strong>：远程仓库</li>
+</ol>
+<h3 id="其他术语">其他术语</h3>
+<ul>
+<li><strong>git</strong>: 一个开源的分布式版本控制系统</li>
+<li><strong>GitHub</strong>: 一个托管和协作管理 Git 仓库的平台</li>
+<li><strong>commit 提交</strong>: 一个 Git 对象，是你整个仓库的快照的哈希值</li>
+<li><strong>branch 分支</strong>: 一个轻型可移动的 commit 指针</li>
+<li><strong>clone</strong>: 一个仓库的本地版本，包含所有提交和分支</li>
+<li><strong>remote 远端</strong>: 一个 GitHub 上的公共仓库，所有小组成员通过它来交换修改</li>
+<li><strong>fork</strong>: 一个属于另一用户的 GitHub 上的仓库的副本</li>
+<li><strong>pull request 拉取请求</strong>: 一处用于比较和讨论分支上引入的差异，且具有评审、评论、集成测试等功能的地方</li>
+<li><strong>HEAD</strong>: 代表你当前的工作目录。使用<code>git checkout</code> 可移动 HEAD 指针到不同的分支、标记(tags)或提交</li>
+</ul>
+<h2 id="一些经验及git教程小结">一些经验及Git教程小结</h2>
+<ul>
+<li>git 是最先进的分布式版本控制系统</li>
+<li>不要使用windows的记事本编辑任何文件（存在编码问题，notepad++或vscode等），文件夹路径不存在中文，最好也不要有空格</li>
+<li>没有使用<code>git add</code>添加到Index的文件不会加入到<code>commit</code>中。</li>
+<li>使用<code>git status</code>命令随时掌握工作区的状态；如果<code>git status</code>查看到有文件被修改过，进一步用<code>git diff</code>查看修改内容</li>
+<li><code>HEAD</code>指向的版本是当前版本，<code>git reset --hard commit_id</code>可以切换到commit_id 对应的版本；<code>git log</code>查看提交历史，<code>git reflog</code>查看命令历史，以便确定切换到哪个版本</li>
+<li>当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>；当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD &lt;file&gt;</code>，就回到了场景1，第二步按场景1操作；已经提交了不合适的修改到版本库时，想要撤销本次提交，结合上一条经验来确定版本切换，不过前提是没有推送到远程库。</li>
+<li>如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失<strong>最近一次提交后你修改的内容</strong>。</li>
+<li>关联一个远程仓库后，使用命令<code>git push -u origin master</code>第一次推送master分支的所有内容到远程仓库；此后，每次本地提交后，只要有必要，就可以使用命令<code>git push origin master</code>推送最新修改。如果推送失败，先用git pull抓取远程的新提交，如果出现冲突，先解决冲突。</li>
+<li>Git支持多种协议，包括<code>https</code>，但<code>ssh</code>协议速度最快。</li>
+<li><code>git log --graph --pretty=oneline --abbrev-commit</code> 查看分支合并图</li>
+<li>合并分支时，<code>--no-ff</code>参数 表示禁用<code>Fast forward</code>。在团队开发中善用分支</li>
+<li>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场；在master分支上修复的bug，想要合并到当前dev分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</li>
+<li>开发一个新的feature，最好新建一个分支；如果要丢弃一个没合并的分支，通过<code>git branch -D &lt;name&gt;</code> 强制删除，-d 会提示要不要删除</li>
+<li>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>。</li>
+<li><em>rebase操作可以把本地未push的分叉提交历史整理成直线；rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。</em> 这个在实际中必要吗？实际操作会有问题吗？比如不同的用户在本地rebsae之后再提交是否会混乱？（我再看看<a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA">Git - 变基</a>）</li>
+<li>Git的tag时版本库的快照，其实就是指向某个commit的指针（即与某个commit绑定。与分支不同，分支可以移动，tag不能移动）。-   命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；命令<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息；命令<code>git tag</code>可以查看所有标签。 -   命令<code>git push origin &lt;tagname&gt;</code>可以推送一个本地标签；命令<code>git push origin --tags</code>可以推送全部未推送过的本地标签； 命令<code>git tag -d &lt;tagname&gt;</code>可以删除一个本地标签；命令<code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签。</li>
+<li>在GitHub上，可以任意Fork开源仓库；自己拥有Fork后的仓库的读写权限；可以推送pull request给官方仓库来贡献代码。</li>
+<li>忽略某些文件时，需要编写<code>.gitignore</code>； <code>.gitignore</code>文件本身要放到版本库里，并且可以对<code>.gitignore</code>做版本管理！</li>
+<li>配置别名，<a href="https://www.liaoxuefeng.com/wiki/896043488029600/898732837407424">配置别名 - 廖雪峰的官方网站</a>，适用于熟练适用git的用户</li>
+<li>搭建Git服务器 <a href="https://www.liaoxuefeng.com/wiki/896043488029600/899998870925664">搭建Git服务器 - 廖雪峰的官方网站</a></li>
+</ul>
+<h2 id="常用命令">常用命令</h2>
+<p>备用一些常见命令原文见[[#参考资料]]，更多请见官网：<a href="https://git-scm.com/docs">Git - Reference</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git init                                                  <span class="c1"># 初始化本地git仓库（创建新仓库）</span>
+git config --global user.name <span class="s2">&#34;xxx&#34;</span>                       <span class="c1"># 配置用户名</span>
+git config --global user.email <span class="s2">&#34;xxx@xxx.com&#34;</span>              <span class="c1"># 配置邮件</span>
+git config --global color.ui <span class="nb">true</span>                         <span class="c1"># git status等命令自动着色</span>
+git config --global color.status auto
+git config --global color.diff auto
+git config --global color.branch auto
+git config --global color.interactive auto
+git config --global --unset http.proxy                    <span class="c1"># remove  proxy configuration on git</span>
+git clone git+ssh://git@192.168.53.168/VT.git             <span class="c1"># clone远程仓库</span>
+git status                                                <span class="c1"># 查看当前版本状态（是否修改）</span>
+git add xyz                                               <span class="c1"># 添加xyz文件至index</span>
+git add .                                                 <span class="c1"># 增加当前子目录下所有更改过的文件至index</span>
+git commit -m <span class="s1">&#39;xxx&#39;</span>                                       <span class="c1"># 提交</span>
+git commit --amend -m <span class="s1">&#39;xxx&#39;</span>                               <span class="c1"># 合并上一次提交（用于反复修改）</span>
+git commit -am <span class="s1">&#39;xxx&#39;</span>                                      <span class="c1"># 将add和commit合为一步</span>
+git rm xxx                                                <span class="c1"># 删除index中的文件</span>
+git rm -r *                                               <span class="c1"># 递归删除</span>
+git log                                                   <span class="c1"># 显示提交日志</span>
+git log -1                                                <span class="c1"># 显示1行日志 -n为n行</span>
+git log -5
+git log --stat                                            <span class="c1"># 显示提交日志及相关变动文件</span>
+git log -p -m
+git show dfb02e6e4f2f7b573337763e5c0013802e392818         <span class="c1"># 显示某个提交的详细内容</span>
+git show dfb02                                            <span class="c1"># 可只用commitid的前几位</span>
+git show HEAD                                             <span class="c1"># 显示HEAD提交日志</span>
+git show HEAD^                                            <span class="c1"># 显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</span>
+git tag                                                   <span class="c1"># 显示已存在的tag</span>
+git tag -a v2.0 -m <span class="s1">&#39;xxx&#39;</span>                                  <span class="c1"># 增加v2.0的tag</span>
+git show v2.0                                             <span class="c1"># 显示v2.0的日志及详细内容</span>
+git log v2.0                                              <span class="c1"># 显示v2.0的日志</span>
+git diff                                                  <span class="c1"># 显示所有未添加至index的变更</span>
+git diff --cached                                         <span class="c1"># 显示所有已添加index但还未commit的变更</span>
+git diff HEAD^                                            <span class="c1"># 比较与上一个版本的差异</span>
+git diff HEAD -- ./lib                                    <span class="c1"># 比较与HEAD版本lib目录的差异</span>
+git diff origin/master..master                            <span class="c1"># 比较远程分支master上有本地分支master上没有的</span>
+git diff origin/master..master --stat                     <span class="c1"># 只显示差异的文件，不显示具体内容</span>
+git remote add origin git+ssh://git@192.168.53.168/VT.git <span class="c1"># 增加远程定义（用于push/pull/fetch）</span>
+git branch                                                <span class="c1"># 显示本地分支</span>
+git branch --contains <span class="m">50089</span>                               <span class="c1"># 显示包含提交50089的分支</span>
+git branch -a                                             <span class="c1"># 显示所有分支</span>
+git branch -r                                             <span class="c1"># 显示所有原创分支</span>
+git branch --merged                                       <span class="c1"># 显示所有已合并到当前分支的分支</span>
+git branch --no-merged                                    <span class="c1"># 显示所有未合并到当前分支的分支</span>
+git branch -m master master_copy                          <span class="c1"># 本地分支改名</span>
+git checkout -b master_copy                               <span class="c1"># 从当前分支创建新分支master_copy并检出</span>
+git checkout -b master master_copy                        <span class="c1"># 上面的完整版</span>
+git checkout features/performance                         <span class="c1"># 检出已存在的features/performance分支</span>
+git checkout --track hotfixes/BJVEP933                    <span class="c1"># 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支</span>
+git checkout v2.0                                         <span class="c1"># 检出版本v2.0</span>
+git checkout -b devel origin/develop                      <span class="c1"># 从远程分支develop创建新本地分支devel并检出</span>
+git checkout -- README                                    <span class="c1"># 检出head版本的README文件（可用于修改错误回退）</span>
+git merge origin/master                                   <span class="c1"># 合并远程master分支至当前分支</span>
+git cherry-pick ff44785404a8e                             <span class="c1"># 合并提交ff44785404a8e的修改</span>
+git push origin master                                    <span class="c1"># 将当前分支push到远程master分支</span>
+git push origin :hotfixes/BJVEP933                        <span class="c1"># 删除远程仓库的hotfixes/BJVEP933分支</span>
+git push --tags                                           <span class="c1"># 把所有tag推送到远程仓库</span>
+git fetch                                                 <span class="c1"># 获取所有远程分支（不更新本地分支，另需merge）</span>
+git fetch --prune                                         <span class="c1"># 获取所有原创分支并清除服务器上已删掉的分支</span>
+git pull origin master                                    <span class="c1"># 获取远程分支master并merge到当前分支</span>
+git mv README README2                                     <span class="c1"># 重命名文件README为README2</span>
+git reset --hard HEAD                                     <span class="c1"># 将当前版本重置为HEAD（通常用于merge失败回退）</span>
+git rebase
+git branch -d hotfixes/BJVEP933                           <span class="c1"># 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）</span>
+git branch -D hotfixes/BJVEP933                           <span class="c1"># 强制删除分支hotfixes/BJVEP933</span>
+git ls-files                                              <span class="c1"># 列出git index包含的文件</span>
+git show-branch                                           <span class="c1"># 图示当前分支历史</span>
+git show-branch --all                                     <span class="c1"># 图示所有分支历史</span>
+git whatchanged                                           <span class="c1"># 显示提交历史对应的文件修改</span>
+git revert dfb02e6e4f2f7b573337763e5c0013802e392818       <span class="c1"># 撤销提交dfb02e6e4f2f7b573337763e5c0013802e392818</span>
+git ls-tree HEAD                                          <span class="c1"># 内部命令：显示某个git对象</span>
+git rev-parse v2.0                                        <span class="c1"># 内部命令：显示某个ref对于的SHA1 HASH</span>
+git reflog                                                <span class="c1"># 显示所有提交，包括孤立节点</span>
+git show HEAD@<span class="o">{</span>5<span class="o">}</span>
+git show master@<span class="o">{</span>yesterday<span class="o">}</span>                               <span class="c1"># 显示master分支昨天的状态</span>
+git log --pretty<span class="o">=</span>format:<span class="s1">&#39;%h %s&#39;</span> --graph                   <span class="c1"># 图示提交日志</span>
+git show HEAD~3
+git show -s --pretty<span class="o">=</span>raw 2be7fcb476
+git stash                                                 <span class="c1"># 暂存当前修改，将所有至为HEAD状态</span>
+git stash list                                            <span class="c1"># 查看所有暂存</span>
+git stash show -p stash@<span class="o">{</span>0<span class="o">}</span>                               <span class="c1"># 参考第一次暂存</span>
+git stash apply stash@<span class="o">{</span>0<span class="o">}</span>                                 <span class="c1"># 应用第一次暂存</span>
+git grep <span class="s2">&#34;delete from&#34;</span>                                    <span class="c1"># 文件中搜索文本“delete from”</span>
+git grep -e <span class="s1">&#39;#define&#39;</span> --and -e SORT_DIRENT
+git gc
+git fsck
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://www.liaoxuefeng.com/wiki/896043488029600">Git教程 - 廖雪峰的官方网站</a></li>
+<li><a href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单 - 阮一峰的网络日志</a></li>
+<li><a href="https://gist.github.com/guweigang/9848271">git命令大全 · GitHub</a></li>
+<li><a href="https://git-scm.com/docs">Git - Reference</a></li>
+<li><a href="https://training.github.com/downloads/zh_CN/github-git-cheat-sheet/">GitHub Git 备忘单 - GitHub Cheatsheets</a></li>
+<li><a href="https://ndpsoftware.com/git-cheatsheet.html#loc=workspace;">workspace :: Git Cheatsheet</a></li>
+<li><a href="https://git-scm.com/book/zh/v2">Git - Book</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-09-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">Git</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6todo_list/">
+            <span class="next-text nav-default">那些年读过的书[&amp;TODO_list]</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2021-09-07 15:11:35 \u002b0800 CST',
+        title: 'Git学习笔记与常用命令',
+        link: decodeURI(location.href),
+        desc: '平时用git不太熟练，又花了一点时间来学习。整理一些相关经验和常用命令备忘，应该会更新 Git 几个重要命令及术语 引阮一峰的网络博客 术语 图中几个术语',
+        owner: 'fzhiy',
+        repo: '',
+        oauth: {
+          client_id: '',
+          client_secret: ''
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
