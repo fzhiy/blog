@@ -4,20 +4,12 @@ date: 2021-09-05T17:04:13+08:00
 draft: false
 ---
 
-
-# 自我介绍
-
-- 余锋，网络空间安全专业硕士在读
-- 坐标：福建福州，曾居住武汉、湘潭
-- 爱好：捣鼓和折腾新技术，**包括但不限于**机器学习、深度强化学习、推荐系统、联邦学习、区块链、网络安全、Web开发。喜欢跑步、乒乓球、篮球等运动，半路闯入的心理学、历史爱好者，正在成长的骑行爱好者和登山爱好者
-
 # 联系方式
 
-Email：[fzhiy270@163.com](mailto:fzhiy270@163.com)
+Email：[fzhiy270@gmail.com](mailto:fzhiy270@gmail.com)
 
 # 其他平台
 
-[link url="https://blog.csdn.net/feng_zhiyu"]CSDN[/link] [github url="https://github.com/fzhiy"]github[/github] [link url="https://www.zhihu.com/people/ni-feng-88-10"]知乎[/link]
 
 # 本站相关
 
@@ -50,7 +42,7 @@ Email：[fzhiy270@163.com](mailto:fzhiy270@163.com)
 - 2021.09.05，
   - 采用hugo + github action搭建[博客](https://blog.fzhiy.net )并自动化部署。（都是才接触不久的，花了一大天时间。。~~感觉违背将重心放在写作上，舍本逐末瞎折~~）这个博客站点专门用来分享笔记，原网站 https://fzhiy.net/ 计划改动中...
   - 改用github图床 + jsdelivr CDN加速（还是免费香呀~）
-  - LoveIt主题个性化配置
+  - ~~LoveIt~~Even主题个性化配置
   - 打算制作个人主页， 建立一个能够分享学习笔记的站点。
   - 
 
