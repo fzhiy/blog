@@ -104,8 +104,8 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 
   livereUID = ""            # LiveRe UID                  # 来必力
 
-  baiduPush = false        # baidu push                  # 百度
-  baiduAnalytics = ""      # Baidu Analytics
+  baiduPush = true        # baidu push                  # 百度
+  baiduAnalytics = "e4ff802fe8f2731918ababdb4ccf87bc"      # Baidu Analytics
   baiduVerification = ""   # Baidu Verification
   googleVerification = ""  # Google Verification         # 谷歌
 
@@ -139,14 +139,15 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
-    owner = "fzhiy"              # Your GitHub ID
+    owner = ""              # Your GitHub ID
     repo = ""               # The repo to store comments
     clientId = ""           # Your client ID
     clientSecret = ""       # Your client secret
 
   [params.utterances]       # https://utteranc.es/
-    owner = ""              # Your GitHub ID
-    repo = ""               # The repo to store comments
+    # owner 填自己的 github 账号，repo 填用来存放评论的仓库名字
+    owner = "fzhiy"
+    repo = "fzhiy.github.io"
 
   [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
     owner = ""              # Your GitHub ID

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Multi-Agent Reinforcement Learning基本概念&amp;三种架构 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="参考内容在References写出，仅作为个人学习笔记，如有错误欢迎指出。 References的一本偏向数学推理的DRL新书即将上线？安排上" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Multi-Agent Reinforcement Learning基本概念&amp;三种架构" />
+<meta property="og:description" content="参考内容在References写出，仅作为个人学习笔记，如有错误欢迎指出。 References的一本偏向数学推理的DRL新书即将上线？安排上" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-22T20:47:09+08:00" />
+<meta property="article:modified_time" content="2021-02-22T20:47:09+08:00" />
+
+<meta itemprop="name" content="Multi-Agent Reinforcement Learning基本概念&amp;三种架构">
+<meta itemprop="description" content="参考内容在References写出，仅作为个人学习笔记，如有错误欢迎指出。 References的一本偏向数学推理的DRL新书即将上线？安排上"><meta itemprop="datePublished" content="2021-02-22T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2021-02-22T20:47:09+08:00" />
+<meta itemprop="wordCount" content="1088">
+<meta itemprop="keywords" content="Multi-Agent Reinforcement Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Multi-Agent Reinforcement Learning基本概念&amp;三种架构"/>
+<meta name="twitter:description" content="参考内容在References写出，仅作为个人学习笔记，如有错误欢迎指出。 References的一本偏向数学推理的DRL新书即将上线？安排上"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Multi-Agent Reinforcement Learning基本概念&amp;三种架构</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-22 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 约 1088 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#multi-agent-reinforcement-learning基本概念12">Multi-Agent Reinforcement Learning基本概念(1/2)</a>
+      <ul>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#terminologies">Terminologies</a></li>
+        <li><a href="#convergence">Convergence</a></li>
+        <li><a href="#summary">Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#multi-agent-reinforcement-learning三种架构22">Multi-Agent Reinforcement Learning三种架构(2/2)</a>
+      <ul>
+        <li><a href="#architectures">Architectures</a></li>
+        <li><a href="#partial-observations-marl的假设">Partial Observations （MARL的假设）</a></li>
+        <li><a href="#fully-decentralized-training">Fully Decentralized Training</a></li>
+        <li><a href="#fully-centralized">Fully Centralized</a>
+          <ul>
+            <li><a href="#shortcommingslow-during-execution">Shortcomming：Slow during Execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#centralized-training-with-decentralized-execution">Centralized Training with Decentralized Execution</a></li>
+        <li><a href="#parameter-sharing">Parameter Sharing？</a></li>
+        <li><a href="#summary-1">Summary</a>
+          <ul>
+            <li><a href="#三种架构的对比">三种架构的对比</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>参考内容在References写出，仅作为个人学习笔记，如有错误欢迎指出。</p>
+<p>References的一本偏向数学推理的DRL新书即将上线？安排上</p>
+</blockquote>
+<h1 id="multi-agent-reinforcement-learning基本概念12">Multi-Agent Reinforcement Learning基本概念(1/2)</h1>
+<h2 id="settings">Settings</h2>
+<ol>
+<li>
+<p>Fully cooperative 相互配合 e.g. 工业机器人</p>
+</li>
+<li>
+<p>Fully competitive 一方的收益是另一方的损失（捕猎者和猎物），如 <strong>零和博弈</strong>，双方获得的奖励总和等于0</p>
+</li>
+<li>
+<p>Mixed Cooperative % competitive   e.g. 足球机器人 同队伍的机器人与不同队伍的机器人分别是合作与竞争关系</p>
+</li>
+<li>
+<p>Self-interested  利己主义，即 <strong>每个agent只想要最大化自身利益</strong> 如 股票和期货的自动交易系统</p>
+<p><img src="https://img.fzhiy.net/img/20210422192256.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422192421.png" alt=""></p>
+</li>
+</ol>
+<h2 id="terminologies">Terminologies</h2>
+<ul>
+<li>
+<p>State，Action，State Transition （<strong>agent之间会相互影响，而非独立</strong>）</p>
+<p><img src="https://img.fzhiy.net/img/20210422192631.png" alt=""></p>
+</li>
+<li>
+<p>Rewards</p>
+<p><img src="https://img.fzhiy.net/img/20210422192804.png" alt=""></p>
+</li>
+<li>
+<p>Returns</p>
+<p><img src="https://img.fzhiy.net/img/20210422192935.png" alt=""></p>
+</li>
+<li>
+<p>Policy Network</p>
+<p><img src="https://img.fzhiy.net/img/20210422193114.png" alt=""></p>
+</li>
+<li>
+<p>Uncertainty in the Return</p>
+<p><img src="https://img.fzhiy.net/img/20210422193226.png" alt=""></p>
+</li>
+<li>
+<p>State-Value Function</p>
+<p><img src="https://img.fzhiy.net/img/20210422193534.png" alt=""></p>
+<p>动作是随机的，与$\theta^j$相关，因此$V^i$<strong>依赖于所有的$\theta^1,&hellip;,\theta^n$</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210422193812.png" alt=""></p>
+</li>
+</ul>
+<h2 id="convergence">Convergence</h2>
+<ul>
+<li>
+<p>Single-Agent Policy Learning</p>
+<p><img src="https://img.fzhiy.net/img/20210422193933.png" alt=""></p>
+</li>
+<li>
+<p>Multi-Agent Policy Learning</p>
+<p>Nash Equilibrium 纳什均衡</p>
+<p><img src="https://img.fzhiy.net/img/20210422194108.png" alt=""></p>
+</li>
+<li>
+<p>Difficulty of MARL</p>
+<p>Single-Agent Policy Gradient for MARL</p>
+<p><img src="https://img.fzhiy.net/img/20210422194209.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422194341.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422194441.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422194550.png" alt=""></p>
+<p>用single-agent policy来做MARL的问题在于：当一个智能体达到最优策略时，另一个智能体继续调整$\theta$，其他的智能体的目标函数都会改变，因此他们也将改变 <strong>自己的策略</strong>。 即 **MARL的最优策略依赖于所有的$\theta^i,i=1,&hellip;,n$ **</p>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>MARL <strong>只有所有的agents之间相互独立时，才能将single-agent RL方法用于MARL</strong></li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/20210422194941.png" alt=""></p>
+<ul>
+<li>
+<p>Setting of MARL 四种设置</p>
+</li>
+<li>
+<p>Convergence</p>
+<p><img src="https://img.fzhiy.net/img/20210422195305.png" alt=""></p>
+<p>对于single-agent System，目标函数不再增长时 收敛；对于multi-agent System，纳什均衡 表示收敛</p>
+</li>
+</ul>
+<h1 id="multi-agent-reinforcement-learning三种架构22">Multi-Agent Reinforcement Learning三种架构(2/2)</h1>
+<h2 id="architectures">Architectures</h2>
+<ul>
+<li>完全去中心化 <strong>agents之间不通信</strong></li>
+<li>完全中心化 （可理解为 “定于一尊“） <strong>中央控制器为所有的agents做决策</strong></li>
+<li>中心化训练、去中心化执行 （训练过程使用中央控制器，训练后不使用中央控制器，<strong>每个agent根据自己的观测用自己的策略网络做决策</strong>）</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/20210422200818.png" alt=""></p>
+<h2 id="partial-observations-marl的假设">Partial Observations （MARL的假设）</h2>
+<p><img src="https://img.fzhiy.net/img/20210422201335.png" alt=""></p>
+<h2 id="fully-decentralized-training">Fully Decentralized Training</h2>
+<p><img src="https://img.fzhiy.net/img/20210422202358.png" alt=""></p>
+<p>Single-Agent RL 架构图（来自基本概念章节）</p>
+<p><img src="https://img.fzhiy.net/img/20210422194209.png" alt=""></p>
+<p>通过上面两张图发现 完全去中心化架构的<strong>本质是Single-Agent RL</strong> 而不是MARL</p>
+<p>==Fully Decentralized Actor-Critic Method==</p>
+<p><img src="https://img.fzhiy.net/img/20210422202828.png" alt=""></p>
+<h2 id="fully-centralized">Fully Centralized</h2>
+<p><strong>Centralized Training</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210422203136.png" alt=""></p>
+<p><strong>Centralized  Execution</strong></p>
+<p>中心化执行的时候， 输入是$o^1,&hellip;,o^n$ ，策略由中央控制器来做，因为做决策需要知道所有的观测o， 一个agent只知道自己的观测o，而不知道其他的观测。</p>
+<p><img src="https://img.fzhiy.net/img/20210422203355.png" alt=""></p>
+<p><strong>Centralized Actor-Critic Mehod</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210422203504.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422203553.png" alt=""></p>
+<p>中心化架构的好处是 中央知道所有的观测o 可以帮助更好的决策。缺点是<strong>执行缓慢</strong>，具体如下</p>
+<h3 id="shortcommingslow-during-execution">Shortcomming：Slow during Execution</h3>
+<p><img src="https://img.fzhiy.net/img/20210422203747.png" alt=""></p>
+<h2 id="centralized-training-with-decentralized-execution">Centralized Training with Decentralized Execution</h2>
+<p><img src="https://img.fzhiy.net/img/20210422203935.png" alt=""></p>
+<p><strong>Centralized Training</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210422204002.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422204038.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210422204114.png" alt=""></p>
+<p><strong>Decentralized Execution</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210422204144.png" alt=""></p>
+<h2 id="parameter-sharing">Parameter Sharing？</h2>
+<p><img src="https://img.fzhiy.net/img/20210422204215.png" alt=""></p>
+<p>网络之间是否要共享参数呢？</p>
+<p>根据具体场景来，比如 足球机器人比赛，agents是不可交换的（理解为负责的任务不同），所以不能共享参数。无人车由同样的网络控制，所以参数可以共享。</p>
+<h2 id="summary-1">Summary</h2>
+<ul>
+<li>
+<p>Fully Decentralized</p>
+<p><img src="https://img.fzhiy.net/img/20210422204435.png" alt=""></p>
+</li>
+<li>
+<p>Fully Centralized</p>
+<p><img src="https://img.fzhiy.net/img/20210422204448.png" alt=""></p>
+</li>
+<li>
+<p>Centralized Training with Decentralized Execution</p>
+<p><img src="https://img.fzhiy.net/img/20210422204545.png" alt=""></p>
+</li>
+</ul>
+<h3 id="三种架构的对比">三种架构的对比</h3>
+<p><img src="https://img.fzhiy.net/img/20210422204702.png" alt=""></p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=0HV1hsjd1y8">https://www.youtube.com/watch?v=0HV1hsjd1y8</a></li>
+<li><a href="https://github.com/wangshusen/DRL/blob/master/Notes_CN/DRL.pdf">https://github.com/wangshusen/DRL/blob/master/Notes_CN/DRL.pdf</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/multi-agent-reinforcement-learning/">Multi-Agent Reinforcement Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2021-03-09-papernotes2017.algorand__scaling_byzantine_agreements_for_cryptocurrencies/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-12-20-papernotes2020.threats_to_federated_learning__a_survey/">
+            <span class="next-text nav-default">[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

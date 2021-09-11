@@ -1,2 +1,5 @@
 # fzhiy.github.io
-myblog
+
+myblog:     <https://blog.fzhiy.net>
+
+HomePage:   https//fzhiy.net Rebuiding...

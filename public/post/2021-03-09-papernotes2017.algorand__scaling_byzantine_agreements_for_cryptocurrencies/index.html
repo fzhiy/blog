@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Algorand: Scaling byzantine agreements for cryptocurrencies 文章链接：https://doi.org/10.1145/3132747.3132757 作者：Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich 发表：" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2021-03-09-papernotes2017.algorand__scaling_byzantine_agreements_for_cryptocurrencies/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies" />
+<meta property="og:description" content="Algorand: Scaling byzantine agreements for cryptocurrencies 文章链接：https://doi.org/10.1145/3132747.3132757 作者：Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich 发表：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2021-03-09-papernotes2017.algorand__scaling_byzantine_agreements_for_cryptocurrencies/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-09T20:47:09+08:00" />
+<meta property="article:modified_time" content="2021-03-09T20:47:09+08:00" />
+
+<meta itemprop="name" content="[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies">
+<meta itemprop="description" content="Algorand: Scaling byzantine agreements for cryptocurrencies 文章链接：https://doi.org/10.1145/3132747.3132757 作者：Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich 发表："><meta itemprop="datePublished" content="2021-03-09T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2021-03-09T20:47:09+08:00" />
+<meta itemprop="wordCount" content="4870">
+<meta itemprop="keywords" content="PaperNotes-Series,Consensus," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies"/>
+<meta name="twitter:description" content="Algorand: Scaling byzantine agreements for cryptocurrencies 文章链接：https://doi.org/10.1145/3132747.3132757 作者：Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich 发表："/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-09 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 约 4870 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#algorand-scaling-byzantine-agreements-for-cryptocurrencies">Algorand: Scaling byzantine agreements for cryptocurrencies</a>
+      <ul>
+        <li><a href="#cs1951l-algorand">CS1951L-Algorand</a>
+          <ul>
+            <li><a href="#algorand"><strong>Algorand</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#conclusions">Conclusions</a></li>
+        <li><a href="#0abstract">0.Abstract</a></li>
+        <li><a href="#1introduction">1.Introduction</a>
+          <ul>
+            <li><a href="#three-challengesalgorand">Three Challenges(Algorand)</a></li>
+            <li><a href="#techniques">Techniques</a></li>
+          </ul>
+        </li>
+        <li><a href="#2related-work">2.Related Work</a></li>
+        <li><a href="#3goals-and-assumptions">3.Goals AND Assumptions</a></li>
+        <li><a href="#4overview">4.Overview</a></li>
+        <li><a href="#5cryptographic-sortition">5.Cryptographic Sortition</a>
+          <ul>
+            <li><a href="#selection-procedure">Selection procedure</a></li>
+            <li><a href="#choosing-the-seed">Choosing the seed</a></li>
+            <li><a href="#choosing-sk_u-well-in-advance-of-the-seed">Choosing sk_u well in advance of the seed</a></li>
+          </ul>
+        </li>
+        <li><a href="#6block-proposal">6.Block Proposal</a></li>
+        <li><a href="#evaluation">Evaluation</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="algorand-scaling-byzantine-agreements-for-cryptocurrencies">Algorand: Scaling byzantine agreements for cryptocurrencies</h1>
+<p>文章链接：https://doi.org/10.1145/3132747.3132757</p>
+<p>作者：Yossi Gilad, Rotem Hemo, Silvio Micali, Georgios Vlachos, Nickolai Zeldovich</p>
+<p>发表：<a href="https://dl.acm.org/doi/proceedings/10.1145/3132747">SOSP &lsquo;17: Proceedings of the 26th Symposium on Operating Systems Principles</a></p>
+<p>截止当前（2021.03.08）被引次数：738</p>
+<blockquote>
+<p>Zotero链接: <a href="zotero://select/items/1_MTJA4T9Q">从我的文库打开</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>标签1</th>
+<th>标签2</th>
+<th>标签3</th>
+<th>标签4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PoS</td>
+<td>VRFs</td>
+<td>Consensus</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>[toc]</p>
+<h2 id="cs1951l-algorand">CS1951L-Algorand</h2>
+<p><strong>Lack of finality（终结性） is a major issue with</strong> <strong>PoW!</strong></p>
+<p>PoW的主要问题是<strong>缺乏终结性</strong>。尤其是在<strong>跨链（cross-chain）或者链下（off-chain）应用中</strong>。</p>
+<p>Byzantine Fault-Tolerance 问题</p>
+<ul>
+<li>无法扩展到大量选民（voters）的情景中</li>
+<li><strong>扩展Scalability：Elect a Committee （只需要委员会选择committee selection不是腐败的） ==&raquo;通过委员会方法进行扩展并不是一个新方法</strong></li>
+<li>对于女巫攻击而言是脆弱的（vulnerable）
+<ul>
+<li>Anti-Sybil：PoS（Proof-of-Stake）</li>
+</ul>
+</li>
+</ul>
+<h3 id="algorand"><strong>Algorand</strong></h3>
+<h4 id="customized-bft-protocolrandomly-select-committeeweighted-by-stakereselect-on-each-round"><strong>Customized BFT protocol，Randomly select committee，Weighted by stake，Reselect on each round</strong></h4>
+<ul>
+<li>
+<p>With high probability, all agree on sequence of transactions 极有可能所有人都同意交易顺序</p>
+</li>
+<li>
+<p>Safety: if one honest use accepts A, all eventually do 安全性：如果一个诚实的使用接受A，则所有最终都接受</p>
+</li>
+<li>
+<p>Liveness: under network assumptions 活动性：在网络假设下</p>
+</li>
+</ul>
+<h4 id="algorand-adversary"><strong>Algorand Adversary</strong></h4>
+<ul>
+<li>我可以参加并持有金钱， <strong>但是我承受不起  h &lt;1/3</strong></li>
+<li>我可以破坏目标用户， <strong>但是我不能破坏  &gt; 2/3的用户</strong></li>
+</ul>
+<p>富有的投票更多</p>
+<ul>
+<li>有k枚硬币的用户，每一枚硬币被分为k个子用户， 被独立选择， 没有人必须知道……， 多少次Alice被选择</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/image-20210308200717284.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210309184035.png" alt=""></p>
+<h2 id="conclusions">Conclusions</h2>
+<ul>
+<li>委员会的途径达成共识</li>
+<li>Proof-of-Stake</li>
+<li>Sortition</li>
+<li>VRFs</li>
+<li>Choosing seeds</li>
+<li>Choosing secret keys</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/20210309184120.png" alt=""></p>
+<h2 id="0abstract">0.Abstract</h2>
+<p>Algorand：一种新的加密货币，<strong>在扩展到许多用户时可以确认时延为一分钟（几乎不分叉）的交易。 即使有一些恶意用户并且网络被临时分区也能确保用户不会对已确认的交易有不同的view。</strong></p>
+<p>使用一种新的Byzantine Agreement（BA）protocol； 使用<strong>基于VRFs的新机制来将共识扩展到许多用户</strong></p>
+<p>在Algorand的BA协议中，<strong>除了用户的私钥外，用户不保存他们的任何私有状态，这使得用户发送完消息后立即更换参与者==&raquo;缓解了参与者身份暴露后的针对性攻击</strong></p>
+<h2 id="1introduction">1.Introduction</h2>
+<p>当前的协议遭遇到交易中时延和信任的权衡。 Bitcoin达成交易实现高度信任需要花费 <strong>1小时，另外要求低时延的应用不能肯定交易得到确认并且必须相信payer不会双花。</strong> 双花攻击=&gt;使用区块链记账， <strong>但是达成共识困难（任何人能够参与，敌手可以创造任意数量的假币【女巫攻击】使得需要一小部分诚实用户的传统共识协议不可行了）</strong> ==&raquo; Bitcoin及其他加密货币使用 <strong>PoW， 但是PoW允许分叉攻击的可能性</strong> 。</p>
+<p>减缓分叉需要两个牺牲：</p>
+<ul>
+<li>将链增长一个区块的时间必须相当高(例如，比特币10分钟)，</li>
+<li>应用程序必须等待几个块，以确保它们的事务保持在权威链上(比特币[7]推荐6个区块)</li>
+</ul>
+<p>==&raquo;其结果是，用比特币确认一笔交易大约需要一个小时。</p>
+<p><strong>Byzantine agreement</strong>（BA，应用于大规模用户中，<strong>低时延且没有分叉的可能性</strong>）协议是Algorand的核心。<strong>BA的关键性技术是VRFs（以私密和非交互的方式随机选择用户）。</strong> <strong>【38，16】是本文的前期技术报告</strong></p>
+<h3 id="three-challengesalgorand">Three Challenges(Algorand)</h3>
+<ul>
+<li>女巫攻击</li>
+<li>BA必须扩展到数百万用户，远高于当前最先进的拜占庭协议的操作规模</li>
+<li>必须能抵抗拒绝服务攻击（<strong>denial-of-service attacks</strong>），并且即使在敌手断开一些用户的连接也要继续操作【30，52】</li>
+</ul>
+<h3 id="techniques">Techniques</h3>
+<ul>
+<li>Weighted users
+<ul>
+<li>为抵抗女巫攻击，Algorand给每个用户一个权重。BA旨在保证用户的一致意见，只要有加权的部分(<strong>大于2/3的常数</strong>)用户是诚实的。在Algorand，我们根据用户账户里的钱来衡量用户。 ==&raquo;只要诚实用户拥有超过2/3，则Algorand能够避免分叉和双花攻击。</li>
+</ul>
+</li>
+<li>Consensus by committee
+<ul>
+<li>BA通过选择一个委员会执行协议的每一步（从所有用户中<strong>随机选择</strong>的一小部分代表）<strong>实现扩展性</strong>。BA基于用户的权重在用户中随机选择委员会成员==&raquo; 允许Algorand确保委员会成员中有相当一部分是诚实的。 <strong>但是，对委员会的依赖增加了对选定的委员会成员进行有针对性攻击的可能性</strong></li>
+</ul>
+</li>
+<li>Cryptographic sortition（加密抽签）
+<ul>
+<li><strong>为了解决利用委员会达成共识产生的针对性攻击问题，BA以一种私人的、非交互式的方式选拔委员会成员。</strong> 系统中的用户通过<strong>计算自身私钥的VRF以及来自区块链的公共信息</strong>来 独立决定他们是否能够被选择为委员。 若函数显示用户被选择了，会返回一个向其他用户证明委员会成员身份的短字符串（包含在他的网络信息中）。由于委员选择是非交互式的，因此直到该用户开始参与BA，对手都不知道目标用户。</li>
+</ul>
+</li>
+<li>Participant replacement
+<ul>
+<li>一旦某个委员会成员在BA中发送了一条信息，敌手就可能盯上该委员会成员。==&raquo; <strong>BA要求委员成员只发送（发言）一次来减缓这种攻击。</strong> 因此，一旦委员会成员发送了他的信息(向对手暴露他的身份)，对于BA委员会成员就变得无关紧要了。</li>
+<li>BA通过避免任何私有状态**(用户的私钥除外)**来实现此属性，这使得所有用户都**能够平等地参与**，并且通过为Byzantine agreement协议的每一步选举新的委员会成员来实现。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2related-work">2.Related Work</h2>
+<ul>
+<li>Proof-of-Work</li>
+<li>Proof-of-Stake
+<ul>
+<li>Algorand使用货币价值作为权重， 许多权益证明的加密货币   <strong>两者之间有重要的不同：Algorand中只要攻击者控制的货币价值少于1/3，就能够保证分叉的可能性是可忽略的（不存在的）；在其他许多权益证明加密货币中，恶意leader创造新块导致网络分叉，leader将会失去他的钱</strong></li>
+<li>PoS避免了PoW的计算开销 ==&raquo; <strong>允许减少交易确认时间</strong>。 <strong>PoS在实践中实现【Outdoors【31】第一个实现】是具有挑战的</strong>。一些权益证明加密货币要求主密钥来周期性对正确账本签名来避免 <u>信任危机</u>；<strong>而Algorand在即使leader证明是恶意的情况下也能避免分叉解决这个问题</strong></li>
+</ul>
+</li>
+<li>Trees and DAGs instead of chains</li>
+</ul>
+<h2 id="3goals-and-assumptions">3.Goals AND Assumptions</h2>
+<ul>
+<li>
+<p>Safety: if one honest use accepts A, all eventually do 安全性：如果一个诚实的用户使用接受A，则所有最终都接受</p>
+</li>
+<li>
+<p>Liveness: under network assumptions 活动性：在网络假设下</p>
+</li>
+<li>
+<p><strong>Assumption</strong></p>
+<ul>
+<li>
+<p><strong>Algorand Adversary</strong>：我可以参加并持有金钱， <strong>但是我承受不起  h &lt;1/3</strong>我可以破坏目标用户， <strong>但是我不能破坏  &gt; 2/3的用户</strong></p>
+</li>
+<li>
+<p>Strong synchrony：Algorand用于<strong>实现Liveness</strong>，在一个已知的有限时间内大部分诚实用户（eg.95%）能发送消息被大部分其他诚实用户（eg.95%）接收；<strong>敌手最多只能能够控制网络的小部分诚实用户</strong></p>
+</li>
+<li>
+<p>Weak synchrony：Algorand用于<strong>实现Safety</strong>。<strong>在每个时长b的周期中，必须要有一个时长为s&lt;b的strong synchrony时间</strong></p>
+<blockquote>
+<p>in every period of length b (think of b as a day or aweek), there must be a strongly synchronous period of length s &lt; b (an s of a few hours suffices).</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4overview">4.Overview</h2>
+<p><img src="https://img.fzhiy.net/img/20210309105856.png" alt=""></p>
+<p>Algorand要求每个用户拥有一个公钥，类似Bitcoin在区块链中添加区块。用户使用gossip protocol通信来提交新交易。Algorand使用BA就未确定（排队中）的区块达成共识。BA**按步骤（step）**执行，在相同的gossip protocol上通信，并产生一个新的一致同意的块。</p>
+<p>BA能达成两类共识：</p>
+<ul>
+<li>
+<p>final consensus；达成最终共识说明在一个区块上达成共识，进一步地交易得到确认</p>
+</li>
+<li>
+<p>tentative consensus。达成暂时性共识说明可能在不同的区块（只要没有达成final consensus）上达成了共识</p>
+<ul>
+<li>两类情况</li>
+<li>1）若网络是强同步的，敌手 <strong>只有小概率可能性</strong> 使BA在一个区块上达成tentative consensus。BA既不能在不同区块上达成共识，也不能简单确认网络是强同步的。Algorand最终（in a few rounds）以压倒性（绝对）概率在后续区块上达成共识，因此确认这些更早一些的交易。</li>
+<li>2）若网络是弱同步的（例如，它完全由对手控制，并有一个上限，即对手可以控制多久）。此时BA能在不同区块上达成tentative consensus，形成多个分叉。这反过来又会阻止BA再次达成共识，因为用户被分成不同的组，而这些组对之前的块有disagree。 <strong>为了恢复liveness，Algorand周期性的invoke BA决定哪个分叉进一步增长。 一旦网络重新回到强同步，这将允许Algorand选择其中一个分叉，然后在该分叉的后续区块上达成final consensus。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>当且仅当后续块达成最终共识时，用户才会确认一个暂时块的交易。</strong></p>
+<p>Algorand的Gossip Protocol 实现类似Bitcoin</p>
+<p><strong>Block  proposal（section 6）</strong></p>
+<p><strong>Agreement using BA（section 7）</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210309110934.png" alt=""></p>
+<p>每个用户都用他们收到的<strong>最高优先级区块</strong>初始化BA。</p>
+<p>上图中，每一步从sortition开始，所有用户检查他们自己是否被选为委员会成员。是委员会成员就广播一条包含他们的选择证明的消息（<strong>上图中部区域的蓝红绿三个箭头</strong>）。在经过BA的多次这样重复执行的步骤后，委员会的足够用户达成共识。</p>
+<blockquote>
+<p>(<strong>Steps are not synchronized across users</strong>; each user checks for selection as soon as he observes the previous step had ended.) <strong>用户之间步骤不是同步的</strong></p>
+<p>委员会成员会在每一步结束后可以替换，每个用户只要观察到每一步结束后则检查选择。</p>
+</blockquote>
+<p>正如前面所讨论的，BA的一个重要特征是委员会成员除了私有密钥之外不保存私有状态，因此（委员会成员）可以在每一步之后被替换，以减少针对他们的有针对性的攻击</p>
+<p><strong>Efficiency</strong></p>
+<p>当网络是强同步的，BA保证所有诚实的用户从相同的初始区块开始（例如，the highest priority block proposer was hon
+est）</p>
+<h2 id="5cryptographic-sortition">5.Cryptographic Sortition</h2>
+<p><img src="https://img.fzhiy.net/img/20210309113029.png" alt=""></p>
+<p>使用VRFs实现Sortition。</p>
+<p><img src="https://img.fzhiy.net/img/image-20210308200638367.png" alt=""></p>
+<h3 id="selection-procedure">Selection procedure</h3>
+<h4 id="sortition-interfacecs1951l">Sortition Interface（CS1951L）</h4>
+<p><img src="https://img.fzhiy.net/img/image-20210308201100807.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/image-20210308201145681.png" alt=""></p>
+<h4 id="sortition-algorithm"><strong>Sortition</strong> <strong>Algorithm</strong></h4>
+<p><img src="https://img.fzhiy.net/img/image-20210308201257310.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/image-20210308201318761.png" alt=""></p>
+<p>其中<strong>W表示 Algorand中货币单元总数，t表示用户预计被选择的次数，p是被选择成为委员的概率。j是被选中的次数。</strong></p>
+<p>伪随机数（<strong>PRN，pseudo-random number</strong>）hash 决定了 <strong>被选择的sub-users数量</strong>。</p>
+<p><img src="https://img.fzhiy.net/img/20210309173627.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210309173647.png" alt=""></p>
+<blockquote>
+<p><strong>PS：上面两张PPT后面没被选中应该是 (1-p)^(w-k) 这样，大概教授笔误了吧？ 看下图原论文</strong></p>
+</blockquote>
+<p>w(用户权重)个子用户中正好有k个子用户被选中的概率遵循二项分布，子用户的选择遵循二项分布。</p>
+<p><img src="https://img.fzhiy.net/img/20210309171759.png" alt=""></p>
+<p>由于上图的性质，则<strong>将[0,1) 区间划分称如下连续的区间（consecutive intervals）</strong><img src="https://img.fzhiy.net/img/20210309172127.png" alt=""></p>
+<p>选择的子用户的数量是可以使用<strong>proof π</strong>(来自VRF输出)公开验证的。</p>
+<p><img src="https://img.fzhiy.net/img/20210309174121.png" alt=""></p>
+<h4 id="two-important-properties">Two important properties</h4>
+<ul>
+<li>
+<p><strong>Users selected at random based on weights</strong></p>
+</li>
+<li>
+<p><strong>Adversary（that does not know sk_i） can’t guess how many times a user was chosen 或者 更准确地说，对手的猜测不可能比基于权重随机猜测更好</strong></p>
+</li>
+</ul>
+<h4 id="verifying-sortition">Verifying Sortition</h4>
+<p><img src="https://img.fzhiy.net/img/20210309174238.png" alt=""></p>
+<h3 id="choosing-the-seed">Choosing the seed</h3>
+<ul>
+<li>PRG requires a seed …</li>
+<li>Chosen at random</li>
+<li>Publicly known</li>
+<li>Algorand: <strong>new one every round</strong></li>
+<li>Cannot be controlled by Adversary</li>
+</ul>
+<p><strong>每一轮，发布一个新的seed，Round <em>r</em> determined with VRFs of <em>r</em>-1（在Algorand中基于第r-1轮的seed使用VRFs来决定第r轮的seed）</strong></p>
+<h4 id="each-committee-member-computes-">Each committee member computes …</h4>
+<p><img src="https://img.fzhiy.net/img/20210309174608.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210309174646.png" alt=""></p>
+<h4 id="round-seeds">Round Seeds</h4>
+<p><img src="https://img.fzhiy.net/img/20210309174807.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210309174818.png" alt=""></p>
+<p>seed0 由Algorand<strong>最初的参与者（在他们的公钥公开后）使用distributed random number generation[14]随机选择</strong></p>
+<h4 id="limiting-the-adversary">Limiting the Adversary</h4>
+<p><img src="https://img.fzhiy.net/img/20210309174901.png" alt=""></p>
+<h3 id="choosing-sk_u-well-in-advance-of-the-seed">Choosing sk_u well in advance of the seed</h3>
+<p>如果网络不是强同步的，attacker对链有完全的控制，因此可以drop block proposal，并强迫用户同意空区块，这样就可以计算未来的选择种子 ==&raquo; <strong>为缓和这种攻击，Algorand依赖于weak synchrony assuption。</strong></p>
+<p>强同步时期的时长s内应该允许足够多的区块被创造以保证绝对的（压倒性的）概率至少有一个区块是诚实的。这可以确保，只要s足够大，选择私钥sk_u的敌手u就无法预测r回合的种子</p>
+<p><strong>this look-back period b</strong> 体现了如下权衡：</p>
+<p>较大的 b 降低了attacker能够打破弱同步假设的风险，但是 <strong>增加了用户将他们的货币转移给其他人的机会 因此如果系统的安全性破坏，也不会有什么损失（俗称 “无利害关系”问题）。</strong> 一个可能避免这种权衡的方法是：<strong>将用户当前余额的最小值和look-back block中的用户余额作为用户的权重。【本文作者指出，但并未在Algorand中使用】</strong></p>
+<p><img src="https://img.fzhiy.net/img/20210309181129.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20210309181207.png" alt=""></p>
+<p>上图<strong>WHP</strong>表示 <strong>with overwhelming probability</strong></p>
+<h2 id="6block-proposal">6.Block Proposal</h2>
+<ul>
+<li>Minimizing unnecessary block transmissions
+<ul>
+<li>为了降低通信成本，用sorting hash对block proposal进行优先级排序：对于用户i的每个被选择的sub-user 1,&hellip;,j，区块proposal的优先级通过对连接子用户索引的VRF(可验证的随机)hash输出进行哈希得到。</li>
+</ul>
+</li>
+<li>Waiting for block proposals</li>
+<li>Malicious proposers</li>
+</ul>
+<h2 id="evaluation">Evaluation</h2>
+<p><img src="https://img.fzhiy.net/img/image-20210309184209123.png" alt=""></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>Gilad Y, Hemo R, Micali S, et al. Algorand: Scaling byzantine agreements for cryptocurrencies[C]//Proceedings of the 26th Symposium on Operating Systems Principles. 2017: 51-68.</p>
+</li>
+<li>
+<p>Micali S, Rabin M, Vadhan S. Verifiable random functions[C]//40th annual symposium on foundations of computer science (cat. No. 99CB37039). IEEE, 1999: 120-130.</p>
+</li>
+<li>
+<p><a href="http://cs.brown.edu/courses/cs1951l/">CS1951L-Algorand</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/algorand/algorand-releases-first-open-source-code-of-verifiable-random-function-93c2960abd61">Algorand Releases First Open-Source Code: Verifiable Random Function</a></p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-03-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/papernotes-series/">PaperNotes-Series</a>
+          <a href="/tags/consensus/">Consensus</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2021-04-08-mit_6.824labss_notes/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[PaperNotes]2017.Algorand: Scaling byzantine agreements for cryptocurrencies</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/">
+            <span class="next-text nav-default">Multi-Agent Reinforcement Learning基本概念&amp;三种架构</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
