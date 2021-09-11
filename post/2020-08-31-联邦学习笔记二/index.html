@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>联邦学习笔记（二） - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="写在前面 ​ 参考文献《Advances and Open Problems in Federated Learning, 2019》，58位作者的105页文章。笔者当前花了一些时间来阅读这篇论文，由于能力有限，只做" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2020-08-31-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="联邦学习笔记（二）" />
+<meta property="og:description" content="写在前面 ​ 参考文献《Advances and Open Problems in Federated Learning, 2019》，58位作者的105页文章。笔者当前花了一些时间来阅读这篇论文，由于能力有限，只做" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2020-08-31-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-08-31T20:47:09+08:00" />
+<meta property="article:modified_time" content="2020-08-31T20:47:09+08:00" />
+
+<meta itemprop="name" content="联邦学习笔记（二）">
+<meta itemprop="description" content="写在前面 ​ 参考文献《Advances and Open Problems in Federated Learning, 2019》，58位作者的105页文章。笔者当前花了一些时间来阅读这篇论文，由于能力有限，只做"><meta itemprop="datePublished" content="2020-08-31T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2020-08-31T20:47:09+08:00" />
+<meta itemprop="wordCount" content="14558">
+<meta itemprop="keywords" content="PaperNotes-Series,Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联邦学习笔记（二）"/>
+<meta name="twitter:description" content="写在前面 ​ 参考文献《Advances and Open Problems in Federated Learning, 2019》，58位作者的105页文章。笔者当前花了一些时间来阅读这篇论文，由于能力有限，只做"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联邦学习笔记（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-31 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 约 14558 字 </span>
+          <span class="more-meta"> 预计阅读 30 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#advances-and-open-problems-in-federated-learning-2019">Advances and Open Problems in Federated Learning, 2019</a>
+      <ul>
+        <li><a href="#摘要">摘要</a></li>
+        <li><a href="#概览">概览</a>
+          <ul>
+            <li><a href="#section-1-引言">Section 1 引言</a></li>
+            <li><a href="#section-2-放宽核心fl假设">Section 2 放宽核心FL假设</a></li>
+            <li><a href="#section-3-提高效率和有效性">Section 3 提高效率和有效性</a></li>
+            <li><a href="#section-4-保护用户数据隐私">Section 4 保护用户数据隐私</a></li>
+            <li><a href="#section-5-面对攻击和故障的鲁棒性">Section 5 面对攻击和故障的鲁棒性</a></li>
+            <li><a href="#secotion-6-确保公平与定位偏差来源">Secotion 6 确保公平与定位偏差来源</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="写在前面">写在前面</h1>
+<p>​	参考文献《<a href="https://arxiv.org/pdf/1912.04977">Advances and Open Problems in Federated Learning</a>, 2019》，58位作者的105页文章。笔者当前花了一些时间来阅读这篇论文，由于能力有限，只做一些感兴趣点的记录和分析。另引用内容见文末参考文献，如侵权请联系笔者。欢迎讨论~</p>
+<h1 id="advances-and-open-problems-in-federated-learning-2019">Advances and Open Problems in Federated Learning, 2019</h1>
+<h2 id="摘要">摘要</h2>
+<p>​	联合学习（FL）是在中央服务器（例如服务提供者）的协调下，许多客户（例如移动设备或整个组织）共同训练一个模型的一种机器学习设置，同时保持训练数据的分散性。 FL体现了集中数据收集和最小化的原理，并且可以减轻传统的集中式机器学习和数据科学方法带来的许多系统隐私风险和成本。受FL研究爆炸性增长的推动，本文讨论了最新进展，并提出了一系列广泛的开放性问题和挑战。</p>
+<h2 id="概览">概览</h2>
+<h3 id="section-1-引言">Section 1 引言</h3>
+<p>​	重要的相关工作要早于引入联邦学习一词。许多研究领域（包括密码学，数据库和机器学习）追求的长期目标是<strong>在不暴露数据的情况下分析和学习许多所有者的分布数据</strong>。数据的加密方法始于1980年代初 [340《<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.500.3989&amp;rep=rep1&amp;type=pdf">On data banks and privacy homomorphisms.</a> 1978》,421《<a href="https://crysp.uwaterloo.ca/courses/pet/W11/cache/www.cs.wisc.edu/areas/sec/yao1982-ocr.pdf">Protocols for secure computations</a>，1982》]，Agrawal和Srikant [15]和Vaidya等人也曾提出。[390]《 <a href="https://link.springer.com/article/10.1007/s10115-007-0073-7">Privacy-preserving SVM classification</a>，2008》是早期工作的例子，这些工作试图使用中央服务器在保护隐私的同时从本地数据中学习。相反，即使在引入联邦学习一词之后，我们也意识到，没有一项工作可以直接解决联邦学习的全部挑战。因此，术语“联邦学习”为一系列特征，约束和挑战提供了方便的简写，这些特征，约束和挑战通常在隐私至关重要的分散数据上应用的机器学习问题中同时出现。</p>
+<p>​	本文起源于2019年6月17日至18日在Google西雅图办公室举行的联邦学习和分析研讨会。在为期两天的活动中，很明显有必要写一篇广泛的论文来调查联邦学习领域的许多开放挑战。</p>
+<p>​	讨论的许多问题的关键特性是它们本质上是跨学科的，解决这些问题可能不仅需要机器学习，还需要分布式优化，加密，安全性，差分隐私，公平性，压缩感知，系统，信息论，统计甚至更多。许多最棘手的问题都在这些领域的交汇处，因此，我们认为合作对于持续发展至关重要。这项工作的目标之一在于突出这些领域的技术进行组合的潜在方式，从而提出了既有趣又新的挑战。</p>
+<p>​	相比最初着重于移动和边缘设备应用程序[289、287]而引入联邦学习一词，将联邦学习应用于其他应用程序的兴趣已经大大增加，包括一些可能只涉及少量相对可靠的客户端的应用程序，例如多个组织合作训练一个模型。我们将这两个联邦学习设置分别称为**“cross-device”**和**“cross-silo”**。鉴于这些变化，我们提出了对联邦学习的更广泛定义：</p>
+<blockquote>
+<p>联邦学习是一种由多个实体（客户端）在中央服务器或服务提供商的协调下协作解决机器学习问题的机器学习设置。每个客户的原始数据都存储在本地，并且不会交换或转移；取而代之的是使用旨在及时信息聚合的局部更新来实现学习目标。</p>
+<p>局部更新是指范围狭窄的更新，其中包含针对特定学习任务所需的最少信息。在数据最小化服务中，尽可能早地执行聚合。我们注意到，此定义将联邦学习与完全分散的（点对点）学习技术区分开</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/20200831111038.png" alt=""></p>
+<p>​												表1：<strong>数据中心中联邦学习设置与分布式学习的典型特征</strong></p>
+<p>联邦学习定义及分类相关介绍见：<a href="https://yu-feng.top/archives/18/">联邦学习笔记（一）</a></p>
+<h3 id="section-2-放宽核心fl假设">Section 2 放宽核心FL假设</h3>
+<h4 id="21-完全去中心化p2p分布式学习">2.1 <strong>完全去中心化/P2P分布式学习</strong></h4>
+<p>​	在联邦学习中，中央服务器负责协调培训过程并接收所有客户的贡献。因此，<strong>服务器是中央参与方，它也可能出现单点故障</strong>。尽管大型公司或组织可以在某些应用场景中扮演这个角色，但是在更多协作学习场景中，可靠、强大的中央服务器可能并不总是可用或理想的[392]。此外，如Lian等人所述，<strong>当客户端数量很大时，服务器甚至可能成为瓶颈[266]</strong>（尽管可以通过精心设计的系统来减轻这种情况，例如[74]）。</p>
+<p>​	完全分布式学习的<strong>关键思想</strong>是<strong>通过各个客户端之间的对等通信来代替与服务器的通信</strong>。通信拓扑表示为一个连接图，其中节点是客户端，一条边表示两个客户端之间的通信通道。<strong>通常将网络图选择为具有小的最大连接数的稀疏图，以便每个节点仅需要向/从少量对等点发送/接收消息</strong>。这与服务器-客户端体系结构的星形图相反。在完全去中心化的算法中，回合对应于每个客户端执行本地更新并与图中的邻居交换信息。在机器学习的上下文中，本地更新通常是本地（随机）梯度步骤，其通信在于将一个人的本地模型参数与邻居平均。请注意，不再像标准联邦学习中那样存在模型的全局状态，而是可以设计过程以使所有局部模型都收敛到所需的全局解决方案，即各个模型逐渐达成共识。</p>
+<p><strong>值得注意的是</strong>，即使在上述分散的环境中，中央机构仍可能负责设置学习任务。例如，考虑以下问题：谁决定在分散环境下要训练的模型是什么？使用什么算法？什么超参数？当某些东西无法按预期工作时，谁负责调试？回答这些问题仍然需要中央机构中参与客户的一定程度的信任。或者可以由提出学习任务的客户来决定，也可以通过共识计划来共同做出决定</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>联邦学习</th>
+<th>完全去中心化（点对点）学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编排</td>
+<td>中央编排服务器或服务可以组织训练，但从不查看原始数据</td>
+<td>没有集中的编排</td>
+</tr>
+<tr>
+<td>广域通讯</td>
+<td>中心辐射型拓扑，中心代表协调服务提供商（通常没有数据），分支连接到客户端</td>
+<td>对等拓扑，可能带有动态连接图</td>
+</tr>
+</tbody>
+</table>
+<p>表3：<strong>联邦学习与完全分散学习之间主要区别的比较</strong>。请注意，与FL一样，分布式学习可以进一步划分为不同的用例，其区别类似于表1中比cross-silo FL和cross-device FL的区别。</p>
+<h5 id="211-算法挑战">2.1.1 算法挑战</h5>
+<ul>
+<li><strong>网络拓扑和异步对分布式SGD的影响</strong></li>
+<li><strong>本地更新分散式SGD</strong></li>
+<li><strong>个性化和信任机制</strong></li>
+<li><strong>梯度压缩和量化方法</strong></li>
+</ul>
+<h5 id="212-实践挑战">2.1.2 实践挑战</h5>
+<blockquote>
+<p>完全分布式学习的一个正交问题是<strong>如何在实践中实现它</strong>。本节概述了<strong>基于分布式分类帐的思想的一系列相关思想。</strong></p>
+<p>区块链是在不同用户之间共享的分布式账本，无需中央授权即可进行数字交易，包括加密货币交易。尤其是，智能合约允许在区块链之上执行任意代码，而区块链本质上是一个大规模复制的最终一致的状态机。在联邦学习方面，该技术的使用可以通过使用智能合约进行模型聚合来实现全球服务器的分散化，其中执行智能合约的参与客户端可以是不同的公司或云服务。</p>
+<p>但是在以太坊[409]等当今的区块链平台上，默认情况下可以公开获取区块链上的数据，<strong>这可能会阻止用户参与去中心化联邦学习协议</strong>，因为数据的保护通常是FL的主要动机。为了解决这些问题，有可能修改现有的隐私保护技术以适应分散式联邦学习的情况。首先，为了防止参与节点利用单独提交的模型更新，可以使用现有的安全聚合协议。 Bonawitz等人提出了一种已在跨设备FL中使用的实用的安全聚合协议[73]，以协议的复杂性为代价，有效地处理了中途退出的参与者。另一种系统是让每个客户在区块链上存入加密货币存款，如果他们在执行过程中退出则受到惩罚。无需处理丢失，可以显著简化安全聚合协议。实现安全聚合的另一种方法是使用机密智能合约，例如在安全区域内运行的Oasis协议[104]所启用的协议。这样，每个客户端都可以简单地提交加密的本地模型更新，知道该模型将通过远程证明在安全硬件内部解密和聚合（尽管请参阅第4.1节中的深入讨论）。</p>
+<p>为了防止任何客户端试图通过利用全局模型来重建另一客户端的私有数据，已经针对FL提出了<strong>客户端级别的差异性隐私[290]</strong>。通过在聚合的全局模型上添加足以隐藏任何单个客户端更新的随机高斯噪声，可以实现客户端级别的差异性隐私。在分布式联邦学习的情况下，我们也可以让每个客户端在本地添加噪音，如[54]中所述。也就是说，每个客户端在局部梯度下降步骤之后在本地添加一定量的高斯噪声，并将模型提交给区块链。计算本地添加的噪声等级，以使区块链上的聚集噪声能够实现与[290]中相同的客户端级别的差分隐私。最后，可以对区块链上的汇总全局模型进行加密，并且只有参与的客户端才拥有解密密钥，从而保护了模型不受公众攻击。</p>
+</blockquote>
+<h4 id="22-cross-silo联邦学习">2.2 cross-silo联邦学习</h4>
+<p>​	与跨设备联邦学习的特征相反，请参见表1，cross-silo联邦学习<strong>在整体设计</strong>的某些方面承认了<strong>更大的灵活性</strong>，但<strong>同时也提供了难以实现其他属性的设置</strong>。本节讨论其中一些差异。</p>
+<p>​	当许多公司或组织共享激励基于其所有数据来训练模型，但不能直接共享其数据时，cross-silo设置可能是相关的。这可能是由于机密性的限制或法律的限制，甚至是在一家公司无法将其数据集中在不同地理区域之间时，甚至在一家公司内部。这些cross-silo的应用引起了广泛的关注。</p>
+<ul>
+<li><strong>数据划分</strong></li>
+<li><strong>激励机制</strong></li>
+<li><strong>差分隐私</strong></li>
+<li><strong>张量分解</strong></li>
+</ul>
+<h4 id="23-拆分学习">2.3 拆分学习</h4>
+<p>​	与之前的着重于数据划分和通信模式的设置相比，拆分学习[190，393]背后的<strong>关键思想</strong>是<strong>在客户端和服务器之间逐层拆分模型的执行</strong>。对于训练和结果都可以做到这一点</p>
+<p><img src="https://img.fzhiy.net/img/20200831114646.png" alt=""></p>
+<p>图2：拆分学习设置，原始数据未在vanilla拆分学习中传输，并且原始数据和标签未在U形拆分学习设置中在客户端和服务器实体之间传输。</p>
+<p>​	在[360]中比较了拆分学习和联邦学习的总体通信要求。拆分学习在训练中带来了并行性的另一个方面，即<strong>模型各部分之间的并行化</strong>，例如客户端和服务器。在[213，207]中，作者打<strong>破了部分网络之间的依赖关系，并通过并行计算不同部分中的计算来减少总的集中训练时间</strong>，在这里也可能是相关的。然而，在边缘设备上探索拆分学习的这种并行化仍然是一个悬而未决的问题。拆分学习还可以使客户端模型组件与最佳服务器端模型组件匹配，以自动进行模型选择，如ExpertMatcher [353]所示。</p>
+<p>​	但是，所传达的值通常可以隐含有关基础数据的信息。具体多少以及是否可以接受，将取决于应用程序和设置。称为**NoPeek SplitNN [395]**的拆分学习的一种变体，通过减少与原始数据的距离相关性[394，378]，通过通信激活来减少潜在的泄漏，同时通过分类交叉熵保持良好的模型性能。关键思想是最小化原始数据点和通信的粉碎数据之间的距离相关性。如果在没有NoPeek SplitNN的情况下使用，则通信的对象可能包含与输入数据高度相关的信息，在使用NoPeek SplitNN的情况下，其提供的去相关特性可以使分割相对较早地进行。第4节中的许多讨论在这里也很重要，提供专门针对拆分学习的正式隐私保证的分析仍然是一个未解决的问题。</p>
+<h3 id="section-3-提高效率和有效性">Section 3 提高效率和有效性</h3>
+<p>​	在本节中，将探讨各种技术和开放性问题，以解决使联邦学习更有效和高效的挑战。这包括许多可能的方法，包括：<strong>开发更好的优化算法</strong>；<strong>为不同的客户端提供不同的模型</strong>；<strong>使ML任务诸如超参数搜索</strong>、<strong>体系结构搜索</strong>、<strong>调试</strong>等在FL上下文中更容易；<strong>提高通信效率</strong>等等。</p>
+<p>解决这些目标的一个基本挑战是<strong>non-IID数据的存在</strong></p>
+<h4 id="31-联邦学习中的non-iid数据">3.1 联邦学习中的non-IID数据</h4>
+<p><strong>不完全相同的客户分布</strong>	Hsieh等[205]，数据趋于偏离相同分布的一些常见方式，即对于不同的客户端i和j，Pi≠Pj。将Pi(x,y)重写为Pi(y|x)Pi(x)和Pi(x|y)Pi(y)使我们能够更精确地表征差异。</p>
+<ul>
+<li><strong>特征分布偏斜（协变量偏移）</strong>：即使共享了Pi(y|x)，边际分布Pi(x)也会因客户端而异。例如在手写识别域中，写相同单词的用户可能仍然具有不同的笔画宽度，倾斜度等。</li>
+<li><strong>标签分布偏斜（先验概率偏移）</strong>：即使Pi(x|y)相同，边际分布Pi(y)也会因客户端而异。例如当客户绑定到特定地理区域时，标签在客户之间的分布会有所不同：袋鼠只在澳大利亚或动物园；一个人的脸只在全球的少数地方出现；对于移动设备键盘，某些人群使用某些表情符号，而其他人群则不使用。</li>
+<li><strong>相同的标签，不同的特征（概念移位）</strong>：即使共享Pi(y)，条件分布Pi(x|y)在客户端之间也可能有所不同。相同的标签y对于不同的客户可能相差很大的x，如由于文化差异，天气影响，生活水平等原因。例如，世界各地的房屋图片可能会发生很大变化，衣服种类也可能会很大。即使在美国，冬季停放的汽车图像也只会在美国某些地区被大雪覆盖。同一标签在不同的时间和不同的时间范围内也可能看起来非常不同：白天和黑夜，季节性影响，自然灾害，时尚和设计趋势等。</li>
+<li><strong>相同的特征，不同的标签（概念偏移）</strong>：即使Pi(x)相同，条件分布Pi(y|x)也会因客户端而异。由于个人喜好，训练数据项中的相同特征向量可能具有不同的标签。例如，反映情感或下一个单词的标签预测变量具有个人和区域差异。</li>
+<li><strong>数量偏斜或不平衡</strong>：不同的客户端可以容纳大量不同的数据。</li>
+</ul>
+<h5 id="311-处理非iid数据的策略"><strong>3.1.1 处理非IID数据的策略</strong></h5>
+<p>联邦学习的最初目标是在客户端数据集的并集上训练单个全局模型，而<strong>使用非IID数据则变得更加困难</strong>。一种自然的方法是<strong>修改现有算法（例如通过不同的超参数选择）或开发新算法</strong>，以便更有效地实现此目标。 3.2.2节中考虑了这种方法。</p>
+<p>对于某些应用程序，有可能扩充数据以使跨客户端的数据更加相似。一种方法是创建一个可以全局共享的小型数据集。该数据集可能来自可公开使用的、与客户数据无关的、对隐私不敏感的单独数据集，也可能源自Wang等人的原始数据挑选[404]。</p>
+<h4 id="32-联邦学习优化算法"><strong>3.2 联邦学习优化算法</strong></h4>
+<p>在典型的联邦学习任务中，目标是学习一个单一的全局模型，该模型可将整个培训数据集上的经验风险函数（即数据在所有客户之间的并集）最小化。联邦优化算法和标准分布式训练方法之间的<strong>主要区别</strong>是需要<strong>解决表1的特性</strong>：对于优化，<strong>非IID和不平衡数据</strong>、<strong>有限的通信带宽</strong>以及<strong>不可靠和有限的设备可用性</strong>尤其重要。</p>
+<p>设备总数巨大的FL设置（例如，跨移动设备）需要每轮仅需要部分客户端参与的算法（客户端采样）。此外，每个设备可能最多只参与一次给定模型的训练，因此<strong>无状态算法是必需的.</strong></p>
+<p>联邦学习算法的另一个重要的实际考虑因素是<strong>与其他技术的可组合性</strong>。优化算法并非在生产部署中独立运行，而是需要与其他技术结合使用，例如加密安全聚合协议（第4.2.1节），差分隐私（DP）（第4.2.2节）以及建模和更新压缩（3.5节）。如第1.1.2节所述，这些技术中的许多技术都可以应用于原语，例如“选定客户端上的总和”和“广播至选定客户端”，因此根据这些原语表达优化算法可提供宝贵的关注点分离，但是<strong>也可能排除某些技术</strong>，例如异步应用更新。</p>
+<p>FL最常见的方法之一是 <strong>联邦平均算法[289]，它是对本地更新或并行SGD的适应。</strong></p>
+<h5 id="321-iid数据的优化算法和收敛速率"><strong>3.2.1 IID数据的优化算法和收敛速率</strong></h5>
+<p><img src="https://img.fzhiy.net/img/20200831145822.png" alt=""></p>
+<p>表5：N个设备上IID数据设置中优化算法的收敛性，适用于H光滑凸函数，随机梯度的方差为σ^2，在给定算法的T次迭代之后（可能具有某种迭代平均方案），所有收敛速度都是式（1）的上限。在IID设置中，所有客户端都是可互换的，因此在不失一般性的前提下，我们可以假定M=N。</p>
+<h5 id="322-非iid数据的优化算法和收敛速率"><strong>3.2.2 非IID数据的优化算法和收敛速率</strong></h5>
+<p><img src="https://img.fzhiy.net/img/20200831150036.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20200831150052.png" alt=""></p>
+<p>表6：在具有非IID数据假设的联邦学习中，优化方法的收敛性。我们总结了非IID数据的关键假设，每个客户端上的本地特性以及其他假设。我们还介绍了与联邦平均算法相比的算法变型以及消除常数的收敛速率</p>
+<ul>
+<li><strong>与分布式优化的联系</strong></li>
+<li><strong>加速和方差减少技术</strong></li>
+</ul>
+<h4 id="33-多任务学习个性化元学习"><strong>3.3 多任务学习，个性化，元学习</strong></h4>
+<h5 id="331-通过特性化实现个性化"><strong>3.3.1 通过特性化实现个性化</strong></h5>
+<p>在某些应用程序中，只需将用户和上下文特征添加到模型中，即可获得类似的好处。例如，像Hard等人一样，考虑用于移动键盘中的下一词预测的语言模型。 [196]</p>
+<p>但是，一种补充方法可能是训练一个联合模型，该模型不仅要输入到目前为止用户输入的单词，还要输入各种其他用户和上下文特征作为输入：该用户经常使用哪些单词？他们当前正在使用什么应用程序？如果他们正在聊天，他们之前曾向此人发送过哪些消息？适当地加以特征化，这样的输入可以允许共享的全局模型产生高度个性化的预测。但是，很大程度上是因为很少有公共数据集包含此类辅助功能，因此开发可以<strong>有效合并不同任务上下文信息的模型体系结构</strong>仍然是一个重要的开放问题，<strong>有可能极大地提高FL训练的模型的实用性</strong>。</p>
+<h5 id="332-多任务学习">3.3.2 多任务学习</h5>
+<p>如果将每个客户的本地问题（本地数据集上的学习问题）视为一项单独的任务（而不是单个分区数据集的分片），则多任务学习[433]的技术将立即变得有意义；</p>
+<p>另一种方法是重新考虑客户（本地数据集）和学习任务（要训练的模型）之间的关系，观察每个客户在单个全局模型和不同模型之间的频谱上是否存在点。</p>
+<h5 id="333-局部微调和元学习"><strong>3.3.3 局部微调和元学习</strong></h5>
+<p><strong>局部微调</strong>指的是从单个模型的联合训练开始，然后将该模型部署到所有客户端的技术（在此之前，通过在推理之前使用本地数据集的额外训练来个性化该模型）。</p>
+<p>研究个性化和非IID数据的一种方法是<strong>与元学习连接</strong>，该方法已经成为模型适应的流行设置。</p>
+<p>最近，已经开发了一种称为<strong>模型不可知元学习（MAML）<strong>的算法，可以元学习全局模型，该算法仅使用一些局部梯度步骤[165]，可以用作学习适合于</strong>给定任务</strong>的良好模型的起点。最值得注意的是，流行的<strong>Reptile算法</strong>[308]的训练阶段与联邦平均[289]密切相关：Reptile允许服务器学习率，并假定所有客户端具有相同数量的数据，其他方面相同。 Khodak等[234]和Jiang等[217]探索了FL和MAML之间的联系，并展示了MAML设置如何成为FL的个性化目标建模的相关框架。在[260]中研究了具有差异性隐私的其他问题。</p>
+<h5 id="334-什么时候全局联邦学习更好"><strong>3.3.4 什么时候全局联邦学习更好？</strong></h5>
+<p>在一台设备上进行本地训练无法完成的联邦学习可以为您做什么？当本地数据集较小且数据为IID时，FL显然具有优势，实际上联邦学习的实际应用[420、196、98]受益于跨设备训练单个模型。另一方面，考虑到病理上非IID的分布（例如，Pi(y|x)在客户端之间直接不一致），局部模型会做得更好。因此，一个自然的理论问题是<strong>确定在什么条件下共享的全局模型比独立的每个设备模型更好</strong>。</p>
+<h4 id="34-调整机器学习工作流程以适应联邦学习"><strong>3.4 调整机器学习工作流程以适应联邦学习</strong></h4>
+<ul>
+<li><strong>超参数的调整</strong>：在资源受限的移动设备上使用不同的超参数运行许多轮培训可能会受到限制。对于小型设备，这可能导致过度使用有限的通信和计算资源；</li>
+<li><strong>神经网络结构设计</strong>：对于non-iid数据分布，可能有更好的网络结构设计</li>
+<li><strong>联邦学习的调试和可解释性</strong>：尽管在模型的联合训练方面已经取得了实质性进展，但这只是完整的ML工作流程的一部分。经验丰富的建模人员通常会直接检查数据的子集以执行任务，包括基本的健全性检查，调试错误分类，发现异常值，手动标记示例或检测训练集中的偏差。<strong>开发隐私保护技术来回答有关分散数据的此类问题</strong>是一个主要的开放问题</li>
+</ul>
+<h4 id="35-通信和压缩">3.5 通信和压缩</h4>
+<p><strong>通信</strong>可能是联邦学习的<strong>主要瓶颈</strong>，因为无线链接和其他最终用户互联网连接的运行速率通常低于数据中心内或数据中心间链接的速率，并且可能昂贵且不可靠。</p>
+<p><strong>压缩目标:</strong> 由于当前设备在计算，内存和通信方面的资源有限，因此存在一些实用价值的不同压缩目标</p>
+<p>（a）<strong>梯度压缩</strong>：减小从客户端到服务器通信的对象的大小，该对象用于更新全局模型；
+（b）<strong>模型广播压缩</strong>：减小从服务器到客户端的模型广播的大小，客户端从该模型开始本地训练；
+（c）<strong>减少本地计算</strong>：修改整体训练算法，以使本地训练过程在计算上更加有效。</p>
+<p>具体方法：</p>
+<ul>
+<li>Caldas， 限制所需的模型更新，以便仅需要模型变量的特定子矩阵才能在客户端上使用；</li>
+<li><strong>与差异隐私和安全聚合兼容</strong></li>
+<li><strong>Wireless-FL协同设计</strong></li>
+</ul>
+<h3 id="section-4-保护用户数据隐私">Section 4 保护用户数据隐私</h3>
+<p>FL中对隐私风险的正式处理要求采用整体和跨学科的方法。尽管某些风险可以映射到技术隐私定义并可以使用现有技术来缓解，但其他风险则更为复杂，需要跨学科的努力。</p>
+<p><img src="https://img.fzhiy.net/img/T7-various%20threat%20models.jpg" alt=""></p>
+<p>表7：针对不同对抗角色的各种威胁模型</p>
+<h4 id="42-工具与技术">4.2 工具与技术</h4>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>差分隐私</strong>（本地，中央，混洗，聚合和混合模型）</td>
+<td>从包含用户的数据集上的分析输出可以量化多少个人信息。具有差分隐私的算法必须包含一定数量的随机性或噪声，可以对其进行调整以掩盖用户对输出的影响</td>
+</tr>
+<tr>
+<td><strong>安全多方计算</strong></td>
+<td>两个或更多参与者通过密码学合作模拟一个完全受信任的第三方，该第三方可以：1）计算所有参与者提供的输入函数；<br/>2）将计算出的值显示给选定的参与者子集，而无需任何一方进一步学习</td>
+</tr>
+<tr>
+<td><strong>同态加密</strong></td>
+<td>通过允许对密文执行数学运算而不解密它们，使一方能够计算其没有明文访问权限的数据的功能。可以通过这种方式计算数据的任意复杂函数（“完全同态加密”），尽管计算成本更高</td>
+</tr>
+<tr>
+<td>受信任的执行环境（安全的飞地）</td>
+<td>即使您不信任机器的所有者/管理员，TEE也可以在远程计算机上可靠地运行代码。这是通过限制任何一方（包括管理员）的功能来实现的。特别是，TEE可以提供以下属性[373]：<br/>1）<strong>机密性</strong>：除非代码明确发布消息，否则代码的执行状态仍为秘密；<br/>2）<strong>完整性</strong>：除非代码明确接收输入，否则代码的执行不会受到影响；<br/>3）<strong>度量/附加</strong>：TEE可以向远程方证明正在执行什么代码（二进制）及其开始状态，从而定义了机密性和完整性的初始条件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>安全计算</p>
+<ul>
+<li>安全多方计算（SMC）
+<ul>
+<li>同态加密（作为有力工具加强MPC）</li>
+</ul>
+</li>
+<li>可信执行环境（TEEs）</li>
+<li>感兴趣的安全计算问题
+<ul>
+<li>安全聚合(secure aggregation)</li>
+<li>安全shuffling(secure shuffling)</li>
+<li>私密信息检索(Private information retrieval, PIR)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>隐私保护disclosures（公开/暴露）</p>
+<ul>
+<li>本地差分隐私</li>
+<li>分布式差分隐私
+<ul>
+<li>通过安全聚合进行分布式DP</li>
+<li>通过安全shuffling进行分布式DP</li>
+</ul>
+</li>
+<li>混合差分隐私
+<ul>
+<li>它通过按用户的信任模型偏好（例如，对负责人的信任或不信任）对用户进行划分，从而组合了多个信任模型。在混合模型之前，有两种自然选择。1）使用最不信任模型；2）使用最受信任模型。通过允许多种模型共存，与纯粹的本地或中央DP机制相比，混合模型机制可以在给定的用户群中实现更多的效用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>可验证性</p>
+<ul>
+<li>零知识证明（ZKPs）</li>
+<li>可信执行环境与远程证明
+<ul>
+<li>在联邦学习设置中，TEE与远程证明可能特别有助于客户端能够有效地验证服务器上运行的关键功能</li>
+<li>远程证明可以使服务器证明来自FL计算所涉及的客户端的特定要求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="43-对抗外部恶意活动者的保护"><strong>4.3 对抗外部恶意活动者的保护</strong></h4>
+<p>研究方法：</p>
+<ul>
+<li>
+<p>审计迭代与最终模型</p>
+<ul>
+<li>为了更好地理解可以从中间迭代或最终模型中学到的知识，建议量化联合学习模型对特定攻击的敏感性。量化模型易受攻击性的<strong>最常用方法</strong>是<strong>使用代理（审核）数据集模拟对模型的攻击</strong>，该数据集与实际中预期的数据集类似。如果代理数据集确实与最终用户数据相似，则可以得出模型预期的攻击敏感性是什么。一种更安全的方法是确定模型的攻击敏感性的最坏情况上限。</li>
+</ul>
+</li>
+<li>
+<p>使用中心差分隐私训练</p>
+<ul>
+<li>
+<p>为了限制或消除可以从迭代（和/或最终模型）中学到的个人信息，可以在FL的迭代训练过程中使用<strong>用户级别的差异性隐私</strong>[7，290，288，62]。利用这种技术，服务器将<strong>裁剪（加密？）单个更新的2范数</strong>，汇总裁剪后的更新，然后将高斯噪声添加到汇总中。这样可以确保迭代不会过度适应任何单个用户的更新。</p>
+</li>
+<li>
+<p>非均匀设别采样过程的隐私放大</p>
+</li>
+<li>
+<p>随机性源（改编自[288]）</p>
+</li>
+<li>
+<p>审核差异隐私实施</p>
+<p>隐私和安全协议很难正确实施（例如，[296，192]用于差异性隐私）。可以使用哪些技术来测试FL实现的正确性？由于这些技术通常会由可能不选择开放源代码的组织部署，因此黑盒测试有哪些可能性？</p>
+</li>
+</ul>
+</li>
+<li>
+<p>隐藏迭代</p>
+<ul>
+<li>在典型的联邦学习系统中，模型迭代（即，每轮训练后模型的新更新版本）对于系统中的多个参与者（包括被选择参加每个参与者的服务器和客户端）都是可见的回合。为了隐藏来自客户端的迭代，每个客户端可以在<strong>提供机密功能的TEE中运行其联合学习的本地部分</strong>（请参阅第4.2.1节）。服务器将验证预期的联合学习代码是否在TEE中运行（依赖于TEE的证明和完整性功能），然后将迭代的加密模型传输到设备，以便只能在TEE内部对其进行解密。最后，模型更新将在TEE内部进行加密，然后再返回给服务器，使用仅在安全区域内和服务器上已知的密钥。</li>
+<li>TEE可能通常无法在客户端之间使用，尤其是当这些客户端是智能手机等最终用户设备时。此外，即使存在TEE，它们也可能不足以支持训练计算，这在TEE内部必须进行以保护模型迭代，并且可能会**很昂贵，**并且/或者需要大量的RAM，尽管TEE的功能可能会随着时间的推移而提高</li>
+<li>在MPC模型[302, 14]下实现类似的保护。例如，服务器可以使用同态加密方案对迭代器的模型参数进行加密，然后再使用服务器只知道的密钥将其发送给客户端。然后，客户端可以使用密码系统的同态属性来计算加密的模型更新，而无需解密模型参数。然后可以将加密的模型更新返回给服务器以进行聚合。这里的<strong>主要挑战</strong>是<strong>在解密之前强制在服务器上进行聚合，否则服务器可能能够了解客户端的模型更新</strong>。另一个挑战是 <strong>提高性能</strong></li>
+</ul>
+</li>
+<li>
+<p>对演变数据进行重复分析</p>
+</li>
+<li>
+<p>防止模型被盗和误用</p>
+<ul>
+<li>在推理期间使用一些保护措施来对模型参数进行保护以防止窃取滥用。但是，即使模型参数本身被成功隐藏，研究表明，在许多情况下，它们可以由对手重建，而对手只能访问基于这些参数的推理/预测API[384]。在存在于数百万或数十亿终端用户设备上的模型的背景下，需要采取何种附加保护措施来防止此类问题仍然没有好的解决方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="44-对恶意服务器的保护">4.4 对恶意服务器的保护</h4>
+<p>本节将讨论更理想的情况，即保护服务器免受敌方攻击</p>
+<ul>
+<li>
+<p>挑战：通信通道，女巫攻击（Sybil Attacks，<a href="https://en.wikipedia.org/wiki/Sybil_attack">wiki释义</a>）与选择</p>
+<p>女巫攻击，是指模仿出多种身份进行的攻击就是女巫攻击，生活中常见的就是利用多个ip地址刷量、刷赞。[源自知乎用户]</p>
+</li>
+<li>
+<p>现有解决方案的<strong>限制</strong></p>
+<ul>
+<li>
+<p>本地差分隐私</p>
+<ul>
+<li>引入的随机噪声的大小必须与数据中信号的大小相当，这可能需要合并客户端之间的报告。因此，要获得与中央设置相当的LDP效用，就需要相对较大的用户群或较大的ε参数。</li>
+</ul>
+</li>
+<li>
+<p>混合差分隐私</p>
+<ul>
+<li>混合模型的<strong>当前工作通常假设</strong>，无论用户信任偏好如何，其数据都来自<strong>相同的分布(IID)</strong>[39、141、53]。<strong>放宽此假设对于FL尤其重要</strong>，因为信任首选项和实际用户数据之间的关系可能并不重要。</li>
+</ul>
+</li>
+<li>
+<p>shuffle模型</p>
+<ul>
+<li>可信中介的要求；如果用户已经不信任安排人，那么他们不太可能会信任由安排人批准或创建的中介机构（尽管TEE可能有助于弥合这一差距）</li>
+<li>shuffle模型的差异性隐私保证与参与计算的对手用户数量成比例地降低[43]</li>
+</ul>
+</li>
+<li>
+<p>安全聚合</p>
+<ul>
+<li>
+<p>假设服务器为半诚实的服务器（仅在私钥基础结构阶段）；</p>
+</li>
+<li>
+<p>允许服务器查看全方位的汇总信息（仍然可能泄漏信息）；</p>
+</li>
+<li>
+<p>稀疏向量聚合效率不高；</p>
+</li>
+<li>
+<p>缺乏强制客户输入格式正确的能力。</p>
+<p>对于如何构建一个<strong>有效、强大的安全聚合协议</strong>来解决上述挑战还没有好的解决方法</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>使用分布式差分隐私训练</p>
+<ul>
+<li>
+<p>分布式DP下的通信、隐私和准确性的权衡</p>
+<p>在分布式差分隐私中，三个性能指标是普遍关注的：<strong>准确性</strong>，隐私和<strong>通信</strong>，并且一个重要的目标是确定这些参数之间的可能权衡。在没有隐私要求的情况下，关于分布估计（例如[376]）和通信复杂性的文献已经很好地研究了通信和准确性之间的权衡（有关教科书的参考，请参见[248]） 。另一方面，在假设所有用户数据都由一个实体保存并且因此不需要进行通信的集中式设置中，从基础的开始，就已经在中央DP中广泛研究了准确性和隐私之间的权衡[147，146]。</p>
+<p>[248] Eyal Kushilevitz and Noam Nisan.Communication Complexity.  Cambridge University Press, New York, NY,USA, 1997. ISBN 0-521-56067-5.</p>
+<p>[146] Cynthia Dwork, Krishnaram Kenthapadi, Frank McSherry, Ilya Mironov, and Moni Naor.  Our data, ourselves:Privacy via distributed noise generation.  InAnnual International Conference on the Theory and Applicationsof Cryptographic Techniques, pages 486–503. Springer, 2006</p>
+<p>[147] Cynthia Dwork, Frank McSherry, Kobbi Nissim, and Adam D. Smith. Calibrating noise to sensitivity in privatedata  analysis.   InIACR  Theory  of  Cryptography  Conference  (TCC),  New  York,  New  York,  volume  3876  ofLecture Notes in Computer Science, pages 265–284. Springer-Verlag, 2006. doi: 10.1007/1168187814.</p>
+<ul>
+<li>安全shuffle的权衡</li>
+<li>安全聚合的权衡</li>
+</ul>
+</li>
+<li>
+<p>隐私评估</p>
+</li>
+<li>
+<p>处理客户中途退出</p>
+</li>
+<li>
+<p>新的信任模式</p>
+</li>
+</ul>
+</li>
+<li>
+<p>子模型训练时的隐私保护</p>
+<ul>
+<li>能否在保持客户的子模型选择私密性的同时，实现沟通效率高的子模型联邦学习？一种有前途的方法是将PIR用于私有子模型下载，同时使用针对稀疏向量优化的安全聚合变体来聚合模型更新[94，216，310]。</li>
+<li>此领域的开放问题
+<ul>
+<li>表征与实际感兴趣的子模型训练问题相关联的稀疏机制；</li>
+<li>开发在这些稀疏机制中通信效率高的稀疏安全聚合技术；</li>
+<li>与仅简单地使每种技术独立运行（例如，通过在两个功能的实现之间分担一些费用）相比，是否可以共同优化私有信息检索（PIR）和安全聚合以实现更好的通信效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>用户感知</p>
+<ul>
+<li>隐私需求下的特定分析任务</li>
+<li>引起隐私偏好的行为研究
+<ul>
+<li>用户教育</li>
+<li>偏好研究</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="section-5-面对攻击和故障的鲁棒性">Section 5 面对攻击和故障的鲁棒性</h3>
+<h4 id="51-恶意攻击模型表现">5.1 恶意攻击模型表现</h4>
+<h5 id="511-恶意攻击者的目标和能力">5.1.1 恶意攻击者的目标和能力</h5>
+<p>​	<strong>目标</strong> 在较高级别上，对机器学习模型的对抗性攻击试图以某种不希望的方式来修改模型的行为。我们发现攻击的目标通常是指不良修改的范围或目标区域，通常有两个级别的范围：</p>
+<ol>
+<li>无目标攻击或模型降级攻击（<strong>untargeted attacks</strong>），旨在降低模型的全局精度或“完全破坏”全局模型[63]；</li>
+<li>有针对性的攻击或后门攻击（targeted attacks），旨在改变少数几个示例的模型行为，同时在所有其他示例上保持良好的整体准确性[100，277，42，61]。</li>
+</ol>
+<p><strong>能力</strong> 同时，在训练过程中尝试颠覆模型时，对手可能具有多种不同的能力。重要的是要注意，联合学习引发了关于对手可能具有的能力的各种各样的问题。明确定义这些功能对于社区衡量提议的防御措施的价值是必要的</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>描述/类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>攻击向量</td>
+<td>对手如何引入攻击：<br/>1）<strong>数据中毒</strong>：对手更改了用于训练模型的客户端数据集。<br/>2）<strong>模型更新中毒</strong>：对手更改发送回服务器的模型更新。<br/>3）<strong>躲避攻击</strong>：对手会更改推理时使用的数据。</td>
+</tr>
+<tr>
+<td>模型查看</td>
+<td>对手是否可以观察模型参数：<br/>1）<strong>黑盒</strong>：攻击者无法在攻击之前或期间检查模型的参数。在联合环境中通常不是这种情况。<br/>2）<strong>过时的白盒</strong>：对手只能检查模型的过时版本。当对手可以访问参加中间培训回合的客户时，这自然会出现在联合环境中。<br/>3）<strong>白盒</strong>：对手具有直接检查模型参数的能力。</td>
+</tr>
+<tr>
+<td>参与者合谋</td>
+<td>多个对手是否可以协调攻击：<br/>1）<strong>非冲突</strong>：参与者没有能力协调攻击。<br/>2）<strong>交叉更新共谋</strong>：过去的客户参与者可以与未来的参与者协调对全球模型的未来更新的攻击。<br/>3）<strong>更新内共谋</strong>：当前客户参与者可以协调对当前模型更新的攻击。</td>
+</tr>
+<tr>
+<td>参与率</td>
+<td>整个训练过程中，对手多久会发起一个攻击<br/>1）在跨设备联合设置中，恶意客户端可能只能参与<strong>单个模型训练回合</strong>。<br/>2）在跨孤岛联合设置中，对手可能会<strong>持续参与</strong>学习过程。</td>
+</tr>
+<tr>
+<td>适应性</td>
+<td>攻击者是否可以随着攻击的进行而更改攻击参数<br/>1）<strong>静态</strong>：攻击者必须在攻击开始时修复攻击参数，并且无法更改它们。<br/>2）<strong>动态的</strong>：对手可以随着训练的进行而适应攻击。</td>
+</tr>
+</tbody>
+</table>
+<p>表11：联邦环境中对手的特征</p>
+<ul>
+<li>
+<p>模型更新中毒</p>
+<ul>
+<li>非针对性和拜占庭式攻击
+<ul>
+<li>对于非目标模型更新中毒攻击特别重要的是拜占庭式威胁模型，其中分布式系统中的故障可以产生任意输出[255]。扩展这一点，如果对手可以使该进程产生任何任意输出，则对分布式系统中某个进程的攻击就是拜占庭式的。因此，拜占庭式攻击可以被视为对给定的一组计算节点的最坏情况的无目标攻击</li>
+</ul>
+</li>
+<li>拜占庭弹性防御
+<ul>
+<li>一种针对非目标模型更新中毒攻击（尤其是拜占庭式攻击）的流行防御机制用可靠的均值估计替代了服务器上的平均步骤</li>
+<li>挑战性开放问题：协调基于冗余的防御（这会增加通信成本）和旨在降低通信成本的联邦学习</li>
+</ul>
+</li>
+<li>针对性的模型更新攻击
+<ul>
+<li>通过关注于目标对手较窄的预期结果，有针对性的模型更新中毒攻击可能需要比无目标攻击更少的对手。在这样的攻击中，即使是单发攻击也足以将后门引入模型[42]。 Bhagoji等[61]显示，如果参与联邦学习的设备中有10％被破坏，即使服务器上存在异常检测器，也可以通过中毒发送回服务提供商的模型来引入后门；</li>
+<li>现有的针对后门攻击的防御措施[368、274、387、133、398、355、107]要么需要仔细检查训练数据，要么访问一组类似分布的数据，或者完全控制服务器上的训练过程，但它们都不能在联邦学习设置中保留；</li>
+<li>未来工作的一个有趣路径：探索零知识证明的使用，以确保用户提交具有预定属性的更新。也可以考虑基于硬件证明的解决方案。例如，用户的手机可以证明使用手机相机产生的图像正确计算了共享模型更新。</li>
+</ul>
+</li>
+<li>串通防御
+<ul>
+<li>最近的研究表明，联邦学习既容易受到有针对性的攻击又受到了无目标的sybil攻击[168]。联邦学习的潜在挑战包括防御共谋或检测共谋的对手，而无需直接检查节点数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>数据污染攻击</p>
+<p>与模型更新中毒相比，潜在的<strong>限制性更高</strong>的攻击类别是数据中毒。</p>
+<p>当攻击者只能影响联邦学习系统边缘的数据收集过程而不能直接破坏学习系统中的派生数量时（例如模型更新），此攻击模型可能会更自然。</p>
+<ul>
+<li>数据中毒和拜占庭健壮性(Byzantime-robust)聚合
+<ul>
+<li>由于数据中毒攻击会导致模型更新中毒，因此<strong>任何针对拜占庭更新的防御措施也可以用于防御数据中毒</strong>。</li>
+<li>对于数据中毒，拜占庭式威胁模型可能过于强大。通过限制数据中毒（而不是一般的模型更新中毒），可以设计出更加定制和有效的拜占庭-鲁棒聚合器。</li>
+<li>数据清理和网络修剪专为数据中毒攻击而设计的防御措施经常依赖于“数据清理”方法[123]，该方法旨在删除中毒或其他异常数据。最近的工作开发了使用健壮统计数据[368，355，387，133]的改进的数据消毒方法，这些方法通常具有对少量异常值具有健壮性的优势[133]。可以将这种方法同时应用于有针对性的攻击和无针对性的攻击，并取得一定程度的经验成功[355]。</li>
+<li>数据清理和网络修剪都不能直接在联合设置中直接进行，因为它们通常都需要访问客户端数据或类似客户端数据的数据。因此，是否可以在联邦环境中使用数据清理方法和网络修剪方法而不会造成隐私损失，还是针对数据中毒的防御措施是否需要新的联盟方法，是一个悬而未决的问题</li>
+</ul>
+</li>
+<li>模型更新中毒与数据中毒之间的关系
+<ul>
+<li>由于数据中毒攻击最终会导致客户端向服务器输出的某些更改，因此数据中毒攻击是模型更新中毒攻击的特殊情况。另一方面，尚不清楚数据中毒攻击可以实现或近似哪种模型更新中毒攻击。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>推理时间躲避攻击(Evasion Attacks)</p>
+<ul>
+<li>在躲避攻击中，对手可能会通过仔细操纵馈入模型的样本来尝试规避已部署的模型。一种被充分研究的逃避攻击形式就是所谓的“对抗性例子”。</li>
+<li>使对抗训练方法适应联邦学习带来了许多悬而未决的问题。例如，对抗训练在获得明显的鲁棒性之前可能需要很多迭代。但是，在联邦学习中，尤其是跨设备联邦学习中，每个训练样本只能看到有限的次数。**更一般而言，对抗训练主要是针对IID数据开发的，目前尚不清楚它在非IID设置中的表现。**例如，在不能在训练之前检查训练数据的联邦设置中，在扰动范数上设置适当的界限以执行对抗性训练（即使在IID设置中也是一个具有挑战性的问题[212]）变得更加困难。</li>
+<li>另一个问题是<strong>生成对抗性示例相对昂贵</strong>。尽管一些对抗训练框架试图通过重用对抗示例来最大程度地降低成本[352]，但是这些方法仍然需要来自客户端的大量计算资源。这在跨设备设置中可能会出现问题，在对抗设备中，对抗性示例的生成可能会加剧内存或功耗限制。因此，在联邦学习设置中可能需要新的设备上鲁棒性优化技术。</li>
+<li>训练时间攻击与推断时间攻击之间的关系前面对逃避攻击的讨论通常假定对手在推断时间具有白盒访问权限（可能由于联合学习的系统级现实）</li>
+<li>对抗组合训练时间和推理时间对手的一种可能的防御方法是检测后门攻击的方法[387、96、398、107]。鉴于在防御纯训练时或纯推理时攻击方面存在的挑战，因此这条道路必定是更多的推测性和未开发的。</li>
+</ul>
+</li>
+<li>
+<p>隐私担保的防御能力</p>
+<ul>
+<li>防御模型更新中毒攻击
+<ul>
+<li>服务提供商可以通过（1）对客户端模型更新执行规范约束（例如，通过裁剪客户端更新）来约束任何单个客户端对整体模型的贡献，（2）汇总裁剪的更新，（3）并添加高斯噪声的总量。这种方法可以防止过度适应任何个人更新（或一小组恶意个人），并且与具有差异性隐私的培训相同</li>
+<li>还有更多的工作来验证DP是否确实可以有效地防御。更重要的是，仍不清楚如何根据模型的大小/架构和恶意设备的比例来一般选择DP的超参数（2范数界限和噪声方差）</li>
+</ul>
+</li>
+<li>防御推理时间逃避攻击</li>
+</ul>
+</li>
+</ul>
+<h4 id="52-非恶意攻击模式">5.2 非恶意攻击模式</h4>
+<ul>
+<li>客户报告失败
+<ul>
+<li>客户端在训练过程中出现故障，目前看来，使用安全聚合的方式实现FL时，当大量设备掉线时可能存在影响隐私风险。</li>
+<li>其中降低故障的方法就是提高SecAgg的效率，这可以减少了客户端退出对SecAgg产生不利影响的时间范围；另一种方法是开发一种SecAgg的异步版本，还有一种想法是有可能执行在多个计算回合中聚合的SecAgg版本，这样散乱的客户端可能包含会在后续聚合中</li>
+</ul>
+</li>
+<li>数据管道故障
+<ul>
+<li>联邦学习中的数据管道仅存在于每个客户端中，但管道仍面临许多潜在问题。特别是，任何联合学习系统仍必须定义如何访问原始用户数据并将其预处理为训练数据。</li>
+<li>该管道中的错误或意外动作会极大地改变联邦学习过程</li>
+</ul>
+</li>
+<li>嘈杂的模型更新</li>
+</ul>
+<h4 id="53-探索隐私和鲁棒性之间的权衡">5.3 探索隐私和鲁棒性之间的权衡</h4>
+<h3 id="secotion-6-确保公平与定位偏差来源">Secotion 6 确保公平与定位偏差来源</h3>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>[1] Kairouz P, McMahan H B, Avent B, et al. Advances and open problems in federated learning[J]. arXiv preprint arXiv:1912.04977, 2019.</li>
+<li>[2] <a href="https://zhuanlan.zhihu.com/c_1238069907449237504">知乎专栏-联邦学习的现状和开放问题</a></li>
+<li><a href="https://www.yangwenzhuo.top/2020/07/26/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/#%E5%AE%9A%E4%B9%89">https://www.yangwenzhuo.top/2020/07/26/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/#%E5%AE%9A%E4%B9%89</a></li>
+</ul>
+<blockquote>
+<p>&ndash;fzhiy.更新于2020年8月31日17点53分</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-31
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/papernotes-series/">PaperNotes-Series</a>
+          <a href="/tags/federated-learning/">Federated Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020-09-01-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">联邦学习笔记（三）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-08-26-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">[”研究生科研信息素养提升“系列讲座]学习总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
