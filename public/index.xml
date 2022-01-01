@@ -412,14 +412,5 @@
       <description>Paper笔记模板 PaperNotes系列笔记说明 文章标题为 【年份.paper主题】 笔记相关及引用权益说明 正文：Markdown笔记框架记录</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
-      <description>2021 1月 01.01[312. Burst Balloons] You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1 goes out of</description>
-    </item>
-    
   </channel>
 </rss>
