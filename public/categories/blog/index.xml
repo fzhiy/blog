@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on fzhiy&#39;s blog</title>
+    <link>https://blog.fzhiy.net/categories/blog/</link>
+    <description>Recent content in blog on fzhiy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 30 Oct 2020 20:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Typecho]主题修改相关</title>
+      <link>https://blog.fzhiy.net/post/2020-10-30-typecho%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3/</link>
+      <pubDate>Fri, 30 Oct 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-10-30-typecho%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3/</guid>
+      <description>文末版权声明代码（post.php对应位置添加以下内容） 1 &amp;lt;strong&amp;gt;版权声明：&amp;lt;/strong&amp;gt;本文采用 &amp;lt;a rel=&amp;#34;license nofollow&amp;#34;</description>
+    </item>
+    
+    <item>
+      <title>[Typecho]使用https连接问题</title>
+      <link>https://blog.fzhiy.net/post/2020-08-15-typecho%E4%BD%BF%E7%94%A8https%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 15 Aug 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-08-15-typecho%E4%BD%BF%E7%94%A8https%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/</guid>
+      <description>写在前面 当前，为了安全大多站长将https应用于网站中，我也不例外。由于个人更关注内容输出，所以希望内容外的东西越少越好，所以博客采用了宝塔</description>
+    </item>
+    
+    <item>
+      <title>个人博客SEO记录</title>
+      <link>https://blog.fzhiy.net/post/2020-08-15-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2seo%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sat, 15 Aug 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-08-15-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2seo%E8%AE%B0%E5%BD%95/</guid>
+      <description>个人博客SEO记录 写在前面 为了提高个人博客的访问量或曝光度，往往会将个人网站生成站点地图sitemap，然后将sitemap提交到各大搜索引</description>
+    </item>
+    
+  </channel>
+</rss>

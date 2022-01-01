@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>【待补】迁移学习笔记（二） - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="【待补】迁移学习笔记（二）" />
+<meta property="og:description" content="写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-09-27T20:47:09+08:00" />
+<meta property="article:modified_time" content="2020-09-27T20:47:09+08:00" />
+
+<meta itemprop="name" content="【待补】迁移学习笔记（二）">
+<meta itemprop="description" content="写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。"><meta itemprop="datePublished" content="2020-09-27T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2020-09-27T20:47:09+08:00" />
+<meta itemprop="wordCount" content="497">
+<meta itemprop="keywords" content="PaperNotes-Series,Transfer Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="【待补】迁移学习笔记（二）"/>
+<meta name="twitter:description" content="写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">【待补】迁移学习笔记（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-27 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 约 497 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#transfer-adaptation-learning-a-decade-survey-2019">Transfer Adaptation Learning: A Decade Survey-2019</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#零次学习zero-shot-learningzsl">零次学习，Zero-Shot Learning（ZSL）</a></li>
+            <li><a href="#开放集识别">开放集识别</a></li>
+          </ul>
+        </li>
+        <li><a href="#instance-re-weighting-adaptation">instance re-weighting adaptation</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="写在前面">写在前面</h1>
+<p>​      参考文献：<a href="https://arxiv.org/abs/1903.04687">Transfer Adaptation Learning: A Decade Survey</a>，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。还是先简单写个目录吧，再逐步把坑填起来！同时非常欢迎同在研究相关内容的学者交流，感谢！</p>
+<blockquote>
+<p>当前因为部分内容对于个人来说有些难度，所以暂时空出待补！</p>
+<p>&ndash;fzhiy.更新于2020年9月27日19点39分</p>
+</blockquote>
+<h1 id="transfer-adaptation-learning-a-decade-survey-2019">Transfer Adaptation Learning: A Decade Survey-2019</h1>
+<ul>
+<li>弱监督学习
+<ul>
+<li>半监督学习</li>
+<li>主动学习</li>
+<li>零次学习，Zero-Shot Learning（ZSL）</li>
+<li>开放集识别</li>
+</ul>
+</li>
+<li>instance re-weighting adaptation
+<ul>
+<li>直推式迁移学习</li>
+<li>基于权重的核映射(Kernel Mapping Based Weighting)</li>
+<li>基于权重的联合训练</li>
+<li>讨论与总结</li>
+</ul>
+</li>
+<li>特征自适应</li>
+<li>分类自适应</li>
+<li>深度网络自适应</li>
+<li>对抗自适应</li>
+<li>数据集</li>
+<li>总结</li>
+<li></li>
+</ul>
+<h3 id="零次学习zero-shot-learningzsl">零次学习，Zero-Shot Learning（ZSL）</h3>
+<p>ZSL定义：<strong>利用训练集数据训练模型，使得模型能够对测试集的对象进行分类，但是训练集类别和测试集类别之间没有交集；期间需要借助类别的描述，来建立训练集和测试集之间的联系，从而使得模型有效</strong>。</p>
+<p>参考： <a href="https://zhuanlan.zhihu.com/p/34656727">零次学习（Zero-Shot Learning）入门</a></p>
+<h3 id="开放集识别">开放集识别</h3>
+<h2 id="instance-re-weighting-adaptation">instance re-weighting adaptation</h2>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>[1] Transfer Adaptation Learning: A Decade Survey，2019</li>
+<li>[2] <a href="https://zhuanlan.zhihu.com/p/34656727">零次学习（Zero-Shot Learning）入门</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-09-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/papernotes-series/">PaperNotes-Series</a>
+          <a href="/tags/transfer-learning/">Transfer Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020-10-03-%E4%B8%8D%E5%87%A1%E4%B9%8B%E5%8F%8C%E8%8A%82%E8%A1%8C/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">不凡之“双节”行</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">
+            <span class="next-text nav-default">迁移学习笔记（一）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

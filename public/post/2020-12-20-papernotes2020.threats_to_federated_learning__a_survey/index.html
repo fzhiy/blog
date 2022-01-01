@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Threats to Federated Learning: A Survey 文章链接：https://arxiv.org/abs/2003.02133 作者：Lingjuan Lyu, Han Yu, Qiang Yang 发表：arXiv 截止当" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2020-12-20-papernotes2020.threats_to_federated_learning__a_survey/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering" />
+<meta property="og:description" content="Threats to Federated Learning: A Survey 文章链接：https://arxiv.org/abs/2003.02133 作者：Lingjuan Lyu, Han Yu, Qiang Yang 发表：arXiv 截止当" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2020-12-20-papernotes2020.threats_to_federated_learning__a_survey/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-20T20:47:09+08:00" />
+<meta property="article:modified_time" content="2022-01-01T22:37:45+08:00" />
+
+<meta itemprop="name" content="[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering">
+<meta itemprop="description" content="Threats to Federated Learning: A Survey 文章链接：https://arxiv.org/abs/2003.02133 作者：Lingjuan Lyu, Han Yu, Qiang Yang 发表：arXiv 截止当"><meta itemprop="datePublished" content="2020-12-20T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2022-01-01T22:37:45+08:00" />
+<meta itemprop="wordCount" content="4446">
+<meta itemprop="keywords" content="PaperNotes-Series,Survey," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering"/>
+<meta name="twitter:description" content="Threats to Federated Learning: A Survey 文章链接：https://arxiv.org/abs/2003.02133 作者：Lingjuan Lyu, Han Yu, Qiang Yang 发表：arXiv 截止当"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[PaperNotes]2020.A Systematic Literature Review on Federated Machine Learning: From A Software Engineering</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-12-20 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 约 4446 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#threats-to-federated-learning-a-survey">Threats to Federated Learning: A Survey</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#types-of-federated-learning">Types of Federated Learning</a></li>
+            <li><a href="#privacy-leakage-in-fl">Privacy Leakage in FL</a></li>
+          </ul>
+        </li>
+        <li><a href="#threat-models">Threat Models</a>
+          <ul>
+            <li><a href="#insider-vs-outsider">Insider v.s. Outsider</a></li>
+            <li><a href="#semi-honest-vs-malicious">Semi-honest v.s. Malicious</a></li>
+            <li><a href="#training-phase-vs-inference-phase">Training Phase v.s. Inference Phase</a></li>
+          </ul>
+        </li>
+        <li><a href="#poisoning-attacks">Poisoning Attacks</a>
+          <ul>
+            <li><a href="#data-poisoning">Data Poisoning</a></li>
+            <li><a href="#model-poisoning">Model Poisoning</a></li>
+          </ul>
+        </li>
+        <li><a href="#inference-attacks">Inference Attacks</a>
+          <ul>
+            <li><a href="#inferring-class-representatives">Inferring Class Representatives</a></li>
+            <li><a href="#inferring-membership">Inferring Membership</a></li>
+            <li><a href="#inferring-properties">Inferring Properties</a></li>
+            <li><a href="#inferring-training-inputs-and-labels">Inferring Training Inputs and Labels</a></li>
+          </ul>
+        </li>
+        <li><a href="#discussions-and-promising-directions">Discussions and Promising Directions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="threats-to-federated-learning-a-survey">Threats to Federated Learning: A Survey</h1>
+<p>文章链接：https://arxiv.org/abs/2003.02133</p>
+<p>作者：<a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Lyu%2C+L">Lingjuan Lyu</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Yu%2C+H">Han Yu</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Yang%2C+Q">Qiang Yang</a></p>
+<p>发表：arXiv</p>
+<p>截止当前（2020.12.20）被引次数：24</p>
+<blockquote>
+<p>Zotero链接: <a href="zotero://select/items/1_V2BVSLT9">从我的文库打开</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>标签1</th>
+<th>标签2</th>
+<th>标签3</th>
+<th>标签4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>[toc]</p>
+<h2 id="summary">Summary</h2>
+<p>本文侧重危及FL的威胁的最新进展，关注由FL系统内部人员发起的两种特定威胁:1)试图阻止模型完全被学习的中毒攻击;2)推理攻击。忽略了对推理阶段攻击的讨论，主要集中在训练阶段攻击上</p>
+<h2 id="abstract">Abstract</h2>
+<p>现存的FL protocol设计存在许多系统内外的攻击者可利用的漏洞来破坏数据隐私。因此FLS设计者对FL算法设计对隐私保护的启示尤为重要。</p>
+<h2 id="introduction">Introduction</h2>
+<p>在通信带宽限制，间歇性网络连接，严格的时延限制情况下，传统中心化机器学习不适用。而FL使得模型训练在产生数据源的设备上进行，这是一种合理的替代ML范式。</p>
+<h3 id="types-of-federated-learning">Types of Federated Learning</h3>
+<p>基于数据特征分布和参与者的数据样本[Yang et al., 2019a]，FL分为</p>
+<ul>
+<li>horizontally federated learning (HFL)</li>
+<li>vertically federated learning (VFL)</li>
+<li>federated transfer learning(FTL)</li>
+</ul>
+<p>具体可参考：<a href="https://fzhiy.net/archives/18/">联邦学习笔记（一） - https://fzhiy.net/archives/18/</a></p>
+<h3 id="privacy-leakage-in-fl">Privacy Leakage in FL</h3>
+<p>最近的工作表明FL可能不能都提供足够的隐私保证，在整个训练过程中进行模型更新的通信仍会暴露敏感信息[Bhowmick et al., 2018; Fredrikson et al., 2015; Melis et al., 2019]甚至导致深度泄露[Zhu et al., 2019], 要么是第三方，要么是中心服务器[McMahan et al., 2018; Agarwal et al., 2018].  [Aono et al., 2018]中显示即使一小部分的原始梯度也会泄露本地数据信息。NeurIPS2019的一箱工作[Zhu et al., 2019]显示恶意攻击者完全可以在较少的迭代中从梯度中偷取得到训练数据。</p>
+<p>FL protocol设计可能在两方面有漏洞：</p>
+<ul>
+<li><strong>(潜在的恶意)服务器</strong>可以随着时间的推移观察单个更新，篡改训练过程，并控制参与者在全局参数上的view;</li>
+<li>能够观察全局参数并控制其参数上传的任何<strong>参与者</strong>。例如，恶意的参与者可以故意改变他们的输入，或者在全局模型中引入秘密的后门。</li>
+</ul>
+<p><strong>现有的FL调查文献多集中在FL的广义方面，即 如何使得FL工作[Yang et al., 2019a; Li et al., 2019;Kairouz et al., 2019].</strong></p>
+<p>在这篇文章中，我们调查了<strong>危及FL的威胁的最新进展</strong>，以弥补人工智能(AI)研究界在这一主题的理解上的这一重要gap。特别地，本文关注由<strong>FL系统内部人员</strong>发起的两种特定威胁:1)试图阻止模型完全被学习的<strong>中毒攻击</strong>，或者使模型产生对对手有利的推论;2)<strong>推理攻击</strong> 针对参与者隐私。</p>
+<p><img src="https://img.fzhiy.net/img/Attacks%20against%20server-based%20FL.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/20201220100816.png" alt=""></p>
+<h2 id="threat-models">Threat Models</h2>
+<p>威胁模型概述</p>
+<h3 id="insider-vs-outsider">Insider v.s. Outsider</h3>
+<p><img src="https://img.fzhiy.net/img/20201220101029.png" alt=""></p>
+<ul>
+<li>内部攻击
+<ul>
+<li>server</li>
+<li>participants（client）</li>
+</ul>
+</li>
+<li>外部攻击
+<ul>
+<li>窃听这在participant和FL server之间的通信信道上发起的攻击</li>
+<li>最终的FL模型作为服务部署时用户发起的攻击</li>
+</ul>
+</li>
+</ul>
+<p>内部攻击通常比外部攻击更强，因为它严格地增强了对手的能力。</p>
+<p>由于这种强大的行为，本文对FL攻击的讨论将主要集中在内部攻击上，采取以下三种一般形式之一:</p>
+<ul>
+<li><strong>Single attack</strong>：一个单一的、不相互勾结的恶意参与者的目标是导致模型错误地对一组高置信度选择的输入进行分类[Bhagoji at el，2018;Bagdasaryan at el，2018];</li>
+<li><strong>Byzantine attack</strong>：拜占庭恶意参与者的行为可能完全任意，并将其输出与正确的模型更新具有相似的分布，使其难以被检测到[Blanchard et al.， 2017; Chen at el，2017;Chen at el，2018;Yin at el，2018];</li>
+<li><strong>Sybil attack（女巫攻击）</strong>：对手可以模拟多个虚拟参与者账户，或选择先前受到威胁的参与者对FL发动更强大的攻击[Fung at el，2018;Bagdasaryan at el，2018]</li>
+</ul>
+<h3 id="semi-honest-vs-malicious">Semi-honest v.s. Malicious</h3>
+<p>在半诚实的环境下，对手被认为是被动的或诚实但好奇的（honest-but-curious）。他们试图在不偏离（违背）FL协议的情况下学习其他各方的私有状态。假设被动对手只观察聚合梯度或平均梯度，而不观察其他诚实参与者的训练数据或梯度。</p>
+<p>在恶意的环境下，活跃的或恶意的对手试图了解诚实参与者的私有状态，并通过修改、重放或删除消息任意偏离FL协议。这种强攻击模型（adversary model）允许对手进行特别具有破坏性的攻击。</p>
+<h3 id="training-phase-vs-inference-phase">Training Phase v.s. Inference Phase</h3>
+<p>训练阶段的攻击试图学习、影响或破坏FL模型本身[Biggio at el，2011]。在训练阶段，攻击者可以通过数据中毒攻击来破坏训练数据集集合的完整性，或者通过模型中毒攻击来破坏学习过程的完整性。攻击者还可以对单个参与者的更新或所有参与者的更新集合发起一系列推理攻击</p>
+<p><strong>推理阶段的攻击</strong>称为<strong>回避/探索性攻击</strong>[Barreno等人，2006]。它们通常不会篡改目标模型，相反，要么导致它产生错误的输出(目标/非目标)，要么收集关于模型特征的证据。这种攻击的有效性在很大程度上<strong>取决于对手可以获得的关于模型的信息</strong>。推理阶段攻击可分为白盒攻击(即具有完全访问权的)</p>
+<p>推理阶段的攻击分为</p>
+<ul>
+<li>白盒攻击，即full access to FL model</li>
+<li>黑盒攻击和黑盒攻击(即只能够查询的FL模型)。</li>
+</ul>
+<p>由服务器维护的模型不仅遭受与一般情况相同的逃避攻击,当目标模型被部署为服务时，FL中的模型广播步骤使任何恶意客户端都可以访问模型。因此，FL需要额外的努力来防御白盒逃避攻击。</p>
+<p>本文忽略了对推理阶段攻击的讨论，而主要集中在训练阶段攻击上。</p>
+<h2 id="poisoning-attacks">Poisoning Attacks</h2>
+<p>根据攻击者的目标分类：</p>
+<ul>
+<li>random attacks ==&gt; 其目标为降低FL模型的准确率</li>
+<li>targeted attacks[Huang et al., 2011]==&gt; 其目标为诱导FL模型输出对手指定的目标标签</li>
+</ul>
+<p>一般来说，针对性攻击比随机攻击更难，因为攻击者有特定的目标要达到。训练阶段的中毒攻击可以在数据或模型上。</p>
+<p><img src="https://img.fzhiy.net/img/20201220102507.png" alt=""></p>
+<p>如上图，中毒的更新来自：(1)本地数据采集过程中的数据中毒攻击;(2)本地模型训练过程中的模型中毒攻击。 这两种中毒攻击都试图修改目标模型的行为。</p>
+<h3 id="data-poisoning">Data Poisoning</h3>
+<p>数据中毒大致分两类：</p>
+<ul>
+<li>clean-label[Shafahi et al., 2018]
+<ul>
+<li>假定对手不能改变任何训练数据的标签（因为通过一个过程，数据被证明属于正确的类别，并且数据样本的中毒必须是不易察觉的）</li>
+</ul>
+</li>
+<li>dirty-label[Gu et al., 2017]
+<ul>
+<li>对手可以在训练集中引入一些它希望用目标标签误分类的数据样本；</li>
+<li>常见例子：label-flipping attack [Biggio et al., 2012; Fung et al., 2018]. 即 在保持数据特征不变的情况下，将一类诚实训练实例的标签翻转到另一类诚实训练实例</li>
+<li>backdoor poisoning [Gu et al., 2017].</li>
+</ul>
+</li>
+</ul>
+<p>通常，在clean inputs上的有毒模型的性能不受影响，这种方式更难检测到攻击。</p>
+<p>数据中毒攻击可以由任何FL参与者执行。<strong>对FL模型的影响取决于系统中参与攻击的参与程度，以及被毒害的训练数据的数量</strong>。数据中毒在H2C等参与方较少的环境中影响较小。</p>
+<h3 id="model-poisoning">Model Poisoning</h3>
+<p>模型中毒攻击的目的是在<strong>将本地模型更新发送到服务器</strong>或<strong>在全局模型中插入隐藏后门之前使其中毒</strong>[Bagdasaryan at el.，2018]。</p>
+<h2 id="inference-attacks">Inference Attacks</h2>
+<p><img src="https://img.fzhiy.net/img/20201220104544.png" alt=""></p>
+<p>FL训练期间交换梯度会造成严重的隐私泄露[Phong et al., 2018; Su and Xu, 2018; Melis et al., 2019; Zhu et al., 2019]。如上图。</p>
+<p>模型更新可能会泄露关于参与者训练数据的意外特征的额外信息给恶意参与者，深度学习模型似乎在内部可以识别非明显与主要任务相关数据的许多特征。</p>
+<p>对手还可以保存FL模型参数的快照，并通过利用连续快照之间的差异进行<strong>属性推断（property inference）</strong>，这等于所有参与者汇总的更新减去对手的更新(图4)</p>
+<p><img src="https://img.fzhiy.net/img/20201220105110.png" alt=""></p>
+<p>主要原因是梯度来自参与者的私有数据。在深度学习模型中，给定层的梯度是利用该层的特征和来自上面层的误差来计算的。</p>
+<p>在连续的全连接层的案例中，权重的梯度是上一层的误差和特征的内积。类似地，对于卷积层，权重的梯度就是上一层的误差和特征的卷积[Melis et al.,  2019]。</p>
+<p>因此，模型更新的观察结果可用于推断大量的私有信息，如类代表、成员以及与训练数据子集相关的属性。更糟糕的是攻击者可以<strong>从共享的梯度推断标签，并恢复原始训练样本</strong>，而不需要任何关于训练集的先验知识[Zhu et al.， 2019]。</p>
+<h3 id="inferring-class-representatives">Inferring Class Representatives</h3>
+<p>Hitaj等人[2017]设计了一种主动推理攻击（active inference attack），称为<strong>生成对抗网络(GAN)攻击</strong>（在深度FL模型上）。在这里，恶意的参与者可以故意损害任何其他参与者。GAN攻击利用了FL学习过程的实时特性，允许敌对方训练GAN，该GAN生成目标训练数据的原型样本，这些样本应该是私有的。生成的样本似乎来自与训练数据相同的分布。因此，<strong>GAN攻击的目标不是重建实际的训练输入，而是只重建类表征（class representatives）</strong>。需要注意的是，GAN攻击假设给定类的整个训练语料库来自单个参与者，只有在所有类成员相似的特殊情况下，GAN构造的代表才与训练数据相似。这类似于一般ML设置中的模型反转攻击[Fredrikson等人，2015]。然而，<strong>这些假设在FL中可能不太实用。GAN攻击需要大量的计算资源，不适用于H2C场景</strong>。</p>
+<h3 id="inferring-membership">Inferring Membership</h3>
+<p><strong>membership inference attacks</strong>的目标是<strong>在给定一个精确的数据点后，确定该数据点是否用于训练模型[Shokri et al., 2017]</strong>.。例如，攻击者可以推断是否使用特定的患者概要来训练与疾病相关的分类器。</p>
+<p>在FL中，攻击者的目标是推断一个特定样本是否属于单方的私有训练数据(如果目标更新是单方的)还是任何一方的私有训练数据(如果目标更新是合计的)。</p>
+<p>攻击者在FL系统中可以进行主动和被动隶属关系推理攻击[Nasr et al., 2019; Melis et al., 2019].。在被动的情况下，攻击者只需观察更新后的模型参数，在不改变局部或全局协同训练过程的情况下进行推理。在主动情况下，攻击者可以篡改FL模型训练协议，并对其他参与者实施更强大的攻击。具体来说，攻击者共享恶意更新并强制FL模型共享关于攻击者感兴趣的参与者本地数据的更多信息。这种攻击被称为<strong>梯度上升攻击（gradient ascent attack）</strong>[Nasr et al., 2019],，利用SGD优化更新模型参数的方向与损失梯度相反的事实。</p>
+<h3 id="inferring-properties">Inferring Properties</h3>
+<p>攻击者可以发起被动和主动的属性推断攻击，以推断其他参与者的训练数据的属性，这些属性独立于FL模型类的特征[Melis等人，2019]。属性推断攻击（Property inference attacks）假设对手有正确标记了他想要推断的属性的辅助训练数据。</p>
+<p>被动对手只能通过训练二值属性分类器来观察/窃听更新并进行推理。</p>
+<p>一个活跃的对手可以使用多任务学习来欺骗FL模型，让它学习更好地分离有和没有属性的数据，从而提取更多的信息。一个敌对的参与者甚至可以在训练过程中推断一个属性何时在数据中出现和消失(例如，识别一个人何时首次出现在用于训练性别分类器的照片中)。属性推理攻击的假设可能会阻碍其在H2C中的应用。</p>
+<h3 id="inferring-training-inputs-and-labels">Inferring Training Inputs and Labels</h3>
+<ul>
+<li>Deep Leakage from Gradient(DLG) 提出一种能够在较少迭代过程获取训练输入和标签的优化算法[Zhu et al., 2019].。这种攻击方法远比以前的强。它可以恢复像素级精确的原始图像和标记级匹配原始文本。</li>
+<li>Improved Deep Leakage from Gradient (iDLG)[Zhao et al., 2020]可以利用标签和相应梯度符号之间的关系，从共享梯度中提取标签。iDLG适用于在单热标签上用交叉熵损失训练的任何可微模型，这是分类的一般情况。</li>
+</ul>
+<p><strong>推理攻击通常假定对手具有复杂的技术能力和庞大的计算资源。此外，对手必须被选中进行多轮FL训练</strong>。因此，它不适合H2C场景，但更可能在H2B场景下。此类攻击还强调了在FL训练期间保护共享的梯度的必要性，可能通过同态加密等机制[Yang等人，2019b]。</p>
+<h2 id="discussions-and-promising-directions">Discussions and Promising Directions</h2>
+<ul>
+<li>Curse of Dimensionality:</li>
+<li>Threats to VFL</li>
+<li>FL with Heterogeneous Architectures</li>
+<li>Decentralized Federated Learning</li>
+<li>Weakness of Current Defense</li>
+<li>Optimizing Defense Mechanism Deployment</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-01
+        <a href="https://github.com/fzhiy/fzhiy.github.io/commit/cab8260e2086784306689f1c105962e1319b7f16" title="rebuilding site Sat Jan  1 22:37:45     2022">(cab8260)</a>
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/papernotes-series/">PaperNotes-Series</a>
+          <a href="/tags/survey/">Survey</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Multi-Agent Reinforcement Learning基本概念&amp;三种架构</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-12-19-papernotes2019.a_survey_on_federated_learning_systems__vision_hype_and_reality_for_data_privacy_and_protection/">
+            <span class="next-text nav-default">[PaperNotes]2019.A Survey on Federated Learning Systems: Vision, Hype and Reality for Data Privacy and Protection</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
