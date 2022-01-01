@@ -6,7 +6,16 @@
     <description>Recent content in Categories on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 07 Sep 2021 15:11:35 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Jan 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes</title>
+      <link>https://blog.fzhiy.net/categories/notes/</link>
+      <pubDate>Sat, 01 Jan 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/categories/notes/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Git</title>
       <link>https://blog.fzhiy.net/categories/git/</link>
@@ -22,15 +31,6 @@
       <pubDate>Wed, 18 Aug 2021 17:04:13 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/categories/reading/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Notes</title>
-      <link>https://blog.fzhiy.net/categories/notes/</link>
-      <pubDate>Sun, 27 Jun 2021 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/categories/notes/</guid>
       <description></description>
     </item>
     
