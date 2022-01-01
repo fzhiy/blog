@@ -6,7 +6,16 @@
     <description>Recent content in Notes on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Jun 2021 20:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Jan 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[刷题]LeetCode每日一题</title>
+      <link>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
+      <pubDate>Sat, 01 Jan 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
+      <description>2021 1月 01.01[312. Burst Balloons] You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1 goes out of</description>
+    </item>
+    
     <item>
       <title>[C&#43;&#43;]内存管理</title>
       <link>https://blog.fzhiy.net/post/2021-06-27-c&#43;&#43;%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
