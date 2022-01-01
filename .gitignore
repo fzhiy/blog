@@ -1,4 +1,5 @@
 themes/LoveIt
+themes/hugo-search-fuse-js
 themes/*/.git
 resources/*
 content/*
