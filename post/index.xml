@@ -6,7 +6,16 @@
     <description>Recent content in Posts on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 01 Jan 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jan 2022 12:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[炼丹]炼丹爬坑&amp;技巧</title>
+      <link>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Sun, 02 Jan 2022 12:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</guid>
+      <description>关于GPU(显存占用率，GPU利用率） 观察GPU利用率，显存占用率 工具：gpustat 1 2 3 pip install gpustat # 安装 watch --color -n1 gpustat -cpu # 监测 gpustat --force-color -cpu -i 1 # 颜色区分</description>
+    </item>
+    
     <item>
       <title>[刷题]LeetCode每日一题</title>
       <link>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
