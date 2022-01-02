@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <lastmod>2022-01-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2022-01-02T12:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -51,15 +58,8 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
-    <lastmod>2022-01-01T22:47:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fzhiy.net/tags/algorithm/</loc>
-    <lastmod>2022-01-01T22:47:09+08:00</lastmod>
+    <lastmod>2022-01-02T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
