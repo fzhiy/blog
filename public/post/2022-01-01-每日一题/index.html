@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2021 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2338">
+<meta itemprop="wordCount" content="2352">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2021 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 2338 字 </span>
+          <span class="more-meta"> 约 2352 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -522,21 +522,41 @@ Explanation: All three pairs have a total duration of 120, which is divisible by
 <p>大概看了下讨论区里的做法，一种是上面这样，另外还有一个先计算mp[x%60]频次，然后计算结果(但是不明白的是为什么特例0 和 30的频次计算公式是n*(n-1) / 2 ，通过样例确实可以说明可用，但是证明呢？？这个还没看明白)。。</p>
 <p>先贴出来， 哪天明白了再补上</p>
 <p>链接：https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/discuss/964469/C%2B%2B-Linear-Solution-Explained-~100-Time-~95-Space</p>
-<p>class Solution {
-public:
-int numPairsDivisibleBy60(vector<int>&amp; time) {
-// support variables
-int freqs[60] = {}, res = 0;
-// populating freqs
-for (int t: time) freqs[t % 60]++;
-// computing the number of matches for most pairs
-for (int i = 1; i &lt; 30; i++) res += freqs[i] * freqs[60 - i];
-// special cases - 0s and 30s
-res += freqs[0] * (freqs[0] - 1) / 2 + freqs[30] * (freqs[30] - 1) / 2;
-return res;
-}
-};</p>
-</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+ <span class="kt">int</span> <span class="n">numPairsDivisibleBy60</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">time</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// support variables
+</span><span class="c1"></span>     <span class="kt">int</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="c1">// populating freqs
+</span><span class="c1"></span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">t</span><span class="p">:</span> <span class="n">time</span><span class="p">)</span> <span class="n">freqs</span><span class="p">[</span><span class="n">t</span> <span class="o">%</span> <span class="mi">60</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+     <span class="c1">// computing the number of matches for most pairs
+</span><span class="c1"></span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">freqs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">60</span> <span class="o">-</span> <span class="n">i</span><span class="p">];</span>
+     <span class="c1">// special cases - 0s and 30s
+</span><span class="c1"></span>     <span class="n">res</span> <span class="o">+=</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
 
     </div>
 
