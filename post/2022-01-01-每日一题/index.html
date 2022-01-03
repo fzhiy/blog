@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-01T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-01-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-03T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2021 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-01-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2352">
+<meta itemprop="dateModified" content="2022-01-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2768">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2021 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 2352 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2768 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
     </header>
@@ -153,6 +153,7 @@
           <ul>
             <li><a href="#0101312-burst-balloons">01.01[312. Burst Balloons]</a></li>
             <li><a href="#01021010-pairs-of-songs-with-total-durations-divisible-by-60">01.02[\1010. Pairs of Songs With Total Durations Divisible by 60]</a></li>
+            <li><a href="#0103997-find-the-town-judge">01.03[\997. Find the Town Judge]</a></li>
           </ul>
         </li>
       </ul>
@@ -522,6 +523,75 @@ Explanation: All three pairs have a total duration of 120, which is divisible by
 <p>大概看了下讨论区里的做法，一种是上面这样，另外还有一个先计算mp[x%60]频次，然后计算结果(但是不明白的是为什么特例0 和 30的频次计算公式是n*(n-1) / 2 ，通过样例确实可以说明可用，但是证明呢？？这个还没看明白)。。</p>
 <p>先贴出来， 哪天明白了再补上</p>
 <p>链接：https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/discuss/964469/C%2B%2B-Linear-Solution-Explained-~100-Time-~95-Space</p>
+<p>class Solution {
+public:
+int numPairsDivisibleBy60(vector<int>&amp; time) {
+// support variables
+int freqs[60] = {}, res = 0;
+// populating freqs
+for (int t: time) freqs[t % 60]++;
+// computing the number of matches for most pairs
+for (int i = 1; i &lt; 30; i++) res += freqs[i] * freqs[60 - i];
+// special cases - 0s and 30s
+res += freqs[0] * (freqs[0] - 1) / 2 + freqs[30] * (freqs[30] - 1) / 2;
+return res;
+}
+};</p>
+</blockquote>
+<h3 id="0103997-find-the-town-judge">01.03[\997. Find the Town Judge]</h3>
+<p><a href="https://leetcode.com/problems/find-the-town-judge/">传送门</a></p>
+<p>In a town, there are <code>n</code> people labeled from <code>1</code> to <code>n</code>. There is a rumor that one of these people is secretly the town judge.</p>
+<p>If the town judge exists, then:</p>
+<ol>
+<li>The town judge trusts nobody.</li>
+<li>Everybody (except for the town judge) trusts the town judge.</li>
+<li>There is exactly one person that satisfies properties <strong>1</strong> and <strong>2</strong>.</li>
+</ol>
+<p>You are given an array <code>trust</code> where <code>trust[i] = [ai, bi]</code> representing that the person labeled <code>ai</code> trusts the person labeled <code>bi</code>.</p>
+<p>Return <em>the label of the town judge if the town judge exists and can be identified, or return</em> <code>-1</code> <em>otherwise</em>.</p>
+<p><strong>Example 1:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: n = 2, trust = [[1,2]]
+Output: 2
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 2:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: n = 3, trust = [[1,3],[2,3]]
+Output: 3
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 3:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: n = 3, trust = [[1,3],[2,3],[3,1]]
+Output: -1
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1000</code></li>
+<li><code>0 &lt;= trust.length &lt;= 104</code></li>
+<li><code>trust[i].length == 2</code></li>
+<li>All the pairs of <code>trust</code> are <strong>unique</strong>.</li>
+<li><code>ai != bi</code></li>
+<li><code>1 &lt;= ai, bi &lt;= n</code></li>
+</ul>
+<p>分析：满足题意的条件：1）只有一个镇判官；2）镇判官 不信任任何人；3）所有人（除了真判官自己）都信任镇判官。 给定二维数组trust，其中$a_i$信任$b_i$​。  统计每个节点的入度和出度，只要入度为n-1且出度为0的节点则为所求。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -538,26 +608,39 @@ Explanation: All three pairs have a total duration of 120, which is divisible by
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 时间复杂度O(max(trust.length, n))，空间复杂度O(n)
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
- <span class="kt">int</span> <span class="n">numPairsDivisibleBy60</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">time</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// support variables
-</span><span class="c1"></span>     <span class="kt">int</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-     <span class="c1">// populating freqs
-</span><span class="c1"></span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">t</span><span class="p">:</span> <span class="n">time</span><span class="p">)</span> <span class="n">freqs</span><span class="p">[</span><span class="n">t</span> <span class="o">%</span> <span class="mi">60</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-     <span class="c1">// computing the number of matches for most pairs
-</span><span class="c1"></span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">freqs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">60</span> <span class="o">-</span> <span class="n">i</span><span class="p">];</span>
-     <span class="c1">// special cases - 0s and 30s
-</span><span class="c1"></span>     <span class="n">res</span> <span class="o">+=</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
- <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">findJudge</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">trust</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">trust</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="c1">//        vector&lt;int&gt; inDegree(n), outDegree(n) //统计入度和出度
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inDegree</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">elem</span><span class="p">:</span> <span class="n">trust</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">//            outDegree[elem[0]-1]++;
+</span><span class="c1"></span>            <span class="n">inDegree</span><span class="p">[</span><span class="n">elem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">elem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 入度与出度之和 = n-1即为所求
+</span><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div></blockquote>
-
+</div>
     </div>
 
     <div class="post-copyright">
@@ -568,7 +651,7 @@ Explanation: All three pairs have a total duration of 120, which is divisible by
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-01-02
+        2022-01-03
         
     </span>
   </p>
