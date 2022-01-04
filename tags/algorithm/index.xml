@@ -16,5 +16,14 @@
       <description>2021 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1</description>
     </item>
     
+    <item>
+      <title>[刷题]LeetCode</title>
+      <link>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</link>
+      <pubDate>Wed, 01 Dec 2021 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</guid>
+      <description>精选高频面试题 合并有序链表 反转链表 单例模式 简单工厂模式 快速排序 归并排序 实现一个堆排序 设计LRU缓存 重排链表 奇偶链表 写三个线程交替打印ABC Top</description>
+    </item>
+    
   </channel>
 </rss>
