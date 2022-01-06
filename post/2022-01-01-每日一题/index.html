@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="3291">
+<meta itemprop="wordCount" content="3576">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 3291 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3576 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
     </header>
@@ -156,6 +156,7 @@
             <li><a href="#0103997-find-the-town-judge">01.03[\997. Find the Town Judge]</a></li>
             <li><a href="#01041009-complement-of-base-10-integer">01.04[\1009. Complement of Base 10 Integer]</a></li>
             <li><a href="#0105131-palindrome-partitioning">01.05[\131. Palindrome Partitioning]</a></li>
+            <li><a href="#01061094-car-pooling">01.06[\1094. Car Pooling]</a></li>
           </ul>
         </li>
       </ul>
@@ -839,6 +840,76 @@ Output: [[&#34;a&#34;]]
             <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">--</span><span class="p">])</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="01061094-car-pooling">01.06[\1094. Car Pooling]</h3>
+<p><a href="https://leetcode.com/problems/car-pooling/">传送门</a></p>
+<p>There is a car with <code>capacity</code> empty seats. The vehicle only drives east (i.e., it cannot turn around and drive west).</p>
+<p>You are given the integer <code>capacity</code> and an array <code>trips</code> where <code>trip[i] = [numPassengersi, fromi, toi]</code> indicates that the <code>ith</code> trip has <code>numPassengersi</code> passengers and the locations to pick them up and drop them off are <code>fromi</code> and <code>toi</code> respectively. The locations are given as the number of kilometers due east from the car&rsquo;s initial location.</p>
+<p>Return <code>true</code> <em>if it is possible to pick up and drop off all passengers for all the given trips, or</em> <code>false</code> <em>otherwise</em>.</p>
+<p><strong>Example 1:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: trips = [[2,1,5],[3,3,7]], capacity = 4
+Output: false
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 2:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: trips = [[2,1,5],[3,3,7]], capacity = 5
+Output: true
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= trips.length &lt;= 1000</code></li>
+<li><code>trips[i].length == 3</code></li>
+<li><code>1 &lt;= numPassengersi &lt;= 100</code></li>
+<li><code>0 &lt;= fromi &lt; toi &lt;= 1000</code></li>
+<li><code>1 &lt;= capacity &lt;= 105</code></li>
+</ul>
+<p>分析：记录在每一战 上下车的人数，枚举每一站， 判断当前剩余的容量capacity是否能够容纳stops[i]个人</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">carPooling</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">trips</span><span class="p">,</span> <span class="kt">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">stops</span><span class="p">[</span><span class="mi">1001</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">trip</span><span class="p">:</span> <span class="n">trips</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">stops</span><span class="p">[</span><span class="n">trip</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+=</span> <span class="n">trip</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">// trip[0]个人上车
+</span><span class="c1"></span>            <span class="n">stops</span><span class="p">[</span><span class="n">trip</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="o">-=</span> <span class="n">trip</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">// 下车
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">1001</span> <span class="o">&amp;&amp;</span> <span class="n">capacity</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">capacity</span> <span class="o">-=</span> <span class="n">stops</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">capacity</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
