@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="3576">
+<meta itemprop="wordCount" content="4853">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 3576 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 4853 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
         
       </div>
     </header>
@@ -157,6 +157,8 @@
             <li><a href="#01041009-complement-of-base-10-integer">01.04[\1009. Complement of Base 10 Integer]</a></li>
             <li><a href="#0105131-palindrome-partitioning">01.05[\131. Palindrome Partitioning]</a></li>
             <li><a href="#01061094-car-pooling">01.06[\1094. Car Pooling]</a></li>
+            <li><a href="#382-linked-list-random-node">\382. Linked List Random Node</a></li>
+            <li><a href="#1463-cherry-pickup-ii">\1463. Cherry Pickup II</a></li>
           </ul>
         </li>
       </ul>
@@ -910,6 +912,359 @@ Output: true
             <span class="n">capacity</span> <span class="o">-=</span> <span class="n">stops</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">capacity</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="382-linked-list-random-node">\382. Linked List Random Node</h3>
+<p><a href="https://leetcode.com/problems/linked-list-random-node/">传送门</a></p>
+<p>Given a singly linked list, return a random node&rsquo;s value from the linked list. Each node must have the <strong>same probability</strong> of being chosen.</p>
+<p>Implement the <code>Solution</code> class:</p>
+<ul>
+<li><code>Solution(ListNode head)</code> Initializes the object with the integer array nums.</li>
+<li><code>int getRandom()</code> Chooses a node randomly from the list and returns its value. All the nodes of the list should be equally likely to be choosen.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/16/getrand-linked-list.jpg" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input
+[&#34;Solution&#34;, &#34;getRandom&#34;, &#34;getRandom&#34;, &#34;getRandom&#34;, &#34;getRandom&#34;, &#34;getRandom&#34;]
+[[[1, 2, 3]], [], [], [], [], []]
+Output
+[null, 1, 3, 2, 2, 3]
+
+Explanation
+Solution solution = new Solution([1, 2, 3]);
+solution.getRandom(); // return 1
+solution.getRandom(); // return 3
+solution.getRandom(); // return 2
+solution.getRandom(); // return 2
+solution.getRandom(); // return 3
+// getRandom() should return either 1, 2, or 3 randomly. Each element should have equal probability of returning.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the linked list will be in the range <code>[1, 104]</code>.</li>
+<li><code>-104 &lt;= Node.val &lt;= 104</code></li>
+<li>At most <code>104</code> calls will be made to <code>getRandom</code>.</li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<ul>
+<li>What if the linked list is extremely large and its length is unknown to you?</li>
+<li>Could you solve this efficiently without using extra space?</li>
+</ul>
+<p>分析：follow up中 要求链表极大且不知道长度，要求不使用额外空间。</p>
+<p>转换为vector会占用额外的空间。</p>
+<p>那么可以预设一个长度len 表示链表长度，随机选择一个节点，然后遍历找到该节点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 预设一个链表长度len
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">Head</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">Solution</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">Head</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">head</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">++</span><span class="p">;</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">getRandom</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">*</span> <span class="n">pHead</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">Head</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="p">{</span><span class="c1">//从头遍历链表找到该节点
+</span><span class="c1"></span>            <span class="n">pHead</span> <span class="o">=</span> <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">mod</span> <span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">Head</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="n">Solution</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">Head</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="nf">getRandom</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">ans</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">pHead</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">Head</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">pHead</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+            <span class="n">mod</span> <span class="o">++</span><span class="p">;</span>
+            <span class="n">pHead</span> <span class="o">=</span> <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="1463-cherry-pickup-ii">\1463. Cherry Pickup II</h3>
+<p><a href="https://leetcode.com/problems/cherry-pickup-ii/">传送门</a></p>
+<p>You are given a <code>rows x cols</code> matrix <code>grid</code> representing a field of cherries where <code>grid[i][j]</code> represents the number of cherries that you can collect from the <code>(i, j)</code> cell.</p>
+<p>You have two robots that can collect cherries for you:</p>
+<ul>
+<li><strong>Robot #1</strong> is located at the <strong>top-left corner</strong> <code>(0, 0)</code>, and</li>
+<li><strong>Robot #2</strong> is located at the <strong>top-right corner</strong> <code>(0, cols - 1)</code>.</li>
+</ul>
+<p>Return <em>the maximum number of cherries collection using both robots by following the rules below</em>:</p>
+<ul>
+<li>From a cell <code>(i, j)</code>, robots can move to cell <code>(i + 1, j - 1)</code>, <code>(i + 1, j)</code>, or <code>(i + 1, j + 1)</code>.</li>
+<li>When any robot passes through a cell, It picks up all cherries, and the cell becomes an empty cell.</li>
+<li>When both robots stay in the same cell, only one takes the cherries.</li>
+<li>Both robots cannot move outside of the grid at any moment.</li>
+<li>Both robots should reach the bottom row in <code>grid</code>.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/04/29/sample_1_1802.png" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: grid = [[3,1,1],[2,5,1],[1,5,5],[2,1,1]]
+Output: 24
+Explanation: Path of robot #1 and #2 are described in color green and blue respectively.
+Cherries taken by Robot #1, (3 + 2 + 5 + 2) = 12.
+Cherries taken by Robot #2, (1 + 5 + 5 + 1) = 12.
+Total of cherries: 12 + 12 = 24.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/04/23/sample_2_1802.png" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: grid = [[1,0,0,0,0,0,1],[2,0,0,0,0,3,0],[2,0,9,0,0,0,0],[0,3,0,5,4,0,0],[1,0,2,3,0,0,6]]
+Output: 28
+Explanation: Path of robot #1 and #2 are described in color green and blue respectively.
+Cherries taken by Robot #1, (1 + 9 + 5 + 2) = 17.
+Cherries taken by Robot #2, (1 + 3 + 4 + 3) = 11.
+Total of cherries: 17 + 11 = 28.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li><code>rows == grid.length</code></li>
+<li><code>cols == grid[i].length</code></li>
+<li><code>2 &lt;= rows, cols &lt;= 70</code></li>
+<li><code>0 &lt;= grid[i][j] &lt;= 100</code></li>
+</ul>
+<p>分析：这里robot1和robot2<strong>需要同时移动</strong>， 因为不同时移动的话，先者会影响后者的移动轨迹。</p>
+<p>dp(row, col1, col2) 表示 robot1在(row, col1)， robot2在(row, col2) 时的收集的cherries的最大值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 自顶向下 dfs+记忆化  时间复杂度O(n m^2) 空间复杂度O(n m^2)
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">cherryPickup</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
+        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">dp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col2</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="n">grid</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="o">&amp;</span><span class="n">dp</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 越界
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">col1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col1</span> <span class="o">&gt;=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">||</span> <span class="n">col2</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col2</span> <span class="o">&gt;=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">][</span><span class="n">col2</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">][</span><span class="n">col2</span><span class="p">];</span>
+        <span class="c1">// 当前的一步收集的cherry
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">col1</span> <span class="o">!=</span> <span class="n">col2</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col2</span><span class="p">];</span>
+        <span class="c1">// 状态转移
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">row</span> <span class="o">!=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">maxCherries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">col1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">col1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">col2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">col2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">maxCherries</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxCherries</span><span class="p">,</span> <span class="n">dfs</span><span class="p">(</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">dp</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">maxCherries</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">][</span><span class="n">col2</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// 自底向上, 时间复杂度 空间复杂度与 自顶向下相同。
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">cherryPickup</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">)));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">row</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">row</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col1</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">col1</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">col1</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col2</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">col2</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">col2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="n">res</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">];</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">col1</span> <span class="o">!=</span> <span class="n">col2</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">res</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col2</span><span class="p">];</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">row</span> <span class="o">!=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="kt">int</span> <span class="n">maxCherries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">col1</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">col1</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">col2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">col2</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">m</span> <span class="o">||</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">m</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+                                <span class="n">maxCherries</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxCherries</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="n">res</span> <span class="o">+=</span> <span class="n">maxCherries</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col1</span><span class="p">][</span><span class="n">col2</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
