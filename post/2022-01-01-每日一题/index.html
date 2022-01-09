@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="4853">
+<meta itemprop="wordCount" content="5325">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 4853 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+          <span class="more-meta"> 约 5325 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
     </header>
@@ -157,8 +157,9 @@
             <li><a href="#01041009-complement-of-base-10-integer">01.04[\1009. Complement of Base 10 Integer]</a></li>
             <li><a href="#0105131-palindrome-partitioning">01.05[\131. Palindrome Partitioning]</a></li>
             <li><a href="#01061094-car-pooling">01.06[\1094. Car Pooling]</a></li>
-            <li><a href="#382-linked-list-random-node">\382. Linked List Random Node</a></li>
-            <li><a href="#1463-cherry-pickup-ii">\1463. Cherry Pickup II</a></li>
+            <li><a href="#0107382-linked-list-random-node">01.07[\382. Linked List Random Node]</a></li>
+            <li><a href="#01081463-cherry-pickup-ii">01.08[\1463. Cherry Pickup II]</a></li>
+            <li><a href="#01091041-robot-bounded-in-circle">01.09.[\1041. Robot Bounded In Circle]</a></li>
           </ul>
         </li>
       </ul>
@@ -916,7 +917,7 @@ Output: true
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="382-linked-list-random-node">\382. Linked List Random Node</h3>
+</div><h3 id="0107382-linked-list-random-node">01.07[\382. Linked List Random Node]</h3>
 <p><a href="https://leetcode.com/problems/linked-list-random-node/">传送门</a></p>
 <p>Given a singly linked list, return a random node&rsquo;s value from the linked list. Each node must have the <strong>same probability</strong> of being chosen.</p>
 <p>Implement the <code>Solution</code> class:</p>
@@ -1062,7 +1063,7 @@ solution.getRandom(); // return 3
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="1463-cherry-pickup-ii">\1463. Cherry Pickup II</h3>
+</div><h3 id="01081463-cherry-pickup-ii">01.08[\1463. Cherry Pickup II]</h3>
 <p><a href="https://leetcode.com/problems/cherry-pickup-ii/">传送门</a></p>
 <p>You are given a <code>rows x cols</code> matrix <code>grid</code> representing a field of cherries where <code>grid[i][j]</code> represents the number of cherries that you can collect from the <code>(i, j)</code> cell.</p>
 <p>You have two robots that can collect cherries for you:</p>
@@ -1267,6 +1268,113 @@ Total of cherries: 17 + 11 = 28.
         <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
     <span class="p">}</span>
 <span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="01091041-robot-bounded-in-circle">01.09.[\1041. Robot Bounded In Circle]</h3>
+<p><a href="https://leetcode.com/problems/robot-bounded-in-circle/">传送门</a></p>
+<p>On an infinite plane, a robot initially stands at <code>(0, 0)</code> and faces north. The robot can receive one of three instructions:</p>
+<ul>
+<li><code>&quot;G&quot;</code>: go straight 1 unit;</li>
+<li><code>&quot;L&quot;</code>: turn 90 degrees to the left;</li>
+<li><code>&quot;R&quot;</code>: turn 90 degrees to the right.</li>
+</ul>
+<p>The robot performs the <code>instructions</code> given in order, and repeats them forever.</p>
+<p>Return <code>true</code> if and only if there exists a circle in the plane such that the robot never leaves the circle.</p>
+<p><strong>Example 1:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: instructions = &#34;GGLLGG&#34;
+Output: true
+Explanation: The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).
+When repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 2:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: instructions = &#34;GG&#34;
+Output: false
+Explanation: The robot moves north indefinitely.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 3:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: instructions = &#34;GL&#34;
+Output: true
+Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0) -&gt; (0, 0) -&gt; ...
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= instructions.length &lt;= 100</code></li>
+<li><code>instructions[i]</code> is <code>'G'</code>, <code>'L'</code> or, <code>'R'</code>.</li>
+</ul>
+<p>分析：判断行进方向和当前位置，具体见代码注释</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 时间复杂度O(n), 空间复杂度O(1)
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">isRobotBounded</span><span class="p">(</span><span class="n">string</span> <span class="n">instructions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 在初始位置默认是向右走的，所以dir[1][0]=0, dir[1][1]=1; 前进方向：右 上 左 下
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">dir</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+        <span class="kt">int</span> <span class="n">direction</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//(x, y)表示当前位置, direction表示当前位置的方向
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span><span class="p">:</span> <span class="n">instructions</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39;L&#39;</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">// 左转90°，朝上走
+</span><span class="c1"></span>                <span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 右转90°，朝下走
+</span><span class="c1"></span>                <span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>    <span class="c1">// 按照当前方向前进
+</span><span class="c1"></span>                <span class="n">x</span> <span class="o">+=</span> <span class="n">dir</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">dir</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// 回到原点(0, 0) 或者 方向不朝北(原因是无限重复instructions这条指令)
+</span><span class="c1"></span>        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="n">direction</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
 </code></pre></td></tr></table>
 </div>
 </div>
