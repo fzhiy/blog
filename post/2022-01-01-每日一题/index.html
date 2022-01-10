@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="5325">
+<meta itemprop="wordCount" content="5478">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 5325 字 </span>
+          <span class="more-meta"> 约 5478 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
@@ -160,6 +160,7 @@
             <li><a href="#0107382-linked-list-random-node">01.07[\382. Linked List Random Node]</a></li>
             <li><a href="#01081463-cherry-pickup-ii">01.08[\1463. Cherry Pickup II]</a></li>
             <li><a href="#01091041-robot-bounded-in-circle">01.09.[\1041. Robot Bounded In Circle]</a></li>
+            <li><a href="#011067-add-binary">01.10[\67. Add Binary]</a></li>
           </ul>
         </li>
       </ul>
@@ -1375,6 +1376,69 @@ Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0
     <span class="p">}</span>
 <span class="p">};</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="011067-add-binary">01.10[\67. Add Binary]</h3>
+<p><a href="https://leetcode.com/problems/add-binary/">传送门</a></p>
+<p>分析：二进制加法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">addBinary</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">lenA</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">lenB</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">carry</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">lenA</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="n">lenB</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">,</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">temp</span><span class="o">+</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">temp</span><span class="o">+</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">--</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">temp</span><span class="o">+</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">--</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>        
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">carry</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span> <span class="kt">char</span><span class="p">(</span><span class="n">carry</span><span class="o">+</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+        <span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
 </div>
