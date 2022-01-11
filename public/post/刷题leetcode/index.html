@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-01T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-01-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-11T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode">
 <meta itemprop="description" content="精选高频面试题 合并有序链表 反转链表 单例模式 简单工厂模式 快速排序 归并排序 实现一个堆排序 设计LRU缓存 重排链表 奇偶链表 写三个线程交替打印ABC Top"><meta itemprop="datePublished" content="2021-12-01T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-01-04T00:00:00+00:00" />
-<meta itemprop="wordCount" content="38948">
+<meta itemprop="dateModified" content="2022-01-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="39299">
 <meta itemprop="keywords" content="Algorithm,LeetCode," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode"/>
 <meta name="twitter:description" content="精选高频面试题 合并有序链表 反转链表 单例模式 简单工厂模式 快速排序 归并排序 实现一个堆排序 设计LRU缓存 重排链表 奇偶链表 写三个线程交替打印ABC Top"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 38948 字 </span>
-          <span class="more-meta"> 预计阅读 78 分钟 </span>
+          <span class="more-meta"> 约 39299 字 </span>
+          <span class="more-meta"> 预计阅读 79 分钟 </span>
         
       </div>
     </header>
@@ -349,6 +349,7 @@
             <li><a href="#494-target-sum">\494. Target Sum</a></li>
             <li><a href="#516-longest-palindromic-subsequence">\516. Longest Palindromic Subsequence</a></li>
             <li><a href="#518-coin-change-2">\518. Coin Change 2</a></li>
+            <li><a href="#542-01-matrix">\542. 01 Matrix</a></li>
             <li><a href="#583-delete-operation-for-two-strings">\583. Delete Operation for Two Strings</a></li>
             <li><a href="#646最长数对链httpsleetcode-cncomproblemsmaximum-length-of-pair-chaindescription">646.<a href="https://leetcode-cn.com/problems/maximum-length-of-pair-chain/description/">最长数对链</a></a></li>
             <li><a href="#647-回文子串httpsleetcode-cncomproblemspalindromic-substringsdescription">647. <a href="https://leetcode-cn.com/problems/palindromic-substrings/description/">回文子串</a></a></li>
@@ -10893,6 +10894,101 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="542-01-matrix">\542. 01 Matrix</h3>
+<p><a href="https://leetcode.com/problems/01-matrix/">传送门</a></p>
+<p>Given an <code>m x n</code> binary matrix <code>mat</code>, return <em>the distance of the nearest</em> <code>0</code> <em>for each cell</em>.</p>
+<p>The distance between two adjacent cells is <code>1</code>.</p>
+<p><strong>Example 1:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/04/24/01-1-grid.jpg" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: mat = [[0,0,0],[0,1,0],[0,0,0]]
+Output: [[0,0,0],[0,1,0],[0,0,0]]
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Example 2:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/04/24/01-2-grid.jpg" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Input: mat = [[0,0,0],[0,1,0],[1,1,1]]
+Output: [[0,0,0],[0,1,0],[1,2,1]]
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == mat.length</code></li>
+<li><code>n == mat[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 104</code></li>
+<li><code>1 &lt;= m * n &lt;= 104</code></li>
+<li><code>mat[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
+<li>There is at least one <code>0</code> in <code>mat</code>.</li>
+</ul>
+<p><strong>分析</strong>: $m * n &lt;= 10 ^4$​，二维数组DP理论上可行。</p>
+<p>DP三步走： DP定义；状态转移；初始状态</p>
+<p>第一遍扫描左上角（左边和上边）：dp[i][j]：表示mat[0, &hellip;, i][0, &hellip;, j]中每个位置距离最近的0的最小距离</p>
+<p>第二遍扫描右上角（右边和下边）: dp即为所求</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">updateMatrix</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="n">dp</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="o">-</span><span class="mf">1e4</span><span class="p">));</span> <span class="c1">// 这里减掉1e4 避免后面int类型溢出。
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+</code></pre></td></tr></table>
+</div>
 </div><h3 id="583-delete-operation-for-two-strings">\583. Delete Operation for Two Strings</h3>
 <p><a href="https://leetcode.com/problems/delete-operation-for-two-strings/">传送门</a></p>
 <p>分析：将word1转化为word2，每一步可以对任何一个字符串的字符做删除操作，求最少操作步数。</p>
@@ -14686,7 +14782,7 @@ Explanation: In this case, no transactions are done and the max profit = 0.
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-01-04
+        2022-01-11
         
     </span>
   </p>
