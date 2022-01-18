@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-01-01T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-01-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-18T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-01-11T00:00:00+00:00" />
-<meta itemprop="wordCount" content="6517">
+<meta itemprop="dateModified" content="2022-01-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6746">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 6517 字 </span>
+          <span class="more-meta"> 约 6746 字 </span>
           <span class="more-meta"> 预计阅读 14 分钟 </span>
         
       </div>
@@ -1597,8 +1597,54 @@ Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="0113452-minimum-number-of-arrows-to-burst-balloons">01.13[\452. Minimum Number of Arrows to Burst Balloons]</h3>
-<h3 id="01148-string-to-integer-atoi">01.14[\8. String to Integer (atoi)]</h3>
+<p><a href="https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/">传送门</a></p>
+<p>分析：位于x的一支箭可以打爆任何一个直径包含x的气球。只知道x轴，将其看着做是一条线段。按照points数组第二个元素排序，将第二个元素point[i][1]作为额外一支箭打爆气球的位置，ans++。因为前面做了排序，所以maxn&gt;=point[i][0]的气球则不需要额外的箭。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// 按第二个元素排序
+</span><span class="c1"></span>    <span class="k">static</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="n">cmp</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">findMinArrowShots</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">points</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">points</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">cmp</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">maxn</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">ans</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">maxn</span> <span class="o">&lt;</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">maxn</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+                <span class="n">ans</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="01148-string-to-integer-atoi">01.14[\8. String to Integer (atoi)]</h3>
+<p><a href="https://leetcode.com/problems/string-to-integer-atoi/">传送门</a></p>
 <h3 id="01151345-jump-game-iv">01.15[\1345. Jump Game IV]</h3>
+<p><a href="https://leetcode.com/problems/jump-game-iv/">传送门</a></p>
 <h3 id="0116849-maximize-distance-to-closest-person">01.16[\849. Maximize Distance to Closest Person]</h3>
 <p><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/">传送门</a></p>
 <p>分析：prev记录上一个seats[i] = 1的位置，i为当前位置，next记录下一个seats[i]=1的位置。</p>
@@ -1753,7 +1799,7 @@ Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-01-11
+        2022-01-18
         
     </span>
   </p>
