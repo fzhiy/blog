@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题">
 <meta itemprop="description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"><meta itemprop="datePublished" content="2022-01-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-01-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="6747">
+<meta itemprop="wordCount" content="7074">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题"/>
 <meta name="twitter:description" content="2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i &#43; 1] coins. If i - 1 or i &#43; 1"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 6747 字 </span>
-          <span class="more-meta"> 预计阅读 14 分钟 </span>
+          <span class="more-meta"> 约 7074 字 </span>
+          <span class="more-meta"> 预计阅读 15 分钟 </span>
         
       </div>
     </header>
@@ -170,6 +170,7 @@
             <li><a href="#0117290-word-pattern">01.17[\290. Word Pattern]</a></li>
             <li><a href="#0118605-can-place-flowers">01.18[\605. Can Place Flowers]</a></li>
             <li><a href="#0119">01.19[]</a></li>
+            <li><a href="#0120875-koko-eating-bananas">01.20[\875. Koko Eating Bananas]</a></li>
           </ul>
         </li>
       </ul>
@@ -1790,7 +1791,59 @@ Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="0119">01.19[]</h3>
-
+<h3 id="0120875-koko-eating-bananas">01.20[\875. Koko Eating Bananas]</h3>
+<p><a href="https://leetcode.com/problems/koko-eating-bananas/">传送门</a></p>
+<p>分析：暴力查找，通过<strong>枚举Koko吃香蕉的速度speed（递增）</strong>，计算实际耗时rh并与h比较，直到speed满足 实际耗时rh&lt;=h。 但是这样的时间复杂度是O(nm)，n是piles数组的长度，m是枚举speed的次数。当piles数组元素都很大时，一定会超时。</p>
+<p>进一步分析，递增枚举，直到一个符合条件的rh。其实这样可以转化为二分法。枚举的speed前面部分都不符合题意，只有临界值 rh* = h以后的speed是符合题意的（即rh&lt;=h）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp">
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">minEatingSpeed</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">piles</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="o">*</span><span class="n">max_element</span><span class="p">(</span><span class="n">piles</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">piles</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">((</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">hourSpent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">piles</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">hourSpent</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">mid</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">mid</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">hourSpent</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -1813,7 +1866,11 @@ Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0
           <a href="/tags/algorithm/">Algorithm</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[刷题]企业真题|专项</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/%E5%88%B7%E9%A2%98leetcode/">
             <span class="next-text nav-default">[刷题]LeetCode</span>
             <span class="next-text nav-mobile">下一篇</span>
