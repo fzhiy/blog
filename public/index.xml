@@ -6,7 +6,7 @@
     <description>Recent content on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Jan 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[刷题]企业真题|专项</title>
       <link>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</link>
@@ -14,15 +14,6 @@
       
       <guid>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</guid>
       <description>企业真题 京东 JD1 年终奖 传送门 分析：二维DP模板 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 class Bonus { public: int getMost(vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; board) { // write code here // dp[i][j]: 位于(i, j)获得的</description>
-    </item>
-    
-    <item>
-      <title>[刷题]LeetCode每日一题</title>
-      <link>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
-      <pubDate>Sat, 01 Jan 2022 22:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
-      <description>2022 1月 01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1</description>
     </item>
     
     <item>
@@ -35,12 +26,30 @@
     </item>
     
     <item>
+      <title>[刷题]LeetCode每日一题[2022.02]</title>
+      <link>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
+      <pubDate>Tue, 01 Feb 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
+      <description>[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&amp;lt;int&amp;gt;&amp;amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } };</description>
+    </item>
+    
+    <item>
       <title>[炼丹]炼丹爬坑&amp;技巧</title>
       <link>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Sun, 02 Jan 2022 12:47:09 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</guid>
       <description>关于GPU(显存占用率，GPU利用率） 观察GPU利用率，显存占用率 工具：gpustat 1 2 3 pip install gpustat # 安装 watch --color -n1 gpustat -cpu # 监测 gpustat --force-color -cpu -i 1 # 颜色区分</description>
+    </item>
+    
+    <item>
+      <title>[刷题]LeetCode每日一题[2022.01]</title>
+      <link>https://blog.fzhiy.net/post/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
+      <pubDate>Sat, 01 Jan 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
+      <description>01.01[312. Burst Balloons] 传送门 You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. If you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1 goes out of</description>
     </item>
     
     <item>

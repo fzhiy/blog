@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</loc>
     <lastmod>2022-01-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,29 +16,50 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/tags/algorithm/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/categories/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/categories/notes/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/</loc>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2022-02-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -53,20 +67,6 @@
   <url>
     <loc>https://blog.fzhiy.net/tags/nowcoder/</loc>
     <lastmod>2022-01-19T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/tags/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -81,6 +81,13 @@
   <url>
     <loc>https://blog.fzhiy.net/tags/deep-learning/</loc>
     <lastmod>2022-01-02T12:47:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
