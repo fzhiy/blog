@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="fzhiy" /><meta name="description" content="[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&amp;lt;int&amp;gt;&amp;amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } }; [02.16]\24. Swap Nodes in Pairs 传送门 分析：交换链表的相邻节点并返回修改后的链表" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="fzhiy" /><meta name="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int k) { int n = nums.size(); vector&amp;lt;int&amp;gt; sum(n&#43;1, 0); for (int i=0; i&amp;lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&amp;lt;int, int&amp;gt;" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="[刷题]LeetCode每日一题[2022.02]" />
-<meta property="og:description" content="[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&lt;int&gt;&amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } }; [02.16]\24. Swap Nodes in Pairs 传送门 分析：交换链表的相邻节点并返回修改后的链表" />
+<meta property="og:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-01T22:47:09+08:00" />
 <meta property="article:modified_time" content="2022-02-18T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode每日一题[2022.02]">
-<meta itemprop="description" content="[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&lt;int&gt;&amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } }; [02.16]\24. Swap Nodes in Pairs 传送门 分析：交换链表的相邻节点并返回修改后的链表"><meta itemprop="datePublished" content="2022-02-01T22:47:09+08:00" />
+<meta itemprop="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"><meta itemprop="datePublished" content="2022-02-01T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-02-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2163">
+<meta itemprop="wordCount" content="2920">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题[2022.02]"/>
-<meta name="twitter:description" content="[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&lt;int&gt;&amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } }; [02.16]\24. Swap Nodes in Pairs 传送门 分析：交换链表的相邻节点并返回修改后的链表"/>
+<meta name="twitter:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 2163 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2920 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
     </header>
@@ -151,6 +151,9 @@
       <ul>
         <li>
           <ul>
+            <li><a href="#210560-subarray-sum-equals-k">[2.10]\560. Subarray Sum Equals K</a></li>
+            <li><a href="#021378-subsets">[02.13]\78. Subsets</a></li>
+            <li><a href="#0214104-maximum-depth-of-binary-tree">[02.14]\104. Maximum Depth of Binary Tree</a></li>
             <li><a href="#0215136-single-number">[02.15]\136. Single Number</a></li>
             <li><a href="#021624-swap-nodes-in-pairs">[02.16]\24. Swap Nodes in Pairs</a></li>
             <li><a href="#021739-combination-sum">[02.17]\39. Combination Sum</a></li>
@@ -164,7 +167,247 @@
   </div>
 </div>
     <div class="post-content">
-      <h3 id="0215136-single-number">[02.15]\136. Single Number</h3>
+      <h3 id="210560-subarray-sum-equals-k">[2.10]\560. Subarray Sum Equals K</h3>
+<p><a href="https://leetcode.com/problems/subarray-sum-equals-k/">传送门</a></p>
+<p>分析：前缀和</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">subarraySum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sum</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="n">ans</span> <span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="o">!=</span> <span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span><span class="c1">//前面存在前缀和sum[j](=sum[i]-k)
+</span><span class="c1"></span>                <span class="n">ans</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">k</span><span class="p">)];</span>
+            <span class="p">}</span>
+            <span class="n">mp</span><span class="p">[</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">++</span><span class="p">;</span>	<span class="c1">// 前缀和为sum[i]的数量+1
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="021378-subsets">[02.13]\78. Subsets</h3>
+<p>传送门</p>
+<p>分析：求子集，任意顺序输出</p>
+<p>三种方法：1）dfs+回溯；2）迭代法；3）位操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//方法1： TC：O(n!)，SC: O(n) + O(n!)
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">subsets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">res</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">temp</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">idx</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">temp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">temp</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// 方法2；迭代法	TC：O(n * 2^n)  SC：O(1)+O(2^n * n)
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">subsets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Example, nums = [1,2,3]
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="p">{{}};</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="nl">num</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="c1">// Round1, num=1, 即RoundX, num=X
+</span><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/** Initialize；res=[[]]
+</span><span class="cm">                Round 1,
+</span><span class="cm">                    After step1: res=[[], []]
+</span><span class="cm">                    After step2: res=[[], [1]]
+</span><span class="cm">                Round 2,
+</span><span class="cm">                    After step1: res=[[], [1], []]
+</span><span class="cm">                    After step2: res=[[], [1], [2]]
+</span><span class="cm">                    After step1: res=[[], [1], [2], [1]]
+</span><span class="cm">                    After step2: res=[[], [1], [2], [1, 2]]
+</span><span class="cm">                Similarly，and so on
+</span><span class="cm">                */</span>
+                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>      <span class="c1">// step1
+</span><span class="c1"></span>                <span class="n">res</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">push_back</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>  <span class="c1">// step2
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="cm">/* 方法3：位操作法 TC：O(2^n * n)   SC：O(2^n * n)
+</span><span class="cm">nums[i]     1     2       3
+</span><span class="cm">0(000), [], [],   [],     []
+</span><span class="cm">1(001), [], [1],  [1],    [1] 
+</span><span class="cm">2(010), [], [],   [2],    [2]
+</span><span class="cm">3(011), [], [1],  [1,2],  [1,2]
+</span><span class="cm">4(100), [], [],   [],     [3]
+</span><span class="cm">5(101), [], [1],  [1],    [1,3]
+</span><span class="cm">6(110), [], [],   [2],    [2,3]
+</span><span class="cm">7(111), [], [1],  [1,2],  [1,2,3]
+</span><span class="cm">创建2^n个的vector&lt;int&gt;的一维数组，(n=(1&lt;&lt;nums.size()) ),对应的二进制位表示中1对应的位置的数组元素nums[i]来填充vector
+</span><span class="cm">*/</span>   
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">subsets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Example, nums = [1,2,3]
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">cnt</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cnt</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">((</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 对应的二进制位是1,
+</span><span class="c1"></span>                    <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="0214104-maximum-depth-of-binary-tree">[02.14]\104. Maximum Depth of Binary Tree</h3>
+<p><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">传送门</a></p>
+<p>分析：求树的最大深度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">maxDepth</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">),</span> <span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="0215136-single-number">[02.15]\136. Single Number</h3>
 <p><a href="https://leetcode.com/problems/single-number/">传送门</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
