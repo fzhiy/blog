@@ -31,7 +31,7 @@
       <pubDate>Tue, 01 Feb 2022 22:47:09 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
-      <description>[02.15]\136. Single Number 传送门 1 2 3 4 5 6 7 8 9 10 class Solution { public: int singleNumber(vector&amp;lt;int&amp;gt;&amp;amp; nums) { int res = 0; for (int x: nums) { res ^= x; } return res; } }; [02.16]\24. Swap Nodes in Pairs 传送门 分析：交换链表的相邻节点并返回修改后的链表</description>
+      <description>[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&amp;lt;int&amp;gt;&amp;amp; nums, int k) { int n = nums.size(); vector&amp;lt;int&amp;gt; sum(n+1, 0); for (int i=0; i&amp;lt;n; i++) { sum[i+1] = sum[i] + nums[i]; } int ans = 0; unordered_map&amp;lt;int, int&amp;gt;</description>
     </item>
     
     <item>
