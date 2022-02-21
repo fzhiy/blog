@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-01T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-02-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-21T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode每日一题[2022.02]">
 <meta itemprop="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"><meta itemprop="datePublished" content="2022-02-01T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-02-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="3260">
+<meta itemprop="dateModified" content="2022-02-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3633">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题[2022.02]"/>
 <meta name="twitter:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 3260 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3633 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
     </header>
@@ -159,6 +159,8 @@
             <li><a href="#021739-combination-sum">[02.17]\39. Combination Sum</a></li>
             <li><a href="#0218402-remove-k-digits">[02.18]\402. Remove K Digits</a></li>
             <li><a href="#02191675-minimize-deviation-in-array">[02.19]\1675. Minimize Deviation in Array</a></li>
+            <li><a href="#02201288-remove-covered-intervals">[02.20]\1288. Remove Covered Intervals</a></li>
+            <li><a href="#0221169-majority-element">[02.21]\169. Majority Element</a></li>
           </ul>
         </li>
       </ul>
@@ -965,6 +967,117 @@ These are the only two combinations.
 
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="02201288-remove-covered-intervals">[02.20]\1288. Remove Covered Intervals</h3>
+<p><a href="https://leetcode.com/problems/remove-covered-intervals/">传送门</a></p>
+<p>分析：先排序，排序后 二维数组先按第一个数大小排序，然后按第二个大小排序。</p>
+<p>那么举例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">intervals = [[1,4],[3,6],[2,8],[2,6]]
+排序后的结果为 [[1,4],[2,6],[2,8],[3,6]]
+(1)|_ _ _ _|(4)				x1 = 1, x2 = 4 		res = 1
+  (2)|_ _ _ _ _|(6)			x1 = 2, x2 = 6		res = 2
+  (2)|_ _ _ _ _ _ _|(8)		x1 = 2, x2 = 8		res = 2
+    (3)|_ _ _ _|(6)			x1 = 3, x2 = 6		res = 2
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">removeCoveredIntervals</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">intervals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">intervals</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">intervals</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">intervals</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">nx1</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">nx2</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nx2</span> <span class="o">&gt;</span> <span class="n">x2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">nx1</span> <span class="o">!=</span> <span class="n">x1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">res</span> <span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">x1</span> <span class="o">=</span> <span class="n">nx1</span><span class="p">;</span>
+                <span class="n">x2</span> <span class="o">=</span> <span class="n">nx2</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="0221169-majority-element">[02.21]\169. Majority Element</h3>
+<p><a href="https://leetcode.com/problems/majority-element/">传送门</a></p>
+<p>分析：n个数中找到最多的那个元素。最直接的方法：排序然后取最中间的那个数。但是限制线性时间和O(1)空间的话，可以考虑设置一个计数变量count 用于记录出现次数最多的那个数次数 - 其他数出现次数的总和。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">count</span> <span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -976,7 +1089,7 @@ These are the only two combinations.
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-02-18
+        2022-02-21
         
     </span>
   </p>
