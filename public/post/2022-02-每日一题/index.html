@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题[2022.02]">
 <meta itemprop="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"><meta itemprop="datePublished" content="2022-02-15T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-02-21T00:00:00+00:00" />
-<meta itemprop="wordCount" content="3633">
+<meta itemprop="wordCount" content="3684">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题[2022.02]"/>
 <meta name="twitter:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 约 3633 字 </span>
+          <span class="more-meta"> 约 3684 字 </span>
           <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
@@ -161,6 +161,7 @@
             <li><a href="#02191675-minimize-deviation-in-array">[02.19]\1675. Minimize Deviation in Array</a></li>
             <li><a href="#02201288-remove-covered-intervals">[02.20]\1288. Remove Covered Intervals</a></li>
             <li><a href="#0221169-majority-element">[02.21]\169. Majority Element</a></li>
+            <li><a href="#0222171-excel-sheet-column-number">[02.22]\171. Excel Sheet Column Number</a></li>
           </ul>
         </li>
       </ul>
@@ -1072,6 +1073,34 @@ These are the only two combinations.
                 <span class="p">}</span>
                 <span class="n">count</span> <span class="o">--</span><span class="p">;</span>
             <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="0222171-excel-sheet-column-number">[02.22]\171. Excel Sheet Column Number</h3>
+<p><a href="https://leetcode.com/problems/excel-sheet-column-number/">传送门</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">titleToNumber</span><span class="p">(</span><span class="n">string</span> <span class="n">columnTitle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span><span class="o">&amp;</span> <span class="nl">ch</span><span class="p">:</span> <span class="n">columnTitle</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">*</span> <span class="mi">26</span> <span class="o">+</span> <span class="p">(</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
     <span class="p">}</span>
