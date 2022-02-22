@@ -177,18 +177,18 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     options = ""            # default: "{theme: 'simple'}"
 
   [params.busuanzi]         # count web traffic by busuanzi                             # 是否使用不蒜子统计站点访问量
-    enable = false
+    enable = true
     siteUV = true
     sitePV = true
     pagePV = true
 
   [params.reward]                                         # 文章打赏
-    enable = false
-    wechat = "/path/to/your/wechat-qr-code.png"           # 微信二维码
-    alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
+    enable = true
+    wechat = "https://img.fzhiy.net/img/20200812154839.png"           # 微信二维码
+    alipay = "https://img.fzhiy.net/img/20200812154858.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
-    a-email = "mailto:fzhiy270@gmail.com"
+    a-email = "mailto:fzhiy270@163.com"
     #b-stack-overflow = "https://stackoverflow.com/users/10337726/fengyu"
     #c-twitter = "http://localhost:1313"
     #d-facebook = "http://localhost:1313"

@@ -30,6 +30,13 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/categories/algorithm/</loc>
+    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/categories/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>https://blog.fzhiy.net/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/categories/notes/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -80,6 +80,13 @@
   
   <url>
     <loc>https://blog.fzhiy.net/tags/deep-learning/</loc>
+    <lastmod>2022-01-02T12:47:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/notes/</loc>
     <lastmod>2022-01-02T12:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -8,9 +8,18 @@
     <language>en</language>
     <lastBuildDate>Tue, 15 Feb 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Algorithm</title>
+      <link>https://blog.fzhiy.net/categories/algorithm/</link>
+      <pubDate>Tue, 15 Feb 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/categories/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Notes</title>
       <link>https://blog.fzhiy.net/categories/notes/</link>
-      <pubDate>Tue, 15 Feb 2022 22:47:09 +0800</pubDate>
+      <pubDate>Sun, 02 Jan 2022 12:47:09 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/categories/notes/</guid>
       <description></description>
