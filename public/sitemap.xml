@@ -16,6 +16,97 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2022-02-22-redis%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/data-structure/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/data-structure/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/os/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/os/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/redis/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/redis/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/source-code/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2022-02-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -31,34 +122,6 @@
   
   <url>
     <loc>https://blog.fzhiy.net/categories/algorithm/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/categories/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2022-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/tags/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
