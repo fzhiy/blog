@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-22-redis%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-22T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-02-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-24T00:00:00+00:00" />
 
 <meta itemprop="name" content="[Redis]Redis底层数据结构深入学习（详解）">
 <meta itemprop="description" content="源自 小林coding，《Redis设计与实现》，部分图片出自个人进一步整理学习 Redis数据结构 Redis底层数据结构设计与要点一览 回顾时直"><meta itemprop="datePublished" content="2022-02-22T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-02-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="8820">
+<meta itemprop="dateModified" content="2022-02-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8848">
 <meta itemprop="keywords" content="Redis,Data-Structure," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Redis]Redis底层数据结构深入学习（详解）"/>
 <meta name="twitter:description" content="源自 小林coding，《Redis设计与实现》，部分图片出自个人进一步整理学习 Redis数据结构 Redis底层数据结构设计与要点一览 回顾时直"/>
@@ -137,7 +137,7 @@
             <a href="/categories/redis/"> Redis </a>
             <a href="/categories/data-structure/"> Data-Structure </a>
             </div>
-          <span class="more-meta"> 约 8820 字 </span>
+          <span class="more-meta"> 约 8848 字 </span>
           <span class="more-meta"> 预计阅读 18 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -180,6 +180,7 @@
         </li>
         <li><a href="#跳表">跳表</a>
           <ul>
+            <li><a href="#练习内容cpp-practicemyskiplisthttpsgithubcomfzhiycpp-practicetreemainmyskiplist">练习内容：<a href="https://github.com/fzhiy/CPP-Practice/tree/main/MySkipList">CPP-Practice/MyskipList</a></a></li>
             <li><a href="#跳表节点结构体">跳表节点结构体</a></li>
             <li><a href="#跳表结构体">跳表结构体</a></li>
             <li><a href="#跳表节点查询过程">跳表节点查询过程</a></li>
@@ -580,6 +581,7 @@
 <p>整数集合升级的好处：<strong>节省内存资源。</strong></p>
 <h3 id="不支持降级操作"><strong>不支持降级操作</strong></h3>
 <h2 id="跳表">跳表</h2>
+<h3 id="练习内容cpp-practicemyskiplisthttpsgithubcomfzhiycpp-practicetreemainmyskiplist">练习内容：<a href="https://github.com/fzhiy/CPP-Practice/tree/main/MySkipList">CPP-Practice/MyskipList</a></h3>
 <p>Redis只有在Zset对象的底层实现用到了跳表，跳表优势：支持平均O(log N)复杂度的节点查找。</p>
 <p>Zset对象是唯一一个同时使用两个数据结构（<strong>跳表和哈希表</strong>）来实现的Redis对象。好处：<strong>既能进行高效的范围查询(如ZRANGEBYSCORE操作，采用了跳表)，也能进行高效（常数复杂度）单点查询（如ZSCORE操作，采用了哈希表进行索引）。</strong></p>
 <div class="highlight"><div class="chroma">
@@ -807,7 +809,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-02-23
+        2022-02-24
         
     </span>
   </p>
