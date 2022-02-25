@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-15T22:47:09+08:00" />
-<meta property="article:modified_time" content="2022-02-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-25T00:00:00+00:00" />
 
 <meta itemprop="name" content="[刷题]LeetCode每日一题[2022.02]">
 <meta itemprop="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"><meta itemprop="datePublished" content="2022-02-15T22:47:09+08:00" />
-<meta itemprop="dateModified" content="2022-02-24T00:00:00+00:00" />
-<meta itemprop="wordCount" content="4303">
+<meta itemprop="dateModified" content="2022-02-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4572">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题[2022.02]"/>
 <meta name="twitter:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 约 4303 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 4572 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -164,6 +164,7 @@
             <li><a href="#0222171-excel-sheet-column-number">[02.22]\171. Excel Sheet Column Number</a></li>
             <li><a href="#0223133-clone-graph">[02.23]\133. Clone Graph</a></li>
             <li><a href="#0224148-sort-list">[02.24]\148. Sort List</a></li>
+            <li><a href="#0225165-compare-version-numbers">[02.25]\165. Compare Version Numbers</a></li>
           </ul>
         </li>
       </ul>
@@ -1381,6 +1382,65 @@ These are the only two combinations.
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="0225165-compare-version-numbers">[02.25]\165. Compare Version Numbers</h3>
+<p><a href="https://leetcode.com/problems/compare-version-numbers/">传送门</a></p>
+<p>分析：按照'.&lsquo;从左到右分开的子串转换成十进制依次比较，若两个在某一个子串不等，则直接返回1或-1，否则遍历完毕表示两个string按照题意其version是相等的，则返回0。TC：O(m+n)，SC：O(1)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">compareVersion</span><span class="p">(</span><span class="n">string</span> <span class="n">version1</span><span class="p">,</span> <span class="n">string</span> <span class="n">version2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">version1</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">version2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span> <span class="o">||</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">version1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">num1</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">version1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+                <span class="o">++</span> <span class="n">i</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">version2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">num2</span> <span class="o">=</span> <span class="n">num2</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">version2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+                <span class="o">++</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">num1</span> <span class="o">&lt;</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">num1</span> <span class="o">&gt;</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// 两个string全部遍历完毕才能确定是相等的
+</span><span class="c1"></span>        <span class="c1">// 例如 version1 = &#34;1&#34;, version2 = &#34;1.0.1&#34;
+</span><span class="c1"></span>        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -1392,7 +1452,7 @@ These are the only two combinations.
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-02-24
+        2022-02-25
         
     </span>
   </p>
