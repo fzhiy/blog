@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[刷题]LeetCode每日一题[2022.02]">
 <meta itemprop="description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"><meta itemprop="datePublished" content="2022-02-15T22:47:09+08:00" />
 <meta itemprop="dateModified" content="2022-02-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="5241">
+<meta itemprop="wordCount" content="5437">
 <meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[刷题]LeetCode每日一题[2022.02]"/>
 <meta name="twitter:description" content="[2.10]\560. Subarray Sum Equals K 传送门 分析：前缀和 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 class Solution { public: int subarraySum(vector&lt;int&gt;&amp; nums, int k) { int n = nums.size(); vector&lt;int&gt; sum(n&#43;1, 0); for (int i=0; i&lt;n; i&#43;&#43;) { sum[i&#43;1] = sum[i] &#43; nums[i]; } int ans = 0; unordered_map&lt;int, int&gt;"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 约 5241 字 </span>
+          <span class="more-meta"> 约 5437 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -166,6 +166,7 @@
             <li><a href="#0224148-sort-list">[02.24]\148. Sort List</a></li>
             <li><a href="#0225165-compare-version-numbers">[02.25]\165. Compare Version Numbers</a></li>
             <li><a href="#0226847-shortest-path-visiting-all-nodes">[02.26]\847. Shortest Path Visiting All Nodes</a></li>
+            <li><a href="#0227662-maximum-width-of-binary-tree">[02.27]\662. Maximum Width of Binary Tree</a></li>
           </ul>
         </li>
       </ul>
@@ -1600,6 +1601,82 @@ These are the only two combinations.
         <span class="p">}</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 不会到达这儿
 </span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="0227662-maximum-width-of-binary-tree">[02.27]\662. Maximum Width of Binary Tree</h3>
+<p><a href="https://leetcode.com/problems/maximum-width-of-binary-tree/">传送门</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">widthOfBinaryTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">que</span><span class="p">;</span>
+        <span class="c1">// unsigned long long: runtime error: signed integer overflow: 2 * 6917529027641081854 cannot be represented in type &#39;long long&#39; (solution.cpp)
+</span><span class="c1"></span>        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
+        <span class="kt">int</span> <span class="n">maxWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">left</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">,</span> <span class="n">right</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">size</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+                <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">TreeNode</span><span class="o">*</span> <span class="n">curNode</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">curNode</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">curNode</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">});</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">curNode</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">curNode</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">2</span><span class="p">});</span>
+            <span class="p">}</span>
+            <span class="n">maxWidth</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="kt">int</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">maxWidth</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
