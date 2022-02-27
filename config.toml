@@ -34,6 +34,11 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   identifier = "home"
   url = "/"
 [[menu.main]]
+  name = "fzhiy的空间"
+  weight = 15
+  identifier = "mine-space"
+  url = "https://fzhiy.net"
+[[menu.main]]
   name = "归档"
   weight = 20
   identifier = "archives"
@@ -195,6 +200,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     #e-linkedin = "http://localhost:1313"
     #f-google = "http://localhost:1313"
     g-github = "https://github.com/fzhiy"
+    h-csdn = "https://blog.csdn.net/feng_zhiyu"
     #h-weibo = "http://localhost:1313"
     i-zhihu = "https://www.zhihu.com/people/ni-feng-88-10"
     #j-douban = "http://localhost:1313"

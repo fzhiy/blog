@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[网络编程]UNIX网络编程 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[网络编程]UNIX网络编程" />
+<meta property="og:description" content="第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-26T20:26:40+08:00" />
+<meta property="article:modified_time" content="2022-02-27T20:26:40+08:00" />
+
+<meta itemprop="name" content="[网络编程]UNIX网络编程">
+<meta itemprop="description" content="第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在"><meta itemprop="datePublished" content="2022-02-26T20:26:40+08:00" />
+<meta itemprop="dateModified" content="2022-02-27T20:26:40+08:00" />
+<meta itemprop="wordCount" content="2809">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[网络编程]UNIX网络编程"/>
+<meta name="twitter:description" content="第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="https://fzhiy.net">
+        <li class="mobile-menu-item">fzhiy的空间</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://fzhiy.net">fzhiy的空间</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[网络编程]UNIX网络编程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-26 </span>
+        
+          <span class="more-meta"> 约 2809 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#第二部分-基本套接字编程">第二部分 基本套接字编程</a>
+          <ul>
+            <li><a href="#第3章-套接字编程简介">第3章 套接字编程简介</a></li>
+            <li><a href="#第4章-基本tcp套接字编程">第4章 基本TCP套接字编程</a></li>
+            <li><a href="#第5章-tcp客户服务器程序示例">第5章 TCP客户/服务器程序示例</a></li>
+            <li><a href="#第6章-io复用select和poll函数">第6章 I/O复用：select和poll函数</a></li>
+            <li><a href="#第7章-套接字选项">第7章 套接字选项</a></li>
+            <li><a href="#第8章-基本udp套接字编程">第8章 基本UDP套接字编程</a></li>
+            <li><a href="#第9章-基本sctp套接字编程">第9章 基本SCTP套接字编程</a></li>
+            <li><a href="#第10章-sctp客户服务器程序例子">第10章 SCTP客户/服务器程序例子</a></li>
+            <li><a href="#第11章-名字与地址转换">第11章 名字与地址转换</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="第二部分-基本套接字编程">第二部分 基本套接字编程</h2>
+<h3 id="第3章-套接字编程简介">第3章 套接字编程简介</h3>
+<ul>
+<li>
+<p>套接字地址结构</p>
+<ul>
+<li>
+<p>IPv4套接字地址结构（又称 网络套接字地址结构）</p>
+<ul>
+<li>
+<p>以 <code>sockaddr_in</code>命名，定义在<code>&lt;nteinet/in.h&gt;</code>头文件种</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// POSIX定义
+</span><span class="c1"></span><span class="k">struct</span> <span class="n">in_addr</span> <span class="p">{</span>
+      <span class="n">in_addr_t</span> <span class="n">s_addr</span><span class="p">;</span>	<span class="c1">// 32位 Ipv4地址，网络字节序（大端字节序）  
+</span><span class="c1"></span><span class="p">};</span>
+<span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span>			<span class="n">sin_len</span><span class="p">;</span>		<span class="c1">// 结构长度 （16, 为增加对OSI协议的支持而随4.3BSD-Reno添加的）
+</span><span class="c1"></span>    <span class="n">sa_family_t</span>		<span class="n">sin_family</span><span class="p">;</span>		<span class="c1">// AF_INET
+</span><span class="c1"></span>    <span class="n">in_port_t</span>		<span class="n">sin_port</span><span class="p">;</span>		<span class="c1">// 16位 TCP或UDP端口号，网络字节序
+</span><span class="c1"></span>
+    <span class="k">struct</span> <span class="n">in_addr</span>	<span class="n">sin_addr</span><span class="p">;</span>
+
+    <span class="kt">char</span> 			<span class="n">sin_zero</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>	<span class="c1">// 未使用
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202262107036.png" alt="imgs202202262107036.png"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>通用套接字地址结构   从应用程序开发人员角度，其<strong>唯一</strong>用途：对指向特定于协议的套接字地址结构的指针执行类型强制转换</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sockaddr</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span>			<span class="n">sa_len</span><span class="p">;</span>
+    <span class="n">sa_family_t</span>		<span class="n">sa_family</span><span class="p">;</span>	<span class="c1">// address family: AF_xxx calue
+</span><span class="c1"></span>    <span class="kt">char</span> 			<span class="n">sa_data</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="c1">// bind函数的ANSI C函数原型
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">bind</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">,</span> <span class="n">socklen_t</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>IPv6套接字地址结构 在<code>&lt;netint/in.h&gt;</code>中定义</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">in6_addr</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">s6_addr</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>		<span class="c1">//128位IPv6地址
+</span><span class="c1"></span><span class="p">};</span>
+<span class="cp">#define SIN6_LEN
+</span><span class="cp"></span><span class="k">struct</span> <span class="n">sockaddr_in6</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span>				<span class="n">sin6_len</span><span class="p">;</span>		<span class="c1">// 这个结构的长度(28)
+</span><span class="c1"></span>    <span class="n">sa_family_t</span> 		<span class="n">sin6_family</span><span class="p">;</span>	<span class="c1">// AF_INET6 (IPv4的地址簇是AF_INET)
+</span><span class="c1"></span>    <span class="n">in_port_t</span>			<span class="n">sin6_port</span><span class="p">;</span>		<span class="c1">//传输层端口
+</span><span class="c1"></span>
+    <span class="kt">uint32_t</span>			<span class="n">sin6_flowinfo</span><span class="p">;</span>	<span class="c1">// flow information(32位，低20位是流标，高12位保留)
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">in6_addr</span>		<span class="n">sin6_addr</span><span class="p">;</span>		<span class="c1">// IPv6地址
+</span><span class="c1"></span>    <span class="kt">uint32_t</span>			<span class="n">sin6_scope_id</span><span class="p">;</span>	<span class="c1">// 标识具有范围的地址（即 集合）
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>存储套接字地址结构：sockaddr_storage</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="p">{</span>
+      <span class="kt">uint8_t</span>		<span class="n">ss_len</span><span class="p">;</span>	<span class="c1">//结构体长度（依赖于实现）
+</span><span class="c1"></span>    <span class="n">sa_family_t</span> <span class="n">ss_family</span><span class="p">;</span>	<span class="c1">// address family: AF_xxx value
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202270943509.png" alt="image-20220227094348636"></p>
+</li>
+<li>
+<p>值 - 结果参数</p>
+<ul>
+<li>
+<p>套接字地址结构传递方式取决于该结构的传递方向：是从进程到内核，还是从内核到进程。</p>
+<ol>
+<li>
+<p>从进程到内核传递 的函数有3个：bind、connect和sendto。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">serv</span><span class="p">;</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span><span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">serv</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serv</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202270949484.png" alt="image-20220227094902082"></p>
+</li>
+<li>
+<p>从内核到进程传递 的函数有4个：accept、recvfrom、getsockname和getpeername。这四个函数其中两个参数是指向某个套接字地质结构的指针和指向表示该结构大小的整数变量的指针。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">cli</span><span class="p">;</span>	<span class="c1">// UNIX domain
+</span><span class="c1"></span><span class="n">socklen_t</span>	<span class="n">len</span><span class="p">;</span>
+
+<span class="n">len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cli</span><span class="p">);</span>
+<span class="n">getpeername</span><span class="p">(</span><span class="n">unixfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span> <span class="o">*</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">cli</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>	<span class="c1">// len是 值-结果 参数
+</span><span class="c1"></span><span class="cm">/* len可能发生改变 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>套接字地址结构大小参数 <strong>从整数改成指向某个整数变量的指针</strong>，原因在于 函数调用时，作为一个值 告诉内核该结构的大小，防止内核在写该结构时越界；函数返回时，作为 一个结果 告诉进程内核在该结构中存储了多少信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202270958858.png" alt="image-20220227095825490"></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>字节排序函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271022259.png" alt="image-20220227102237924"></p>
+<ul>
+<li>
+<p>小端字节序 又是大多系统使用的格式，称为主机字节序；大端字节序 又称为网络字节序</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;netinet/in.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">uint16_t</span> <span class="nf">htons</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">host16bitvalue</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">htonl</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">host32bitvalue</span><span class="p">);</span>		<span class="c1">// 均返回网络字节序的值
+</span><span class="c1"></span><span class="kt">uint16_t</span> <span class="nf">ntohs</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">net16bitvalue</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">ntohl</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">net32bitvalue</span><span class="p">);</span>			<span class="c1">// 均返回主机字节序的值
+</span><span class="c1">// h代表host， n代表network，s代表short， l代表long
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>字节操纵函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;strings.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">bzero</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">nbytes</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">bcopy</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">nbytes</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">bcmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">ptr1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">ptr2</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">nbytes</span><span class="p">);</span>
+<span class="c1">// b代表 字节
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>inet_aton、inet_addr和inet_ntoa函数 （在点分十进制数串与它长度为32位的网络字节序二进制间转换<strong>IPv4地址</strong>）</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">inet_aton</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">strptr</span><span class="p">,</span> <span class="k">struct</span> <span class="n">in_addr</span> <span class="o">*</span><span class="n">addrptr</span><span class="p">);</span>	<span class="c1">//返回：若字符串有效则为1，否则为0
+</span><span class="c1"></span><span class="n">in_addr_t</span> <span class="nf">inet_addr</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">strptr</span><span class="p">);</span>	
+<span class="c1">// 返回：若字符串有效则为32位二进制网络字节序的IPv4地址，否则为INADDR_NONE
+</span><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="nf">inet_ntoa</span><span class="p">(</span><span class="k">struct</span> <span class="n">in_addr</span> <span class="n">inaddr</span><span class="p">);</span>	<span class="c1">// 返回：指向一个点分十进制数串的指针
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>inet_pton和inet_ntop函数 （对 <strong>IPv4地址和IPv6地址都适用</strong>）</p>
+<ul>
+<li>
+<p>p (presentation) 表达 和 n(numeric) 数值</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">inet_pton</span><span class="p">(</span><span class="kt">int</span> <span class="n">family</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">strptr</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">addrptr</span><span class="p">);</span><span class="c1">// 尝试转换由strptr指针所指的字符串，addrptr存放二进制结果
+</span><span class="c1">// 返回：若成功则为1，若输入不是有效的表达格式则为0，若出错则为-1
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">inet_ntop</span><span class="p">(</span><span class="kt">int</span> <span class="n">family</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">addrptr</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">strptr</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">);</span><span class="c1">// 从数值格式(addrptr) 转换到 表达格式(strptr)
+</span><span class="c1">// 返回：若成功则为指向结果的指针，若出错则为NULL
+</span></code></pre></td></tr></table>
+</div>
+</div><p>family参数既可以是 AF_INET， 也可以是AF_INET6。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271046868.png" alt="image-20220227104632664"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>sock_ntop和相关函数</p>
+<ul>
+<li>
+<p>inet_ntop的一个基本问题：它要求调用者传递一个指向某个二进制地址的指针，而该地址通常包含在一个套接字地址结构中，这就要求调用者必须知道这个结构的格式和地址簇。</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;unp.h&#34;	// 自定义头文件</span><span class="cp">
+</span><span class="cp"></span><span class="kt">char</span> <span class="o">*</span><span class="nf">sock_ntop</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">sockaddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>	
+<span class="c1">// 返回：若成功则为非空指针，若出错则为NULL
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271148621.png" alt="image-20220227114823456"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>readn、written、readline函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 每当 读或写 一个字节流套接字时总要使用的函数
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;unp.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="n">ssize_t</span> <span class="nf">readn</span><span class="p">(</span><span class="kt">int</span> <span class="n">filedes</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buff</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">nbytes</span><span class="p">);</span>	<span class="c1">// 从一个描述符filedes读n字节
+</span><span class="c1"></span><span class="n">ssize_t</span> <span class="nf">written</span><span class="p">(</span><span class="kt">int</span> <span class="n">filedes</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buff</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">nbytes</span><span class="p">);</span>	<span class="c1">// 往一个描述符写n字节
+</span><span class="c1"></span><span class="n">ssize_t</span> <span class="nf">readline</span><span class="p">(</span><span class="kt">int</span> <span class="n">filedes</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buff</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">maxlen</span><span class="p">);</span>	<span class="c1">// 从一个描述符读文本行，一次一个字节
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h3 id="第4章-基本tcp套接字编程">第4章 基本TCP套接字编程</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271359963.png" alt="image-20220227135907426"></p>
+<ul>
+<li>
+<p>socket函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="c1">// family表示协议簇
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">socket</span><span class="p">(</span><span class="kt">int</span> <span class="n">family</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span><span class="p">)</span>
+<span class="c1">// 返回：若成功则为非负描述符，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271407611.png" alt="image-20220227140749635"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271408843.png" alt="image-20220227140807012"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271408880.png" alt="image-20220227140823442"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>connect函数 （TCP客户用connect函数来建立与TCP服务器的连接）</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">connect</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">servaddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+<span class="c1">// 返回： 若成功则为0，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div><p>客户 在调用函数 connect 前不必非得调用 bind函数，因为如果需要的化，内核会确定源IP地址，并选择一个临时端口作为源端口。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>bind函数  （把一个本地协议地址 赋予一个套接字） 服务器在启动时绑定一个众所周知端口</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="c1">// myaddr 是指向特定于协议的地址结构的指针，addrlen是该地址结构的长度
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">bind</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">myaddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+<span class="c1">// 返回：若成功则为0， 若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>listen函数</p>
+<ul>
+<li>
+<p>仅由 TCP服务器调用。 本函数通常应该在调用socket和bind函数之后，并在调用accept函数之前调用。</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">listen</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="p">);</span>
+<span class="c1">// 返回：若成功则为0， 若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div><p>内核为任何一个给定的监听套接字维护两个队列：</p>
+<ul>
+<li>
+<p><code>未完成连接队列</code>，每个这样的SYN分节对应其中一项：已有某个客户发出并到达服务器，而服务器正在等待完成相应的TCP三路握手过程。这些套接字处于SYN_RCVD状态；</p>
+</li>
+<li>
+<p><code>已完成连接队列</code>，每个已完成TCP三路握手过程的客户对应其中一项。这些套接字处于ESTABLISHED状态。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271428751.png" alt="image-20220227142843678"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271429696.png" alt="image-20220227142910524"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>accept函数</p>
+<ul>
+<li>
+<p>accept函数由TCP服务器调用，用于已完成连接队列队头返回下一个已完成连接。如果已完成连接队列为空，那么进程被投入睡眠（假定套接字为默认的阻塞方式）</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">accept</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">cliaddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+<span class="c1">// 返回：若成功则为非负描述符，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>fork和exec函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="n">pid_t</span> <span class="nf">fork</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>	
+<span class="c1">// 返回：在子进程中为0，在父进程中为子进程ID，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>并发服务器</p>
+</li>
+<li>
+<p>close函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">);</span>
+<span class="c1">// 返回：若成功则为0，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>getsockname和getpeername函数</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">getsockname</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">localaddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">getpeername</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">peeraddr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+<span class="c1">// 均返回：若成功则为0，若出错则为-1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h3 id="第5章-tcp客户服务器程序示例">第5章 TCP客户/服务器程序示例</h3>
+<ul>
+<li>
+<p>回射服务器</p>
+<ul>
+<li>客户端从标准输入读入一行文本，并写给服务器；</li>
+<li>服务器从网络输入读入这行文本，并回射给客户；</li>
+<li>客户从网络输入读入这行回射文本，并显示在标准输出上。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202262114008.png" alt="image-20220226211440868"></p>
+<ul>
+<li>written readline</li>
+</ul>
+</li>
+</ul>
+<h3 id="第6章-io复用select和poll函数">第6章 I/O复用：select和poll函数</h3>
+<p>IO复用典型网络应用场合：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271504381.png" alt="image-20220227150432196"></p>
+<ul>
+<li>I / O 模型
+<ul>
+<li>5种 I / O模型，
+<ul>
+<li>阻塞式I / O
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271507083.png" alt="image-20220227150752200"></li>
+<li></li>
+</ul>
+</li>
+<li>非阻塞式 I / O</li>
+<li>I / O复用（select和 poll）</li>
+<li>信号驱动式 I / O （SIGIO）</li>
+<li>异步 I / O （POSIX的aio_系列函数）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="第7章-套接字选项">第7章 套接字选项</h3>
+<h3 id="第8章-基本udp套接字编程">第8章 基本UDP套接字编程</h3>
+<h3 id="第9章-基本sctp套接字编程">第9章 基本SCTP套接字编程</h3>
+<h3 id="第10章-sctp客户服务器程序例子">第10章 SCTP客户/服务器程序例子</h3>
+<h3 id="第11章-名字与地址转换">第11章 名字与地址转换</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-02-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154839.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154858.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%88%B7%E9%A2%98leetcode/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[刷题]LeetCode</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
+            <span class="next-text nav-default">[MySQL]MySQL技术内幕_InnoDB存储引擎（未完）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
