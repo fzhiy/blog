@@ -3,7 +3,7 @@
   
   <url>
     <loc>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
-    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2022-02-27-linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-02-27T20:26:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-02-27T20:26:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -30,7 +37,28 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/categories/</loc>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/</loc>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/notes/</loc>
+    <lastmod>2022-02-27T20:26:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/notes/</loc>
     <lastmod>2022-02-27T20:26:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,7 +66,14 @@
   
   <url>
     <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2022-02-27T20:26:40+08:00</lastmod>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -46,13 +81,6 @@
   <url>
     <loc>https://blog.fzhiy.net/post/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</loc>
     <lastmod>2022-02-24T12:39:35+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/categories/</loc>
-    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -67,13 +95,6 @@
   <url>
     <loc>https://blog.fzhiy.net/categories/mysql/</loc>
     <lastmod>2022-02-24T12:39:35+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/tags/</loc>
-    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -150,14 +171,14 @@
   
   <url>
     <loc>https://blog.fzhiy.net/tags/algorithm/</loc>
-    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/categories/algorithm/</loc>
-    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2022-02-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -178,13 +199,6 @@
   
   <url>
     <loc>https://blog.fzhiy.net/tags/deep-learning/</loc>
-    <lastmod>2022-01-02T12:47:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/categories/notes/</loc>
     <lastmod>2022-01-02T12:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

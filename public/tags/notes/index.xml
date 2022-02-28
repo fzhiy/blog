@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on fzhiy&#39;s blog</title>
+    <link>https://blog.fzhiy.net/tags/notes/</link>
+    <description>Recent content in Notes on fzhiy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 26 Feb 2022 20:26:40 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[网络编程]UNIX网络编程</title>
+      <link>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Sat, 26 Feb 2022 20:26:40 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <description>第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在</description>
+    </item>
+    
+  </channel>
+</rss>
