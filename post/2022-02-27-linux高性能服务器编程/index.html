@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[服务器编程]Linux高性能服务器编程 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Linux高性能服务器编程 ch05 Linux网络编程基础API socket 地址API 字节序，现代CPU的累加器一次都能装载（至少）4字节（考虑32位机，下同" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2022-02-27-linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[服务器编程]Linux高性能服务器编程" />
+<meta property="og:description" content="Linux高性能服务器编程 ch05 Linux网络编程基础API socket 地址API 字节序，现代CPU的累加器一次都能装载（至少）4字节（考虑32位机，下同" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2022-02-27-linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-26T20:26:40+08:00" />
+<meta property="article:modified_time" content="2022-02-27T20:26:40+08:00" />
+
+<meta itemprop="name" content="[服务器编程]Linux高性能服务器编程">
+<meta itemprop="description" content="Linux高性能服务器编程 ch05 Linux网络编程基础API socket 地址API 字节序，现代CPU的累加器一次都能装载（至少）4字节（考虑32位机，下同"><meta itemprop="datePublished" content="2022-02-26T20:26:40+08:00" />
+<meta itemprop="dateModified" content="2022-02-27T20:26:40+08:00" />
+<meta itemprop="wordCount" content="2488">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[服务器编程]Linux高性能服务器编程"/>
+<meta name="twitter:description" content="Linux高性能服务器编程 ch05 Linux网络编程基础API socket 地址API 字节序，现代CPU的累加器一次都能装载（至少）4字节（考虑32位机，下同"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="https://fzhiy.net">
+        <li class="mobile-menu-item">fzhiy的空间</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://fzhiy.net">fzhiy的空间</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[服务器编程]Linux高性能服务器编程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-26 </span>
+        
+          <span class="more-meta"> 约 2488 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux高性能服务器编程">Linux高性能服务器编程</a>
+      <ul>
+        <li><a href="#ch05-linux网络编程基础api">ch05 Linux网络编程基础API</a></li>
+        <li><a href="#ch08-高性能服务器程序框架">ch08 高性能服务器程序框架</a></li>
+        <li><a href="#ch09-io-复用">ch09 I/O 复用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="linux高性能服务器编程">Linux高性能服务器编程</h1>
+<h2 id="ch05-linux网络编程基础api">ch05 Linux网络编程基础API</h2>
+<ul>
+<li>
+<p>socket 地址API</p>
+<p>字节序，现代CPU的累加器一次都能装载（至少）4字节（考虑32位机，下同），即一个整数。4字节在内存中排列的顺序将影响它被累加器装在成的整数值。</p>
+<p><strong>大端字节序（网络字节序）：一个整数的高位字节（23-31bit）存储在内存的低地址初，低位字节（0-7bit）存储在内存的高地址处</strong></p>
+<p><strong>小端字节序（主机字节序）  则指 整数的高位字节存储在内存的高地址处，低位字节存储在内存的低地址处。</strong></p>
+<ul>
+<li>主机字节序 ，<strong>现代PC大多采用小端字节序</strong></li>
+<li>网络字节序，它给所有接收数据的主机提供了一个正确解释收到的格式化数据的保证</li>
+</ul>
+</li>
+<li>
+<p>socket 基础API</p>
+</li>
+<li>
+<p>网络信息API</p>
+</li>
+</ul>
+<h2 id="ch08-高性能服务器程序框架">ch08 高性能服务器程序框架</h2>
+<ul>
+<li>
+<p>服务器模型</p>
+<ul>
+<li>
+<p>C / S 模型</p>
+<p>客户连接请求是随机到达的异步事件，服务器需要使用某种I / O模型来监听这一事件。 下图种，服务器使用的 I / O复用技术之一的 <strong>select系统调用</strong>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271526363.png" alt="image-20220227152644693"></p>
+<ul>
+<li>C / S模型非常适合资源相对集中的场合，并且实现简单，但缺点明显：服务器是通信的中心，当访问量过大时，可能所有客户都将得到很慢的响应。</li>
+</ul>
+</li>
+<li>
+<p>P2P模型。下图a所示的模型存在一个显著的问题，即主机之间很难互相发现。 所以实际上使用P2P模型通常带有一个专门的发现服务器（通常还提供查找服务（甚至提供内容服务），使每个客户能尽快找到自己需要的资源）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271533346.png" alt="image-20220227153320116"></p>
+<p>从编程角度，P2P模型可以看作C/S模型的扩展。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>服务器编程框架</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271534482.png" alt="image-20220227153420368"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271534248.png" alt="image-20220227153446888"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271535203.png" alt="image-20220227153503876"></p>
+</li>
+<li>
+<p>I / O模型</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271539757.png" alt="image-20220227153931699"></p>
+</li>
+<li>
+<p>两种高效的事件处理模式</p>
+<ul>
+<li>
+<p>服务器程序通常需要处理三类事件：I / O事件、信号及定时事件。</p>
+</li>
+<li>
+<p>同步I/O模型通常用于实现Reactor模式，异步I/O模型则用于实现Proactor模式。</p>
+</li>
+<li>
+<p>Reactor模式 （<strong>它要求主线程（I/O处理单元）只负责监听文件描述上是否有事件发生，有的话立即将该事件通知工作线程（逻辑单元）。除此之外 主线程不做任何其他实质性的工作。</strong>）</p>
+<ul>
+<li>
+<p>使用同步I / O模型（以epoll_wait为例）实现的Reactor模式的工作流程：</p>
+<ol>
+<li>主线程往epoll内核事件中注册socket上的读就绪事件；</li>
+<li>主线程<u>调用 <code>epoll_wait</code>等待socket上有数据可读</u>；</li>
+<li>当socket上有数据可读时，epoll_wait通知主线程。<u>主线程则将socket可读事件放入请求队列</u>；</li>
+<li>睡眠在请求队列上的某个工作线程被唤醒，它从socket读取数据，并处理客户请求，然后往epoll内核事件表中注册该socket上的写就绪事件；</li>
+<li>主线程调用epoll_wait等待socket可写；</li>
+<li>当socket可写时，epoll_wait通知主线程。主线程将socket可写事件放入请求队列；</li>
+<li>睡眠在请求队列上的某个工作线程被唤醒，它往socket上写入服务器处理客户请求的结果。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271550493.png" alt="image-20220227155052296"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Proactor模式 （<strong>与Reactor模式不通，它将所有I/O操作都交给主线程和内核来处理，工作线程仅仅负责业务逻辑。</strong>）</p>
+<ul>
+<li>
+<p>使用异步 I / O模型（以aio_read 和 aio_write为例）实现的Proactor模式的工作流程：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271553012.png" alt="image-20220227155333515"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>两种高效的并发模式 （并发模式：<strong>I/O处理单元和多个逻辑单元之间协调完成任务的方法。</strong>）</p>
+<ul>
+<li>
+<p>服务器 主要有两种并发编程模式： 半同步 / 半异步 模式； 领导者/追随者模式。</p>
+</li>
+<li>
+<p>半同步 / 半异步模式 （既要求较好的实时性、又能同时处理多个客户请求的应用程序。<strong>同步线程处理 <u>客户逻辑</u>，异步线程处理 <u>I/O事件</u>。</strong>）</p>
+<ul>
+<li>
+<p><u>在I/O模型中</u>，“同步”和&quot;异步&quot; 区分的是 <strong>内核向应用程序通知的是何种I/O事件（是就绪事件还是完成事件），以及该由谁来完成I/O读写（是应用程序还是内核）。</strong> <u>在并发模式</u>中，“同步”指的是 <strong>程序完全按照代码序列的顺序执行，“异步”指的是程序的执行需要由系统事件来驱动。</strong> 常见的系统事件包括：中断、信号等。</p>
+</li>
+<li>
+<p>并发模式中的同步和异步 <img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271559025.png" alt="image-20220227155942562"></p>
+</li>
+<li>
+<p>同步线程（按同步方式运行的线程）</p>
+<ul>
+<li>效率相对较低，实时性差， 但逻辑简单</li>
+</ul>
+</li>
+<li>
+<p>异步线程（按异步方式运行）</p>
+<ul>
+<li>效率高，实时性强， 但编写代码相对复杂，难以调试和扩展，而且不适合于大量的并发。</li>
+</ul>
+</li>
+<li>
+<p>半同步 / 半异步模式的工作流程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271605089.png" alt="image-20220227160515610"></p>
+</li>
+<li>
+<p>半同步 / 半异步模式的一种变体 —— <strong>半同步 / 半反应堆模式</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271606775.png" alt="image-20220227160633279"></p>
+<p>上图（8-10）中，主线程插入请求队列中的任务是就绪的连接socket，说明该图采用的事件处理模式是Reactor模式：要求工作线程自己从socket上读取客户请求和往socket写入服务器应答。 这就是 <strong>该模式名称中的“half-reactive”的含义。</strong></p>
+<ul>
+<li><strong>半同步 / 半反应堆模式的 缺点：</strong>
+<ul>
+<li>主线程和工作线程<strong>共享请求队列</strong>。主线程往请求队列中添加任务，或者工作线程从请求队列中取出任务，<u>都需要对请求队列加锁保护，从而白白耗费CPU时间</u>。</li>
+<li><strong>每个工作线程在同一时间只能处理一个客户请求</strong>。如果客户数量较多，而工作线程较少，则请求队列中将堆积很多任务对象，客户端的响应速度将越来越慢。如果通过增加工作线程来解决这一问题，则工作线程的切换也将消大量CPU时间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>高效的 半同步 / 半反应堆模式</strong> （每个工作线程都能同时处理多个客户连接）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271613851.png" alt="image-20220227161326757"></p>
+<ul>
+<li>每个线程（主线程、工作线程）都维持自己的事件循环，他们各自独立地监听不同的事件。 因此，在这种高效的半同步/半异步模式中，<strong>每个线程都工作在异步模式</strong>，所以 <u>它并非严格意义上的半同步/半异步模式。</u></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>领导者 / 追随者模式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202271616174.png" alt="image-20220227161628627"></p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>有限状态机</p>
+</li>
+</ul>
+<h2 id="ch09-io-复用">ch09 I/O 复用</h2>
+<blockquote>
+<p>网络程序在下列情况需要使用I/O复用技术：</p>
+<ul>
+<li>客户端程序要同时处理多个socket； 如 非阻塞connet技术；</li>
+<li>客户端程序要同时处理用户输入和网络廉价而。如 本章讨论的聊天室程序；</li>
+<li>TCP服务器要同时处理监听socket和连接socket。 <strong>I/O复用使用最多的场合</strong></li>
+<li>服务器要同时处理TCP请求和UDP请求。比如 本章讨论的回射服务器</li>
+<li>服务器要同时监听多个端口，或处理多种服务。 如 本章讨论的xinetd服务器。</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>select 系统调用 （用途：在一段指定时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件。）</p>
+<ul>
+<li>
+<p>select 原型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/select.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">select</span><span class="p">(</span><span class="kt">int</span> <span class="n">nfds</span><span class="p">,</span> <span class="n">fd_set</span><span class="o">*</span> <span class="n">readfds</span><span class="p">,</span> <span class="n">fd_set</span><span class="o">*</span> <span class="n">writefds</span><span class="p">,</span> <span class="n">fd_set</span><span class="o">*</span> <span class="n">exceptfds</span><span class="p">,</span> <span class="k">struct</span> <span class="n">timeval</span><span class="o">*</span> <span class="n">timeout</span><span class="p">);</span>
+<span class="c1">// nfds 指定被监听的文件描述符的总数。
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202272134889.png" alt="image-20220227213452116"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>poll系统调用</p>
+</li>
+<li>
+<p>epoll系列系统调用</p>
+</li>
+<li>
+<p>三组I / O 复用函数的比较</p>
+</li>
+<li>
+<p>I/O复用的高级应用一：非阻塞connect</p>
+</li>
+<li>
+<p>I/O复用的高级应用二：聊天室程序</p>
+</li>
+<li>
+<p>I/O复用的高级应用三：同时处理TCP和UDP程序</p>
+</li>
+<li>
+<p>超级服务xinetd</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-02-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154839.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154858.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%88%B7%E9%A2%98leetcode/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[刷题]LeetCode</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+            <span class="next-text nav-default">[网络编程]UNIX网络编程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
