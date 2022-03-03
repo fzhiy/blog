@@ -6,7 +6,16 @@
     <description>Recent content in Algorithm on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Feb 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Mar 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[刷题]LeetCode每日一题[2022.02]</title>
+      <link>https://blog.fzhiy.net/post/2022-03-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
+      <pubDate>Wed, 02 Mar 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-03-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
+      <description>[03.02]\392. Is Subsequence 传送门 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 // dp[i+1][j+1]: s[0,...,i] 和 t[0,...,j]中的最长公共子串的长度. 故dp[m]</description>
+    </item>
+    
     <item>
       <title>[刷题]企业真题|专项</title>
       <link>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</link>
