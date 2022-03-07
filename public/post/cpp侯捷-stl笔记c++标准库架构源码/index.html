@@ -512,7 +512,7 @@
 <p>为什么默认使用的是 std::allocator 而不是更省空间的 __pool_alloc？ <strong>不知道。</strong></p>
 <h3 id="容器结构与分类">容器，结构与分类</h3>
 <p>下图中 以 <strong>缩排</strong>的形式表示 “基层与衍生层”的关系，这里的<strong>衍生 是 复合关系</strong>， 而不是继承。</p>
-<p><img src="C:%5CUsers%5Cyufeng%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211213212056517.png" alt="image-20211213212056517"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202203071928924.png" alt="image-20211213212056517"></p>
 <h4 id="容器list">容器list</h4>
 <p>每次为list申请分配空间的时候，会为<strong>每个节点多申请两个指针的空间</strong> 存储 prev 和 next。</p>
 <blockquote>
