@@ -23,20 +23,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</loc>
-    <lastmod>2022-01-19T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</loc>
-    <lastmod>2022-01-11T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fzhiy.net/tags/algorithm/</loc>
     <lastmod>2022-03-09T14:50:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -219,6 +205,13 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</loc>
+    <lastmod>2022-01-19T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/tags/nowcoder/</loc>
     <lastmod>2022-01-19T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -242,6 +235,13 @@
   <url>
     <loc>https://blog.fzhiy.net/post/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</loc>
+    <lastmod>2022-01-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
