@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>2022 03 27 [C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记 - fzhiy&#39;s blog</title>
+  <title>[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记 - fzhiy&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="fzhiy" /><meta name="description" content="ch01 关于对象 C&#43;&#43;在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="fzhiy" /><meta name="description" content="ch01 关于对象 C&#43;&#43;在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v" /><meta name="keywords" content="C&#43;&#43;" />
 
 
 
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="2022 03 27 [C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记" />
+<meta property="og:title" content="[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记" />
 <meta property="og:description" content="ch01 关于对象 C&#43;&#43;在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fzhiy.net/post/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-27T21:17:03+08:00" />
 <meta property="article:modified_time" content="2022-03-27T21:17:03+08:00" />
 
-<meta itemprop="name" content="2022 03 27 [C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记">
+<meta itemprop="name" content="[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记">
 <meta itemprop="description" content="ch01 关于对象 C&#43;&#43;在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v"><meta itemprop="datePublished" content="2022-03-27T21:17:03+08:00" />
 <meta itemprop="dateModified" content="2022-03-27T21:17:03+08:00" />
 <meta itemprop="wordCount" content="796">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="2022 03 27 [C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记"/>
+<meta itemprop="keywords" content="C&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记"/>
 <meta name="twitter:description" content="ch01 关于对象 C&#43;&#43;在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v"/>
 
 <!--[if lte IE 9]>
@@ -133,11 +133,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">2022 03 27 [C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记</h1>
+      <h1 class="post-title">[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2022-03-27 </span>
-        
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            </div>
           <span class="more-meta"> 约 796 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
@@ -266,7 +268,9 @@
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          </div>
       <nav class="post-nav">
         <a class="prev" href="/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/">
             <i class="iconfont icon-left"></i>
