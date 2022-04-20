@@ -6,7 +6,7 @@
     <description>Recent content on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Mar 2022 21:17:03 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Apr 2022 12:39:35 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>十大排序算法</title>
       <link>https://blog.fzhiy.net/post/2022-03-09-%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
@@ -23,6 +23,24 @@
       
       <guid>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
       <description>[CPP侯捷视频课笔记]C++标准库——架构&amp;amp;源码 [TOC] 源码之前 了无秘密 —— 侯捷 第一讲 架构 基础：C++基本语法（包括如何正确使用模板，t</description>
+    </item>
+    
+    <item>
+      <title>[Linux服务器开发]Linux高并发服务器开发笔记</title>
+      <link>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <description>1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test.</description>
+    </item>
+    
+    <item>
+      <title>[C&#43;&#43;]Effective C&#43;&#43;笔记</title>
+      <link>https://blog.fzhiy.net/post/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 13 Apr 2022 22:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/</guid>
+      <description>导读 1 2 3 4 5 6 7 8 9 10 11 12 class Widget { public: Widget(); // default 构造函数 Widget(const Widget&amp;amp; rhs); // copy 构造函数 Widget&amp;amp; operator=(const Widget&amp;amp; rhs); // copy assignment 操作符 }; Widget w1; // 调用默认构造函数 Widget w2(w1); // 调用拷贝构造函数 w1 = w1;</description>
     </item>
     
     <item>
