@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[Linux服务器开发]Linux高并发服务器开发笔记">
 <meta itemprop="description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."><meta itemprop="datePublished" content="2022-04-20T12:39:35+08:00" />
 <meta itemprop="dateModified" content="2022-04-20T12:39:35+08:00" />
-<meta itemprop="wordCount" content="2674">
+<meta itemprop="wordCount" content="3385">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Linux服务器开发]Linux高并发服务器开发笔记"/>
 <meta name="twitter:description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 约 2674 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+          <span class="more-meta"> 约 3385 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,6 +154,10 @@
     <li>
       <ul>
         <li><a href="#1linux系统编程入门">1.Linux系统编程入门</a></li>
+        <li><a href="#2linux多进程开发">2.Linux多进程开发</a></li>
+        <li><a href="#3linux多线程开发">3.Linux多线程开发</a></li>
+        <li><a href="#4linux网络编程">4.Linux网络编程</a></li>
+        <li><a href="#5项目实战与总结">5.项目实战与总结</a></li>
       </ul>
     </li>
   </ul>
@@ -523,7 +527,7 @@ gcc test.s -s -o a
 </li>
 <li>
 <p>GDB命令——断点操作</p>
-</li>
+<ul>
 <li>
 <p>设置断点</p>
 <p>b/break 行号</p>
@@ -551,9 +555,197 @@ gcc test.s -s -o a
 <p>设置条件断点（一般用在循环的位置）</p>
 <p>b/break 10 if i == 5</p>
 </li>
-<li></li>
 </ul>
 </li>
+<li>
+<p>GDB命令——调试命令</p>
+<ul>
+<li>
+<p>运行GDB程序</p>
+<p>start （程序停在第一行）</p>
+<p>run（遇到断点才停）</p>
+</li>
+<li>
+<p>继续运行，到下一个断点停</p>
+<p>c/continue</p>
+</li>
+<li>
+<p>向下执行一行代码（不会进入函数体）</p>
+<p>n/next</p>
+</li>
+<li>
+<p>变量操作</p>
+<p>p/print 变量名（打印变量值）</p>
+<p>ptype 变量名（打印变量类型）</p>
+</li>
+<li>
+<p>向下单步调试（遇到函数进入函数体）</p>
+<p>s/step</p>
+<p>finish（跳出函数体）</p>
+</li>
+<li>
+<p>自动变量操作</p>
+<p>display num（自动打印变量的值）</p>
+<p>i/info display</p>
+<p>undisplay 编号</p>
+</li>
+<li>
+<p>其他操作</p>
+<p>set var 变量名=变量值</p>
+<p>until （跳出循环）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>文件IO</p>
+<ul>
+<li>
+<p>标准C库IO函数 （可以跨平台）</p>
+<p><img src="https://img.fzhiy.net/img/202204202125271.png" alt="image-20220420212556936"></p>
+</li>
+<li>
+<p>标准C库IO和Linux系统IO的关系 （调用和被调用）</p>
+<p><img src="https://img.fzhiy.net/img/202204202136219.png" alt="image-20220420213652006"></p>
+</li>
+<li>
+<p>虚拟地址空间</p>
+<p><img src="https://img.fzhiy.net/img/202204202142104.png" alt="image-20220420214211970"></p>
+<p>MMU（内存管理单元）将虚拟地址映射到物理地址。</p>
+</li>
+<li>
+<p>文件描述符</p>
+<p><img src="https://img.fzhiy.net/img/202204202152663.png" alt="image-20220420215257544"></p>
+</li>
+<li>
+<p>Linux 系统IO函数</p>
+<p>标准C库的 API，使用 <code>man 3 函数名</code>查看，Linux 系统IO函数，使用<code>man 2 函数名</code>查看说明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">open</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">open</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="n">mode_t</span> <span class="n">mode</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">);</span>
+<span class="n">ssize_t</span> <span class="nf">read</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">);</span>
+<span class="n">ssize_t</span> <span class="nf">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">);</span>
+<span class="n">off_t</span> <span class="nf">lseek</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">off_t</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">whence</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>stat结构体</p>
+<p><img src="https://img.fzhiy.net/img/202204212126311.png" alt="image-20220421212627185"></p>
+</li>
+<li>
+<p>st_mode变量</p>
+<p><img src="https://img.fzhiy.net/img/202204212128183.png" alt="image-20220421212801173"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>模拟实现 <code>ls -l</code>命令 （<strong>见lesson12的 <code>ls-l.c</code></strong>）</p>
+</li>
+<li>
+<p>文件属性操作函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">access</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mode</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">chmod</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mode</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">chown</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="n">uid_t</span> <span class="n">owner</span><span class="p">,</span> <span class="n">gid_t</span> <span class="n">group</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">truncate</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="n">off_t</span> <span class="n">length</span><span class="p">);</span>	<span class="c1">// 缩减或扩展文件的尺寸至指定的大小
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>目录操作函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">mkdir</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="n">mode_t</span> <span class="n">mode</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">rmdir</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">rename</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">oldpath</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">newpath</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">chdir</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">);</span>
+<span class="kt">char</span> <span class="o">*</span><span class="nf">getcwd</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>目录遍历函数</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">DIR</span> <span class="o">*</span><span class="nf">opendir</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
+<span class="k">struct</span> <span class="n">dirent</span> <span class="o">*</span><span class="nf">readdir</span><span class="p">(</span><span class="n">DIR</span> <span class="o">*</span><span class="n">dirp</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">closedir</span><span class="p">(</span><span class="n">DIR</span> <span class="o">*</span><span class="n">dirp</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>dirent结构体和d_type</p>
+<p><img src="https://img.fzhiy.net/img/202204221050441.png" alt="image-20220422105027384"></p>
+<ul>
+<li>
+<p>dup、dup2函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">dup</span><span class="p">(</span><span class="kt">int</span> <span class="n">oldfd</span><span class="p">);</span>	<span class="c1">// 复制文件描述符
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">dup2</span><span class="p">(</span><span class="kt">int</span> <span class="n">oldfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">newfd</span><span class="p">);</span>	<span class="c1">// 重定向文件描述符
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>fcntl函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">fcntl</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="p">...</span> <span class="cm">/* arg */</span><span class="p">);</span>
+<span class="c1">// 复制文件描述符，
+</span><span class="c1">// 设置/获取文件的状态标志
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="2linux多进程开发">2.Linux多进程开发</h2>
+<h2 id="3linux多线程开发">3.Linux多线程开发</h2>
+<h2 id="4linux网络编程">4.Linux网络编程</h2>
+<h2 id="5项目实战与总结">5.项目实战与总结</h2>
+<ul>
+<li>阻塞和非阻塞、同步和异步</li>
+<li>Unix、Linux上的五种IO模型</li>
+<li>Web服务器简介以及HTTP协议</li>
+<li>服务器编程基本框架和两种高效的事件处理模式</li>
 </ul>
 
     </div>
