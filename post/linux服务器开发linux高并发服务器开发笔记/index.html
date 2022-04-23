@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[Linux服务器开发]Linux高并发服务器开发笔记">
 <meta itemprop="description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."><meta itemprop="datePublished" content="2022-04-20T12:39:35+08:00" />
 <meta itemprop="dateModified" content="2022-04-20T12:39:35+08:00" />
-<meta itemprop="wordCount" content="3385">
+<meta itemprop="wordCount" content="3895">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Linux服务器开发]Linux高并发服务器开发笔记"/>
 <meta name="twitter:description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 约 3385 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3895 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -738,6 +738,89 @@ gcc test.s -s -o a
 </div></li>
 </ul>
 <h2 id="2linux多进程开发">2.Linux多进程开发</h2>
+<ul>
+<li>
+<p>进程概述</p>
+<ul>
+<li>
+<p>程序和进程</p>
+<ul>
+<li>程序（<strong>占用磁盘大小，不占用内存和CPU资源</strong>）是 包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程。（二进制格式标识、机器语言指令、程序入口地址、数据、符号表及重定位表、共享库和动态链接信息 和 其他信息。）</li>
+<li>进程（<strong>占用内存资源和CPU资源</strong>） 是正在运行的程序的实例。</li>
+</ul>
+</li>
+<li>
+<p>单道、多道程序设计</p>
+<ul>
+<li>单道程序，即在计算机内存中只允许一个程序运行；</li>
+<li>引入多道程序设计技术的 <strong>根本目的</strong>是 <strong>为了提高CPU的利用率。</strong></li>
+</ul>
+</li>
+<li>
+<p>时间片（timeslice）</p>
+<ul>
+<li>又称为 “量子（quantum）”或“处理器片（processor slice）” 是操作系统分配给每个正在运行的微观上的一段CPU时间。</li>
+<li>时间片 由 <strong>操作系统内核的调度程序</strong>分配给每个进程。</li>
+</ul>
+</li>
+<li>
+<p>并行和并发</p>
+</li>
+<li>
+<p>进程控制块（PCB）</p>
+<ul>
+<li>
+<p>Linux内核的进程控制块是 task_struct 结构体。</p>
+</li>
+<li>
+<p>其内部成员(需要掌握的)有：</p>
+<p><img src="https://img.fzhiy.net/img/202204231502499.png" alt="image-20220423150234361"></p>
+</li>
+<li>
+<p>当前工作目录</p>
+</li>
+<li>
+<p>umask掩码</p>
+</li>
+<li>
+<p>文件描述符表，包含很多指向file结构体的指针</p>
+</li>
+<li>
+<p>和信号相关的信息</p>
+</li>
+<li>
+<p>用户id和组id</p>
+</li>
+<li>
+<p>会话（session）和进程组</p>
+</li>
+<li>
+<p>进程可以使用的资源上限（<code>ulimit -a</code>）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>进程状态转换</p>
+<ul>
+<li>
+<p>进程的状态</p>
+<ul>
+<li>
+<p>在三态模型中，分为三个基本状态：就绪态、运行态、阻塞态。</p>
+</li>
+<li>
+<p>在五态模型中，分为新建态、就绪态、运行态、阻塞态、终止态。</p>
+<p><img src="https://img.fzhiy.net/img/202204231547033.png" alt="image-20220423154753716"></p>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li></li>
+</ul>
 <h2 id="3linux多线程开发">3.Linux多线程开发</h2>
 <h2 id="4linux网络编程">4.Linux网络编程</h2>
 <h2 id="5项目实战与总结">5.项目实战与总结</h2>
