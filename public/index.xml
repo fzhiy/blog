@@ -6,7 +6,7 @@
     <description>Recent content on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Apr 2022 12:39:35 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2022 12:39:35 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>十大排序算法</title>
       <link>https://blog.fzhiy.net/post/2022-03-09-%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
@@ -26,12 +26,30 @@
     </item>
     
     <item>
+      <title>[笔试]腾讯2021技术后端实习笔试题</title>
+      <link>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2021%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</link>
+      <pubDate>Sun, 24 Apr 2022 12:39:35 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2021%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</guid>
+      <description>1.竖着读 给n个数字字符串，每个字符串长度都为m，然后按照每一列从上往下读构成m个字符串，求这m个排序后的字符串，排序输出。 思路：按列存储到</description>
+    </item>
+    
+    <item>
       <title>[Linux服务器开发]Linux高并发服务器开发笔记</title>
       <link>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
       <description>1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test.</description>
+    </item>
+    
+    <item>
+      <title>[MySQL]《从根儿上理解MySQL》笔记</title>
+      <link>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</guid>
+      <description>上一次完整的读完了这本书，记得说要写个笔记来着，但是读完发现好多，就忘却了整理这事。到现在也没剩多少了，重读记点重点内容复习下 1.初识MyS</description>
     </item>
     
     <item>
