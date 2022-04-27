@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[Linux服务器开发]Linux高并发服务器开发笔记">
 <meta itemprop="description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."><meta itemprop="datePublished" content="2022-04-20T12:39:35+08:00" />
 <meta itemprop="dateModified" content="2022-04-20T12:39:35+08:00" />
-<meta itemprop="wordCount" content="3895">
+<meta itemprop="wordCount" content="6165">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Linux服务器开发]Linux高并发服务器开发笔记"/>
 <meta name="twitter:description" content="1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test."/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 约 3895 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 6165 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -809,20 +809,312 @@ gcc test.s -s -o a
 <ul>
 <li>
 <p>在三态模型中，分为三个基本状态：就绪态、运行态、阻塞态。</p>
+<p><img src="https://img.fzhiy.net/img/202204231547033.png" alt="image-20220423154753716"></p>
 </li>
 <li>
 <p>在五态模型中，分为新建态、就绪态、运行态、阻塞态、终止态。</p>
-<p><img src="https://img.fzhiy.net/img/202204231547033.png" alt="image-20220423154753716"></p>
+<p><img src="https://img.fzhiy.net/img/202204270947799.png" alt="image-20220427094737444"></p>
 </li>
 </ul>
 </li>
-<li></li>
+<li>
+<p>进程相关命令</p>
+<ul>
+<li>
+<p>查看进程</p>
+<ul>
+<li>
+<p>ps aux / ajx</p>
+<p>a：显示终端上的所有进程，包括其他用户的进程</p>
+<p>u：<strong>显示进程的详细信息</strong></p>
+<p>x：显示没有控制终端的进程</p>
+<p>j：列出<strong>与作业控制相关的信息</strong></p>
+<p><img src="https://img.fzhiy.net/img/202204271010427.png" alt="image-20220427101042933"></p>
+</li>
+<li>
+<p>STAT参数意义</p>
+<p>D				不可中断 Uninterruptible (usually IO)</p>
+<p>R 				正在运行，或 在队列中的进程</p>
+<p>S（大写） 出于休眠状态</p>
+<p>T				停止 或 被追踪</p>
+<p>Z				僵尸进程</p>
+<p>W				进入内存交换（从内核2.6开始无效）</p>
+<p>X				死掉的进程</p>
+<p>&lt;				高优先级</p>
+<p>N				低优先级</p>
+<p>s(小写)  	 包含子进程</p>
+<p>+                 位于 前台的进程组</p>
+</li>
+<li>
+<p>实时显示进程状态</p>
+<p>top</p>
+<p>可以在使用 <code>top</code> 命令时加上 <code>-d</code>来指定显示信息更新的事件间隔，在<code>top</code>命令执行后，可以按以下按键对显示的结果进行排序：</p>
+<ul>
+<li>M	根据内存使用量排序</li>
+<li>P     根据 CPU 占用率排序</li>
+<li>T     根据进程运行事件长短排序</li>
+<li>U     根据用户名来筛选进程</li>
+<li>K      输入指定的PID杀死进程</li>
 </ul>
+</li>
+<li>
+<p>杀死进程</p>
+<p>kill [-signal] pid</p>
+<p>kill -l 列出所有信号</p>
+<p>kill -SIGKILL  进程ID</p>
+<p>kill -9 进程ID （强制杀死某个进程）</p>
+<p>killall name 根据进程名杀死进程</p>
+<p><img src="https://img.fzhiy.net/img/202204271022091.png" alt="image-20220427102217992"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>进程号和相关函数</p>
+<p><img src="https://img.fzhiy.net/img/202204271027382.png" alt="image-20220427102606767"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>进程创建</p>
+<ul>
+<li>
+<p>系统允许一个进程创建子进程，新进程即为子进程，子进程还可以创建新的子进程，形成<u>进程树结构模型</u>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="n">pid_t</span> <span class="nf">fork</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>父子进程指定代码的情况：</p>
+<p><img src="https://img.fzhiy.net/img/202204271052167.png" alt="image-20220427105213977"></p>
+</li>
+<li>
+<p>父子进程虚拟地址空间情况</p>
+<p><img src="https://img.fzhiy.net/img/202204271058413.png" alt="image-20220427105840251"></p>
+<p>父子进程中的变量在各自的栈空间中，互不影响。</p>
+<p><strong>读时共享</strong>父进程虚拟地址空间，<strong>写时拷贝</strong>。</p>
+<p><img src="https://img.fzhiy.net/img/202204271106224.png" alt="image-20220427110620205"></p>
+</li>
+<li>
+<p>父子进程关系以及GDB多进程调试</p>
+</li>
+<li>
+<p>父子进程关系</p>
+<p><img src="https://img.fzhiy.net/img/202204271113956.png" alt="image-20220427111326013"></p>
+</li>
+<li>
+<p>GDB多进程调试（面试考 调试命令）</p>
+<p>使用GDB调试时，GDB默认只能跟踪一个进程，可以在fork函数调用之前，通过指令设置GDB调试工具跟踪父进程或子进程，<strong>默认跟踪父进程。</strong></p>
+<p>设置调试父进程或子进程： <code>set follow-fork-mode [parent(默认) | child]</code></p>
+<p>设置调试模式： <code>set detach-on-fork [on | off]</code></p>
+<p>​	<strong>默认为on</strong>，表示调试当前进程时，其他的进程继续运行；如果为off，调试当前进程时，其他进程被GDB挂起。</p>
+<p>查看调试的进程：info inferiors</p>
+<p>切换当前调试的进程：inferior id</p>
+<p>使进程脱离GDB调试：detach inferiors id</p>
+</li>
+<li>
+<p>exec函数簇</p>
+<ul>
+<li>
+<p>作用：根据指定的文件名找到可执行文件，并用它来取代调用进程的内容，换句话说，就是在调用进程内部内执行一个可执行文件。</p>
+</li>
+<li>
+<p>exec函数簇的函数执行册成功后不会返回，因为调用进程的实体，包括代码段，数据段和堆栈等都已经被新的内容取代，只留下进程ID等一些表面上的信息仍保持原样，颇有些“三十六计”中的“金蝉脱壳”。看上去还是旧的躯壳，却已经注入了新的灵魂。只有调用失败了，他们才会返回-1，从原程序的调用点接着往下执行。</p>
+<p><img src="https://img.fzhiy.net/img/202204271940946.png" alt="image-20220427194028639"></p>
+<p><img src="https://img.fzhiy.net/img/202204271942258.png" alt="image-20220427194202915"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>进程退出、孤儿进程、僵尸进程</p>
+<ul>
+<li>
+<p>进程退出</p>
+<p><img src="https://img.fzhiy.net/img/202204272008608.png" alt="image-20220427200814249"></p>
+</li>
+<li>
+<p>孤儿进程</p>
+<ul>
+<li>父进程运行结束，但子进程还在运行（未运行结束），这样的子进程称为 孤儿进程（Orphan Process）</li>
+<li>每当出现一个孤儿进程的时候，<strong>内核</strong>就<strong>把孤儿进程的父进程设置为 init</strong>， 而init进程会循环地 <strong>wait()</strong> 它的已退出地子进程。这样，当一个孤儿进程凄凉地结束其声明周期地时候，init进程就会代表党和政府出面处理它地一切善后工作。</li>
+<li>因此<strong>孤儿进程并不会有什么危害</strong>。</li>
+</ul>
+</li>
+<li>
+<p>僵尸进程</p>
+<ul>
+<li>每个结束后，都会释放自己地址空间中的用户区数据，内核区的 PCB 没有办法自己释放掉，需要父进程去释放。</li>
+<li>进程终止时，父进程尚未回收，子进程残留资源（PCB）存放在内核中，变成僵尸（<strong>Zombie</strong>）进程。</li>
+<li>僵尸进程不能被 <code>kill -9</code> 杀死。</li>
+<li>这样会导致一个问题，<strong>如果父进程不调用wait() 或 waitpid() 的话</strong>，那么<strong>保留的那段信息就不会释放，其进程号就会一直被占用，但是系统所能使用的进程号是有限的</strong>，<strong>如果大量的产生僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程</strong>，此即为僵尸进程的危害，应当避免。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>wait函数</p>
+<p><img src="https://img.fzhiy.net/img/202204272121606.png" alt="image-20220427212124418"></p>
+<ul>
+<li>
+<p>进程回收</p>
+<p><img src="https://img.fzhiy.net/img/202204272037520.png" alt="image-20220427203725270"></p>
+<p>wait() 和 waitpid() 函数的功能一样，区别在于，<strong>wait()函数会阻塞，waitpid() 可以设置不阻塞，waitpid() 还可以指定等待哪个子进程结束。</strong></p>
+<p>注意：<strong>一次wait或waitpid 调用只能清理一个子进程，清理多个子进程应使用循环。</strong></p>
+</li>
+<li>
+<p>退出信息相关宏函数</p>
+<p><img src="https://img.fzhiy.net/img/202204272056469.png" alt="image-20220427205601479"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>waitpid函数</p>
+<p><img src="https://img.fzhiy.net/img/202204272121305.png" alt="image-20220427212106011"></p>
+</li>
+<li>
+<p>进程间通信简介</p>
+<p><img src="https://img.fzhiy.net/img/202204272122641.png" alt="image-20220427212215193"></p>
+<ul>
+<li>
+<p>进程间通信（<strong>IPC，Inter Processes Communication</strong>）的目的：</p>
+<ul>
+<li>数据传输：一个进程需要将它的数据发送给另一个进程；</li>
+<li>通知事件：一个进程需要向另一个或一组进程发送消息，通知它（他们）发生了某种事件（如进程终止时要通知父进程）。</li>
+<li>资源共享：多个进程之间共享同样的资源。为了做到这一点，需要内核提供<strong>互斥和同步</strong>机制。</li>
+<li>进程控制：有些进程希望完全控制另一个进程的执行（如Debug进程），此时控制进程希望能够拦截另一个进程的所有陷入和异常，并能够及时知道它的状态改变。</li>
+</ul>
+</li>
+<li>
+<p>Linux进程间通信的方式</p>
+<p><img src="https://img.fzhiy.net/img/202204272129375.png" alt="image-20220427212921082"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>匿名管道概述</p>
+<ul>
+<li>
+<p>匿名管道</p>
+<ul>
+<li>管道也叫 无名（匿名）管道，它是UNIX系统IPC的最古老形式，所有的UNIX系统都支持这种通信机制。</li>
+<li>统计一个目录中文件的数目命令：<code>ls | wc -l</code>，为了执行改命令，shell 创建了两个进程来分别执行 <code>ls</code>和<code>wc</code>。</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/202204272132527.png" alt="image-20220427213246517"></p>
+</li>
+<li>
+<p>管道的特点</p>
+<p><img src="https://img.fzhiy.net/img/202204272137614.png" alt="image-20220427213754334"></p>
+<p><img src="https://img.fzhiy.net/img/202204272141127.png" alt="image-20220427214129774"></p>
+</li>
+<li>
+<p>为什么可以使用管道进行进程间通信？</p>
+<p>因为 <strong>父子进程 共享文件描述符。</strong></p>
+<p><img src="https://img.fzhiy.net/img/202204272144439.png" alt="image-20220427214457130"></p>
+</li>
+<li>
+<p>管道的数据结构</p>
+<p>循环队列 <img src="https://img.fzhiy.net/img/202204272146253.png" alt="image-20220427214652241"></p>
+</li>
+<li>
+<p>匿名管道的使用</p>
+<ul>
+<li>
+<p>创建匿名管道</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">pipe</span><span class="p">(</span><span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查看管道缓冲大小命令</p>
+<p><code>ulimit -a</code></p>
+</li>
+<li>
+<p>查看管道缓冲大小函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">long</span> <span class="nf">fpathconf</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">name</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>父子进程通过匿名管道通信</p>
+</li>
+<li>
+<p>匿名管道通信案例</p>
+</li>
+<li>
+<p>管道的读写特点和管道设置为非阻塞</p>
+</li>
+<li>
+<p>有名管道介绍及使用</p>
+</li>
+<li>
+<p>有名管道实现简单版聊天功能</p>
 </li>
 <li></li>
 </ul>
 <h2 id="3linux多线程开发">3.Linux多线程开发</h2>
 <h2 id="4linux网络编程">4.Linux网络编程</h2>
+<ul>
+<li>网络结构模式</li>
+<li>MAC地址、IP地址、端口</li>
+<li>网络模型</li>
+<li>协议</li>
+<li>网络通信的过程</li>
+<li>socket介绍</li>
+<li>字节序</li>
+<li>字节序转换函数</li>
+<li>socket地址</li>
+<li>IP地址转换函数</li>
+<li>TCP通信流程</li>
+<li>socket函数</li>
+<li>TCP通信实现（服务端）</li>
+<li>TCP通信实现（客户端）</li>
+<li>TCP三次握手</li>
+<li>滑动窗口</li>
+<li>TCP四次握手</li>
+<li>多进程实现并发服务器</li>
+<li>多线程实现并发服务器</li>
+<li>TCP状态转换</li>
+<li>半关闭、端口复用</li>
+<li>IO多路复用简介</li>
+<li>select API介绍</li>
+<li>select代码编写</li>
+<li>poll API介绍以及代码编写</li>
+<li>epoll API介绍</li>
+<li>epoll代码编写</li>
+<li>epoll的两种工作模式</li>
+<li>UDP通信实现</li>
+<li>广播</li>
+<li>组播</li>
+<li>本地套接字通信</li>
+</ul>
 <h2 id="5项目实战与总结">5.项目实战与总结</h2>
 <ul>
 <li>阻塞和非阻塞、同步和异步</li>
