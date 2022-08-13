@@ -26,11 +26,11 @@
     </item>
     
     <item>
-      <title>[笔试]腾讯2021技术后端实习笔试题</title>
-      <link>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2021%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</link>
+      <title>[笔试]腾讯2022技术后端实习笔试题</title>
+      <link>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</link>
       <pubDate>Sun, 24 Apr 2022 12:39:35 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2021%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</guid>
+      <guid>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</guid>
       <description>1.竖着读 给n个数字字符串，每个字符串长度都为m，然后按照每一列从上往下读构成m个字符串，求这m个排序后的字符串，排序输出。 思路：按列存储到</description>
     </item>
     
