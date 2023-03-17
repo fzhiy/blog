@@ -72,6 +72,13 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <lastmod>2022-08-13T17:08:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2022-04-25T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -928,12 +935,6 @@
   <url>
     <loc>https://blog.fzhiy.net/tags/blockchain/</loc>
     <lastmod>2022-01-01T22:37:45+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
