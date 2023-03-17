@@ -23,35 +23,70 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/categories/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/elk/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/elk/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/</loc>
-    <lastmod>2022-08-13T17:08:33+08:00</lastmod>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/kafka/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/kafka/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2022-08-13T17:08:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
-    <lastmod>2022-04-25T12:39:35+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/categories/</loc>
-    <lastmod>2022-04-25T12:39:35+08:00</lastmod>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2022-04-25T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
