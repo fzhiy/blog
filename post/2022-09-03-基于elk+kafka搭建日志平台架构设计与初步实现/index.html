@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>基于ELK&#43;Kafka搭建日志平台架构设计与初步实现 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="已解决的需求 时间顺序排序，与实际日志相符 kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.pat" /><meta name="keywords" content="Log-virtualization" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="基于ELK&#43;Kafka搭建日志平台架构设计与初步实现" />
+<meta property="og:description" content="已解决的需求 时间顺序排序，与实际日志相符 kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.pat" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-17T15:07:10+08:00" />
+<meta property="article:modified_time" content="2023-03-17T15:07:10+08:00" />
+
+<meta itemprop="name" content="基于ELK&#43;Kafka搭建日志平台架构设计与初步实现">
+<meta itemprop="description" content="已解决的需求 时间顺序排序，与实际日志相符 kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.pat"><meta itemprop="datePublished" content="2023-03-17T15:07:10+08:00" />
+<meta itemprop="dateModified" content="2023-03-17T15:07:10+08:00" />
+<meta itemprop="wordCount" content="5689">
+<meta itemprop="keywords" content="ELK,Kafka," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于ELK&#43;Kafka搭建日志平台架构设计与初步实现"/>
+<meta name="twitter:description" content="已解决的需求 时间顺序排序，与实际日志相符 kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.pat"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="https://fzhiy.net">
+        <li class="mobile-menu-item">fzhiy的空间</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://fzhiy.net">fzhiy的空间</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">基于ELK&#43;Kafka搭建日志平台架构设计与初步实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-17 </span>
+        <div class="post-category">
+            <a href="/categories/elk/"> ELK </a>
+            <a href="/categories/kafka/"> Kafka </a>
+            </div>
+          <span class="more-meta"> 约 5689 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#已解决的需求">已解决的需求</a></li>
+        <li><a href="#架构图"><strong>架构图</strong></a></li>
+        <li><a href="#当前架构">当前架构</a>
+          <ul>
+            <li><a href="#集群节点分布图">集群节点分布图</a></li>
+            <li><a href="#环境说明server-1-server-2-server-3均是需要日志收集服务的机器">环境说明（Server 1, Server 2, Server 3均是需要日志收集服务的机器）</a></li>
+          </ul>
+        </li>
+        <li><a href="#工作流程概述">工作流程概述</a></li>
+        <li><a href="#具体配置">具体配置</a>
+          <ul>
+            <li><a href="#kafka">Kafka</a></li>
+            <li><a href="#es">ES</a></li>
+            <li><a href="#kibana">Kibana</a></li>
+            <li><a href="#logstash">Logstash</a></li>
+            <li><a href="#filebeat">Filebeat</a></li>
+          </ul>
+        </li>
+        <li><a href="#效果">效果</a></li>
+        <li><a href="#联调步骤">联调步骤</a></li>
+        <li><a href="#note">NOTE</a></li>
+        <li><a href="#todo">TODO</a>
+          <ul>
+            <li><a href="#service方式启动filebeat">Service方式启动Filebeat</a></li>
+            <li><a href="#logstash单调故障问题利用kafka--consumer-group实现高可用">Logstash单调故障问题——利用Kafka  Consumer Group实现高可用</a></li>
+            <li><a href="#kafka-partition数目的确定">Kafka Partition数目的确定？</a></li>
+            <li><a href="#log-topic的划分颗粒度">Log topic的划分？（颗粒度）</a></li>
+            <li><a href="#项目log的格式-grok正则化解析式编写">项目log的格式 grok正则化解析式编写？</a></li>
+            <li><a href="#根据request-api找到对应的response">根据request api找到对应的response</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="已解决的需求">已解决的需求</h2>
+<ol>
+<li>时间顺序排序，与实际日志相符</li>
+<li>kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.path）</li>
+<li>引入kafka保证 机器宕机后日志不丢失，3个节点组成的集群来实现日志同步，备份</li>
+<li>同城双活</li>
+</ol>
+<h2 id="架构图"><strong>架构图</strong></h2>
+<blockquote>
+<p>ELK Demo采用的架构如下：</p>
+<p><img src="https://img.fzhiy.net/img/image-20220902093938379.png" alt="image-20220902093938379"></p>
+<p>如上图，图中 Logstash 多个的原因是考虑到程序是分布式架构的情况，每台机器都需要部署一个 Logstash，如果确实是单服务器的情况部署一个 Logstash 即可。</p>
+<p><strong>优点</strong>是搭建简单，易于上手。<strong>缺点</strong>是Logstash耗资源较大，运行占用CPU和内存高。另外没有消息队列缓存，存在数据丢失隐患。</p>
+<p><strong>改进架构</strong></p>
+<p>架构图二：</p>
+<p><img src="https://img.fzhiy.net/img/image-20220902094000615.png" alt="image-20220902094000615"></p>
+<p>此种架构引入了<strong>消息队列机制</strong>，位于各个节点上的Logstash Agent先将数据/日志传递给Kafka（或者Redis），并将队列中消息或数据间接传递给Logstash，Logstash过滤、分析后将数据传递给Elasticsearch存储。最后由Kibana将日志和数据呈现给用户。因为引入了Kafka（或者Redis）,所以即使远端Logstash server因故障停止运行，数据将会先被存储下来，从而避免数据丢失。</p>
+<p>架构图三：</p>
+<p><img src="https://img.fzhiy.net/img/image-20220902094313826.png" alt="image-20220902094313826"></p>
+<p>此种架构将<strong>收集端logstash替换为beats</strong>，更灵活，消耗资源更少，扩展性更强。同时可配置Logstash 和Elasticsearch 集群用于支持大集群系统的运维日志数据监控和查询。</p>
+</blockquote>
+<h2 id="当前架构">当前架构</h2>
+<p><img src="https://img.fzhiy.net/img/image-20220902094327500.png" alt="image-20220902094327500"></p>
+<h3 id="集群节点分布图">集群节点分布图</h3>
+<p><img src="https://img.fzhiy.net/img/image-20220902094338417.png" alt="image-20220902094338417"></p>
+<h3 id="环境说明server-1-server-2-server-3均是需要日志收集服务的机器">环境说明（Server 1, Server 2, Server 3均是需要日志收集服务的机器）</h3>
+<blockquote>
+<p>ELK版本均为<strong>7.6.0</strong>, Kafka版本为<strong>2.5.0</strong>。<strong>所有机器的操作系统都是CentOS 7。</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>host</th>
+<th>vm-name</th>
+<th>hostname</th>
+<th>资源</th>
+<th>运行服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.240.211.189</td>
+<td>yufeng-centos7-kafka1</td>
+<td>kafka1</td>
+<td>4核8G</td>
+<td>kafka</td>
+</tr>
+<tr>
+<td>10.240.211.71</td>
+<td>yufeng-centos7-kafka2</td>
+<td>kafka2</td>
+<td>4核8G</td>
+<td>kafka</td>
+</tr>
+<tr>
+<td>10.240.211.76（Lab2 ESXI）</td>
+<td>yufeng-centos7-kafka3</td>
+<td>kafka3</td>
+<td>4核8G</td>
+<td>kafka</td>
+</tr>
+<tr>
+<td>10.240.211.68</td>
+<td>yufeng-centos7-dev</td>
+<td>yufeng</td>
+<td>8核24G</td>
+<td>es, logstash, kibana</td>
+</tr>
+<tr>
+<td>10.240.210.242</td>
+<td>yufeng-centos7-dev2</td>
+<td>dev2</td>
+<td>4核8G</td>
+<td>es</td>
+</tr>
+<tr>
+<td>10.240.210.193（Lab2 ESXI）</td>
+<td>yufeng-centos7-es3</td>
+<td>es3</td>
+<td>2核4G</td>
+<td>es</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10.240.211.112</td>
+<td></td>
+<td>dbgshell</td>
+<td></td>
+<td>lxca, filebeat</td>
+</tr>
+<tr>
+<td>10.240.210.243</td>
+<td></td>
+<td>dbgshell</td>
+<td></td>
+<td>lxca, filebeat</td>
+</tr>
+</tbody>
+</table>
+<p>正如架构补充部分所说，引入<strong>Kafka</strong>，利用消息队列机制将<strong>filebeat</strong>（生产者）从服务器上采集的日志存储下来，然后<strong>logstash</strong>作为消费者将日志解析并存储到 <strong>ElasticSearch</strong>中，然后通过 <strong>Kibana</strong>提供日志可视化、筛选等功能。</p>
+<p>此处的Kafka集群由 **三个节点（Lab1 2个节点，Lab2 1个节点）**组成，每个节点是一个broker，能够实现一个节点宕机，其他节点依然能够正常提供服务。而 **这里采取的Lab1 2个节点，Lab2 1个节点（Kafka，ES）**的目的是为了实现 <strong>同城双活</strong>。</p>
+<blockquote>
+<p>ES双活需要考虑的问题：</p>
+<ul>
+<li>长距离传输导致的数据传送的延时，以及 网络抖动增加“误选举”的概率？
+<ul>
+<li>测试节点所在机房邻近，延时忽略不计</li>
+</ul>
+</li>
+<li>3个节点，当某个节点挂了以后，重新恢复连接时，从leader节点上同步数据时 可能发生的<strong>流量风暴</strong>？
+<ul>
+<li>当前的日志量可以承受，需测试更大的规模。</li>
+</ul>
+</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.elastic.co/cn/blog/bi-directional-replication-with-elasticsearch-cross-cluster-replication-ccr">https://www.elastic.co/cn/blog/bi-directional-replication-with-elasticsearch-cross-cluster-replication-ccr</a></li>
+<li><a href="https://www.cnblogs.com/yjmyzz/p/14586637.html">https://www.cnblogs.com/yjmyzz/p/14586637.html</a></li>
+<li><a href="http://kaito-kidd.com/2021/10/15/what-is-the-multi-site-high-availability-design/">http://kaito-kidd.com/2021/10/15/what-is-the-multi-site-high-availability-design/</a></li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/16342320382121.jpg" alt="img"></p>
+<p><img src="https://img.fzhiy.net/img/16342338343503.jpg" alt="img"></p>
+</blockquote>
+<h2 id="工作流程概述">工作流程概述</h2>
+<ol>
+<li>配置jdk</li>
+<li>根据环境说明中的所运行的软件下载安装软件，并配置<code>filebeat.yml</code>, <code>logstash配置文件</code>，<code>kafka</code>, <code>es</code></li>
+<li>依次启动es集群, kibana, kafka集群，创建topic，启动filebeat，启动logstash</li>
+</ol>
+<h2 id="具体配置">具体配置</h2>
+<h3 id="kafka">Kafka</h3>
+<h4 id="configserverproperties">config/server.properties</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># kafka1
+broker.id=0				# 当前机器在集群中的唯一标识，和zookeeper的myid性质一样
+listeners=PLAINTEXT://10.240.211.189:9092
+offsets.topic.replication.factor=3
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+zookeeper.connect=10.240.211.189:2181,10.240.211.71:2181,10.240.211.76:2181
+
+# kafka2
+broker.id=1
+listeners=PLAINTEXT://10.240.211.71:9092
+offsets.topic.replication.factor=3
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+zookeeper.connect=10.240.211.189:2181,10.240.211.71:2181,10.240.211.76:2181
+
+# kafka3 也一样 就broker.id = 2
+broker.id=2
+listeners=PLAINTEXT://10.240.211.76:9092
+offsets.topic.replication.factor=3
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+zookeeper.connect=10.240.211.189:2181,10.240.211.71:2181,10.240.211.76:2181
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="configzookeeperproperties">config/zookeeper.properties</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dataDir=/tmp/zookeeper
+
+# 客户端连接server的端口，即对外服务端口，默认为2181
+clientPort=2181
+
+# 单个客户端与单台服务器之间的连接数的限制，是ip级别的，默认是60，如果设置为0，那么表明不作任何限制。请注意这个限制的使用范围，仅仅是单台客户端机器与单台ZK服务器之间的连接数限制，不是针对指定客户端IP，也不是ZK集群的连接数限制，也不是单台ZK对所有客户端的连接数限制
+maxClientCnxns=0
+
+admin.enableServer=false
+
+# server列表 2888为选举端口，3888为心跳端口
+# 0表示服务器的编号 对应 dataDir 下面的 myid 文件
+server.0=10.240.211.189:2888:3888
+server.1=10.240.211.71:2888:3888
+server.2=10.240.211.76:2888:3888
+
+# ZK中的一个时间单元。ZK中所有时间都是以这个时间单元为基础，进行整数倍配置的。例如，session的最小超时时间是2*tickTime
+tickTime=2000
+
+# Follower在启动过程中，会从Leader同步所有最新数据，然后确定自己能够对外服务的起始状态。Leader允许F在 initLimit时间内完成这个工作。通常情况下，我们不用太在意这个参数的设置。如果ZK集群的数据量确实很大了，F在启动的时候，从Leader上同步数据的时间也会相应变长，因此在这种情况下，有必要适当调大这个参数
+initLimit=10
+
+# 在运行过程中，Leader负责与ZK集群中所有机器进行通信，例如通过一些心跳检测机制，来检测机器的存活状态。如果L发出心跳包在syncLimit之后，还没有从F那里收到响应，那么就认为这个F已经不在线了。注意：不要把这个参数设置得过大，否则可能会掩盖一些问题
+syncLimit=5
+</code></pre></td></tr></table>
+</div>
+</div><p>在上一步 <code>dataDir</code> 指定的目录下，创建 <code>myid</code> 文件。 直接将 <code>kafka</code> 的 <code>broker.id</code> 写入对应即可</p>
+<h4 id="启动集群所有节点"><strong>启动集群所有节点</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">./bin/zookeeper-server-start.sh -daemon ./config/zookeeper.properties
+./bin/kafka-server-start.sh -daemon ./config/server.properties
+
+<span class="c1"># 开放端口，</span>
+iptables -A INPUT -ptcp --dport <span class="m">3888</span> -j ACCEPT
+iptables -A INPUT -ptcp --dport <span class="m">2888</span> -j ACCEPT
+iptables-save 	<span class="c1">#保存</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="创建topic">创建topic</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">./bin/kafka-topics.sh --create --bootstrap-server 10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092 --replication-factor <span class="m">3</span> --partitions <span class="m">1</span> --topic pim2_log
+
+./bin/kafka-topics.sh --create --bootstrap-server 10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092 --replication-factor <span class="m">3</span> --partitions <span class="m">1</span> --topic lxca2_log
+
+<span class="c1"># 查看topic是否正常</span>
+./bin/kafka-topics.sh --describe --bootstrap-server 10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092 --topic pim2_log
+
+./bin/kafka-topics.sh --describe --bootstrap-server 10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092 --topic lxca2_log
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="es">ES</h3>
+<h4 id="elasticsearchyml">elasticsearch.yml</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l">elk-application </span><span class="w"> </span><span class="c">#ELK的集群名称，名称相同即属于是同一个集群</span><span class="w">
+</span><span class="w"></span><span class="nt">node.name</span><span class="p">:</span><span class="w"> </span><span class="l">node-1</span><span class="w"> </span><span class="c">#本机在集群内的节点名称 要在集群中唯一</span><span class="w">
+</span><span class="w"></span><span class="nt">path.data</span><span class="p">:</span><span class="w"> </span><span class="l">/elk/data</span><span class="w"> </span><span class="c">#数据存放目录</span><span class="w">
+</span><span class="w"></span><span class="nt">path.logs</span><span class="p">:</span><span class="w"> </span><span class="l">/elk/logs</span><span class="w"> </span><span class="c">#日志保存目录</span><span class="w">
+</span><span class="w"></span><span class="nt">network.host</span><span class="p">:</span><span class="w"> </span><span class="m">10.240.211.68</span><span class="w"> </span><span class="c">#监听的IP地址</span><span class="w">
+</span><span class="w"></span><span class="nt">http.port</span><span class="p">:</span><span class="w"> </span><span class="m">9200</span><span class="w"> </span><span class="c">#服务监听的端口</span><span class="w">
+</span><span class="w"></span><span class="nt">discovery.seed_hosts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.240.211.68:9300&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.240.210.242:9300&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.240.210.193:9300&#34;</span><span class="p">]</span><span class="w"> </span><span class="c"># 提供集群中符合主机要求的节点的列表 服务发现种子主机</span><span class="w">
+</span><span class="w"></span><span class="nt">cluster.initial_master_nodes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.240.211.68&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.240.210.242&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.240.210.193&#34;</span><span class="p">]</span><span class="w"> </span><span class="c"># 可以成为master节点的机器 初始主节点</span><span class="w">
+</span><span class="w"></span><span class="c">#开启 xpack 功能，如果要禁止使用密码，请将以下内容注释，直接启动不需要设置密码</span><span class="w">
+</span><span class="w"></span><span class="nt">xpack.security.enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="nt">xpack.security.transport.ssl.enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="nt">xpack.security.transport.ssl.verification_mode</span><span class="p">:</span><span class="w"> </span><span class="l">certificate</span><span class="w">
+</span><span class="w"></span><span class="nt">xpack.security.transport.ssl.keystore.path</span><span class="p">:</span><span class="w"> </span><span class="l">elastic-certificates.p12</span><span class="w">
+</span><span class="w"></span><span class="nt">xpack.security.transport.ssl.truststore.path</span><span class="p">:</span><span class="w"> </span><span class="l">elastic-certificates.p12</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>各节点修改 <code>config/jvm.options</code> 文件的 <code>-Xms4g</code> 和 <code>-Xmx4g</code> 为服务器的内存一半，我的服务器时 <code>8G</code> 内存，所以这里改成了 <code>4G</code> 。当然，这个值最大不要超过 <code>32G</code> 。</p>
+<h4 id="生成tls核身份认证">生成TLS核身份认证</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">bin/elasticsearch-certutil cert -out config/elastic-certificates.p12 -pass &#34;&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>生成 <code>TLS</code> 和身份验证，将会在<code>config</code>下生成<code>elastic-certificates.p12</code>文件，将此文件传到其他节点的<code>config</code>目录，<em><strong>注意文件权限</strong></em>。</p>
+<h4 id="创建-elasticsearch-集群密码">创建 <code>Elasticsearch</code> 集群密码</h4>
+<p>交互式设置密码，此处密码全部设置为 <code>123456</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">bin/elasticsearch-setup-passwords interactive
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>kibana页面登录账号密码为：elastic/123456</p>
+</blockquote>
+<h3 id="kibana">Kibana</h3>
+<h4 id="configkibanayml">config/kibana.yml</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">server.port</span><span class="p">:</span><span class="w"> </span><span class="m">5601</span><span class="w">
+</span><span class="w"></span><span class="nt">server.host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;10.240.211.68&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">elasticsearch.hosts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.240.211.68:9200&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="nt">elasticsearch.username</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;kibana&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">elasticsearch.password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;123456&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="logstash">Logstash</h3>
+<h4 id="lxca_logconf-处理topic为lxca2_log的日志">lxca_log.conf 	处理topic为lxca2_log的日志</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="l">input{</span><span class="w">
+</span><span class="w">    </span><span class="l">kafka {</span><span class="w">
+</span><span class="w">        </span><span class="l">codec =&gt; json</span><span class="w">
+</span><span class="w">        </span><span class="l">auto_offset_reset =&gt; &#34;earliest&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">topics =&gt; &#34;lxca2_log&#34;					# 与kafka topic对应</span><span class="w">
+</span><span class="w">        </span><span class="l">consumer_threads =&gt; 1</span><span class="w">
+</span><span class="w">        </span><span class="l">bootstrap_servers =&gt; &#34;10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092&#34;</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>}<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">filter {</span><span class="w">
+</span><span class="w">    </span><span class="l">grok {</span><span class="w">
+</span><span class="w">        </span><span class="l">match =&gt; {&#34;message&#34; =&gt; &#34;%{MONTHDAY:day}\.%{MONTH:month}\.%{YEAR:year}\s+%{TIME:time}\s+%{TZ:timezone},\s+\[%{DATA:threadName}\],\s+%{LOGLEVEL:loglevel},\s+%{JAVACLASS:logclass}\:%{WORD:method}\s+%{GREEDYDATA:details}&#34;}</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">mutate {</span><span class="w">
+</span><span class="w">        </span><span class="l">add_field =&gt; {&#34;timestamp&#34; =&gt; &#34;%{year}-%{month}-%{day} %{time}&#34;}</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">date {</span><span class="w">
+</span><span class="w">        </span><span class="l">match =&gt; [ &#34;timestamp&#34; , &#34;yyy-MMM-dd HH:mm:ss.SSS&#34; ]</span><span class="w">
+</span><span class="w">        </span><span class="l">target =&gt; &#34;@timestamp&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">locale =&gt; &#34;en&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">timezone =&gt; &#34;+00:00&#34;</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">mutate {</span><span class="w">
+</span><span class="w">        </span><span class="l">remove_field =&gt; [&#34;timezone&#34;, &#34;timestamp&#34;, &#34;day&#34;, &#34;month&#34;, &#34;year&#34;, &#34;time&#34;]</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>}<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">output{</span><span class="w">
+</span><span class="w">    </span><span class="c">#if [type] == &#34;lxca-log&#34; {</span><span class="w">
+</span><span class="w">    </span><span class="l">if [fields][topic] == &#34;lxca2_log&#34; {		# 与filebeat.yml对应</span><span class="w">
+</span><span class="w">        </span><span class="l">elasticsearch{</span><span class="w">
+</span><span class="w">            </span><span class="l">hosts =&gt; [&#34;10.240.211.68:9200&#34;,&#34;10.240.210.242:9200&#34;, &#34;10.240.210.193:9200&#34;]</span><span class="w">
+</span><span class="w">            </span><span class="l">user =&gt; &#34;elastic&#34;				# 前面创建的账号密码</span><span class="w">
+</span><span class="w">            </span><span class="l">password =&gt; &#34;123456&#34;</span><span class="w">
+</span><span class="w">            </span><span class="l">index =&gt;&#34;lxca-%{+YYYY.MM.dd}.log&#34;</span><span class="w">
+</span><span class="w">        </span>}<span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="c">#}</span><span class="w">
+</span><span class="w"></span>}<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="pim_logconf-处理topic为pim2_log的日志">pim_log.conf 	处理topic为pim2_log的日志</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="c"># pim_log.conf 	处理topic为pim2_log的日志</span><span class="w">
+</span><span class="w"></span><span class="l">input{</span><span class="w">
+</span><span class="w">    </span><span class="l">kafka {</span><span class="w">
+</span><span class="w">        </span><span class="l">codec =&gt; json</span><span class="w">
+</span><span class="w">        </span><span class="l">auto_offset_reset =&gt; &#34;earliest&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">topics =&gt; &#34;pim2_log&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">consumer_threads =&gt; 1</span><span class="w">
+</span><span class="w">        </span><span class="l">bootstrap_servers =&gt; &#34;10.240.211.189:9092,10.240.211.71:9092,10.240.211.76:9092&#34;</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>}<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">filter {</span><span class="w">
+</span><span class="w">    </span><span class="l">grok {</span><span class="w">
+</span><span class="w">        </span><span class="l">match =&gt; {&#34;message&#34; =&gt; &#34;%{MONTHDAY:day}\.%{MONTH:month}\.%{YEAR:year}\s+%{TIME:time}\s+%{TZ:timezone},\s+\[%{DATA:threadName}\],\s+%{LOGLEVEL:loglevel},\s+%{JAVACLASS:logclass}\:%{WORD:method}\s+%{GREEDYDATA:details}&#34;}</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">mutate {</span><span class="w">
+</span><span class="w">        </span><span class="l">add_field =&gt; {&#34;timestamp&#34; =&gt; &#34;%{year}-%{month}-%{day} %{time}&#34;}</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">date {</span><span class="w">
+</span><span class="w">        </span><span class="l">match =&gt; [ &#34;timestamp&#34; , &#34;yyy-MMM-dd HH:mm:ss.SSS&#34; ]</span><span class="w">
+</span><span class="w">        </span><span class="l">target =&gt; &#34;@timestamp&#34;</span><span class="w">
+</span><span class="w">        </span><span class="c">#remove_field =&gt; [&#34;timezone&#34;]</span><span class="w">
+</span><span class="w">        </span><span class="l">locale =&gt; &#34;en&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">timezone =&gt; &#34;+00:00&#34;</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w">    </span><span class="l">mutate {</span><span class="w">
+</span><span class="w">        </span><span class="l">remove_field =&gt; [&#34;timezone&#34;, &#34;timestamp&#34;, &#34;day&#34;, &#34;month&#34;, &#34;year&#34;, &#34;time&#34;]</span><span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>}<span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">output{</span><span class="w">
+</span><span class="w">    </span><span class="l">if [fields][topic] == &#34;pim2_log&#34; {</span><span class="w">
+</span><span class="w">        </span><span class="l">elasticsearch{</span><span class="w">
+</span><span class="w">            </span><span class="l">hosts =&gt; [&#34;10.240.211.68:9200&#34;,&#34;10.240.210.242:9200&#34;, &#34;10.240.210.193:9200&#34;]</span><span class="w">
+</span><span class="w">            </span><span class="l">user =&gt; &#34;elastic&#34;</span><span class="w">
+</span><span class="w">            </span><span class="l">password =&gt; &#34;123456&#34;</span><span class="w">
+</span><span class="w">            </span><span class="l">index =&gt;&#34;pim-%{+YYYY.MM.dd}.log&#34;</span><span class="w">
+</span><span class="w">        </span>}<span class="w">
+</span><span class="w">    </span>}<span class="w">
+</span><span class="w"></span>}<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="filebeat">Filebeat</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">filebeat.inputs</span><span class="p">:</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Each - is an input. Most options can be set at the input level, so</span><span class="w">
+</span><span class="w"></span><span class="c"># you can use different inputs for various configurations.</span><span class="w">
+</span><span class="w"></span><span class="c"># Below are the input specific configurations.</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">log</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c"># Change to true to enable this input configuration.</span><span class="w">
+</span><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c"># Paths that should be crawled and fetched. Glob based paths.</span><span class="w">
+</span><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">/opt/lenovo/lxca/data/logs/pim-*.log</span><span class="w">
+</span><span class="w">    </span><span class="c">#- /opt/cfc/test-filebeat.log</span><span class="w">
+</span><span class="w">    </span><span class="c">#- /var/log/test-filebeat.log</span><span class="w">
+</span><span class="w">    </span><span class="c">#- c:\programdata\elasticsearch\logs\*</span><span class="w">
+</span><span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="l">pim2_log				# 对应于输出到kafka的topic</span><span class="w">
+</span><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">10.240.211.112</span><span class="w">		</span><span class="c"># 这个字段用来区分是哪台机器</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">log</span><span class="w">
+</span><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="l">/opt/lenovo/lxca/data/logs/lxca*.log</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="l">lxca2_log</span><span class="w">
+</span><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">10.240.211.112</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">output.kafka</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.240.211.189:9092&#34;</span><span class="p">,</span><span class="s2">&#34;10.240.211.71:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.240.211.76:9092&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;%{[fields.topic]}&#34;</span><span class="w">		</span><span class="c"># 输出到kafka对应topic</span><span class="w">
+</span><span class="w">  </span><span class="nt">partition.round_robin</span><span class="p">:</span><span class="w"> </span><span class="c"># 开启kafka的partition分区</span><span class="w">
+</span><span class="w">    </span><span class="nt">reachable_only</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w">  </span><span class="nt">required_acks</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">  </span><span class="nt">compression</span><span class="p">:</span><span class="w"> </span><span class="l">gzip</span><span class="w">
+</span><span class="w">  </span><span class="nt">max_message_bytes</span><span class="p">:</span><span class="w"> </span><span class="m">100000000</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="效果">效果</h2>
+<p>http://10.240.211.68:5601/</p>
+<p>登录kibana，elastic/123456</p>
+<p><img src="https://img.fzhiy.net/img/image-20220902102246026.png" alt="image-20220902102246026"></p>
+<ol>
+<li>
+<p>按实际日志时间倒序排序；</p>
+</li>
+<li>
+<p>根据server ip区分机器（fields.server），根据log.file.path区分log；</p>
+</li>
+<li>
+<p>实时性，依赖kafka与ELK</p>
+</li>
+<li>
+<p>同城双活（2机房，主机房2个节点，第二机房1个节点）</p>
+<p><img src="https://img.fzhiy.net/img/image-20220902102226116.png" alt="image-20220902102226116"></p>
+</li>
+</ol>
+<p>简单使用：创建Index Pattern（可以理解为对es的index进行分组筛选），然后切换到Discover页面根据需要做filter</p>
+<h2 id="联调步骤">联调步骤</h2>
+<p>为了能够节省调试时间，建议大家从数据源头开始做调试，</p>
+<p>第一步：查看filebeat的log确认 pim-*.log日志收集是否正常</p>
+<p>第二步：查看filebeat的日志文件有没有自身配置错误信息以及转发数据到kafka队列是否正常</p>
+<blockquote>
+<p>此步骤可以在kafka服务器端使用命令行方式消费kafka中的消息进行双边确认</p>
+</blockquote>
+<p>第三步：确认kafka服务本身正常的情况下，查看logstash日志，如果logstash和其它服务共用节点时</p>
+<blockquote>
+<p>需要注意该节点的内存资源是否充足，否则logstash会因为内存不足直接启动失败</p>
+</blockquote>
+<p>第四步：如果前面三步验证都没问题的情况下，elasticsearch里面现在生产了少量的日志数据，但只要有数据存入elasticsearch，就会产生logstash out插件中预定义好的index，此时可能通过elasticsearch  提供的查询API验证elasticsearch是否正常接收了来自logstash转发过来的日志数据</p>
+<p>第五步：确认elasticsearch里面有数据以后，就可以使用浏览器打开es_server_ip:5601页面进行创建index模式</p>
+<blockquote>
+<p>如果elasticsearch中没有数据时，是无法在kibana页面中创建index模式</p>
+</blockquote>
+<h2 id="note">NOTE</h2>
+<ol>
+<li>
+<p>架构中各节点端口的开放，（9092，9200，9300等），ssh, telnet, 检查防火墙</p>
+</li>
+<li>
+<p>一个logstash实例同时启动多个配置文件，<strong>善用 pipelines.yml</strong>，<u>利用pipeline可以将各个配置文件相互隔离开来</u>，对于不同的log，我们就可以分别编写一个conf来处理，相互之间不干扰，<strong>可扩展性高，不易出错。</strong></p>
+<p>pipelines.yml（<strong>实现一个logstash两个pipeline的关键</strong>）</p>
+<blockquote>
+<p>参考：https://www.elastic.co/guide/en/logstash/7.6/pipeline-to-pipeline.html</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml">- <span class="nt">pipeline.id</span><span class="p">:</span><span class="w"> </span><span class="l">pim_log-processing</span><span class="w">
+</span><span class="w">  </span><span class="nt">pipeline.workers</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="w">  </span><span class="nt">pipeline.batch.size</span><span class="p">:</span><span class="w"> </span><span class="m">256</span><span class="w">
+</span><span class="w">  </span><span class="nt">path.config</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/home/yufeng/logstash-7.6.0/config/conf/pim_log.conf&#34;</span><span class="w">
+</span><span class="w"></span>- <span class="nt">pipeline.id</span><span class="p">:</span><span class="w"> </span><span class="l">lxca_log-processing</span><span class="w">
+</span><span class="w">  </span><span class="nt">pipeline.workers</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span><span class="w">  </span><span class="nt">path.config</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/home/yufeng/logstash-7.6.0/config/conf/lxca_log.conf&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>ES用户拥有的可创建文件描述的权限太低 以及 filebeat.yml格式</p>
+</li>
+<li>
+<p>kafka 集群优化</p>
+</li>
+</ol>
+<h2 id="todo">TODO</h2>
+<h3 id="service方式启动filebeat">Service方式启动Filebeat</h3>
+<ul>
+<li>filebeat一段时间以后自动关闭，<strong>可以通过添加为servie自动重启</strong>；
+<ul>
+<li>解决方法：https://www.jianshu.com/p/6720fe6d24fb</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="logstash单调故障问题利用kafka--consumer-group实现高可用">Logstash单调故障问题——利用Kafka  Consumer Group实现高可用</h3>
+<p>参考： <a href="https://www.cnblogs.com/caoweixiong/p/12691458.html">https://www.cnblogs.com/caoweixiong/p/12691458.html</a></p>
+<p><img src="https://img.fzhiy.net/img/1577453-20200413144542136-527813172.png" alt="img"></p>
+<p><strong>Consumer Group：</strong> 是个逻辑上的概念，为一组consumer的集合，同一个topic的数据会广播给不同的group，同一个group中只有一个consumer能拿到这个数据。</p>
+<p>也就是说<strong>对于同一个topic，每个group都可以拿到同样的所有数据，但是数据进入group后只能被其中的一个consumer消费，</strong></p>
+<p>基于这一点我们只需要启动多个logstsh，并将这些logstash分配在同一个组里边就可以实现logstash的高可用了。</p>
+<h3 id="kafka-partition数目的确定">Kafka Partition数目的确定？</h3>
+<ul>
+<li>
+<p>推荐partition的数量一定要大于同时运行的consumer的数量。</p>
+</li>
+<li>
+<p>建议partition的数量大于集群broker的数量，这样<strong>消息数据就可以均匀的分布在各个broker中。</strong></p>
+</li>
+</ul>
+<p>如果partition少的话，某些消费者无法消费数据，那么，Topic为什么要设置多个Partition呢，这是因为<strong>kafka是基于文件存储</strong>的，通过配置多个partition可以将消息内容分散存储到多个broker上,这样可以<strong>避免文件尺寸达到单机磁盘的上限</strong>。同时，将一个topic切分成任意多个partitions，可以保证消息存储、消息消费的效率，因为<strong>越多的partitions可以容纳更多的consumer，可有效提升Kafka的吞吐率</strong>。因此，将Topic切分成多个partitions的好处是可以将大量的消息<strong>分成多批数据</strong>同时写到不同节点上，将写请求分担负载到各个集群节点。</p>
+<h4 id="topic为什么要设置多个partition呢">Topic为什么要设置多个Partition呢</h4>
+<ol>
+<li>可有效<strong>提升Kafka的吞吐率</strong></li>
+<li>写请求分担<strong>负载到各个集群节点</strong></li>
+</ol>
+<h3 id="log-topic的划分颗粒度">Log topic的划分？（颗粒度）</h3>
+<h3 id="项目log的格式-grok正则化解析式编写">项目log的格式 grok正则化解析式编写？</h3>
+<p>每个log文件的（Exception）异常情况处理，需要根据loglevel级别划分，并编写对应的grok解析式。</p>
+<h3 id="根据request-api找到对应的response">根据request api找到对应的response</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">fzhiy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-03-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154839.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://img.fzhiy.net/img/20200812154858.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/elk/">ELK</a>
+          <a href="/tags/kafka/">Kafka</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[C&#43;&#43;侯捷视频课笔记]C&#43;&#43;标准库——架构&amp;源码</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/">
+            <span class="next-text nav-default">[笔试]腾讯2022技术后端实习笔试题</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/fzhiy.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

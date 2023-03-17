@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kafka on fzhiy&#39;s blog</title>
+    <link>https://blog.fzhiy.net/categories/kafka/</link>
+    <description>Recent content in Kafka on fzhiy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 17 Mar 2023 15:07:10 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于ELK&#43;Kafka搭建日志平台架构设计与初步实现</title>
+      <link>https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Fri, 17 Mar 2023 15:07:10 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</guid>
+      <description>已解决的需求 时间顺序排序，与实际日志相符 kibana根据ip、log筛选日志（对应字段：fileds.server, log.file.pat</description>
+    </item>
+    
+  </channel>
+</rss>
