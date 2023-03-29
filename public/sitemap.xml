@@ -9,8 +9,57 @@
   </url>
   
   <url>
+    <loc>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fzhiy.net/categories/</loc>
-    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/paper-notes/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/ray/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/categories/ray/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2023-03-29T15:51:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -30,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/</loc>
-    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fzhiy.net/tags/kafka/</loc>
     <lastmod>2023-03-17T15:07:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -45,20 +87,6 @@
   
   <url>
     <loc>https://blog.fzhiy.net/categories/kafka/</loc>
-    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/post/</loc>
-    <lastmod>2023-03-17T15:07:10+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.fzhiy.net/tags/</loc>
     <lastmod>2023-03-17T15:07:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

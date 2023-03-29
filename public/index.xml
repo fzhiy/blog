@@ -6,7 +6,7 @@
     <description>Recent content on fzhiy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Mar 2023 15:07:10 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Mar 2023 15:51:32 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[C&#43;&#43;侯捷视频课笔记]C&#43;&#43;标准库——架构&amp;源码</title>
       <link>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
       <description>[CPP侯捷视频课笔记]C++标准库——架构&amp;amp;源码 [TOC] 源码之前 了无秘密 —— 侯捷 第一讲 架构 基础：C++基本语法（包括如何正确使用模板，t</description>
+    </item>
+    
+    <item>
+      <title>[Ray]Ray论文笔记</title>
+      <link>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 29 Mar 2023 15:51:32 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</guid>
+      <description>Ray论文 Real-Time Machine Learning: The Missing Pieces Ray: A Distributed Framework for Emerging AI Applications [Ray]Ray: A Distributed Framework for Emerging AI Applications 与supervised learning不同的是，training和serving可以由</description>
     </item>
     
     <item>
