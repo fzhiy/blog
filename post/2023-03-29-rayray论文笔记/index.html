@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[Ray]Ray论文笔记">
 <meta itemprop="description" content="Ray论文 Real-Time Machine Learning: The Missing Pieces Ray: A Distributed Framework for Emerging AI Applications [Ray]Ray: A Distributed Framework for Emerging AI Applications 与supervised learning不同的是，training和serving可以由"><meta itemprop="datePublished" content="2023-03-29T15:51:32+08:00" />
 <meta itemprop="dateModified" content="2023-03-29T15:51:32+08:00" />
-<meta itemprop="wordCount" content="6306">
+<meta itemprop="wordCount" content="6477">
 <meta itemprop="keywords" content="ray," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Ray]Ray论文笔记"/>
 <meta name="twitter:description" content="Ray论文 Real-Time Machine Learning: The Missing Pieces Ray: A Distributed Framework for Emerging AI Applications [Ray]Ray: A Distributed Framework for Emerging AI Applications 与supervised learning不同的是，training和serving可以由"/>
@@ -137,7 +137,7 @@
             <a href="/categories/paper-notes/"> paper-notes </a>
             <a href="/categories/ray/"> ray </a>
             </div>
-          <span class="more-meta"> 约 6306 字 </span>
+          <span class="more-meta"> 约 6477 字 </span>
           <span class="more-meta"> 预计阅读 13 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -194,7 +194,7 @@
 <h4 id="编程模型">编程模型</h4>
 <ul>
 <li>
-<p><code>Tasks</code>。一个任务task表示在无状态工作器上执行一个远程函数。当一个带有<code>@remote</code>注解的remote函数被调用，会立即返回一个<code>future</code>对象，然后调用<code>ray.get()</code>即可得到结果.</p>
+<p><code>Tasks</code>。一个任务task表示在无状态工作器上执行一个远程函数。当一个带有<code>@remote</code>注解的remote函数被调用，会立即返回一个<code>future</code>对象，然后调用<code>ray.get()</code>即可得到结果。</p>
 <blockquote>
 <p>比如说</p>
 <div class="highlight"><div class="chroma">
@@ -232,6 +232,13 @@ results = ray.get(object_ids)
 </div><p><code>f.remote()</code>调用运行时，将返回一个<code>future</code>对象，存储在<code>object_ids</code>中，调用<code>ray.get(object_ids)</code>可以得到返回值的列表。</p>
 </blockquote>
 <p>remote函数操作的数据是不可变的对象，remote函数是无状态，无副作用的，使得幂等性得以保证，从而简化了容错的处理。</p>
+</li>
+<li>
+<p><code>Actors</code>。一个角色actor代表一个<strong>有状态的stateful计算</strong>。每个角色都暴露了可以被远程调用的方法，并被连续执行。一个<u>方法的执行</u>类似于一个<em>任务task</em>，因为它是远程执行并返回一个未来，但不同的是它是在一个<strong>有状态的worker</strong>上执行的。一个actor的<code>句柄handle</code>可以传递给其他角色或任务，使他们有可能调用该角色的方法。</p>
+<p><img src="https://img.fzhiy.net/img/image-20230329163905360.png" alt="image-20230329163905360"></p>
+<center>Tasks vs. actors tradeoffs</center>
+<p><img src="https://img.fzhiy.net/img/image-20230329163811643.png" alt="image-20230329163811643"></p>
+<center>Ray API</center>
 <p>为了满足上一节提到的<code>heterogeneity</code>和<code>flexibility</code>需求，通过三种方程增强API的功能：</p>
 <ol>
 <li>处理不同时长的并发任务，采用<code>ray.wait()</code>，等待<em>前k个</em>可用结果，而不是像<code>ray.get()</code>等待<em>所有</em>结果；</li>
@@ -254,10 +261,10 @@ results = ray.get(object_ids)
 <p>Ray架构由（1）实现API的<strong>应用层</strong>，（2）提供高可扩展性和容错性的<strong>系统层</strong> 组成。</p>
 <p><img src="https://img.fzhiy.net/img/image-20230329144117190.png" alt="image-20230329144117190"></p>
 <h4 id="应用层">应用层</h4>
-<p>应用层由三类过程process组成：</p>
+<p>应用层由三类进程process组成：</p>
 <ol>
-<li><code>Driver</code>：执行用户程序的过程；</li>
-<li><code>Worker</code>: 被driver或另一个worker调用的 执行任务(remote functions)的无状态过程。workers被自动启动，并由系统层分配任务。当一个remote function被声明时，该函数会自动发布给所有workers。worker以串行方式执行任务，在不同的任务中不保留本地状态。</li>
+<li><code>Driver</code>：执行用户程序的进程；</li>
+<li><code>Worker</code>: 被driver或另一个worker调用的 执行任务(remote functions)的无状态进程。workers被自动启动，并由系统层分配任务。当一个remote function被声明时，该函数会自动发布给所有workers。worker以串行方式执行任务，在不同的任务中不保留本地状态。</li>
 <li><code>Actor</code>: 一个有状态的进程，当被调用时，只执行它所暴露的方法。与 Worker 不同，Actor 是由 Worker 或 Driver显示实例化的。与Workers一样，Actor也是以串行方式执行方法，只是每个方法都依赖于前一个方法的执行所产生的状态。</li>
 </ol>
 <h4 id="系统层">系统层</h4>
