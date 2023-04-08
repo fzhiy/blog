@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2023-04-05-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2023-04-08T13:48:32+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fzhiy.net/categories/</loc>
     <lastmod>2023-04-08T13:48:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -52,6 +45,13 @@
   
   <url>
     <loc>https://blog.fzhiy.net/tags/</loc>
+    <lastmod>2023-04-08T13:48:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fzhiy.net/post/2023-04-05-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2023-04-08T13:48:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
