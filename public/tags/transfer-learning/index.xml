@@ -9,19 +9,19 @@
     <lastBuildDate>Sun, 27 Sep 2020 20:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/transfer-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【待补】迁移学习笔记（二）</title>
-      <link>https://blog.fzhiy.net/posts/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link>
+      <link>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link>
       <pubDate>Sun, 27 Sep 2020 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid>
+      <guid>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid>
       <description>写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。</description>
     </item>
     
     <item>
       <title>迁移学习笔记（一）</title>
-      <link>https://blog.fzhiy.net/posts/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
+      <link>https://blog.fzhiy.net/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
       <pubDate>Sat, 26 Sep 2020 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
+      <guid>https://blog.fzhiy.net/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
       <description># 写在前面 ​ 计划在这几天看一些TL相关综述论文，并初步写一点学习笔记（待完善，又挖坑了）。本文主要参考《A survey on transfer learning.2016》</description>
     </item>
     

@@ -9,28 +9,28 @@
     <lastBuildDate>Sun, 27 Mar 2022 21:17:03 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[C&#43;&#43;侯捷视频课笔记]C&#43;&#43;标准库——架构&amp;源码</title>
-      <link>https://blog.fzhiy.net/posts/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</link>
+      <link>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</link>
       <pubDate>Sat, 05 Mar 2022 09:21:56 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
+      <guid>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
       <description>[CPP侯捷视频课笔记]C++标准库——架构&amp;amp;源码 [TOC] 源码之前 了无秘密 —— 侯捷 第一讲 架构 基础：C++基本语法（包括如何正确使用模板，t</description>
     </item>
     
     <item>
       <title>[C&#43;&#43;]深入探索C&#43;&#43;对象模型笔记</title>
-      <link>https://blog.fzhiy.net/posts/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.fzhiy.net/post/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 27 Mar 2022 21:17:03 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.fzhiy.net/post/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</guid>
       <description>ch01 关于对象 C++在布局以及存取时间上的主要额外负担是 由virtual引起的，包括： virtual function 机制， 引入 vptr（指向一个对象的虚拟表的指针） 以及v</description>
     </item>
     
     <item>
       <title>[C&#43;&#43;]一文搞懂C&#43;&#43;中的内存大小问题</title>
-      <link>https://blog.fzhiy.net/posts/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
+      <link>https://blog.fzhiy.net/post/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 10 Mar 2022 10:03:40 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://blog.fzhiy.net/post/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</guid>
       <description>C++内存大小计算总结 总结 类（C++的struct等价class）的内存大小占用问题（三个部分） 非静态（non-static）数据成员大小；</description>
     </item>
     
