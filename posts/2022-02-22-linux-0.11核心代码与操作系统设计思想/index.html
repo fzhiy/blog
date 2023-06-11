@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[源码]Linux 0.11核心代码与操作系统设计思想 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Linux 0.11 源码 学习资料： https://github.com/sunym1993/flash-linux0.11-talk Linux 0.11源码讲解 及 相关学习内容 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html Intel手册 第一部分：进入内核前的苦力活 1.1 最开始的两行代码 上图中启动区的定义：只要硬" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[源码]Linux 0.11核心代码与操作系统设计思想" />
+<meta property="og:description" content="Linux 0.11 源码 学习资料： https://github.com/sunym1993/flash-linux0.11-talk Linux 0.11源码讲解 及 相关学习内容 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html Intel手册 第一部分：进入内核前的苦力活 1.1 最开始的两行代码 上图中启动区的定义：只要硬" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-22T22:47:09+08:00" />
+<meta property="article:modified_time" content="2022-02-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="[源码]Linux 0.11核心代码与操作系统设计思想">
+<meta itemprop="description" content="Linux 0.11 源码 学习资料： https://github.com/sunym1993/flash-linux0.11-talk Linux 0.11源码讲解 及 相关学习内容 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html Intel手册 第一部分：进入内核前的苦力活 1.1 最开始的两行代码 上图中启动区的定义：只要硬"><meta itemprop="datePublished" content="2022-02-22T22:47:09+08:00" />
+<meta itemprop="dateModified" content="2022-02-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2594">
+<meta itemprop="keywords" content="OS,Source-Code," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[源码]Linux 0.11核心代码与操作系统设计思想"/>
+<meta name="twitter:description" content="Linux 0.11 源码 学习资料： https://github.com/sunym1993/flash-linux0.11-talk Linux 0.11源码讲解 及 相关学习内容 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html Intel手册 第一部分：进入内核前的苦力活 1.1 最开始的两行代码 上图中启动区的定义：只要硬"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h1 id="linux-011-源码">Linux 0.11 源码</h1>
+<p>学习资料：</p>
+<ul>
+<li><a href="https://github.com/sunym1993/flash-linux0.11-talk">https://github.com/sunym1993/flash-linux0.11-talk</a> Linux 0.11源码讲解  及 相关学习内容</li>
+<li><a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html</a> Intel手册</li>
+</ul>
+<h2 id="第一部分进入内核前的苦力活"><strong>第一部分：进入内核前的苦力活</strong></h2>
+<h3 id="11-最开始的两行代码">1.1 最开始的两行代码</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs640" alt="图片"></p>
+<p>上图中启动区的定义：只要<strong>硬盘中的0盘0道1扇区的512个字节的最后两个字节分别是0x55和0xaa</strong>，BIOS就认为它是启动区。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221442598.png" alt="image-20220222144214631"></p>
+<p>汇编代码bootsect.s 经过编译成二进制文件，存放在启动区的第一扇区。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221443518.webp" alt="图片"></p>
+<p>随后就会如刚刚所说，由 BIOS 搬运到内存的 <strong>0x7c00</strong> 这个位置，而 CPU 也会从这个位置开始，不断往后一条一条语句无脑地执行下去。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221450483.webp" alt="图片"></p>
+<p>ds：16位的段寄存器，具体表示 <strong>数据段寄存器，在内存寻址时充当段基址的作用。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mov ax, [0x0001] 
+相当于
+mov ax, [ds:0x0001]
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么是 <strong>0x7c00</strong>呢？</p>
+<h4 id="为什么主引导记录的内存地址是0x7c00httpswwwruanyifengcomblog2015090x7c00html"><a href="https://www.ruanyifeng.com/blog/2015/09/0x7c00.html">为什么主引导记录的内存地址是0x7C00？</a></h4>
+<blockquote>
+<p>0x7C00的由来：</p>
+<p>1981年8月，IBM公司最早个人电脑IBM PC 5150搭配的操作系统是86-DOS。这个操作系统需要的内存最少是32KB。内存地址从0X0000开始编号，32KB内存就是<code>0x0000 ~ 0x7FFF</code>；</p>
+<p>8088芯片本身占用<code>0x0000 ~ 0x03FF</code>用来保存各种中断处理程序的储存位置。（主引导记录本身就是中断信号INT 19h的处理程序。）因此，内存剩下 <code>0x0400 ~ 0x7FFF</code>可以使用。</p>
+<p>**为了把尽量多的连续内存留给操作系统，主引导记录就被放到了内存地址的尾部。**由于一个扇区是512字节，主引导记录本身也会产生数据，需要另外留出512字节保存。所以， 它的预留位置变成了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">0x7FFF - 512 - 512 + 1 = 0x7C00
+</code></pre></td></tr></table>
+</div>
+</div><p>计算机启动后，32KB内存的使用情况如下。</p>
+<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">+--------------------- 0x0
+<span class="p">|</span> Interrupts vectors
++--------------------- 0x400
+<span class="p">|</span> BIOS data area
++--------------------- 0x5??
+<span class="p">|</span> OS load area
++--------------------- 0x7C00
+<span class="p">|</span> Boot sector
++--------------------- 0x7E00
+<span class="p">|</span> Boot data/stack
++--------------------- 0x7FFF
+<span class="p">|</span> <span class="o">(</span>not used<span class="o">)</span>
++--------------------- <span class="o">(</span>...<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+</blockquote>
+<p>Master Boot Record，MBR 主引导记录： 拥有BIOS控制权的存储设备的第一个扇区 <strong>最前面的512个字节</strong>。 <a href="https://www.ruanyifeng.com/blog/2013/02/booting.html">计算机是如何启动的</a></p>
+<p>主引导记录结构：</p>
+<ul>
+<li>第1-446字节：调用操作系统的机器码；</li>
+<li>第447-510字节：分区表（Partition table）； 【作用：将硬盘分成若干个区】</li>
+<li>第511-512字节：主引导记录签名（<strong>0x55和0xAA</strong>）</li>
+</ul>
+<p>计算机启动过程：</p>
+<ol>
+<li>通电</li>
+<li>读取ROM里面的BIOS，用来检查硬件</li>
+<li>硬件检查通过</li>
+<li><strong>BIOS根据指定的顺序，检查引导设备的第一个扇区（即主引导记录），加载在内存地址 0x7C00</strong></li>
+<li>主引导记录把操作权交给操作系统</li>
+</ol>
+<p><strong>详解计算机启动过程</strong>：《X86汇编语言—从实模式到保护模式》</p>
+<h3 id="12-自己给自己挪个地儿">1.2 自己给自己挪个地儿</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mov ax,0x07c0
+mov ds,ax		;1.1节讲过这两行代码
+mov ax,0x9000
+mov es,ax
+mov cx,#256
+sub si,si
+sub di,di
+rep movw		;rep 表示重复执行后面的命令； movw表示复制一个字(word 16位) 其实就是不断重复地复制一个字
+;重复执行多少次呢？是 cx 寄存器中的值，也就是 256 次。
+;从哪复制到哪呢？是从 ds:si 处复制到 es:di 处。
+;一次复制多少呢？刚刚说过了，复制一个字，16 位，也就是两个字节。
+; 更直白地说：将内存地址0x7c00处开始往后的512字节的数据，原封不动复制到0x90000处
+</code></pre></td></tr></table>
+</div>
+</div><p>经过上面的几行指令后，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ds = 0x07c0
+es = 0x9000
+cx = 256
+si = 0
+di = 0
+</code></pre></td></tr></table>
+</div>
+</div><p>此时CPU寄存器的总图如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221544074.webp" alt="图片"></p>
+<p><strong>将内存地址 0x7c00 处开始往后的 512 字节的数据，原封不动复制到 0x90000 处</strong>。 如下图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221549191.webp" alt="图片"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">jmpi go,0x9000	; jmpi是一个段间跳转指令，表示跳转到 0x9000:go 处执行
+go: 
+  mov ax,cs
+  mov ds,ax
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>段基址 : 偏移地址 ** 这种格式的内存地址的计算： 段基址要先左移四位，所以是跳转到</strong>0x90000 + go**这个内存地址处执行。</p>
+<p>go是一个标签，最终编译成机器码的时候被翻译成一个值，这个值 就是go这个标签在文件内的偏移地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221615601.webp" alt="图片"></p>
+<p>到此为止，前两回的内容，其实就是一段 <strong>512</strong> 字节的代码和数据，从硬盘的启动区先是被移动到了内存 <strong>0x7c00</strong> 处，然后又立刻被移动到 <strong>0x90000</strong> 处，并且跳转到此处往后再稍稍偏移 <strong>go</strong> 这个标签所代表的偏移地址处，也就是 <strong>mov ax,cs</strong> 这行指令的位置。</p>
+<h3 id="13-做好最最基础的准备工作">1.3 做好最最基础的准备工作</h3>
+<p>接着上一节内容：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221621572.webp" alt="图片"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">go: mov ax,cs
+    mov ds,ax
+    mov es,ax
+    mov ss,ax
+    mov sp,#0xFF00	;sp 栈基址寄存器
+</code></pre></td></tr></table>
+</div>
+</div><p>回顾 CPU中的关键寄存器：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221623678.webp" alt="图片"></p>
+<p>cs寄存器 表示 <code>代码段寄存器</code>，CPU当前正在执行的代码在内存中的位置，由cs : ip 这组寄存器配合指向的，cs是基址，ip是偏移地址。</p>
+<p>sp寄存器被赋值为 0xFF00，所以目前的栈顶地址是 ss:sp所指向的地址<code>0x9FF00</code>处。</p>
+<p>到这里，操作系统的一些最最最基础的准备工作就做好了。具体如下：</p>
+<ol>
+<li>代码从硬盘移到内存，又从内存挪了个地方，放在了 <strong>0x90000</strong>处；</li>
+<li><strong>数据段寄存器ds 和 代码段寄存器cs</strong> 此时都被设置为 0x9000，也为跳转代码和访问内存代码 奠定了同一个内存的基址地址，方便了跳转和内存访问，因为仅仅需要指定偏移地址 即可；</li>
+<li>栈顶地址被设置为 0x9FF00，具体表现为<strong>栈段寄存器ss</strong>为0x9000，<strong>栈基址寄存器sp</strong>为0xFF00。栈是向下发展的，这个栈顶地址0x9FF00要远远大于此时代码所在的位置0x90000，所以栈向下发展就很难撞见代码所在的位置，也就比较安全。这也是为什么给栈顶地址设置为这个值的原因，其实只需要离代码的位置远远的即可。</li>
+</ol>
+<p>这一部分其实就是把 <strong>代码段寄存器cs，数据段寄存器ds，栈段寄存器ss和栈基址寄存器sp</strong>分别设置好了值，方便后续使用。</p>
+<p>再拔高一下，其实操作系统在做的事情，就是给如何访问代码，如何访问数据，如何访问栈进行了一下 <strong>内存的初步规划</strong>。其中访问代码和访问数据的规划方式就是 设置了一个<strong>基址</strong>而已，访问栈就是把<strong>栈顶指针</strong>指向了一个远离代码位置的地方而已。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221637148.webp" alt="图片"></p>
+<blockquote>
+<p>三种段寄存器的作用：（来自Intel手册）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fzhiy/images/imgs202202221650597.webp" alt="图片"></p>
+</blockquote>
+<h3 id="14-把自己在硬盘里的其他部分也放到内存来">1.4 把自己在硬盘里的其他部分也放到内存来</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">; load the setup-sectors directly after the bootblock.
+; Note that &#39;es&#39; is already set up.
+
+load_setup:
+	mov	dx,#0x0000		; drive 0, head 0
+	mov	cx,#0x0002		; sector 2, track 0
+	mov	bx,#0x0200		; address = 512, in INITSEG
+	mov	ax,#0x0200+SETUPLEN	; service 2, nr of sectors
+	int	0x13			; read it
+	jnc	ok_load_setup		; ok - continue
+	mov	dx,#0x0000
+	mov	ax,#0x0000		; reset the diskette
+	int	0x13
+	j	load_setup
+
+ok_load_setup:
+	...
+</code></pre></td></tr></table>
+</div>
+</div><p><code>int 0x13</code>表示 发起0x13号中断，</p>
+<h3 id="todo15-进入保护模式前的最后一次折腾内存">【TODO】1.5 进入保护模式前的最后一次折腾内存</h3>
+<h3 id="16-先解决段寄存器的历史包袱问题">1.6 先解决段寄存器的历史包袱问题</h3>
+<h3 id="17-六行代码就进入了保护模式">1.7 六行代码就进入了保护模式</h3>
+<h3 id="18-烦死了又要重新设置一边idt和gdt">1.8 烦死了又要重新设置一边idt和gdt</h3>
+<h3 id="19-intel内存管理两板斧分段与分页">1.9 Intel内存管理两板斧：分段与分页</h3>
+<h3 id="110-进入main函数前的最后一跃">1.10 进入main函数前的最后一跃！</h3>
+<h3 id="总结与回顾">总结与回顾</h3>
+<h2 id="第二部分大战前期的初始化工作"><strong>第二部分：大战前期的初始化工作</strong></h2>
+<h3 id="211--整个操作系统就20几行代码">2.11  整个操作系统就20几行代码</h3>
+<h3 id="212-管理内存前先划分处三个边界值">2.12 管理内存前先划分处三个边界值</h3>
+<h3 id="213-主内存初始化-mem_init">2.13 主内存初始化 mem_init</h3>
+<h3 id="214-中断初始化-trap_init">2.14 中断初始化 trap_init</h3>
+<h3 id="215-块设备请求项初始化-blk_dev_init">2.15 块设备请求项初始化 blk_dev_init</h3>
+<h3 id="216-控制台初始化-tty_init">2.16 控制台初始化 tty_init</h3>
+<h3 id="217-时间初始化-time_init">2.17 时间初始化 time_init</h3>
+<h3 id="218-进程调度初始化-sched_init">2.18 进程调度初始化 sched_init</h3>
+<h3 id="219-缓冲区初始化-buffer_init">2.19 缓冲区初始化 buffer_init</h3>
+<h3 id="220-硬盘初始化-hd_init">2.20 硬盘初始化 hd_init</h3>
+<h3 id="总结与回顾-1">总结与回顾</h3>
+<h2 id="第三部分一个新进程的诞生"><strong>第三部分：一个新进程的诞生</strong></h2>
+<h3 id="321-新进程诞生全局概述">3.21 新进程诞生全局概述</h3>
+<h3 id="322-从内核态切换到用户态">3.22 从内核态切换到用户态</h3>
+<h3 id="323-如果让你来设计进程调度">3.23 如果让你来设计进程调度</h3>
+<h2 id="第四部分-shell程序的到来">第四部分 shell程序的到来</h2>
+<h2 id="第五部分-从一个命令的执行看操作系统各模块的运作">第五部分 从一个命令的执行看操作系统各模块的运作</h2>
+<h2 id="第六部分-操作系统哲学与思想">第六部分 操作系统哲学与思想</h2>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

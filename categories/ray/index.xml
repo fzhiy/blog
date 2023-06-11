@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 29 Mar 2023 15:51:32 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/ray/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Ray]Ray论文笔记</title>
-      <link>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.fzhiy.net/posts/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 29 Mar 2023 15:51:32 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.fzhiy.net/posts/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</guid>
       <description>Ray论文 Real-Time Machine Learning: The Missing Pieces Ray: A Distributed Framework for Emerging AI Applications [Ray]Ray: A Distributed Framework for Emerging AI Applications 与supervised learning不同的是，training和serving可以由</description>
     </item>
     

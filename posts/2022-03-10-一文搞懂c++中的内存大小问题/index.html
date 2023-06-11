@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[C&#43;&#43;]一文搞懂C&#43;&#43;中的内存大小问题 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="C&#43;&#43;内存大小计算总结 总结 类（C&#43;&#43;的struct等价class）的内存大小占用问题（三个部分） 非静态（non-static）数据成员大小；" /><meta name="keywords" content="C&#43;&#43;, 内存大小" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[C&#43;&#43;]一文搞懂C&#43;&#43;中的内存大小问题" />
+<meta property="og:description" content="C&#43;&#43;内存大小计算总结 总结 类（C&#43;&#43;的struct等价class）的内存大小占用问题（三个部分） 非静态（non-static）数据成员大小；" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-10T10:03:40+08:00" />
+<meta property="article:modified_time" content="2022-03-10T10:03:40+08:00" />
+
+<meta itemprop="name" content="[C&#43;&#43;]一文搞懂C&#43;&#43;中的内存大小问题">
+<meta itemprop="description" content="C&#43;&#43;内存大小计算总结 总结 类（C&#43;&#43;的struct等价class）的内存大小占用问题（三个部分） 非静态（non-static）数据成员大小；"><meta itemprop="datePublished" content="2022-03-10T10:03:40+08:00" />
+<meta itemprop="dateModified" content="2022-03-10T10:03:40+08:00" />
+<meta itemprop="wordCount" content="2749">
+<meta itemprop="keywords" content="C&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[C&#43;&#43;]一文搞懂C&#43;&#43;中的内存大小问题"/>
+<meta name="twitter:description" content="C&#43;&#43;内存大小计算总结 总结 类（C&#43;&#43;的struct等价class）的内存大小占用问题（三个部分） 非静态（non-static）数据成员大小；"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h2 id="c内存大小计算总结">C++内存大小计算总结</h2>
+<h2 id="总结">总结</h2>
+<h3 id="类c的struct等价class的内存大小占用问题三个部分">类（C++的struct等价class）的内存大小占用问题（三个部分）</h3>
+<ol>
+<li>非静态（<strong>non-static</strong>）数据成员大小；（<strong>成员函数不占内存，想想如果占内存的话，我多加些 那不内存爆炸了~</strong>）</li>
+<li>虚函数表指针（<strong>若存在virtual function，则+8（vptr指针的sizeof均是8）</strong>）</li>
+<li>内存对齐填充的<strong>padding</strong></li>
+</ol>
+<p><strong>空类的 sizeof 为1.</strong></p>
+<h4 id="内存对齐原则">内存对齐原则</h4>
+<blockquote>
+<p>参考：https://blog.csdn.net/luolaihua2018/article/details/115372273</p>
+</blockquote>
+<ol>
+<li><strong>数据成员</strong>对齐规则，结构体(struct)(或联合(union))的数据成员，第一个数据成员存放在offset为0的地方，以后每个数据成员存储的<strong>起始位置</strong>要从<strong>该成员大小或者成员的子成员(只要该成员有子成员，比如数组、结构体等)大小的整数倍</strong>开始(如：int 在 64bit 目标平台下占用 4Byte，则要从4的整数倍地址开始存储)；</li>
+<li>结构体作为成员，如果一个结构体里有某些结构体成员，则结构体成员要从<strong>其</strong>内部<strong>最大元素大小的整数倍地址</strong>开始存储</li>
+<li>结构体的总大小，即sizeof的结果，必须是<strong>其内部最大成员长度(即前面内存对齐指令中提到的有效值)的整数倍，不足的要补齐</strong></li>
+</ol>
+<h3 id="union内存大小">union内存大小</h3>
+<p>union结构大小是<strong>最大成员所占大小+(为了符合内存对齐原则填充的padding)</strong></p>
+<h3 id="enum大小">enum大小</h3>
+<blockquote>
+<p>参考：https://blog.csdn.net/chenjiayi_yun/article/details/15832425</p>
+</blockquote>
+<p>C++中枚举变量的大小是 1&lt;=sizeof(enum)&lt;=sizeof(int) 字节 （1-4字节）</p>
+<p>枚举<strong>默认</strong>是用<strong>int类型</strong>来存储的，<strong>占4个字节</strong>。可以存储的最大值是0xffffff。可以<strong>通过继承方式改变枚举的大小</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AA</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="k">enum</span> <span class="nc">EnumTest</span>
+    <span class="p">{</span><span class="n">a</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">};</span><span class="c1">//枚举类型没有占用内存（占用内存的只是变量）
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="c1">// 枚举默认是用int类型来存储的，占4个字节。可以存储的最大值是0xffffff。
+</span><span class="c1">// 可以通过继承方式改变枚举的大小
+</span><span class="c1">// C++中枚举变量的大小是 1&lt;=sizeof(enum)&lt;=sizeof(int) 字节 （1-4字节）
+</span><span class="c1"></span><span class="k">enum</span> <span class="nc">EnumTest</span> <span class="p">{</span>
+    <span class="n">a</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1">// 默认是int类型
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">BB</span> <span class="p">{</span>
+    <span class="k">enum</span> <span class="nc">EnumTest</span> <span class="n">enumTest1</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="nc">EnumChar</span> <span class="o">:</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="p">{</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">,</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="mh">0xff</span>
+<span class="p">};</span>
+
+<span class="c1">// size of enum 4
+</span><span class="c1">// Class AA veriable size 1
+</span><span class="c1">// Class BB veriable size 4
+</span><span class="c1">// sizeof EnumChar 1
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;size of enum &#34;</span><span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">EnumTest</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>         <span class="c1">// 4
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Class AA veriable size &#34;</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>    <span class="c1">//内存大小最少是1字节（所以class A这里是1字节）
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Class BB veriable size &#34;</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">BB</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>    <span class="c1">// 4
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;sizeof EnumChar &#34;</span><span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">EnumChar</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>      <span class="c1">// 1
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="全部测试代码">全部测试代码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/*** 
+</span><span class="cm"> * @Date: 2022-03-07 13:55:22
+</span><span class="cm"> * @Author: yufeng
+</span><span class="cm"> * @GitHub: https://github.com/fzhiy
+</span><span class="cm"> * @Email: fzhiy270@163.com
+</span><span class="cm"> * @LastEditTime: 2022-03-10 10:42:07
+</span><span class="cm"> */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span> 
+    <span class="n">A</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">A</span><span class="p">()</span> <span class="p">{</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;~A()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;this is class A.print()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">B</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span> 
+    <span class="n">B</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;B()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">B</span><span class="p">()</span> <span class="p">{</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;~B()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;this is class B.print()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">C</span> <span class="o">:</span> <span class="k">public</span> <span class="n">B</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span> 
+    <span class="n">C</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;C()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">C</span><span class="p">()</span> <span class="p">{</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;~C()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> 
+        <span class="c1">// oerride关键字 确保此函数 覆盖了父类B的print()函数, 确保不会出现函数名打错的情况
+</span><span class="c1"></span>        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;this is class C.print()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">D</span> <span class="o">:</span> <span class="k">public</span> <span class="n">C</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">d</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">dc</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="c1">// const static int da = 5;     // 允许
+</span><span class="c1"></span>    <span class="c1">// const int dab = 5;           // 允许
+</span><span class="c1"></span>    <span class="c1">// static int dac = 5;          // 不允许, static变量必须在类外面初始化, 因为static变量属于整个类, 而不属于某个对象
+</span><span class="c1"></span><span class="k">public</span><span class="o">:</span> 
+    <span class="n">D</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;D()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">D</span><span class="p">()</span> <span class="p">{</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;~D()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="k">final</span> <span class="p">{</span>
+        <span class="c1">// final关键字 确保print()函数不会被其子类(如果有子类的话)覆盖(override)
+</span><span class="c1"></span>        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;this is class D.print()&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">E</span> <span class="p">{</span>
+<span class="p">};</span>
+
+<span class="cm">/** 类的内存空间大小占用计算(三个部分):
+</span><span class="cm"> *  1) 非静态(non-static)数据成员大小
+</span><span class="cm"> *  2) 虚函数表指针(若存在virtual function, 则 +8 (vptr指针的sizeof均是8))
+</span><span class="cm"> *  3) 内存对齐填充的padding
+</span><span class="cm"> */</span> 
+<span class="c1">// class F {
+</span><span class="c1">//     virtual void Func() {;}
+</span><span class="c1">// };
+</span><span class="c1">// int main() {
+</span><span class="c1">//     cout &lt;&lt; sizeof(F) &lt;&lt; endl;  // 8
+</span><span class="c1">//     E e;
+</span><span class="c1">//     cout &lt;&lt; sizeof(E) &lt;&lt; endl;  // 1    C++中 空类的大小为1
+</span><span class="c1">//     cout &lt;&lt; sizeof(e) &lt;&lt; endl;  // 1    保证 类的每个实例 独一无二
+</span><span class="c1">//     A a;
+</span><span class="c1">//     a.print();
+</span><span class="c1">//     cout &lt;&lt; sizeof(A) &lt;&lt; endl;  // 4
+</span><span class="c1">//     cout &lt;&lt; sizeof(a) &lt;&lt; endl;  // 4
+</span><span class="c1">//     B b;
+</span><span class="c1">//     b.print();
+</span><span class="c1">//     cout &lt;&lt; sizeof(b) &lt;&lt; endl;  // 16
+</span><span class="c1">//     cout &lt;&lt; sizeof(b) &lt;&lt; endl;  // 16   (4 + 8 + 4(内存对齐)一个虚函数表的指针大小 占用  bytes)
+</span><span class="c1">//     C c;
+</span><span class="c1">//     c.print();
+</span><span class="c1">//     cout &lt;&lt; sizeof(C) &lt;&lt; endl;  // 16
+</span><span class="c1">//     cout &lt;&lt; sizeof(c) &lt;&lt; endl;  // 16   (4 + 8 + 4(class C中的非静态数据成员c的大小))
+</span><span class="c1">//     D d;
+</span><span class="c1">//     d.print();
+</span><span class="c1">//     cout &lt;&lt; sizeof(D) &lt;&lt; endl;  // 24
+</span><span class="c1">//     cout &lt;&lt; sizeof(d) &lt;&lt; endl;  // 24, (4 + 8 + 4 + 4 + 4(内存对齐))如果 C 的成员函数print()加了virtual 输出会是 24
+</span><span class="c1"></span>
+<span class="c1">//     return 0;
+</span><span class="c1">// }
+</span><span class="c1"></span>
+<span class="c1">// enum Day {
+</span><span class="c1">//     one = &#39;1&#39;,
+</span><span class="c1">//     two = &#39;2&#39;,
+</span><span class="c1">//     three = &#39;3&#39;,
+</span><span class="c1">//     four = &#39;4&#39;,
+</span><span class="c1">//     five = &#39;5&#39;
+</span><span class="c1">// };
+</span><span class="c1"></span>
+<span class="c1">// int main() {
+</span><span class="c1">//     int a = 4;
+</span><span class="c1">//     char *str[] = {&#34;asbih&#34;, &#34;adjao&#34;, &#34;haode&#34;};
+</span><span class="c1">//     char** p = str;
+</span><span class="c1">//     Day d;
+</span><span class="c1">//     cout &lt;&lt; sizeof(d) &lt;&lt; endl;      //4
+</span><span class="c1">//     cout &lt;&lt; sizeof(str[0]) &lt;&lt; endl; //8 str[i] 都是一个指针
+</span><span class="c1">//     cout &lt;&lt; sizeof(p) &lt;&lt; endl;      //8 p是一个 指向指针的指针
+</span><span class="c1">//     cout &lt;&lt; sizeof(&amp;a) &lt;&lt; endl;     //8
+</span><span class="c1">//     cout &lt;&lt; sizeof(a) &lt;&lt; endl;      // 4
+</span><span class="c1">//     cout &lt;&lt; sizeof(int) &lt;&lt; endl;    // 4
+</span><span class="c1">//     cout &lt;&lt; sizeof(int*) &lt;&lt; endl;   // 8
+</span><span class="c1">//     cout &lt;&lt; sizeof(float) &lt;&lt; endl;      //4 
+</span><span class="c1">//     cout &lt;&lt; sizeof(float*) &lt;&lt; endl;     //8 凡是指针类型，其sizeof都是8 bytes
+</span><span class="c1">//     cout &lt;&lt; sizeof(double) &lt;&lt; endl;     //8 
+</span><span class="c1">//     cout &lt;&lt; sizeof(long) &lt;&lt; endl;       //4 
+</span><span class="c1">//     cout &lt;&lt; sizeof(long long) &lt;&lt; endl;  //8
+</span><span class="c1">//     cout &lt;&lt; sizeof(unsigned long long) &lt;&lt; endl; //8
+</span><span class="c1">// }
+</span><span class="c1"></span>
+<span class="c1">// 兴业数金
+</span><span class="c1"></span><span class="k">typedef</span> <span class="k">union</span> <span class="nc">tagPeople</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">sex</span><span class="p">;</span>
+<span class="p">}</span><span class="n">People_t</span><span class="p">,</span> <span class="o">*</span><span class="n">People_tp</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">union</span> <span class="nc">UnionStruct</span> <span class="p">{</span>
+<span class="p">};</span>
+<span class="k">union</span> <span class="nc">UnionStruct2</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+    <span class="c1">// double d;
+</span><span class="c1"></span>    <span class="c1">// string s;
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="k">union</span> <span class="nc">Test</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">union</span> <span class="nc">Test2</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="nc">TestStruct</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="nc">TestStruct2</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>   <span class="c1">// 结构体内最大元素的大小 8
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">fun</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;TestStruct2&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">TestStruct</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>     <span class="c1">// 28 = 20 + 4 + 4
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">TestStruct2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>    <span class="c1">// 40 = 20 + 4 + 4 + 8 + 4(内存对齐)
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Test</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// 20
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Test2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 24 = 20 + 4(内存对齐，24是最大成员double类型d的 3倍)
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>    <span class="c1">// 虽然数组名a也是数组a的首地址，指针p指向了它。但是sizeof(a) = 数组的实际大小
+</span><span class="c1"></span>    <span class="c1">// cout &lt;&lt; sizeof(p) &lt;&lt; endl;              // 8
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>              <span class="c1">// 5  = 5 * 1
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ip</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>              <span class="c1">// 20 = 5 * 4
+</span><span class="c1"></span>    <span class="c1">// cout &lt;&lt; sizeof(ip) &lt;&lt; endl;             // 8
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">UnionStruct</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>    <span class="c1">// 1
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>         <span class="c1">// 32
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">UnionStruct2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// 8 (找Union中最大的数据类型，还必须满足是所有成员的整数倍)
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>            <span class="c1">// 4
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">People_t</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>       <span class="c1">// 8
+</span><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">People_tp</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>      <span class="c1">// 8 (64位操作系统中指针大小为8，32位)   
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// class AA {
+</span><span class="c1">//     public:
+</span><span class="c1">//     enum EnumTest
+</span><span class="c1">//     {a =1,b = 5};//枚举类型没有占用内存（占用内存的只是变量）
+</span><span class="c1">// };
+</span><span class="c1"></span>
+<span class="c1">// // 枚举默认是用int类型来存储的，占4个字节。可以存储的最大值是0xffffff。
+</span><span class="c1">// // 可以通过继承方式改变枚举的大小
+</span><span class="c1">// // C++中枚举变量的大小是 1&lt;=sizeof(enum)&lt;=sizeof(int) 字节 （1-4字节）
+</span><span class="c1">// enum EnumTest {
+</span><span class="c1">//     a =1,b = 5  // 默认是int类型
+</span><span class="c1">// };
+</span><span class="c1"></span>
+<span class="c1">// class BB {
+</span><span class="c1">//     enum EnumTest enumTest1;
+</span><span class="c1">// };
+</span><span class="c1"></span>
+<span class="c1">// enum EnumChar : unsigned char {
+</span><span class="c1">//     A = 0x00,
+</span><span class="c1">//     B,
+</span><span class="c1">//     C = 0xff
+</span><span class="c1">// };
+</span><span class="c1"></span>
+<span class="c1">// // size of enum 4
+</span><span class="c1">// // Class AA veriable size 1
+</span><span class="c1">// // Class BB veriable size 4
+</span><span class="c1">// // sizeof EnumChar1
+</span><span class="c1">// int main() {
+</span><span class="c1">//     cout &lt;&lt; &#34;size of enum &#34;&lt;&lt; sizeof(EnumTest) &lt;&lt; endl;         // 4
+</span><span class="c1">//     cout &lt;&lt; &#34;Class AA veriable size &#34; &lt;&lt; sizeof(AA) &lt;&lt; endl;    //内存大小最少是1字节（所以class A这里是1字节）
+</span><span class="c1">//     cout &lt;&lt; &#34;Class BB veriable size &#34; &lt;&lt; sizeof(BB) &lt;&lt; endl;    // 4
+</span><span class="c1">//     cout &lt;&lt; &#34;sizeof EnumChar &#34;&lt;&lt; sizeof(EnumChar) &lt;&lt; endl;      // 1
+</span><span class="c1">//     return 0;
+</span><span class="c1">// }
+</span></code></pre></td></tr></table>
+</div>
+</div>
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

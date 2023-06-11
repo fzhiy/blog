@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[CCF-GAIR 2020]联邦学习下的数据价值与模型安全-杨强 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="写在前面 很高兴有机会去到了现场参加CCF-GAIR 2020 全球人工智能和机器人峰会， ​ 先简单贴下介绍，8月7日-8月9日，2020年全球人工智能和" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2020-08-12-ccf-gair_2020%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8-%E6%9D%A8%E5%BC%BA/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[CCF-GAIR 2020]联邦学习下的数据价值与模型安全-杨强" />
+<meta property="og:description" content="写在前面 很高兴有机会去到了现场参加CCF-GAIR 2020 全球人工智能和机器人峰会， ​ 先简单贴下介绍，8月7日-8月9日，2020年全球人工智能和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2020-08-12-ccf-gair_2020%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8-%E6%9D%A8%E5%BC%BA/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-12T20:47:09+08:00" />
+<meta property="article:modified_time" content="2020-08-12T20:47:09+08:00" />
+
+<meta itemprop="name" content="[CCF-GAIR 2020]联邦学习下的数据价值与模型安全-杨强">
+<meta itemprop="description" content="写在前面 很高兴有机会去到了现场参加CCF-GAIR 2020 全球人工智能和机器人峰会， ​ 先简单贴下介绍，8月7日-8月9日，2020年全球人工智能和"><meta itemprop="datePublished" content="2020-08-12T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2020-08-12T20:47:09+08:00" />
+<meta itemprop="wordCount" content="6041">
+<meta itemprop="keywords" content="Federated Learning,CCF-GAIR 2020," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[CCF-GAIR 2020]联邦学习下的数据价值与模型安全-杨强"/>
+<meta name="twitter:description" content="写在前面 很高兴有机会去到了现场参加CCF-GAIR 2020 全球人工智能和机器人峰会， ​ 先简单贴下介绍，8月7日-8月9日，2020年全球人工智能和"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h1 id="写在前面">写在前面</h1>
+<blockquote>
+<p><strong>很高兴有机会去到了现场参加CCF-GAIR 2020 全球人工智能和机器人峰会，</strong></p>
+<p>​	<strong>先简单贴下介绍</strong>，8月7日-8月9日，2020年全球人工智能和机器人峰会（简称“CCF-GAIR 2020”）在深圳举办！CCF-GAIR由中国计算机学会（CCF）主办，香港中文大学（深圳）、雷锋网联合承办，鹏城实验室、深圳市人工智能与机器人研究院协办，<strong>以“AI新基建 产业新机遇”为大会主题</strong>，致力打造国内人工智能和机器人领域规模最大、规格最高、跨界最广的学术、工业和投资领域盛会。</p>
+<p>峰会网站入口：https://gair.leiphone.com/gair/gair2020</p>
+<p>​	主要参加了 <strong>人工智能前沿专场、前沿语音技术专场、机器人前沿专场、AI金融专场、联邦学习与大数据隐私专场</strong>。虽然此次会议部分有线上直播，但是现场给自己留下了更加深刻的感受与体会。我目前是网络空间安全的一名硕士研究生，也通过会议了解学习到一些前沿知识和风向，对自己未来发展有一定的指导作用。为了更好地学习，也特地将自己所了解所学习到的一些东西分享出来，供大家参考学习。同时十分希望同在研究学习的朋友多多交流，留下您的宝贵意见和建议那就更好了！</p>
+<p><strong>另外做一个说明，总结不会完全重述演讲者的讲话，会挑一些自己觉得重点的点进行阐述（引用部分标识出来），仅代表个人浅见，也欢迎留言讨论你的想法。如果想看全文或视频，请将本文拉到最下方见参考文献。</strong></p>
+</blockquote>
+<h1 id="杨强教授联邦学习下的数据价值与模型安全">杨强教授:<strong>联邦学习下的数据价值与模型安全</strong></h1>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_135523.jpg" alt=""></p>
+<h2 id="演讲大咖简介">演讲大咖简介</h2>
+<p>杨强：微众银行首席人工智能官，IJCAI首位华人理事会主席</p>
+<h3 id="相关研究追溯">相关研究追溯</h3>
+<p><a href="http://www.cs.ust.hk/~qyang/">主页</a></p>
+<p><a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=1LxWZLQAAAAJ">Scholar</a></p>
+<h2 id="演讲概述">演讲概述</h2>
+<p>演讲中，杨强教授介绍了联邦学习的关键技术以及应用案例，并进一步介绍了最新开展的联邦学习和迁移学习的结合研究以及接下来的重点研究方向。</p>
+<p>杨强教授表示，我们建立的 AI 离不开人，保护人的隐私是当下AI 发展中特别重要的一点，这也是从政府到个人、企业以及社会的要求；另外，AI也要保护模型的安全，防止恶意或非恶意的攻击；最后，AI 需要人类伙伴的理解，如何实现联邦学习系统的透明性和可解释性，也是研究者接下来需要重点研究的方向。</p>
+<h2 id="总结正文看重点标注部分">总结（正文看重点标注部分）</h2>
+<ul>
+<li>AI离不开人，<strong>保护人的隐私是当下AI发展特别重要的一点，也是政府、个人、社会以及企业的要求</strong></li>
+<li>AI也要保护<strong>模型的安全</strong>，如上述例子，若差分隐私用的不好，可能会暴露原始数据</li>
+<li><strong>AI需要人类伙伴的理解</strong>， 如何实现<strong>联邦学习系统的透明性和可解释性</strong>， 也是需要研究的方向</li>
+</ul>
+<h3 id="研究方向概述"><strong>研究方向概述</strong></h3>
+<ul>
+<li><strong>如何应对对抗攻击？机器学习过程中有哪些可攻击的点？</strong>
+<ul>
+<li>第一种，他可以通过跟你的交互来推断你的数据隐私，这个叫<strong>推断训练数据的隐私</strong>；</li>
+<li>第二种，通过<strong>跟你合作建模，影响你的模型效果</strong>，而这个影响朝着他们希望的方向行进；</li>
+<li>第三种，在<strong>测试数据里加入一些小的改动</strong>，改变模型对测试数据的判断。</li>
+</ul>
+</li>
+<li><strong>隐私攻击：</strong>
+<ul>
+<li>防御攻击（<strong>HE、MPC、DP</strong>）</li>
+<li>深度泄露攻击（<strong>DP中噪声的适当添加</strong>）——防御（<strong>安全和效率高之间的最佳平衡点</strong>）</li>
+</ul>
+</li>
+<li><strong>联邦学习和自动化机器学习的结合</strong></li>
+<li><strong>对于学生来说，将算法与联邦学习相结合是一个很好的研究题目。不管是To C还是To B，既可以采用横向联邦也可以采用纵向联邦。	寻找课题研究的一种思路：在机器学习算法中找到与联邦学习结合的点进行研究.</strong></li>
+</ul>
+<h2 id="正文">正文</h2>
+<h3 id="fl-背景">FL 背景</h3>
+<p>​	杨教授首先讲了联邦学习的背景，<strong>AI的力量来自大数据，但是面临的实际问题往往只有小数据</strong>。</p>
+<p>举例：1）一个是法律，一个是金融，一个是医疗，这些跟国计民生和大产业都相关。</p>
+<p>​		   2）**香港科技大学的老师们，他们网上课程的学生受众是万级的，那能不能用他们的问答数据做一个对话系统？**我带着这个问题访问了好几位老师，结果他们的回答都是：<strong>没有数据。他们的数据十分有限，也没有标注，完全没办法采用人工智能对话机器人的思路和方法来做对话系统。</strong></p>
+<p>杨教授以此展开开始了 <strong>联邦学习下的数据价值与模型安全</strong>的主题演讲。在平常听到的人工智能主战场，比如无人车、智能手机、Pad、笔记本电脑等，**每一台设备数据都是有限的，只有把这些数据汇聚云端才能形成大数据。**但汇聚云端会带来隐私问题，泄露隐私问题如Facebook事件等等这些，继而政府部分关注并实施法律法规，如 <strong>GDPR、2020年7月的中国《数据安全法》草案</strong>。再者，数据上传云端容易发生泄露，因此推动联邦学习的发展。</p>
+<h3 id="fl数据不动模型动数据可用不可见">FL：数据不动模型动，数据可用不可见</h3>
+<p><strong>核心：数据不动模型动，</strong>（插句题外话，这场会议中的PPT我曾经在前几个月的演讲中见过，可以在youtube或者B站找到，还有上午的AI金融专场，所以至少看了3遍）</p>
+<p>数据不动模型动，是指<strong>模型在不同机构之间、端和云之间进行沟通交流</strong>。<strong>产生的效果</strong> 则是 <strong>数据可用不可见</strong>，不可见指的是 <strong>双方都不能看见对方的数据，即数据和模型都保留在本地，建模的过程也保证了数据的安全。</strong></p>
+<h4 id="羊吃草的例子">“羊吃草”的例子：</h4>
+<p><img src="https://img.fzhiy.net/img/20200812143546.png" alt=""></p>
+<p><strong>把羊比拟成一个模型，把草比作数据</strong>。传统的做法是把草运到羊的位置，这样的话这个数据就需要出本地，而<strong>联邦学习</strong>的做法是<strong>领着这只羊访问不同的草所在的地方，这样草就不用出本地，羊还是可以长大。</strong></p>
+<h3 id="横向联邦学习按样本分割横向切割数据">横向联邦学习：按样本分割（横向切割数据）</h3>
+<p><img src="https://img.fzhiy.net/img/20200812143529.png" alt=""></p>
+<blockquote>
+<p>业界有多种不同的联邦学习模式，一种模式是谷歌提出的横向联邦，或者叫做按照样本切割的联邦学习。</p>
+<p>如果我们把所有聚合好的数据想象成一个大的数据集，这个数据集<strong>横过来的每一行是一个样本</strong>，是一个用户的所有数据，<strong>纵过来的每一列则是特征</strong>，比如用户的年份、身份等等。横向联邦，就是把这个数据的一部分样本寄存在某个终端，如上右图所示。这些样本加起来是一个完整的数据集，但我们现在没办法在物理或实际现实世界中达到这个目的。</p>
+<p>谷歌的做法是：首先在每一个本地建模，建的模型是图里的“w”，对模型加密以后，把加密后的模型在云端进行整合。</p>
+</blockquote>
+<h3 id="fl关键技术加密解密">FL关键技术——加密/解密</h3>
+<p><img src="https://img.fzhiy.net/img/20200812124227.png" alt=""></p>
+<p>这个过程的目的是不让参数泄露，因此关键技术是加密和解密的技术，现在有各种各样的可以使用的加密技术，它们都在不同程度有保密性。比方说最严格的同态加密，它的特点是穿透性，其进行的数学多项运算可以穿透包对内部数据进行同样的运算，而运作执行者可以不看内容。</p>
+<h3 id="纵向联邦学习特征不同样本重叠">纵向联邦学习（特征不同，样本重叠）</h3>
+<p><img src="https://img.fzhiy.net/img/20200812143506.png" alt=""></p>
+<p>可以用在纵向联邦模型上。<strong>按照特征来分</strong>，一个机构可以有这样的用户特征，另一个机构可以有那样的用户特征；一个医院可以有病人的胸腔检测，另一个医院可以有病人的核酸检测，当他们合作以后，就希望得到全面的用户检测模型。而这个模型可以通过上右图呈现的方式，在两个机构之间传播和沟通，整个<strong>传播和沟通</strong>过程也是<strong>在加密的情况下用分布式的机器学习</strong>来进行的。</p>
+<h3 id="secureboost-in-vfl">Secureboost in VFL</h3>
+<p><img src="https://img.fzhiy.net/img/20200812143449.png" alt=""></p>
+<p>这种做法也可以适配到人工智能算法上，左边的图表示的是在纵向的情况下采用SecureBoost算法，右边的图表示在横向联邦基础上也可以实现SecureBoost算法，这是机器学习联邦化的例子。</p>
+<p>**对于学生来说，将算法与联邦学习相结合是一个很好的研究题目。  不管是To C还是To B，既可以采用横向联邦也可以采用纵向联邦。	**</p>
+<p><strong>寻找课题研究的一种思路：在机器学习算法中找到与联邦学习结合的点进行研究.</strong></p>
+<h2 id="fl应用案例">FL应用案例</h2>
+<h3 id="纵向联邦推荐系统架构">纵向联邦推荐：系统架构</h3>
+<p><img src="https://img.fzhiy.net/img/20200812143411.png" alt=""></p>
+<blockquote>
+<p>第一个案例是推荐系统，这是现在很多应用的核心，比如电影推荐、书籍推荐，比如新闻和短视频推荐，这些系统的特点是数据越多越好，我们叫做矩阵数据。也就是说，这个矩阵的纵向是不同用户，横向是不同特征（即产品）。做推荐的时候，矩阵越密越好，因为矩阵的密度决定了推荐的个性化效果。如果要实现这个推荐系统，让两方合作，同时又不在物理上将双方的数据进行传播，就需要用到联邦推荐的架构，<strong>具体来说，就是让双方交换一些共有子矩阵，在加密的前提下实现联邦推荐的效果。这种方法也可以应用在广告的推荐上。</strong></p>
+</blockquote>
+<h3 id="应用基于联邦学习的企业贷款风控模型">应用：基于联邦学习的企业贷款风控模型</h3>
+<p><img src="https://img.fzhiy.net/img/20200812143858.png" alt=""></p>
+<blockquote>
+<p>第二个例子是基于联邦学习的企业贷款风控模型。金融界特别关心建立一个好的风控模型。在这个案例中，由一家银行和一家票据公司对同一批用户进行联合建模，在建模的过程中就可以复传数据。</p>
+<p>对于纵向联邦而言特别重要的一点是，有一方需要有关键的标注数据，比如银行有关键的逾期率数据，但缺乏用户行为数据，而用户行为数据可以由合作的票据方来提供，最终实现效果也是非常明显的。</p>
+<p><strong>目前在联邦学习实践中，已经有几十家银行和非银行合作的案例了，这些案例都证明联邦学习方法可以大幅降低坏账率。</strong></p>
+<p>第三个例子，多个保险公司之间进行横向联邦，在保险公司和互联网之间还可以进行纵向联邦。也就是说在同样类型客户的机构之间，可以进行横向联邦；而在拥有不同特征客户的机构之间可以进行纵向联邦，也可以进行拓扑联邦。</p>
+</blockquote>
+<h3 id="联邦学习用于计算机视觉">联邦学习用于计算机视觉</h3>
+<p><img src="https://img.fzhiy.net/img/20200812144105.png" alt=""></p>
+<blockquote>
+<p>联邦学习在计算机视觉领域也有应用案例。AI 视觉公司之间如果进行<strong>横向联邦</strong>，他们<strong>可以把模型的准确率大幅提高。</strong></p>
+</blockquote>
+<h3 id="语音识别引擎-微众ai基于联邦对抗学习的解决方案">语音识别引擎-微众AI基于“联邦对抗学习”的解决方案</h3>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_141104.jpg" alt=""></p>
+<blockquote>
+<p>视觉以外，人工智能的另一个重要战场是<strong>语音识别ASR</strong>，<strong>这一领域也有采用联邦学习的需求</strong>。比方说我们在一个客服中心收集了很多录音，在另一个客服中心也收集了很多录音，那能不能把这两批录音结合起来变成更大的数据集？很显然，这会暴露用户隐私，不过现在我们可以<strong>用联邦学习建立一个更好的语音识别模型</strong>，<strong>目前微众人工智能部门也实现这一方案。</strong></p>
+</blockquote>
+<h3 id="federated-learning-in-iot">Federated Learning in IoT</h3>
+<p><img src="https://img.fzhiy.net/img/20200812144233.png" alt=""></p>
+<blockquote>
+<p>联邦学习在 IoT 领域也得到了应用，比如还利用联邦学习进行**仓库的仓储量预测，**比如当有些货品缺乏时，系统就可以提早提出预警。</p>
+</blockquote>
+<h3 id="联邦学习技术加速大数据合作生态构建">联邦学习技术加速大数据合作生态构建</h3>
+<p><strong><img src="https://img.fzhiy.net/img/20200812144350.png" alt=""></strong></p>
+<blockquote>
+<p>总结来说，这一阶段我们做了各种各样的尝试，以<strong>证明联邦学习可以在企业，尤其是可以在不同企业之间广泛使用，现在这一点也得到了很好的印证</strong>，接下来的专场，大家也会听到不同讲者 阐述联邦学习在他们各自领域中的应用。</p>
+</blockquote>
+<h3 id="federated-health-code-defending-covid-19-with-privacy">Federated Health Code: Defending COVID 19 with privacy</h3>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_141237.jpg" alt=""></p>
+<blockquote>
+<p>我特别要提到的一个应用——健康码，这是我们最新的一个尝试。大家扫健康码进入会场的时候，<strong>扫的时候可能都会有一个担心，健康码记录了你到过什么地方，有没有去过现在疫情比较紧急的地方。<strong>其实更准确的健康码，应该能记录到你有没有近距离接触过一些新冠病人，但这就要</strong>对你的轨迹数据进行非常细致的调查</strong>以及<strong>你和其他人的轨迹的交叉计算。<strong>这或多或少会让我们担心自己的轨迹数据隐私会不会暴露给一些不认识的人，比方说云计算公司。我们现在把联邦学习和应用结合起来，形成了新的方案，叫做</strong>联邦健康码</strong>，它计算出来的最后结果只有你自身所拥有的那台手机才知道，其他的人都只知道片面信息，而不知道全面信息。</p>
+</blockquote>
+<h2 id="联邦学习和迁移学习的结合研究">联邦学习和迁移学习的结合研究</h2>
+<blockquote>
+<p>联邦学习在应用中往往存在一个现象，即<strong>每一个数据拥有方所持有的数据，也许和别人的分布是不一样的，也许和别人的表达也是不一样的</strong>。比方说一个摄像头中可能看到更多的是男性，另一个摄像头看到的更多的是女性，这样的分布是不一样的。在这种状况下建模，对机器学习来说是有困难的，因为<strong>机器学习要求数据遵从统一分布，并且表达也是类似的</strong>，而不能一部分数据是图像，而另一部分数据是文字。这种<strong>异构的数据</strong>在现实中经常发生，所以有必要来做<strong>联邦学习和迁移学习的结合</strong>。</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_141459.jpg" alt=""></p>
+<blockquote>
+<p>这种结合可以体现在各个层面，以深度学习为例，左边的图展示的是两个神经网络，蓝色的神经网络有很多数据标签，所以可以建一个很好的神经网络模型，但是红色的神经网络却缺乏这样的数据，我们考虑将蓝色神经网络的数据迁移到红色的神经网络中。<strong>过去，迁移学习是不考虑隐私的</strong>，模型和数据都可以被物理运到红色神经网络进行知识迁移。<strong>现在有了隐私顾虑，是不是可以用联邦学习达到迁移学习的效果？答案是可以。</strong></p>
+<p>在两边沟通的过程中，除了<strong>隐私加密</strong>以外，还要进行<strong>一项迁移学习的运算，保证两边数据的分布和两边数据的表达都是相同的</strong>。要达到这一点，双方首先要把各自方的模型和数据迁移到一个共同的子空间，这个迁移过程可以通过某种数学运算进行，比如和函数，效果相当于我们把神经网络的某些层迁移到了新的场景下。</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_141659.jpg" alt=""></p>
+<blockquote>
+<p>这个工作中需要经过多番迁移和对比，所以<strong>效率很低</strong>。最近我们又提出了一个<strong>加速算法</strong>，使得每一方本地的数据计算尽量多，跨合作方的计算尽量少，<strong>以联邦块的方式进行梯度交互，结果证明效果非常好</strong>。</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/20200812145528.png" alt=""></p>
+<p>随机森林也可以采用这个方法实现迁移学习和联邦学习的结合。</p>
+<p><img src="https://img.fzhiy.net/img/20200812145558.png" alt=""></p>
+<blockquote>
+<p>最近我们在推**<a href="https://dataset.fedai.org/">一个联邦视觉的公共数据集</a>**，欢迎学校的学生来参与比赛。我在很多场合都说过，我们在共同推动IEEE标准，比如涂威威等人都在共同推动。现在，微众银行开源的FATE也变成了国际上知名的联邦学习开源软件。</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/20200812145820.png" alt=""></p>
+<h2 id="联邦学习接下来的重点研究方向">联邦学习接下来的重点研究方向</h2>
+<p>第一方向，是<strong>如何应对对抗攻击</strong>。假设在联合建模的过程中有坏人参与，或者说这个人并不那么坏，但是他很好奇，时不时要探测合作方数据隐私，这种情况怎么防止？我们要看<strong>机器学习的过程中有哪些可攻击点</strong>。</p>
+<p><img src="https://img.fzhiy.net/img/20200812145936.png" alt=""></p>
+<p>第一种，他可以通过跟你的交互来推断你的数据隐私，这个叫<strong>推断训练数据的隐私</strong>；</p>
+<p>第二种，通过<strong>跟你合作建模，影响你的模型效果</strong>，而这个影响朝着他们希望的方向行进；</p>
+<p>第三种，在<strong>测试数据里加入一些小的改动</strong>，改变模型对测试数据的判断。</p>
+<p><img src="https://img.fzhiy.net/img/20200812150033.png" alt=""></p>
+<p>另外我们一不小心也有可能让参与方学到你数据里的隐私，这也是一种<strong>隐私攻击</strong>。如果我们用很严格的<strong>同态加密或者多方安全计算</strong>来进行，往往就不会发生这种情况。但是<strong>在大规模的工业应用中</strong>，我们往往没办法用完整的原始同态加密和多方安全计算保证安全。相反，我们往往会往模型加一些噪音，<strong>在完全安全和完全不安全之间选择一个中间点，差分隐私往往是中间点</strong>，具体做法是<strong>在数据和模型当中加入一些噪音</strong>，使对方没办法完全区分某一个人或者某一个样本是不是在你的数据里。</p>
+<p><img src="https://img.fzhiy.net/img/20200812150147.png" alt=""></p>
+<blockquote>
+<p>但是这是有一定概率的，有可能对方还是能猜出来你的数据内容。去年年底<strong>MIT的韩松教授团队</strong>发表了一篇论文，他们<strong>证明如果差分隐私应用得不好，有可能让参与方通过对梯度的积累猜出来数据的原始形状和原始的隐私信息</strong>。实验证明，如果你加更多的噪音，会导致联邦学习的效果下降，准确率会变差；而加的噪音少了，效果变好了，安全性却又大为降低，所以这个方法其实是一把双刃剑。</p>
+<p>ps：<strong>加噪声需要根据实际效果判断</strong></p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/20200812150325.png" alt=""></p>
+<blockquote>
+<p>最近我们引入了一个新的方法，<strong>让每一个参与方不直接和对方沟通</strong>，具体来说，就是<strong>让参与方在建模的时候建立自己的镜像</strong>，在跟别人沟通时，防火墙会把他们对隐私的好奇心挡住，这样就能够<strong>在安全和效率高的两个极端找到一个最佳的平衡点。</strong></p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/IMG_20200809_142350.jpg" alt=""></p>
+<blockquote>
+<p><strong>联邦学习和自动化机器学习的结合研究</strong>，是另一个方向，第四范式的涂威威是这方面的专家。</p>
+</blockquote>
+<p><img src="https://img.fzhiy.net/img/20200812150453.png" alt=""></p>
+<blockquote>
+<p>纵向联邦中，我们都希望两边都快速建立起一个神经网络。而神经网络的结构和搜索空间是非常大的，过去我们需要一个人做手工调参，但现在可以通过一些加密手段梯让度和损失函数值进行沟通，促进双边都自动寻找最优网络结构，如图上所示的两个系统一样，可以进行有机结合，最后获得的效果就会非常好。上图的大概<strong>思想</strong>是，<strong>我们建立网络形状拓扑的同时，也可以让他们交换一定量的网络数据、梯度和损失函数，当能够自动化建模的过程，实现的效果非常好</strong>。</p>
+</blockquote>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>[1] <a href="https://www.leiphone.com/news/202008/hBACeSbAY8PIOcbh.html">https://www.leiphone.com/news/202008/hBACeSbAY8PIOcbh.html</a></li>
+<li>[2] <a href="https://gair.leiphone.com/gair/gair2020">https://gair.leiphone.com/gair/gair2020</a></li>
+<li>[3] <a href="https://github.com/jindongwang/transferlearning">TransferLearning-GitHub</a></li>
+</ul>
+<p>最后附一张与杨强教授的合影~
+<img src="https://img.fzhiy.net/img/fl-yq.jpg" alt=""></p>
+<p>欢迎交流，静候你的留言~</p>
+<p>&ndash;fzhiy.更新于2020年8月19日23点47分</p>
+<blockquote>
+<p>文中部分引用了相关文献或者其他资料，如有侵权请邮件[fzhiy270@163.com]联系站长，感谢！</p>
+<p>若有 引用或转载 本文的请贴原文链接: <a href="https://yu-feng.top/archives/6/">https://yu-feng.top/archives/6/</a></p>
+</blockquote>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
