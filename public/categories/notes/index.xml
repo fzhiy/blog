@@ -8,6 +8,24 @@
     <language>en</language>
     <lastBuildDate>Mon, 28 Feb 2022 20:26:40 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/categories/notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>科研/课程/博客/工具</title>
+      <link>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</guid>
+      <description>课程 收录推荐的优质教(课)程类 Python 廖雪峰：Python教程 lijin-THU：中文 Python 笔记 数学 微积分：Essence of calculus — YouTube 线性代数 麻省理工公开</description>
+    </item>
+    
+    <item>
+      <title>笔记导航页</title>
+      <link>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</link>
+      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</guid>
+      <description>写在前面 本文主要汇总所做的一些重要笔记，方便后续查看。 会议 [CCF-GAIR 2020]全球人工智能和机器人峰会 峰会网站入口：https://gair.lei</description>
+    </item>
+    
+    <item>
       <title>[网络编程]TCP/IP网络编程</title>
       <link>https://blog.fzhiy.net/post/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Mon, 28 Feb 2022 20:26:40 +0800</pubDate>
@@ -41,15 +59,6 @@
       
       <guid>https://blog.fzhiy.net/post/2021-06-27-c&#43;&#43;%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
       <description>C++应用程序实用memory的途径 C++ memory primitives new expression 上图中，只有编译器才能调用构造函数（否则报错，示例如下图）。 不能由App.调用构造函数， 可用p</description>
-    </item>
-    
-    <item>
-      <title>[PaperNotes]2021.Robust Blockchained Federated Learning with Model Validation and Proof-of-Stake Inspired </title>
-      <link>https://blog.fzhiy.net/post/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</link>
-      <pubDate>Thu, 27 May 2021 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</guid>
-      <description>Robust Blockchained Federated Learning with Model Validation and Proof-of-Stake Inspired Consensus AAAI 2021 Workshop，Chen Hang - Department of Computer and Information Sciences, University of Delaware, USA Code：https://github.com/hanglear</description>
     </item>
     
     <item>
@@ -206,15 +215,6 @@
     </item>
     
     <item>
-      <title>【待补】迁移学习笔记（二）</title>
-      <link>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link>
-      <pubDate>Sun, 27 Sep 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid>
-      <description>写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。</description>
-    </item>
-    
-    <item>
       <title>迁移学习笔记（一）</title>
       <link>https://blog.fzhiy.net/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
       <pubDate>Sat, 26 Sep 2020 20:47:09 +0800</pubDate>
@@ -302,24 +302,6 @@
       
       <guid>https://blog.fzhiy.net/post/2020-08-13-ccf-gair_2020abductive_learning%E5%8F%8D%E7%BB%8E%E5%AD%A6%E4%B9%A0-%E5%91%A8%E5%BF%97%E5%8D%8E/</guid>
       <description>写在前面 ​ 人工智能前沿专场会议我是通过线上直播观看的，其中给我留下印象最为深刻的则是周志华教授的演讲。给我感觉条理清晰，并且在该演讲中通过设</description>
-    </item>
-    
-    <item>
-      <title>科研/课程/博客/工具</title>
-      <link>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</guid>
-      <description>课程 收录推荐的优质教(课)程类 Python 廖雪峰：Python教程 lijin-THU：中文 Python 笔记 数学 微积分：Essence of calculus — YouTube 线性代数 麻省理工公开</description>
-    </item>
-    
-    <item>
-      <title>笔记导航页</title>
-      <link>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</link>
-      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</guid>
-      <description>写在前面 本文主要汇总所做的一些重要笔记，方便后续查看。 会议 [CCF-GAIR 2020]全球人工智能和机器人峰会 峰会网站入口：https://gair.lei</description>
     </item>
     
     <item>
