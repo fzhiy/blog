@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 16 Apr 2021 20:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[PaperNotes]2020.Optimizing Federated Learning on Non-IID Data with Reinforcement Learning</title>
-      <link>https://blog.fzhiy.net/posts/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</link>
+      <link>https://blog.fzhiy.net/post/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</link>
       <pubDate>Fri, 16 Apr 2021 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</guid>
+      <guid>https://blog.fzhiy.net/post/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</guid>
       <description>Optimizing Federated Learning on Non-IID Data with Reinforcement Learning 文章链接：https://ieeexplore.ieee.org/document/9155494/ 作者：Hao Wang，</description>
     </item>
     

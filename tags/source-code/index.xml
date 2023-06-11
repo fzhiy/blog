@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 22 Feb 2022 22:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/source-code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[源码]Linux 0.11核心代码与操作系统设计思想</title>
-      <link>https://blog.fzhiy.net/posts/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
+      <link>https://blog.fzhiy.net/post/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
       <pubDate>Tue, 22 Feb 2022 22:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/posts/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
+      <guid>https://blog.fzhiy.net/post/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
       <description>Linux 0.11 源码 学习资料： https://github.com/sunym1993/flash-linux0.11-talk Linux 0.11源码讲解 及 相关学习内容 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html Intel手册 第一部分：进入内核前的苦力活 1.1 最开始的两行代码 上图中启动区的定义：只要硬</description>
     </item>
     
