@@ -8,12 +8,21 @@
     <language>en</language>
     <lastBuildDate>Sat, 08 Apr 2023 13:48:32 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>[C&#43;&#43;侯捷视频课笔记]C&#43;&#43;标准库——架构&amp;源码</title>
-      <link>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</link>
-      <pubDate>Sat, 05 Mar 2022 09:21:56 +0800</pubDate>
+      <title>科研/课程/博客/工具</title>
+      <link>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
-      <description>[CPP侯捷视频课笔记]C++标准库——架构&amp;amp;源码 [TOC] 源码之前 了无秘密 —— 侯捷 第一讲 架构 基础：C++基本语法（包括如何正确使用模板，t</description>
+      <guid>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</guid>
+      <description>课程 收录推荐的优质教(课)程类 Python 廖雪峰：Python教程 lijin-THU：中文 Python 笔记 数学 微积分：Essence of calculus — YouTube 线性代数 麻省理工公开</description>
+    </item>
+    
+    <item>
+      <title>笔记导航页</title>
+      <link>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</link>
+      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</guid>
+      <description>写在前面 本文主要汇总所做的一些重要笔记，方便后续查看。 会议 [CCF-GAIR 2020]全球人工智能和机器人峰会 峰会网站入口：https://gair.lei</description>
     </item>
     
     <item>
@@ -35,6 +44,15 @@
     </item>
     
     <item>
+      <title>[Reading随记]The PhD Grind</title>
+      <link>https://blog.fzhiy.net/post/2023-03-26-reading%E9%9A%8F%E8%AE%B0the_phd_grind/</link>
+      <pubDate>Sun, 26 Mar 2023 16:53:56 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2023-03-26-reading%E9%9A%8F%E8%AE%B0the_phd_grind/</guid>
+      <description>THE PH.D. GRIND A Ph.D. Student Memoir 随记，有兴趣建议阅读原文。 Preface 本书是作者Guo对于2006-2012 6年在Stanford大学读博期间的回忆录。 受众： 对于读Ph</description>
+    </item>
+    
+    <item>
       <title>基于ELK&#43;Kafka搭建日志平台架构设计与初步实现</title>
       <link>https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Fri, 17 Mar 2023 15:07:10 +0800</pubDate>
@@ -44,12 +62,39 @@
     </item>
     
     <item>
+      <title>雅思自学备考</title>
+      <link>https://blog.fzhiy.net/post/2022-12-18-%E9%9B%85%E6%80%9D%E8%87%AA%E5%AD%A6%E5%A4%87%E8%80%83/</link>
+      <pubDate>Sun, 18 Dec 2022 12:46:56 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-12-18-%E9%9B%85%E6%80%9D%E8%87%AA%E5%AD%A6%E5%A4%87%E8%80%83/</guid>
+      <description>最重要的是剑雅真题，考前需要多练习找考试感觉；着重提升单项（尽量齐头并进），比如听力 地图题、多选题、数字等；阅读TFN题。 前言 说下背景，英语</description>
+    </item>
+    
+    <item>
+      <title>[随记]以终为始，轻装前行</title>
+      <link>https://blog.fzhiy.net/post/2022-09-03-%E9%9A%8F%E8%AE%B0%E4%BB%A5%E7%BB%88%E4%B8%BA%E5%A7%8B%E8%BD%BB%E8%A3%85%E5%89%8D%E8%A1%8C/</link>
+      <pubDate>Sat, 03 Sep 2022 00:56:56 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-09-03-%E9%9A%8F%E8%AE%B0%E4%BB%A5%E7%BB%88%E4%B8%BA%E5%A7%8B%E8%BD%BB%E8%A3%85%E5%89%8D%E8%A1%8C/</guid>
+      <description>以终为始，轻装前行 截止到今天，暑期实习结束了。也不知道为什么，一如往常的周五，健身房里跑步，但是脑海里一直都会浮现这段时间所经历过的事。可能</description>
+    </item>
+    
+    <item>
       <title>[刷题]每日一题</title>
       <link>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
       <pubDate>Sat, 13 Aug 2022 17:08:33 +0800</pubDate>
       
       <guid>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</guid>
       <description>LeetCode每日一题 有练手的时候，不出意外就会提交到GitHub，也希望能够坚持吧！ （每次flag倒了以后的再次豪言壮志，最好的就是每天</description>
+    </item>
+    
+    <item>
+      <title>[随记]匆匆时光，入职月余</title>
+      <link>https://blog.fzhiy.net/post/2022-07-22-%E9%9A%8F%E8%AE%B0%E5%8C%86%E5%8C%86%E6%97%B6%E5%85%89%E5%85%A5%E8%81%8C%E6%9C%88%E4%BD%99/</link>
+      <pubDate>Fri, 22 Jul 2022 03:38:56 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/2022-07-22-%E9%9A%8F%E8%AE%B0%E5%8C%86%E5%8C%86%E6%97%B6%E5%85%89%E5%85%A5%E8%81%8C%E6%9C%88%E4%BD%99/</guid>
+      <description>匆匆时光，入职月余随记 真的很奇怪，未曾想到会在这个时间来写下这篇随记。 （当前时间：2022年7月22日凌晨2点40分）是的，我失眠了。 明明在</description>
     </item>
     
     <item>
@@ -68,15 +113,6 @@
       
       <guid>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
       <description>1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test.</description>
-    </item>
-    
-    <item>
-      <title>[MySQL]《从根儿上理解MySQL》笔记</title>
-      <link>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</guid>
-      <description>上一次完整的读完了这本书，记得说要写个笔记来着，但是读完发现好多，就忘却了整理这事。到现在也没剩多少了，重读记点重点内容复习下 1.初识MyS</description>
     </item>
     
     <item>
@@ -125,6 +161,15 @@
     </item>
     
     <item>
+      <title>[C&#43;&#43;侯捷视频课笔记]C&#43;&#43;标准库——架构&amp;源码</title>
+      <link>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Sat, 05 Mar 2022 09:21:56 +0800</pubDate>
+      
+      <guid>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</guid>
+      <description>[CPP侯捷视频课笔记]C++标准库——架构&amp;amp;源码 [TOC] 源码之前 了无秘密 —— 侯捷 第一讲 架构 基础：C++基本语法（包括如何正确使用模板，t</description>
+    </item>
+    
+    <item>
       <title>[刷题]LeetCode每日一题[2022.03]</title>
       <link>https://blog.fzhiy.net/post/2022-03-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</link>
       <pubDate>Wed, 02 Mar 2022 22:47:09 +0800</pubDate>
@@ -158,15 +203,6 @@
       
       <guid>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description>第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在</description>
-    </item>
-    
-    <item>
-      <title>[MySQL]MySQL技术内幕_InnoDB存储引擎（未完）</title>
-      <link>https://blog.fzhiy.net/post/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</link>
-      <pubDate>Thu, 24 Feb 2022 12:39:35 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</guid>
-      <description>MySQL技术内幕_InnoDB存储引擎 [TOC] ch01 MySQL体系结构和存储引擎 ch02 InnoDB存储引擎 InnoDB关键特性 插入缓冲（Insert Bu</description>
     </item>
     
     <item>
@@ -275,15 +311,6 @@
       
       <guid>https://blog.fzhiy.net/post/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</guid>
       <description>C++ 《C++语言的设计与演化》：可以用来理解C++的设计思路，知其所以然 《Effective C++》：很多关于C++方面面试问题的出处 《Mor</description>
-    </item>
-    
-    <item>
-      <title>[PaperNotes]2021.Robust Blockchained Federated Learning with Model Validation and Proof-of-Stake Inspired </title>
-      <link>https://blog.fzhiy.net/post/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</link>
-      <pubDate>Thu, 27 May 2021 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</guid>
-      <description>Robust Blockchained Federated Learning with Model Validation and Proof-of-Stake Inspired Consensus AAAI 2021 Workshop，Chen Hang - Department of Computer and Information Sciences, University of Delaware, USA Code：https://github.com/hanglear</description>
     </item>
     
     <item>
@@ -476,15 +503,6 @@
     </item>
     
     <item>
-      <title>【待补】迁移学习笔记（二）</title>
-      <link>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link>
-      <pubDate>Sun, 27 Sep 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid>
-      <description>写在前面 ​ 参考文献：Transfer Adaptation Learning: A Decade Survey，这是2019年的一篇综述，简单看了一下发现信息量有点大（真就挖坑“把自己埋了”）。</description>
-    </item>
-    
-    <item>
       <title>迁移学习笔记（一）</title>
       <link>https://blog.fzhiy.net/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
       <pubDate>Sat, 26 Sep 2020 20:47:09 +0800</pubDate>
@@ -590,24 +608,6 @@
       
       <guid>https://blog.fzhiy.net/post/2020-08-13-ccf-gair_2020abductive_learning%E5%8F%8D%E7%BB%8E%E5%AD%A6%E4%B9%A0-%E5%91%A8%E5%BF%97%E5%8D%8E/</guid>
       <description>写在前面 ​ 人工智能前沿专场会议我是通过线上直播观看的，其中给我留下印象最为深刻的则是周志华教授的演讲。给我感觉条理清晰，并且在该演讲中通过设</description>
-    </item>
-    
-    <item>
-      <title>科研/课程/博客/工具</title>
-      <link>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</guid>
-      <description>课程 收录推荐的优质教(课)程类 Python 廖雪峰：Python教程 lijin-THU：中文 Python 笔记 数学 微积分：Essence of calculus — YouTube 线性代数 麻省理工公开</description>
-    </item>
-    
-    <item>
-      <title>笔记导航页</title>
-      <link>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</link>
-      <pubDate>Thu, 13 Aug 2020 20:47:09 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</guid>
-      <description>写在前面 本文主要汇总所做的一些重要笔记，方便后续查看。 会议 [CCF-GAIR 2020]全球人工智能和机器人峰会 峰会网站入口：https://gair.lei</description>
     </item>
     
     <item>

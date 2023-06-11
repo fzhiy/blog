@@ -16,14 +16,5 @@
       <description>1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test.</description>
     </item>
     
-    <item>
-      <title>[MySQL]《从根儿上理解MySQL》笔记</title>
-      <link>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
-      
-      <guid>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</guid>
-      <description>上一次完整的读完了这本书，记得说要写个笔记来着，但是读完发现好多，就忘却了整理这事。到现在也没剩多少了，重读记点重点内容复习下 1.初识MyS</description>
-    </item>
-    
   </channel>
 </rss>
