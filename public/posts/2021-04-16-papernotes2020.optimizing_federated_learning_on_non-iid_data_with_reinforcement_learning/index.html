@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[PaperNotes]2020.Optimizing Federated Learning on Non-IID Data with Reinforcement Learning - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Optimizing Federated Learning on Non-IID Data with Reinforcement Learning 文章链接：https://ieeexplore.ieee.org/document/9155494/ 作者：Hao Wang，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[PaperNotes]2020.Optimizing Federated Learning on Non-IID Data with Reinforcement Learning" />
+<meta property="og:description" content="Optimizing Federated Learning on Non-IID Data with Reinforcement Learning 文章链接：https://ieeexplore.ieee.org/document/9155494/ 作者：Hao Wang，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-16T20:47:09+08:00" />
+<meta property="article:modified_time" content="2021-04-16T20:47:09+08:00" />
+
+<meta itemprop="name" content="[PaperNotes]2020.Optimizing Federated Learning on Non-IID Data with Reinforcement Learning">
+<meta itemprop="description" content="Optimizing Federated Learning on Non-IID Data with Reinforcement Learning 文章链接：https://ieeexplore.ieee.org/document/9155494/ 作者：Hao Wang，"><meta itemprop="datePublished" content="2021-04-16T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2021-04-16T20:47:09+08:00" />
+<meta itemprop="wordCount" content="2615">
+<meta itemprop="keywords" content="PaperNotes-Series,Federated Learning,Reinforcement Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[PaperNotes]2020.Optimizing Federated Learning on Non-IID Data with Reinforcement Learning"/>
+<meta name="twitter:description" content="Optimizing Federated Learning on Non-IID Data with Reinforcement Learning 文章链接：https://ieeexplore.ieee.org/document/9155494/ 作者：Hao Wang，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h1 id="optimizing-federated-learning-on-non-iid-data-with-reinforcement-learning">Optimizing Federated Learning on Non-IID Data with Reinforcement Learning</h1>
+<p>文章链接：https://ieeexplore.ieee.org/document/9155494/</p>
+<p>作者：<a href="https://ieeexplore.ieee.org/author/37088456423">Hao Wang</a>，<a href="https://ieeexplore.ieee.org/author/37088457244">Zakhary Kaplan</a>，<a href="https://ieeexplore.ieee.org/author/37409788400">Di Niu</a>，<a href="https://ieeexplore.ieee.org/author/37085743244">Baochun Li</a></p>
+<p>发表：IEEE INFOCOM 2020 - IEEE Conference on Computer Communications</p>
+<p>截止当前（2021.04.16）被引次数：25</p>
+<h2 id="zotero-links">Zotero links</h2>
+<ul>
+<li><a href="zotero://select/items/1_KA9DGR8J">Local library</a></li>
+<li><a href="http://zotero.org/users/6745993/items/KA9DGR8J">Cloud library</a></li>
+</ul>
+<h2 id="fl的两大挑战">FL的两大挑战</h2>
+<p>SEMI - 2020 - Applying Deep Reinforcement Learning Techniques in Federated Learning：https://www.youtube.com/watch?v=JlvizFBFCTw</p>
+<ul>
+<li>
+<p><img src="https://img.fzhiy.net/img/image-20210413195528689.png" alt=""></p>
+<p>减少开销的可能方法</p>
+<ul>
+<li>减少通信轮数：<strong>本地更新</strong></li>
+<li>减少每一轮传输的信息大小</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/image-20210413195757951.png" alt=""></p>
+</li>
+<li>
+<p>统计异构性 non-id 数据</p>
+<p>ML算法假设训练数据是iid。 FL算法的训练数据基于non-iid data （<strong>non-iid 数据向training中引入了bias，导致更慢的收敛</strong>）</p>
+<p><img src="https://img.fzhiy.net/img/image-20210413200644595.png" alt=""></p>
+</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/image-20210413200806472.png" alt=""></p>
+<p>上面的解决方案带来两个问题：1）如何获得真正的共享数据【因为所有的数据都在本地】；2）实际上增加了更多的通讯开销，  用于下载共享数据</p>
+<p>==&raquo; client selection，选择一部分设备来减少设备之间的开销。</p>
+<h2 id="abstract">Abstract</h2>
+<p><strong>痛点：1） 移动设备有限的网络连接， 使得FL在所有参与设备上并行执行模型更新与聚合不实际；2）non-iid data对FL的收敛与训练速度增加了额外的挑战</strong></p>
+<p>本文提出 <strong>FAVOR</strong>，一种经验驱动的控制（<strong>experience-driven control</strong>）框架  智能选择客户端设备参与每一轮的联邦学习，以抵消non-iid data引入的偏差，加快收敛速度。</p>
+<p><strong>an implicit connection</strong> between <strong>the distribution of training data on a device</strong> and <strong>the model weights</strong> trained based on those data 发现在这些实验数据中，设备上训练数据的分布与模型权重之间存在 <strong>隐含的联系</strong>，使得我们<strong>可以根据上传的模型权重 to profile the data distribution（来分析设备上的数据分布）</strong> ==&raquo; states：本地模型权重和共享的全局模型</p>
+<p>提出基于dqn的一种机制在每轮通信中选择一个设备集合 来最大化奖励值，促进了验证准确率的增加，并惩罚（减少）了更多通信轮数的使用。</p>
+<p>实验： PyTorch，dataset：MNIST，FashionMNIST，CIFAR-10， 与FedAvg算法对比</p>
+<h2 id="introduction">Introduction</h2>
+<p>已有研究指出<strong>FL的性能，尤其是FedAvg</strong>，因为<strong>non-iid data</strong>的出现而<strong>严重下降</strong>。</p>
+<p>FedAvg随机选择一个设备子集合，并将他们的本地模型权重平均后更新全局模型。 从全局来看，<strong>随机选择</strong>的本地数据集可能不会影响真实数据分布，但一定 <strong>引入bias到全局模型更新中</strong>。 non-iid data设备之间很大不同，聚合分散模型<strong>减慢了收敛</strong>继而<strong>降低了模型精度</strong>。</p>
+<p>FAVOR， aim to accelerate and stabilize the federated learning process  <strong>基于RL</strong>通过每个通信轮<strong>主动选择最佳的设备集合</strong>抵消non-iid data引入的偏差。</p>
+<h2 id="drl-for-client-selection">DRL for Client Selection</h2>
+<p>训练DRL智能体的目标是：使FL尽可能快的收敛到目标准确率（target accuracy）。</p>
+<p>在此框架中，智能体<strong>不必</strong>收集 或 检查任何来自移动设备数据样本，<strong>只需要传输模型权重</strong> ==&raquo; 因此origin FL一样保护了样本级的隐私。 框架只依赖<strong>模型权重信息</strong>来决定 <strong>哪个设备可能对全局模型的提升最大</strong>， 因为在<strong>设备上的数据分布</strong>和在那些数据上执行SGD获得的<strong>本地模型权重</strong>有<strong>隐含的联系</strong>。</p>
+<h3 id="the-agent-based-on-deep-q-network">The Agent based on Deep Q-Network</h3>
+<p>考虑到 <strong>limited available traces from federated learning jobs，</strong> 相比策略梯度方法与actor-critic方法，DQN训练更高效，而且能高效重复利用数据。</p>
+<ul>
+<li>
+<p>State</p>
+<p>$s_t = (w_t,(w_t)^{(1)},&hellip;,(w_t)^{(N)} )$ , $w_t$ 表示t轮训练后全局模型的权重，$(w_t)^{(k)}$ 表示第k个设备的本地模型权重</p>
+<p><strong>没有引入额外的通信开销</strong>给设备， 因为只有设备k被选中作为client训练时，才会更新$w^{(k)}$</p>
+<p>为解决<strong>巨大状态空间问题</strong>（CNN模型包含百万个权重），采用高效且轻量的 <strong>降维技术</strong> 。如本节第三部分</p>
+</li>
+<li>
+<p>Action</p>
+<p>client selection可能导致巨大的动作空间$C_K^N$ ，这使得RL training复杂化了。</p>
+<p>==&raquo; <strong>a trick</strong> ：基于DQN每一轮FL训练 智能体从N台设备中只选出一台设备。 DQN智能体学习最优动作值函数$Q^*(s_t,a)$ 的一个近似器（approximator），用于<strong>评估</strong>从$s_t$开始的最大化预计收益的<strong>action</strong> 。 ==&raquo; 因此动作空间减少为{${1,2,&hellip;,N}$ } ，a=i表示选择设备i参与FL训练</p>
+<p>每个动作值 代表智能体在状态$s_t$时选择一个特定动作a 获得的最大化预计收益。然后<strong>选择K台设备</strong>，每台设备对应一个不同的动作a，因此得到**$Q^*{(s_t,a)}$的top-K values**</p>
+</li>
+<li>
+<p>Reward</p>
+<p>$r_t = \Xi^{(w_t-\Omega)} -1，t = 1,&hellip;,T$，其中$w_t$是全局模型在held-out验证集上经过t轮验证后达到的测试精度（<strong>testing accuracy</strong>），$\Omega$是目标精度(target accuracy)，$\Xi$ 是正常数 在测试精度$w_t$下确保$r_t$呈指数式增长。$r_t \in (-1,0], 0\leq w_t \leq \Omega \leq 1$。当$w_t = \Omega 时，$此时$r_t$达到其最大值0。</p>
+<p>训练DQN智能体 来最大化累计折扣奖励的期望 $R=\sum^T_{t=1}\gamma ^{t-1}r_t=\sum^T_{t=1}\gamma^{t-1}(\Xi ^{(w_t-\Omega)}-1)$ ，其中折扣因子 $\gamma \in (0,1]$ 。</p>
+<p>$r_t$中的两个术语 $\Xi^{(w_t - \Omega)}$ 和 $-1$ motivations，</p>
+<p><strong>前者激励智能体选择设备达到更高的测试精度$w_t$</strong>，$\Xi$ 用$w_t$控制奖励$r_t$的增长速度。通常，ML训练过程中，模型精度以更慢的pace增长，意味着轮数t增加时，$|w_t-w_{t-1}|$ 下降。因此，我们使用**指数项**来放大随着FL进展到后期的边缘精度增加。在本实验中 $\Xi$ 设置为64。</p>
+<p><strong>后者-1，鼓励智能体以更少的轮数完成训练，因为消耗越多的轮数，智能体获得的累计奖励越少。</strong></p>
+</li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<p><img src="https://img.fzhiy.net/img/20210416211955.png" alt=""></p>
+<p>上图为FAVOR在每一轮用DRL智能体选择设备执行FL的步骤。</p>
+<ul>
+<li>Step1：FL服务器检查所有N台合格的设备</li>
+<li>Step2：没太设备从服务器下载初始随机模型权重$w_{init}$，在每个回合执行本地SGD，然后将结果模型权重 ${w_1^{(k)}, k \in [N]}$返回给服务器</li>
+<li>Step3：在第t轮（$t=1,2,&hellip;,$），接收到上传的本地权重后，更新存储在服务器上的本地模型权重的对应副本。DQN智能体计算所有设备a=1,&hellip;,N的 $Q(s_t,a;\theta)$</li>
+<li>Step4：DQN智能体选择K台设备对应top-K values，$Q(s_t,a;\theta)$，a=1,&hellip;,N。被选的K台设备下载最新的全局模型权重$w_t$，然后在本地执行一轮SGD来获得{${ w_{t+1}^{k} k \in [K] }$ }</li>
+<li>Step5：上传{${ w_{t+1}^{k} k \in [K] }$ }到服务器，基于FEDAVG计算$w_{t+1}$。进入t+1轮并重复Step3-5</li>
+</ul>
+<h3 id="dimension-reduction">Dimension Reduction</h3>
+<p>PCA提取两个主成分，将状态空间映射到横纵坐标为这两个主成分的平面空间上</p>
+<h2 id="evaluation">Evaluation</h2>
+<p>代码研究</p>
+<h2 id="conclusion-remarks">Conclusion Remarks</h2>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

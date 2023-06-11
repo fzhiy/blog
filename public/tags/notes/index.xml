@@ -9,19 +9,19 @@
     <lastBuildDate>Mon, 28 Feb 2022 20:26:40 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[网络编程]TCP/IP网络编程</title>
-      <link>https://blog.fzhiy.net/post/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <link>https://blog.fzhiy.net/posts/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Mon, 28 Feb 2022 20:26:40 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://blog.fzhiy.net/posts/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description>基于TCP的服务端/客户端 类比 打电话 TCP / IP协议栈 可以理解为数据收发分成 4 个层次化过程。 TCP和UDP是以IP层提供的路径信息为基础 完成实际</description>
     </item>
     
     <item>
       <title>[网络编程]UNIX网络编程</title>
-      <link>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <link>https://blog.fzhiy.net/posts/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Sat, 26 Feb 2022 20:26:40 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://blog.fzhiy.net/posts/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description>第二部分 基本套接字编程 第3章 套接字编程简介 套接字地址结构 IPv4套接字地址结构（又称 网络套接字地址结构） 以 sockaddr_in命名，定义在</description>
     </item>
     

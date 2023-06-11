@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[PaperNotes]2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System 本文总结原文为《Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System》Yang Zhao et al。笔记主要供自己复看复" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2020-08-12-papernotes2019.mobile_edge_computing_blockchain_and_reputation-based_crowdsourcing_iot_federated_learning_a_secure_decentralized_and_privacy-preserving_system/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[PaperNotes]2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System" />
+<meta property="og:description" content="2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System 本文总结原文为《Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System》Yang Zhao et al。笔记主要供自己复看复" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2020-08-12-papernotes2019.mobile_edge_computing_blockchain_and_reputation-based_crowdsourcing_iot_federated_learning_a_secure_decentralized_and_privacy-preserving_system/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-12T20:47:09+08:00" />
+<meta property="article:modified_time" content="2020-08-12T20:47:09+08:00" />
+
+<meta itemprop="name" content="[PaperNotes]2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System">
+<meta itemprop="description" content="2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System 本文总结原文为《Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System》Yang Zhao et al。笔记主要供自己复看复"><meta itemprop="datePublished" content="2020-08-12T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2020-08-12T20:47:09+08:00" />
+<meta itemprop="wordCount" content="2028">
+<meta itemprop="keywords" content="Blockchain,PaperNotes-Series,Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[PaperNotes]2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System"/>
+<meta name="twitter:description" content="2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System 本文总结原文为《Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System》Yang Zhao et al。笔记主要供自己复看复"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h1 id="2019mobile-edge-computing-blockchain-and-reputation-based-crowdsourcing-iot-federated-learning-a-secure-decentralized-and-privacy-preserving-system">2019.Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System</h1>
+<blockquote>
+<p>本文总结原文为《Mobile Edge Computing, Blockchain and Reputation-based Crowdsourcing IoT Federated Learning A Secure Decentralized and Privacy-preserving System》Yang Zhao et al。笔记主要供自己复看复学，如有不当或错误，欢迎拍砖~</p>
+</blockquote>
+<h2 id="总结">总结</h2>
+<p><strong>主要服务于智能物联网设备制造商（工业应用），从用户获得有效反馈来提高产品和服务质量（分析并预测客户对物联网设备的需求）。</strong></p>
+<p><strong>着重于解决某一问题提出的新方法的应用 且 在前人基础上所作的改进。 <u><em>注意系统假设部分不合理的地方以及Idea的提出</em></u></strong></p>
+<h2 id="研究目标">研究目标</h2>
+<p>研究该系统提供强大的计算能力、机密性、审计、分布式存储、并鼓励客户参与协作式联邦学习，<strong>从而使智能物联网设备制造商能够通过预测客户的消费行为来更好地调整其业务计划。</strong></p>
+<h2 id="问题陈述">问题陈述</h2>
+<p><strong>由于问题有限，传统调查无法反映客户的实际情况。此外，调查结果还受到各种主观因素的影响</strong>。因此物联网公司致力从用户获得反馈来提高产品和服务质量的目的受阻（受限）。</p>
+<h2 id="方法">方法</h2>
+<h3 id="新方法技术-的应用">新方法/技术 的应用</h3>
+<ul>
+<li>为鼓励用户参与训练任务，<strong>使用移动边缘计算服务器增强计算力在近数据源处来加快训练</strong></li>
+<li>为解决恶意客户上传 <strong>有害更新 和 移动边缘计算服务第三方非授权下使用或售卖客户数据问题，</strong> <strong>在设计系统时使用区块链和差分隐私技术；</strong></li>
+<li><strong>区块链的应用能够保持众包系统运行同时节省高昂的服务费；</strong></li>
+<li><strong>为了保护训练数据特征的隐私，为客户引入了 分区的深度模型培训方法(a partitioned deep model training approach)</strong></li>
+</ul>
+<h3 id="众包系统所做假设assumptions">众包系统所做假设(Assumptions)</h3>
+<ol>
+<li><strong>假设客户不愿意分享他们的可能含有隐私信息的原始数据，因此使用联邦学习</strong></li>
+<li><strong>区块链保证了只有合格的客户才能访问（<strong>the blockchain is permissioned so that only eligible
+customers can access</strong>）</strong></li>
+<li><strong><u>参与客户是诚实的，并且在未经批准的情况下不会泄露公司的模型。</u></strong>  【<u>在这一点中，假设客户是诚实的，不太符合实际。 实际情况中不可能都是诚实的且不泄露公司的模型。 】Idea：这里是否可以将系统假设更改为 参与客户都是不诚实的，对此设计系统？？？</u></li>
+</ol>
+<h3 id="相关工作related-work">相关工作（Related Work）</h3>
+<ul>
+<li>【9】<strong>提出了协同学习的深链（deepchain）系统，但是没有考虑在传输梯度和学习模型过程中的恶意攻击；</strong></li>
+<li>【7】<strong>提出的分层深度模型训练方法  是作为本众包系统的建立基础使用</strong>；</li>
+<li>【10】<strong>设计了In-Edge AI framework在交换参数过程中减少通讯费，使用分布式终端设备和边缘节点来训练模型。但是【10】在模型聚合过程中没有解决任何安全和隐私问题；</strong></li>
+<li>【11】<strong>设计了基于区块链的去中心化的众包框架，但是【11】没有使用如本系统中的差分隐私和签名技术</strong></li>
+<li>【2】<strong>提出 了联邦学习的概念，但是【2】没有考虑在联邦学习过程中的隐私或安全问题</strong></li>
+</ul>
+<h3 id="贡献"><strong>贡献</strong></h3>
+<ul>
+<li><strong>为预测客户在运行物联网设备中的行为提出分层协作学习系统来帮助建立模型。</strong></li>
+<li><strong>将差分隐私技术应用于训练联邦学习模型中，从而对用不能利用学习到的模型推断出客户的敏感信息</strong></li>
+<li><strong>基于区块链的系统通过确保而恶意的模型更新能够追责来增强模型更新的安全</strong></li>
+</ul>
+<h2 id="评估">评估</h2>
+<ol>
+<li>
+<p>Privacy and Security</p>
+<p><strong>本系统应用差分隐私技术分别保护特征的机密和模型的安全，因此，一定程度上系统保持参与客户的隐私。除此外，在训练过程中，我们通过加入拉普拉斯噪音到提取的特征中来增强隐私保护。进一步，通过发送者对训练模型加密和签名来防止攻击者和冒名顶替者偷取模型或者通过逆工程技术推断原始数据。</strong></p>
+</li>
+<li>
+<p>Delay in Crodsourcing</p>
+<p><strong>不像其他的众包任务，我们系统中的公司偏向 参与者 遵从他们的生活方式而不是赶着完成工作取获取real status。因此，很少使用设备的参与者可能推迟总体众包的进度。</strong></p>
+</li>
+</ol>
+<h2 id="结论">结论</h2>
+<p><strong>提出了基于声誉的众包联邦学习系统给物联网制造商在未来提供更好的服务。使用了多种先进技术来构建系统，包括：MEC、blockchain、distributed storage and federated learning. 还使用了差分隐私技术保护客户的隐私，为众包任务设计了合理的机里机制使得客户愿意参与到众包任务中。 区块链审计协同训练过程中所有客户的更新 以便 系统能够让恶意更新的责任（承担）。</strong></p>
+<h3 id="未来方向和工作">未来方向和工作</h3>
+<p><strong>做更多的实验并且 和现实的物联网设备制造商合作 测试我们的系统。</strong></p>
+<h2 id="笔记">笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+<h3 id="原文参考文献">原文参考文献</h3>
+<ul>
+<li>
+<p>[2] H. B. McMahan, E. Moore, D. Ramage, S. Hampson, and B. A. y Arcas, “Communication-efficient learning of deep networks from decentralized data,” in Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS), 2017.</p>
+</li>
+<li>
+<p>[3] S. Wang, T. Tuor, T. Salonidis, K. K. Leung, C. Makaya, T. He, and K. Chan, “When edge meets learning: Adaptive control for resourceconstrained distributed machine learning,” in IEEE Conference on Computer Communications (INFOCOM), 2018, pp. 63–71.</p>
+</li>
+<li>
+<p>[4] L. Melis, C. Song, E. De Cristofaro, and V. Shmatikov, “Exploiting unintended feature leakage in collaborative learning,” in IEEE Symposium on Security and Privacy (S&amp;P), 2019.</p>
+</li>
+<li>
+<p>[5] C. Fung, C. J. Yoon, and I. Beschastnikh, “Mitigating sybils in federated learning poisoning,” arXiv preprint arXiv:1808.04866, 2018.</p>
+</li>
+<li>
+<p>[7] L. Jiang, X. Lou, R. Tan, and J. Zhao, “Differentially private collaborative learning for the IoT edge,” in International Workshop on Crowd Intelligence for Smart Cities: Technology and Applications (CISC), 2018.</p>
+</li>
+<li>
+<p>[9] J. Weng, J. Weng, J. Zhang, M. Li, Y. Zhang, and W. Luo, “DeepChain: Auditable and privacy-preserving deep learning with blockchain-based incentive,” Cryptology ePrint Archive, Report 2018/679, 2018.</p>
+</li>
+<li>
+<p>[10] X. Wang, Y. Han, C. Wang, Q. Zhao, X. Chen, and M. Chen, “In-edge AI: Intelligentizing mobile edge computing, caching and communication by federated learning,” IEEE Network, 2019 (to appear).</p>
+</li>
+<li>
+<p>[11] M. Li, J. Weng, A. Yang, W. Lu, Y. Zhang, L. Hou, J.-N. Liu, Y. Xiang, and R. Deng, “CrowdBC: A blockchain-based decentralized framework for crowdsourcing,” IEEE Transactions on Parallel and Distributed Systems, 2018.</p>
+</li>
+</ul>
+<h3 id="本文参考文献">本文参考文献</h3>
+<ul>
+<li>Zhao Y, Zhao J, Jiang L, et al. Mobile edge computing, blockchain and reputation-based crowdsourcing iot federated learning: A secure, decentralized and privacy-preserving system[J]. arXiv preprint arXiv:1906.10893, 2019.</li>
+</ul>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

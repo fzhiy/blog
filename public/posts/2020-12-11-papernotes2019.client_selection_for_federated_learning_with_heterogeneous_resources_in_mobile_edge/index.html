@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[PaperNotes]2019.Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge Zotero链接: 从我的文库打开 标签1 标签2 标签3 标签4 Federated Learning Client Selection FedCS MEC 回顾本文重点内容见Conclusion。论文阅读笔" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2020-12-11-papernotes2019.client_selection_for_federated_learning_with_heterogeneous_resources_in_mobile_edge/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[PaperNotes]2019.Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge" />
+<meta property="og:description" content="Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge Zotero链接: 从我的文库打开 标签1 标签2 标签3 标签4 Federated Learning Client Selection FedCS MEC 回顾本文重点内容见Conclusion。论文阅读笔" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2020-12-11-papernotes2019.client_selection_for_federated_learning_with_heterogeneous_resources_in_mobile_edge/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-12-11T20:47:09+08:00" />
+<meta property="article:modified_time" content="2020-12-11T20:47:09+08:00" />
+
+<meta itemprop="name" content="[PaperNotes]2019.Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge">
+<meta itemprop="description" content="Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge Zotero链接: 从我的文库打开 标签1 标签2 标签3 标签4 Federated Learning Client Selection FedCS MEC 回顾本文重点内容见Conclusion。论文阅读笔"><meta itemprop="datePublished" content="2020-12-11T20:47:09+08:00" />
+<meta itemprop="dateModified" content="2020-12-11T20:47:09+08:00" />
+<meta itemprop="wordCount" content="3073">
+<meta itemprop="keywords" content="PaperNotes-Series,Federated Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[PaperNotes]2019.Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge"/>
+<meta name="twitter:description" content="Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge Zotero链接: 从我的文库打开 标签1 标签2 标签3 标签4 Federated Learning Client Selection FedCS MEC 回顾本文重点内容见Conclusion。论文阅读笔"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h1 id="client-selection-for-federated-learning-with-heterogeneous-resources-in-mobile-edge">Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge</h1>
+<blockquote>
+<p>Zotero链接: <a href="zotero://select/items/1_5AE9IDJU">从我的文库打开</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>标签1</th>
+<th>标签2</th>
+<th>标签3</th>
+<th>标签4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Federated Learning</td>
+<td>Client Selection</td>
+<td>FedCS</td>
+<td>MEC</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>回顾本文重点内容见Conclusion。论文阅读笔记仅供参考交流~</p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="abstract">Abstract</h2>
+<p>虽然Google提出的Federated protocol中的客户端不需要公开自己的私有数据，但当某些客户端计算资源有限(例如，需要较长的更新时间)或无线信道条件较差(较长的上传时间)时，整个培训过程会变得低效。因此本文提出FedCS，其能够解决资源限制下的client selection问题，并能准许服务器聚合尽可能多的client updates以及提升ML模型的性能。</p>
+<h2 id="contribution">Contribution</h2>
+<p>FedCS &ndash; a protocol：该系统在MEC框架的操作人员积极地管理异类客户端的资源，能有效地运行FL。特别是FedCS为客户端在FL protocol下载、更新、上传ML模型设置了一个deadline。</p>
+<h2 id="method">Method</h2>
+<blockquote>
+<p><img src="https://img.fzhiy.net/img/image-20201210190159845.png" alt=""></p>
+</blockquote>
+<p>[6] T. Nishio, R. Shinkuma, T. Takahashi, and N. B. Mandayam, “Serviceoriented heterogeneous resource sharing for optimizing service latency
+in mobile cloud,” in Proc. of the International Workshop on Mobile Cloud Computing &amp; Networking, July 2013, pp. 19–26.
+[7] S. Sardellitti, G. Scutari, and S. Barbarossa, “Joint optimization of radio and computational resources for multicell mobile-edge computing,”
+IEEE Transactions on Signal and Information Processing over Networks, vol. 1, no. 2, pp. 89–103, June 2015.
+[8] Y. Yu, J. Zhang, and K. B. Letaief, “Joint subcarrier and CPU time allocation for mobile edge computing,” in Proc. of the IEEE Globecom,
+Dec. 2016, pp. 1–6.</p>
+<p>以上方法被设计用于<strong>最小化通用计算任务的计算时间 和/或 能耗</strong>。而本文方法针对<strong>最大化训练ML模型的效率</strong>。本文工作开始假设了一个不同的场景，即每个移动客户端在执行ML任务时都有数据和计算资源来保护客户端数据隐私。 这些不同点激发了我们提出一个新的定制的MEC协议和算法。</p>
+<p><strong>本文与其他已有方法的不同点在于考虑了客户端的异质计算与通信 和/或 数据资源。</strong> 模型压缩技术的使用能帮助提升本文协议的整体效率。</p>
+<h3 id="assumption">Assumption</h3>
+<p>我们假设每个客户端在考虑其信道状态的同时，适当地确定了无线电通信的调制和编码方案，使得包丢失率可以忽略不计。这导致每个客户端上载模型参数的吞吐量不同，尽管分配RBs（RBs：在LTE中定义的带宽资源的最小单位）的数量是恒定的。假设BS广播和组播传输的吞吐量为受最坏信道条件下客户端的吞吐量限制。尽管如此，<strong>我们仍然假设每个客户端的通道状态和吞吐量如上所述是稳定的</strong>。</p>
+<h3 id="fedcs-protocol">FedCS Protocol</h3>
+<p><img src="https://img.fzhiy.net/img/image-20201210191752315.png" alt=""></p>
+<p>The key idea of FedCS：采用two-step client selection。</p>
+<ul>
+<li>step1：Resource Request，即 要求随机客户端通知MEC操作员他们的资源信息 如无限通道状态、计算能力、与当前训练任务相关的数据资源的大小</li>
+<li>step2：Client Selection，评估Distribution和Scheduled Update and Upload所需时间并确定哪个客户端执行这些步骤</li>
+</ul>
+<p><img src="https://img.fzhiy.net/img/image-20201210205012741.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/image-20201211084151023.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/image-20201211084201241.png" alt=""></p>
+<p>Client Selection的目标为最大化选择客户端的数量，即 $max_S|S|$.</p>
+<p><img src="https://img.fzhiy.net/img/image-20201211084610678.png" alt=""></p>
+<p>$T_{i}^{UL}$ 表示客户端upload模型更新时间的总和，$t_{k_j}^{UL}$表示第$k_j$个客户端upload模型更新的时间，当i != 0时，$\theta _i$ 表示update与upload model 过程的总时间。</p>
+<p><img src="https://img.fzhiy.net/img/image-20201210205130489.png" alt=""></p>
+<p>Client Selection最大化|S|的形式化表示如下：</p>
+<p><img src="https://img.fzhiy.net/img/image-20201211085725280.png" alt=""></p>
+<h3 id="optimization-strategies">Optimization strategies</h3>
+<p>为了解决最大化问题，针对背包约束的最大化问题，提出基于贪心算法的启发式算法。</p>
+<p>如上图Algorithm 3，step 3, 4, 9迭代加入模型上传与更新消耗最少时间的客户端 直至时间t达到**设定的deadline $T_{round}$** （step 5, 6, 7, 8）。该算法的复杂度为 $O(|K^{'}||S|)$</p>
+<h3 id="selection-of-t_round">Selection of $T_{round}$</h3>
+<p>如果选取一个大的$T_{round}$， 则我们期望更多的客户端参与到每一轮模型更新与上传。然而，直到deadline时，这同时会减少更新聚合的可能次数（更多客户端消耗时间在上传更新模型上了）。 因此，在实验评估部分通过不同的 $T_{round}$选取展示对训练模型的最终表现的影响。</p>
+<h2 id="experiment">Experiment</h2>
+<h3 id="simulated-environment">Simulated Environment</h3>
+<p>基于假设部分，假设FL processes在网络条件稳定以及客户端设备可能在午夜或清晨未使用或stationary条件下进行。因此，本文作者将平均吞吐量视作稳定的。然而，考虑在Scheduled Update and Upload实践过程中可能短期吞吐量的小幅度变化，每次当客户端上传模型时，我们从高斯分布中采样吞吐量，其平均值和标准差分别由平均吞吐量和它的r%值给出。</p>
+<p>$D_m$ 为全局模型的数据大小，upload模型所需时间可计算得 $t_{k}^{UL}=D_m / \theta_k$。model distribution所需时间建模为 $T_S^d = D_m / min_{k\in S}{\theta _k}$。另外，假设服务器得计算能力足够强 以忽略Client Selection and Aggregation的时间，即$T_{cs}=0, T_{agg}=0$。</p>
+<h3 id="experimental-setup-of-ml-tasks">Experimental Setup of ML Tasks</h3>
+<p>数据集：CIFAR-10，MNIST</p>
+<p>对于两个任务，训练数据集分配给K=1000个客户端：首先，随机在100-1000中决定所属每个客户端的图像数据数目；然后将训练数据集划分为两个部分：1）idd setting，2）non-idd setting，划分方式为在统一数据集或多种不同数据集中随机选取样本图像数据；FL protocol的每一轮中，设置C=0.1以选择基于【FedAvg论文】中 $K \times C = 100$客户端K的最大值；最后测试数据集仅用于衡量分类的表现。</p>
+<h3 id="global-models-and-their-updates">Global Models and Their Updates</h3>
+<p>【FedAvg论文】</p>
+<h2 id="results-and-discussions">Results and discussions</h2>
+<h3 id="details">Details</h3>
+<p><img src="https://img.fzhiy.net/img/image-20201211103141720.png" alt=""></p>
+<h3 id="iid-setting">IID setting</h3>
+<p><img src="https://img.fzhiy.net/img/image-20201211102523455.png" alt=""></p>
+<p>达到相同的精度（在设定时间内）FedCS的表现比FedLim更好，并且最终FedCS能达到的精度也比FedLim高。==&raquo; FedCS就训练过程能够提升效率。其中原因有：FedCS能够在每一轮训练中incorporate更多的客户端。</p>
+<p>CIFAR-10和Fashion-MNIST当前的最好准确率分为为0.9769何0.967，而本文模型架构的选择充分表明此新的protocol能够在资源受限的设置下提升训练效率而不是达到最好的准确率。原始的FL【即FedAvg算法】没有deadline限制能够达到的最高准确率与FedCS的差不多。 因此，本文证实了用r参数化的吞吐量和计算能力的不确定性对FedCS的性能影响不大。</p>
+<p><img src="https://img.fzhiy.net/img/image-20201211104720739.png" alt=""></p>
+<p>$T_{round}$的影响：由上图可知，$T_{round}$ 的选择不能太长也不能太短。</p>
+<p>较长的deadline（如10mins）FedCS在每一轮训练中涉及到大量客户端，它们的表现极度受限更少次数的Aggregation步骤；较端的deadline（如1min），它们的表现受限于每一轮客户端的获取（参与），这也会降低分类准确率。 未来的工作可以有一种更好地方法选择$T_{round}$来**动态**改变每一轮足够的客户端参与数量。</p>
+<h3 id="non-iid-setting">Non-IID setting</h3>
+<p><img src="https://img.fzhiy.net/img/image-20201211102835490.png" alt=""></p>
+<p><img src="https://img.fzhiy.net/img/image-20201211110729846.png" alt=""></p>
+<p>相比于iid setting，FedCS与FedAvg类似，都受限于Non-iid setting。能够缓解non-iid 问题的潜在扩展方法是使用model compression技术，在相同的 $T_{round}$限制下这能够增加被选择的客户端的数量（进而提升算法准确率）。</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>本文提出的FedCS，针对MEC框架下异质设备的FL效率提升。在本文的实验中分别将CIFAR-10、MNIST数据集划分为iid setting和non-iid setting，并将【FedAvg论文】中的算法做了小改动，即设定了deadline $T_{round}$；并做了对比实验，实验结论：FedCS能够在资源受限的条件下提升训练过程的效率，而不是最终的最佳准确率。对于non-iid setting，可使用model compression技术来间接提升算法准确率。</p>
+<p>本文的关键思想在于 $T_{round}$的设定，未来工作的有趣方向在于处理更加动态的场景，其中资源的平均数量以及更新和上传所需的时间可以动态波动。</p>
+<p>==&raquo;Model Compression + Deep Reinforcement Learning？？？ 大规模应用及效果如何？</p>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

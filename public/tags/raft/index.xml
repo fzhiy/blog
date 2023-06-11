@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 07 May 2021 20:47:09 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/raft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[MIT 6.824]Raft</title>
-      <link>https://blog.fzhiy.net/post/2021-05-07-mit_6.824raft/</link>
+      <link>https://blog.fzhiy.net/posts/2021-05-07-mit_6.824raft/</link>
       <pubDate>Fri, 07 May 2021 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/2021-05-07-mit_6.824raft/</guid>
+      <guid>https://blog.fzhiy.net/posts/2021-05-07-mit_6.824raft/</guid>
       <description>参考Raft-paper、MIT 6.824-2020 video与一些辅助资料，按照paper目录顺序记录笔记 Raft lecture (Raft user study) vedio：https://www.yo</description>
     </item>
     

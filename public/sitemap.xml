@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.fzhiy.net/post/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</loc>
+    <loc>https://blog.fzhiy.net/posts/cpp%E4%BE%AF%E6%8D%B7-stl%E7%AC%94%E8%AE%B0c&#43;&#43;%E6%A0%87%E5%87%86%E5%BA%93%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/</loc>
     <lastmod>2022-03-05T09:21:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/</loc>
+    <loc>https://blog.fzhiy.net/posts/</loc>
     <lastmod>2023-04-08T13:48:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -51,14 +51,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2023-04-05-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>https://blog.fzhiy.net/posts/2023-04-05-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2023-04-08T13:48:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2023-03-29-rayray%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-03-29T15:51:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -114,21 +114,21 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-09-03-%E5%9F%BA%E4%BA%8Eelk&#43;kafka%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2023-03-17T15:07:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/%E5%88%B7%E9%A2%98%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-08-13T17:08:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/%E7%AC%94%E8%AF%95%E8%85%BE%E8%AE%AF2022%E6%8A%80%E6%9C%AF%E5%90%8E%E7%AB%AF%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2022-04-25T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -149,14 +149,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-04-20T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-04-20T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -177,7 +177,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -198,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-03-27-c&#43;&#43;%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2c&#43;&#43;%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-03-27T21:17:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -219,7 +219,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-03-20-leetcodec&#43;&#43;%E5%BF%AB%E9%80%9F%E5%88%B7%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-03-20-leetcodec&#43;&#43;%E5%BF%AB%E9%80%9F%E5%88%B7%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2022-03-21T00:10:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-03-10-%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82c&#43;&#43;%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2022-03-10T10:03:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -254,21 +254,21 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-03-09-%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-03-09-%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-03-09T14:50:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-03-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-03-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-03-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-28-tcpip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-03-01T20:26:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -289,21 +289,21 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-27-linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-27-linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-02-27T20:26:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-26-unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-02-27T20:26:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</loc>
+    <loc>https://blog.fzhiy.net/posts/mysqlmysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95_innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</loc>
     <lastmod>2022-02-24T12:39:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -324,21 +324,21 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/mysqlmysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A7%88%E5%9B%BE/</loc>
+    <loc>https://blog.fzhiy.net/posts/mysqlmysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A7%88%E5%9B%BE/</loc>
     <lastmod>2022-02-24T12:34:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-22-redis%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-22-redis%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2022-02-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-22-linux-0.11%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</loc>
     <lastmod>2022-02-22T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -394,14 +394,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-02-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-02-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-01-19-%E5%88%B7%E9%A2%98%E7%89%9B%E5%AE%A2%E7%BD%91/</loc>
     <lastmod>2022-01-19T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -415,7 +415,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-01-02-%E7%82%BC%E4%B8%B9%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2022-01-02T12:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -429,14 +429,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2022-01-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2022-01-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/%E5%88%B7%E9%A2%98leetcode/</loc>
+    <loc>https://blog.fzhiy.net/posts/%E5%88%B7%E9%A2%98leetcode/</loc>
     <lastmod>2022-01-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -457,7 +457,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-09-07-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2021-09-07T15:11:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -499,14 +499,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6todo_list/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-08-18-%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%AF%BB%E8%BF%87%E7%9A%84%E4%B9%A6todo_list/</loc>
     <lastmod>2021-08-18T17:04:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-06-27-c&#43;&#43;%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-06-27-c&#43;&#43;%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2021-06-27T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -520,29 +520,29 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</loc>
     <lastmod>2021-06-25T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-05-27-papernotes2021.robust_blockchained_federated_learning_with_model_validation_and_proof-of-stake_inspired_consensus/</loc>
+    <lastmod>2021-05-27T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/blockchained-fl/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-05-27T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/papernote-series/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-05-27T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -555,99 +555,99 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-05-23-%E9%A3%8E%E5%90%B9%E8%BF%87%E7%A8%BB%E7%94%B0%E6%88%91%E5%B0%B1%E6%83%B3%E8%B5%B7%E4%BD%A0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-05-23-%E9%A3%8E%E5%90%B9%E8%BF%87%E7%A8%BB%E7%94%B0%E6%88%91%E5%B0%B1%E6%83%B3%E8%B5%B7%E4%BD%A0/</loc>
     <lastmod>2021-05-23T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-05-07-mit_6.824raft/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-05-07-mit_6.824raft/</loc>
+    <lastmod>2021-05-07T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-05-07-mit_6.824vmware_ft/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-05-07-mit_6.824vmware_ft/</loc>
+    <lastmod>2021-05-07T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/distributed-system/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-05-07T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/mit-6.824/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-05-07T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/raft/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-05-07T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-05-05-mit_6.824gfs/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-05-05-mit_6.824gfs/</loc>
+    <lastmod>2021-05-05T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-04-16-papernotes2020.optimizing_federated_learning_on_non-iid_data_with_reinforcement_learning/</loc>
+    <lastmod>2021-04-16T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/federated-learning/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-04-16T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/papernotes-series/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-04-16T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/reinforcement-learning/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-04-16T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-04-08-mit_6.824labss_notes/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-04-08-mit_6.824labss_notes/</loc>
+    <lastmod>2021-04-08T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-03-09-papernotes2017.algorand__scaling_byzantine_agreements_for_cryptocurrencies/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2021-03-09-papernotes2017.algorand__scaling_byzantine_agreements_for_cryptocurrencies/</loc>
+    <lastmod>2021-03-09T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/consensus/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2021-03-09T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -660,84 +660,84 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://blog.fzhiy.net/posts/2021-04-22-multi-agent_reinforcement_learning%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5amp%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2021-02-22T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-12-20-papernotes2020.threats_to_federated_learning__a_survey/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-12-20-papernotes2020.threats_to_federated_learning__a_survey/</loc>
+    <lastmod>2020-12-20T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/survey/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2020-12-20T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-12-19-papernotes2019.a_survey_on_federated_learning_systems__vision_hype_and_reality_for_data_privacy_and_protection/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-12-19-papernotes2019.a_survey_on_federated_learning_systems__vision_hype_and_reality_for_data_privacy_and_protection/</loc>
+    <lastmod>2020-12-19T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-12-19-papernotes2019.federated_learning_for_wireless_communications__motivation_opportunities_and_challenges/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-12-19-papernotes2019.federated_learning_for_wireless_communications__motivation_opportunities_and_challenges/</loc>
+    <lastmod>2020-12-19T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-12-17-papernotes2020.a_systematic_literature_review_on_federated_machine_learning__from_a_software_engineering_perspective/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-12-17-papernotes2020.a_systematic_literature_review_on_federated_machine_learning__from_a_software_engineering_perspective/</loc>
+    <lastmod>2020-12-17T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-12-11-papernotes2019.client_selection_for_federated_learning_with_heterogeneous_resources_in_mobile_edge/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-12-11-papernotes2019.client_selection_for_federated_learning_with_heterogeneous_resources_in_mobile_edge/</loc>
+    <lastmod>2020-12-11T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-11-15-papernotes2020.dplcf_differentially_private_local_collaborative_filtering/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-11-15-papernotes2020.dplcf_differentially_private_local_collaborative_filtering/</loc>
+    <lastmod>2020-11-15T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/collaborative-filtering/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2020-11-15T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.fzhiy.net/tags/differential-privacy/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2020-11-15T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-11-13-%E8%AF%A5%E5%A6%82%E4%BD%95%E8%A1%A8%E8%BE%BE%E5%AF%B9%E4%BD%A0%E7%9A%84%E7%83%AD%E7%88%B1/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-11-13-%E8%AF%A5%E5%A6%82%E4%BD%95%E8%A1%A8%E8%BE%BE%E5%AF%B9%E4%BD%A0%E7%9A%84%E7%83%AD%E7%88%B1/</loc>
     <lastmod>2020-11-13T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-30-typecho%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-30-typecho%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3/</loc>
     <lastmod>2020-10-30T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -758,7 +758,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-29-papernotes2018.%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-29-papernotes2018.%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/</loc>
     <lastmod>2020-10-29T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -779,7 +779,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-23-meta_learning%E5%88%9D%E6%8E%A2/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-23-meta_learning%E5%88%9D%E6%8E%A2/</loc>
     <lastmod>2020-10-23T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -793,7 +793,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-22-%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0meta_learning/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-22-%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0meta_learning/</loc>
     <lastmod>2020-10-22T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -807,14 +807,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-20-%E9%A2%86%E5%9F%9F%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86%E6%9B%B4%E6%96%B0%E4%B8%AD/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-20-%E9%A2%86%E5%9F%9F%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86%E6%9B%B4%E6%96%B0%E4%B8%AD/</loc>
     <lastmod>2020-10-20T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-10-03-%E4%B8%8D%E5%87%A1%E4%B9%8B%E5%8F%8C%E8%8A%82%E8%A1%8C/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-10-03-%E4%B8%8D%E5%87%A1%E4%B9%8B%E5%8F%8C%E8%8A%82%E8%A1%8C/</loc>
     <lastmod>2020-10-03T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -828,14 +828,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-09-27-%E5%BE%85%E8%A1%A5%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</loc>
     <lastmod>2020-09-27T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-09-26-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
     <lastmod>2020-09-26T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -849,14 +849,14 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-09-09-%E5%87%A1%E6%98%AF%E8%BF%87%E5%BE%80_%E7%9A%86%E4%B8%BA%E5%BA%8F%E7%AB%A0/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-09-09-%E5%87%A1%E6%98%AF%E8%BF%87%E5%BE%80_%E7%9A%86%E4%B8%BA%E5%BA%8F%E7%AB%A0/</loc>
     <lastmod>2020-09-09T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-09-09-%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0%E6%96%87%E7%8C%AE%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E5%88%86%E6%9E%90/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-09-09-%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0%E6%96%87%E7%8C%AE%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E5%88%86%E6%9E%90/</loc>
     <lastmod>2020-09-01T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -870,63 +870,63 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-09-01-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-09-01-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/</loc>
     <lastmod>2020-09-01T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-31-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-31-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</loc>
     <lastmod>2020-08-31T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-26-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-26-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2020-08-26T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-23-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-23-%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
     <lastmod>2020-08-23T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-15-typecho%E4%BD%BF%E7%94%A8https%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-15-typecho%E4%BD%BF%E7%94%A8https%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2020-08-15T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-15-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2seo%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-15-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2seo%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2020-08-15T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-14-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E6%A8%A1%E5%9D%97%E4%B8%80%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83_%E7%AC%AC1-2%E8%AE%B2/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-14-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E6%A8%A1%E5%9D%97%E4%B8%80%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83_%E7%AC%AC1-2%E8%AE%B2/</loc>
     <lastmod>2020-08-14T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-14-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E6%A8%A1%E5%9D%97%E4%B8%80%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83_%E7%AC%AC3-4%E8%AE%B2/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-14-%E7%A0%94%E7%A9%B6%E7%94%9F%E7%A7%91%E7%A0%94%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E6%8F%90%E5%8D%87%E7%B3%BB%E5%88%97%E8%AE%B2%E5%BA%A7%E6%A8%A1%E5%9D%97%E4%B8%80%E4%BF%A1%E6%81%AF%E7%B4%A0%E5%85%BB%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83_%E7%AC%AC3-4%E8%AE%B2/</loc>
     <lastmod>2020-08-14T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-13-ccf-gair_2020abductive_learning%E5%8F%8D%E7%BB%8E%E5%AD%A6%E4%B9%A0-%E5%91%A8%E5%BF%97%E5%8D%8E/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-13-ccf-gair_2020abductive_learning%E5%8F%8D%E7%BB%8E%E5%AD%A6%E4%B9%A0-%E5%91%A8%E5%BF%97%E5%8D%8E/</loc>
     <lastmod>2020-08-13T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -947,35 +947,35 @@
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-12-%E7%A7%91%E7%A0%94_%E8%AF%BE%E7%A8%8B_%E5%8D%9A%E5%AE%A2_%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-08-13T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-13-%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA%E9%A1%B5/</loc>
     <lastmod>2020-08-13T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-12-ccf-gair_2020%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8-%E6%9D%A8%E5%BC%BA/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-12-ccf-gair_2020%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8-%E6%9D%A8%E5%BC%BA/</loc>
     <lastmod>2020-08-12T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-12-papernotes2019.mobile_edge_computing_blockchain_and_reputation-based_crowdsourcing_iot_federated_learning_a_secure_decentralized_and_privacy-preserving_system/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <loc>https://blog.fzhiy.net/posts/2020-08-12-papernotes2019.mobile_edge_computing_blockchain_and_reputation-based_crowdsourcing_iot_federated_learning_a_secure_decentralized_and_privacy-preserving_system/</loc>
+    <lastmod>2020-08-12T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.fzhiy.net/post/2020-08-12-papernotespaper%E7%AC%94%E8%AE%B0%E6%A8%A1%E6%9D%BF/</loc>
+    <loc>https://blog.fzhiy.net/posts/2020-08-12-papernotespaper%E7%AC%94%E8%AE%B0%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2020-08-12T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -983,7 +983,7 @@
   
   <url>
     <loc>https://blog.fzhiy.net/tags/blockchain/</loc>
-    <lastmod>2022-01-01T22:37:45+08:00</lastmod>
+    <lastmod>2020-08-12T20:47:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

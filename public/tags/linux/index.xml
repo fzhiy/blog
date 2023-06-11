@@ -9,28 +9,28 @@
     <lastBuildDate>Wed, 20 Apr 2022 12:39:35 +0800</lastBuildDate><atom:link href="https://blog.fzhiy.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Linux服务器开发]Linux高并发服务器开发笔记</title>
-      <link>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.fzhiy.net/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.fzhiy.net/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91linux%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</guid>
       <description>1.Linux系统编程入门 GCC工作流程 GCC常用参数选项 使用如： 1 2 3 gcc test.c -E -o test.i #预处理源文件 gcc test.i -S -o test.s # 编译经过预处理的源文件test.</description>
     </item>
     
     <item>
       <title>[MySQL]《从根儿上理解MySQL》笔记</title>
-      <link>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.fzhiy.net/posts/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 Apr 2022 12:39:35 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.fzhiy.net/posts/mysql%E4%BB%8E%E6%A0%B9%E5%84%BF%E4%B8%8A%E7%90%86%E8%A7%A3mysql%E7%AC%94%E8%AE%B0/</guid>
       <description>上一次完整的读完了这本书，记得说要写个笔记来着，但是读完发现好多，就忘却了整理这事。到现在也没剩多少了，重读记点重点内容复习下 1.初识MyS</description>
     </item>
     
     <item>
       <title>阅读实践计划</title>
-      <link>https://blog.fzhiy.net/post/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</link>
+      <link>https://blog.fzhiy.net/posts/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</link>
       <pubDate>Fri, 25 Jun 2021 20:47:09 +0800</pubDate>
       
-      <guid>https://blog.fzhiy.net/post/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</guid>
+      <guid>https://blog.fzhiy.net/posts/2021-06-25-%E9%98%85%E8%AF%BB%E5%AE%9E%E8%B7%B5%E8%AE%A1%E5%88%92/</guid>
       <description>C++ 《C++语言的设计与演化》：可以用来理解C++的设计思路，知其所以然 《Effective C++》：很多关于C++方面面试问题的出处 《Mor</description>
     </item>
     

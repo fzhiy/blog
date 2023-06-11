@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[C&#43;&#43;]Effective C&#43;&#43;笔记 - fzhiy&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="fzhiy" /><meta name="description" content="导读 1 2 3 4 5 6 7 8 9 10 11 12 class Widget { public: Widget(); // default 构造函数 Widget(const Widget&amp;amp; rhs); // copy 构造函数 Widget&amp;amp; operator=(const Widget&amp;amp; rhs); // copy assignment 操作符 }; Widget w1; // 调用默认构造函数 Widget w2(w1); // 调用拷贝构造函数 w1 = w1;" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.fzhiy.net/posts/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[C&#43;&#43;]Effective C&#43;&#43;笔记" />
+<meta property="og:description" content="导读 1 2 3 4 5 6 7 8 9 10 11 12 class Widget { public: Widget(); // default 构造函数 Widget(const Widget&amp; rhs); // copy 构造函数 Widget&amp; operator=(const Widget&amp; rhs); // copy assignment 操作符 }; Widget w1; // 调用默认构造函数 Widget w2(w1); // 调用拷贝构造函数 w1 = w1;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fzhiy.net/posts/2022-04-13-c&#43;&#43;effective-c&#43;&#43;%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-13T22:47:09+08:00" />
+<meta property="article:modified_time" content="2022-04-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="[C&#43;&#43;]Effective C&#43;&#43;笔记">
+<meta itemprop="description" content="导读 1 2 3 4 5 6 7 8 9 10 11 12 class Widget { public: Widget(); // default 构造函数 Widget(const Widget&amp; rhs); // copy 构造函数 Widget&amp; operator=(const Widget&amp; rhs); // copy assignment 操作符 }; Widget w1; // 调用默认构造函数 Widget w2(w1); // 调用拷贝构造函数 w1 = w1;"><meta itemprop="datePublished" content="2022-04-13T22:47:09+08:00" />
+<meta itemprop="dateModified" content="2022-04-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2742">
+<meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[C&#43;&#43;]Effective C&#43;&#43;笔记"/>
+<meta name="twitter:description" content="导读 1 2 3 4 5 6 7 8 9 10 11 12 class Widget { public: Widget(); // default 构造函数 Widget(const Widget&amp; rhs); // copy 构造函数 Widget&amp; operator=(const Widget&amp; rhs); // copy assignment 操作符 }; Widget w1; // 调用默认构造函数 Widget w2(w1); // 调用拷贝构造函数 w1 = w1;"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">fzhiy&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="https://home.fzhiy.net">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/posts/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">fzhiy&#39;s blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.fzhiy.net">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/posts/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h2 id="导读">导读</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Widget</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+	<span class="n">Widget</span><span class="p">();</span>								<span class="c1">// default 构造函数
+</span><span class="c1"></span>	<span class="n">Widget</span><span class="p">(</span><span class="k">const</span> <span class="n">Widget</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">);</span>				<span class="c1">// copy 构造函数
+</span><span class="c1"></span>	<span class="n">Widget</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Widget</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">);</span>	<span class="c1">// copy assignment 操作符
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="n">Widget</span> <span class="n">w1</span><span class="p">;</span>			<span class="c1">// 调用默认构造函数
+</span><span class="c1"></span><span class="n">Widget</span> <span class="nf">w2</span><span class="p">(</span><span class="n">w1</span><span class="p">);</span>		<span class="c1">// 调用拷贝构造函数
+</span><span class="c1"></span><span class="n">w1</span> <span class="o">=</span> <span class="n">w1</span><span class="p">;</span>			<span class="c1">// 调用拷贝赋值操作符
+</span><span class="c1">// = 也可以用来调用 copy 构造函数
+</span><span class="c1"></span><span class="n">Widget</span> <span class="n">w3</span> <span class="o">=</span> <span class="n">w2</span><span class="p">;</span>		<span class="c1">// 调用拷贝构造函数
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>copy 构造</strong> 与 <strong>copy赋值</strong>的区别：</p>
+<ul>
+<li>如果一个新对象被定义（如w3），一定会有个构造函数被调用，不可能调用赋值操作。</li>
+<li>如果没有新对象被定义（如前述 w1 = w2），就不会有构造函数被调用，那么就是赋值操作被调用。</li>
+</ul>
+<h2 id="01视c为一个语言联邦">01.视C++为一个语言联邦</h2>
+<p>今天的C++是个 <strong>多重范型编程语言</strong>，同时 <strong>支持过程形式、面向对象形式、函数形式、泛型形式、元编程形式</strong>的语言。</p>
+<p>将C++视为一个由相关语言组成的联邦； 四种主要的次语言：</p>
+<ol>
+<li>C；C++是以C为基础的。区块，语句，预处理器，内置数据类型，数组，指针都来自于C。当以C++内的C成分工作时，高效编程守则映照出C语言的局限性：没有模板，没有异常，没有重载……</li>
+<li>Object-Oriented C++；C with Classes所诉求的部分：classes（包括构造函数和析构函数）、封装（encapsulation）、继承（inheritance）、多态（polymorphism）、virtual函数（动态绑定）等等</li>
+<li>Template C++；C++的泛型编程部分。由于templates带来的崭新的编程范型 即 template metaprogramming（TMP，模板元编程）</li>
+<li>STL。</li>
+</ol>
+<blockquote>
+<p>注意：C++高效编程守则视状况而变化，取决于你使用C++的哪一部分。</p>
+</blockquote>
+<h2 id="02尽量以constenuminline替换define">02.尽量以const，enum，inline替换#define</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">GamePlayer</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">// static const int Numturns = 5;
+</span><span class="c1"></span>    <span class="k">enum</span> <span class="p">{</span><span class="n">NumTurns</span> <span class="o">=</span> <span class="mi">5</span><span class="p">};</span> 		<span class="c1">// 当编译器（错误地）不允许”static整数型class常量“完成”in class初值设定“，采用&#34;the enum hack&#34; 令 NumTurns成为5的一个记号名称
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">scores</span><span class="p">[</span><span class="n">NumTurns</span><span class="p">];</span>		<span class="c1">// 
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>enum hack的行为某方面说比较像 #define 而不像const。</p>
+<p>例如：取一个const的地址是合法的，但取一个enum的地址就不合法，而取一个#define的地址通常也不合法。</p>
+<p><strong>”enum hack“是template metaprogramming的基础技术（条款48）</strong></p>
+<blockquote>
+<ul>
+<li>对于<strong>单纯常量</strong>，最好以const对象或enums替换#defines.</li>
+<li>对于<strong>形似函数的宏（macros</strong>），最好改用inline函数替换#define。</li>
+</ul>
+</blockquote>
+<h2 id="03尽可能使用const">03.尽可能使用const</h2>
+<p>const</p>
+<ul>
+<li>如果const 出现在 * 左边，表示被指物是常量，此const为 底层const；</li>
+<li>如果const 出现在 * 右边，表示指针自身是常量，此const为 顶层const。</li>
+<li>如果出现在 * 两边，表示被指物和指针两者都是常量。</li>
+</ul>
+<p>const成员函数</p>
+<p>将const实施于成员函数的目的，是为了确认该成员函数可作用于const对象身上。</p>
+<ul>
+<li>使得class接口比较容易被理解。<strong>得知哪个函数可以改动对象内容而 哪个对象不行</strong>，这很重要。</li>
+<li>使”操作const对象“成为可能，<strong>这对编写高效代码很关键</strong>。</li>
+</ul>
+<p><strong><u>两个成员函数如果只是 常量性（constness）不同，可以被重载</u></strong>，如下代码所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TextBlock</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+	<span class="p">...</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> 	<span class="c1">// operator[] for const 对象
+</span><span class="c1"></span>    <span class="p">{</span> <span class="k">return</span> <span class="n">text</span><span class="p">[</span><span class="n">position</span><span class="p">];</span> <span class="p">}</span>
+    <span class="kt">char</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">position</span><span class="p">)</span>				<span class="c1">// operator[] for non-const对象 
+</span><span class="c1"></span>    <span class="p">{</span> <span class="k">return</span> <span class="n">text</span><span class="p">[</span><span class="n">position</span><span class="p">];</span> <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// 可以被这样调用
+</span><span class="c1"></span><span class="n">TextBlock</span> <span class="nf">tb</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tb</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>	<span class="c1">//调用 non-const TextBlock::operator[]
+</span><span class="c1"></span><span class="k">const</span> <span class="n">TextBlock</span> <span class="nf">ctb</span><span class="p">(</span><span class="s">&#34;world&#34;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ctb</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>	<span class="c1">// 调用const TextBlock::operator[]
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>const 成员函数不可以更改对象内任何non-static成员变量。</strong></p>
+<p>在const 和 non-const成员函数中避免重复 （<strong>在non-const成员函数中调用const成员函数</strong>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TextBlock</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span> <span class="k">return</span> <span class="n">text</span><span class="p">[</span><span class="n">position</span><span class="p">];</span> <span class="p">}</span>
+    
+    <span class="kt">char</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">position</span><span class="p">)</span> 		<span class="c1">// 现在只调用const op[]
+</span><span class="c1"></span>    <span class="p">{</span> <span class="k">return</span> 
+        <span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&amp;&gt;</span><span class="p">(</span>						<span class="c1">// 将op[]返回值的const移除
+</span><span class="c1"></span>    	  <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">TextBlock</span><span class="o">&amp;&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)</span>	<span class="c1">// 为*this加上const
+</span><span class="c1"></span>   			<span class="p">[</span><span class="n">position</span><span class="p">]</span>							<span class="c1">// 调用 const op[]
+</span><span class="c1"></span>        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 两次转型：第一次是为*this 添加const，第二次是从const operator[]的返回值中移除const
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<ul>
+<li>声明为const可帮助编译器侦测出错误用法。const可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体；</li>
+<li>当const 和 non-const成员函数有实质等价的实现时，令non-const版本调用const版本可避免代码重复。</li>
+</ul>
+</blockquote>
+<h2 id="04确定对象被使用前已经先被初始化">04.确定对象被使用前已经先被初始化</h2>
+<p>使用<strong>成员初始化列表的</strong>效率 比 基于赋值的版本的构造函数<strong>效率更高。<strong>因为后者需要先</strong>调用 默认构造函数为成员变量设初值然后对它们赋予新值。</strong></p>
+<p>成员初始化列表的初始化顺序是<strong>按照 成员变量声明的顺序 进行初始化的</strong>，而不是初始化列表给定的顺序。</p>
+<p>C++有着固定的 ”成员初始化次序“。 <strong>base classes更早于其derived classes被初始化，而class的成员变量总是 以其声明次序被初始化。</strong></p>
+<p><u><strong>多个编译单元内的non-local static对象</strong>经由”模板隐式具现化（implicit template instantiations）“形成（而后者自己可能也经由”模板隐式具现化“形成），不但不可能决定正确的初始化次序，甚至往往不值得寻找”可决定正确次序“的特殊情况。</u></p>
+<p>解决方法：<strong>将每个non-local static对象搬到自己的专属函数内（该对象在此函数内被声明为static）。这些函数返回一个reference指向它所含的对象。然后用户调用这些函数，而不直接指涉这些对象。（即 non-local 对象被local static对象替换了，这是Singleton模式的一个常见实现手法）</strong></p>
+<h2 id="05了解c默默编写并调用哪些函数">05.了解C++默默编写并调用哪些函数</h2>
+<p>空类，如果自己没声明函数，编译器就会为它声明（编译器版本的）<strong>一个拷贝构造函数，一个拷贝赋值操作符和一个析构函数</strong>；如果没声明任何构造函数，<strong>编译器会声明一个默认构造函数</strong>。所有这些函数是<strong>public且inline</strong>的。</p>
+<p><u><strong>编译器产出的析构函数是 non-virtual，除非这个class的base class自身声明有virtual 析构函数。</strong></u></p>
+<h2 id="07为多态基类声明virtual析构函数">07.为多态基类声明virtual析构函数</h2>
+<p><strong>给base class一个virtual析构函数（此规则只适用于带有多态性之的base class上）</strong>，此后删除derived class对象就会销毁整个对象，包括所有derived class成分。（否则可能出现只消毁了base class成分，而没有销毁derived class成分 这样的一个”局部销毁“现象。）</p>
+<p><strong>如果class不含virtual函数，通常表示它并不意图被用作一个base class。任何class只要带有virtual函数都几乎确定应该有一个virtual析构函数。</strong></p>
+<blockquote>
+<ul>
+<li>带多态性质的base classes应该声明一个virtual析构函数，如果class带有任何virtual函数，它就应该拥有一个virtual析构函数；</li>
+<li>Classes的设计目的如果不是作为base classes使用，或不是为了具备多态性，就不该声明为virtual函数。如 标准string和STL容器都不被设计作为base classes使用。</li>
+</ul>
+</blockquote>
+
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="fzhiy/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:fzhiy270@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/fzhiy" class="iconfont icon-github" title="github"></a>
+      <a href="https://blog.csdn.net/feng_zhiyu" class="iconfont icon-csdn" title="csdn"></a>
+      <a href="https://www.zhihu.com/people/ni-feng-88-10" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://blog.fzhiy.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>fzhiy</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?e4ff802fe8f2731918ababdb4ccf87bc";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
