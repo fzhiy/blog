@@ -54,8 +54,13 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   identifier = "about"
   url = "/about/"
 [[menu.main]]
-  name = "主页"
+  name = "友链"
   weight = 50
+  identifier = "links"
+  url = "/links/"
+[[menu.main]]
+  name = "主页"
+  weight = 60
   identifier = "mine-space"
   url = "https://home.fzhiy.net"
 
